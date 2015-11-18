@@ -1,0 +1,61 @@
+///
+	/// \brief 改变模式
+	/// \para 需要传入的参数有：工程编号、项目编号、模块编号、模式编号
+	/// 参数对象列表（传引用返回，包括已初始化值）、端口选择器（传引用返回）
+	/// \return 结果，返回0正确，其他异常
+	///
+	static int changeMode(int projectID,int programID,int moduleID,int modeID,
+		std::vector <logic_BasicPara *> &paraReturnList,WinSwitcher &_winSwitcher);
+
+	///
+	/// \brief 改变参数值（文本、数字、逻辑重载）
+	/// \return 结果，返回0正确，其他异常
+	///
+	static int changeParaValue(int projectID,int programID,int moduleID,int paraID,std::string _value);
+	static int changeParaValue(int projectID,int programID,int moduleID,int paraID,double _value);
+	static int changeParaValue(int projectID,int programID,int moduleID,int paraID,int _value);
+	static int changeParaValue(int projectID,int programID,int moduleID,int paraID,bool _value);
+
+	///
+	/// \brief 修改模式选择器的值
+	///
+	static int changeWinSwitcher(int projectID,int programID,int moduleID,WinSwitcher _winSwitcher);
+
+	///
+	/// \brief 添加模块
+	///
+	static int appendModule(int projectID,int programID,int parentID,int moduleID,bool isInTree); //直接追加在父模块后
+	static int addModule(int projectID,int programID,int parentID,int successorID,int moduleID,bool isInTree);
+
+	///
+	/// \brief 删除模块
+	///
+	static int deleteModule(int projectID,int programID,int moduleID);
+
+	///
+	/// \brief 模块参数连线
+	///
+	static int paraConnect(int projectID,int programID,int outMuduleID,int outParaID,int inModuleID,int inParaID);
+
+	///
+	/// \brief 新建project
+	///
+	static int newPrj(int projectID);
+
+	///
+	/// \brief 打开一个project
+	///
+	static int openPrj(int projectID);
+
+	///
+	/// \brief 新建program
+	///
+	static int newProg(int projectID,int programID);
+
+	///
+	/// \brief for循环模块内联
+	///
+
+	///
+	/// \brief 创建我的模块
+	///

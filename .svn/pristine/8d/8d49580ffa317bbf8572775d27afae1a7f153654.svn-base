@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modules>
+  <basic_module  id="1" img_pic=":/module1/mainwindow/module1/green_1_icon.png" 
+                 button_pic=":/module1/mainwindow/module1/green_1_button.png" 
+                 img_tooltip="module1_img_tip"
+                 menu_tooltip="module1_button" 
+                 port_info=":/module1/mainwindow/module1/port.png"
+                 
+                 left=":/module1/mainwindow/module1/green_left.png"
+                 right=":/module1/mainwindow/module1/green_right.png"
+                 middle=":/module1/mainwindow/module1/green_middle.png"
+
+  >
+  </basic_module>
+  
+  <basic_module  id="2" img_pic="module2_img.png" button_pic="module1_button.png" img_tooltip="module1_img_tip"  port_info="1" menu_tooltip="module2_button" >  </basic_module>
+</modules>

@@ -1,0 +1,136 @@
+﻿生成启动时间为 2015/11/13 12:55:37。
+     1>项目“D:\Projects\BK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
+       InitializeBuildStatus:
+         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+       CustomBuild:
+         Moc'ing mainwindow.h...
+         Uic'ing mainwindow.ui...
+         Moc'ing bottom_label.h...
+         Moc'ing menuitem.h...
+         Moc'ing ports.h...
+         Moc'ing mode_select.h...
+         Moc'ing module.h...
+         Moc'ing graphic.h...
+         Moc'ing view.h...
+         Rcc'ing image.qrc...
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
+         bottom_label.cpp
+     1>bottom_label.cpp(35): warning C4189: “dropAction”: 局部变量已初始化但不引用
+         moc_bottom_label.cpp
+         moc_graphic.cpp
+         moc_mainwindow.cpp
+         moc_menuitem.cpp
+         moc_mode_select.cpp
+         moc_module.cpp
+         moc_ports.cpp
+         moc_view.cpp
+         graphic.cpp
+         logger.cpp
+     1>logger.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>d:\projects\bk\logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+         logic_BasicModule.cpp
+     1>logic\logic_BasicModule.cpp(36): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_BasicModule.cpp(41): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_BasicModule.cpp(53): warning C4100: “ParaReturnList”: 未引用的形参
+     1>logic\logic_BasicModule.cpp(53): warning C4100: “modeID”: 未引用的形参
+     1>logic\logic_BasicModule.cpp(58): warning C4100: “paraID”: 未引用的形参
+     1>logic\logic_BasicModule.cpp(131): warning C4018: “<”: 有符号/无符号不匹配
+         logic_ForModule.cpp
+     1>d:\projects\bk\logic\logic_ForModule.h(43): warning C4100: “value”: 未引用的形参
+                 logic\logic_ForModule.cpp(39): 参见对正在编译的函数 模板 实例化“bool whIsInVector<int>(const std::vector<_Ty>,Type)”的引用
+                 with
+                 [
+                     _Ty=int,
+                     Type=int
+                 ]
+         logic_Program.cpp
+     1>logic\logic_Program.cpp(504): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(533): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(614): warning C4018: “<”: 有符号/无符号不匹配
+         logic_Project.cpp
+         logic_Test.cpp
+     1>d:\projects\bk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+         logic_Tree.cpp
+     1>logic\logic_Tree.cpp(208): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(262): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(310): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(344): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(360): warning C4189: “some”: 局部变量已初始化但不引用
+         logic_TreeNode.cpp
+         logic_Controller.cpp
+         logic_VarModule.cpp
+         正在生成代码...
+         正在编译...
+         logic_XmlIO.cpp
+     1>logic\logic_XmlIO.cpp(9): warning C4100: “prj”: 未引用的形参
+         main.cpp
+         mainwindow.cpp
+     1>mainwindow.cpp(85): warning C4189: “a”: 局部变量已初始化但不引用
+     1>mainwindow.cpp(96): warning C4189: “layout”: 局部变量已初始化但不引用
+         menuitem.cpp
+         mode_select.cpp
+         module.cpp
+     1>module.cpp(298): warning C4100: “action”: 未引用的形参
+         msgInterface.cpp
+     1>msgInterface.cpp(43): warning C4100: “prjID”: 未引用的形参
+     1>msgInterface.cpp(47): warning C4100: “progID”: 未引用的形参
+     1>msgInterface.cpp(95): warning C4100: “m_id”: 未引用的形参
+     1>msgInterface.cpp(165): warning C4100: “in_para_id”: 未引用的形参
+     1>msgInterface.cpp(165): warning C4100: “in_m_id”: 未引用的形参
+     1>msgInterface.cpp(165): warning C4100: “out_para_id”: 未引用的形参
+     1>msgInterface.cpp(165): warning C4100: “out_m_id”: 未引用的形参
+         ports.cpp
+         program.cpp
+         project.cpp
+         view.cpp
+     1>view.cpp(220): warning C4100: “event”: 未引用的形参
+     1>view.cpp(246): warning C4100: “event”: 未引用的形参
+         正在生成代码...
+     1>d:\projects\bk\msginterface.cpp(162): warning C4715: “msgInterface::moveModule”: 不是所有的控件路径都返回值
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 GeneratedFiles\qrc_image.cpp
+         qrc_image.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\mainwindow.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib /LIBPATH:C:/qt/5.5/msvc2012/lib /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib qtmaind.lib shell32.lib Qt5Cored.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"debug\mainwindow.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" Win32\Debug\bottom_label.obj
+         Win32\Debug\moc_bottom_label.obj
+         Win32\Debug\moc_graphic.obj
+         Win32\Debug\moc_mainwindow.obj
+         Win32\Debug\moc_menuitem.obj
+         Win32\Debug\moc_mode_select.obj
+         Win32\Debug\moc_module.obj
+         Win32\Debug\moc_ports.obj
+         Win32\Debug\moc_view.obj
+         Win32\Debug\qrc_image.obj
+         Win32\Debug\graphic.obj
+         Win32\Debug\logger.obj
+         Win32\Debug\logic_BasicModule.obj
+         Win32\Debug\logic_ForModule.obj
+         Win32\Debug\logic_Program.obj
+         Win32\Debug\logic_Project.obj
+         Win32\Debug\logic_Test.obj
+         Win32\Debug\logic_Tree.obj
+         Win32\Debug\logic_TreeNode.obj
+         Win32\Debug\logic_Controller.obj
+         Win32\Debug\logic_VarModule.obj
+         Win32\Debug\logic_XmlIO.obj
+         Win32\Debug\main.obj
+         Win32\Debug\mainwindow.obj
+         Win32\Debug\menuitem.obj
+         Win32\Debug\mode_select.obj
+         Win32\Debug\module.obj
+         Win32\Debug\msgInterface.obj
+         Win32\Debug\ports.obj
+         Win32\Debug\program.obj
+         Win32\Debug\project.obj
+         Win32\Debug\view.obj
+         mainwindow.vcxproj -> D:\Projects\BK\debug\mainwindow.exe
+       FinalizeBuildStatus:
+         正在删除文件“Win32\Debug\mainwindow.unsuccessfulbuild”。
+         正在对“Win32\Debug\mainwindow.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\Projects\BK\mainwindow.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:22.08
