@@ -1,0 +1,55 @@
+<RCC>
+  <qresource prefix="/image">
+    <file>mainwindow/module1/menu_1.png</file>
+    <file>mainwindow/module1/menu_2.png</file>
+    <file>mainwindow/module1/menu_3.png</file>
+    <file>mainwindow/module1/menu_4.png</file>
+    <file>mainwindow/623_217.png</file>
+    <file>mainwindow/green_1.png</file>
+    <file>mainwindow/green_2.png</file>
+    <file>mainwindow/green_3.png</file>
+    <file>mainwindow/green_4.png</file>
+    <file>mainwindow/green_5.png</file>
+    <file>mainwindow/green_6.png</file>
+    <file>mainwindow/orange.png</file>
+    <file>mainwindow/yellow.png</file>
+    <file>mainwindow/blue.png</file>
+    <file>mainwindow/click.png</file>
+    <file>mainwindow/green.png</file>
+    <file>mainwindow/white.png</file>
+    <file>mainwindow/widget.png</file>
+    <file>mainwindow/1276_168.png</file>
+  </qresource>
+  <qresource prefix="/module1">
+    <file>mainwindow/module1/1_4.png</file>
+    <file>mainwindow/module1/1_7.png</file>
+    <file>mainwindow/module1/1_tip3.png</file>
+    <file>mainwindow/module1/choose.png</file>
+    <file>mainwindow/module1/false.png</file>
+    <file>mainwindow/module1/green_1_button.png</file>
+    <file>mainwindow/module1/green_1_icon.png</file>
+    <file>mainwindow/module1/green_left.png</file>
+    <file>mainwindow/module1/green_middle.png</file>
+    <file>mainwindow/module1/green_right.png</file>
+    <file>mainwindow/module1/hslider.png</file>
+    <file>mainwindow/module1/left_button.png</file>
+    <file>mainwindow/module1/menu.png</file>
+    <file>mainwindow/module1/menu1_1.png</file>
+    <file>mainwindow/module1/menu1_2.png</file>
+    <file>mainwindow/module1/menu1_3.png</file>
+    <file>mainwindow/module1/menu1_4.png</file>
+    <file>mainwindow/module1/menu1_icon1.png</file>
+    <file>mainwindow/module1/menu1_icon2.png</file>
+    <file>mainwindow/module1/menu1_icon3.png</file>
+    <file>mainwindow/module1/menu1_icon4.png</file>
+    <file>mainwindow/module1/menu1_icon5.png</file>
+    <file>mainwindow/module1/menubackground.png</file>
+    <file>mainwindow/module1/port.png</file>
+    <file>mainwindow/module1/right_button.png</file>
+    <file>mainwindow/module1/select.png</file>
+    <file>mainwindow/module1/slidepoint.png</file>
+    <file>mainwindow/module1/true.png</file>
+    <file>mainwindow/module1/trueorfalse.png</file>
+    <file>mainwindow/module1/trueorfalsemiddle.png</file>
+  </qresource>
+</RCC>
