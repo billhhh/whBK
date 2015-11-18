@@ -50,3 +50,32 @@ int logic_IfModule::setCurActiveTree(int branch_id,int tree_id) {
 	mvmu_BranchMap[branch_id].curActiveTree = tree_id;
 	return 0;
 }
+
+///// \向指定 branch 中添加一棵树
+///// \return 返回错误类型，正常返回0
+int logic_IfModule::addTreeId(int branch_id,int tree_id) {
+
+	//没找到此 branch，错误
+	if( mvmu_BranchMap.count(branch_id)<=0 )
+		return -1;
+
+	//已经有该树了
+	if( mvmis_TreeId_BranchMap.count(tree_id) > 0 )
+		return -2;
+
+	mvmis_TreeId_BranchMap[tree_id] = branch_id;
+
+	return 0;
+}
+
+///// \删除一棵树
+int logic_IfModule::delTreeId(int tree_id) {
+
+	//并没有找到该树
+	if( mvmis_TreeId_BranchMap.count(tree_id) == 0 )
+		return -1;
+
+	mvmis_TreeId_BranchMap.erase(tree_id);
+
+	return 0;
+}

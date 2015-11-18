@@ -46,8 +46,8 @@ void logic_Program::Init()
 
 	mvvu_ModulePortLineList.clear();
 	//mvvu_ModulePortLineList[0] = NULL;
-	mvmi_TreeId_ForIdMap.clear();
-	//mvmi_TreeId_ForIdMap[0] = NULL;
+	mvmi_TreeId_For_IfIdMap.clear();
+	//mvmi_TreeId_For_IfIdMap[0] = NULL;
 
 	add_Tree(1);
 
@@ -490,9 +490,10 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
 		insTree->add_node(pre_m_id,insNode);
 
-		///// 更新 module tree映射
-		recurs_update(insTree,insNode);
 	}
+
+	///// step3、更新 module tree映射
+	recurs_update(insTree,insNode);
 
 	return 0; //正常返回
 }

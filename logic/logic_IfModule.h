@@ -16,8 +16,8 @@
 typedef struct
 {
 	int curActiveTree;
-	int contentInt;
-	std::string contentStr;
+	int contentInt; //分支的内容 int
+	std::string contentStr; //分支的内容 string
 }whBranch;
 
 class logic_IfModule 
@@ -34,8 +34,8 @@ public:
 	///// \向指定 branch 中添加一棵树
 	///// \return 返回错误类型，正常返回0
 	int addTreeId(int branch_id,int tree_id);
-	///// \向指定 branch 中删除一棵树
-	int delTreeId(int branch_id,int tree_id);
+	///// \删除一棵树
+	int delTreeId(int tree_id);
 
 protected:
 
