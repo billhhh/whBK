@@ -357,7 +357,7 @@ bool logic_Tree::del_node_notConn(int ID) {
 
 logic_Tree::iterator* logic_Tree::search(_IdDataType ID)
 {
-	tree_node* some = mvu_root;
+	//tree_node* some = mvu_root;
 	tree_node* res = recurs_render(mvu_root,ID);
 
 	if (res == NULL)

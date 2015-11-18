@@ -352,7 +352,13 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 	logic_Tree *insTree = NULL;
 	if( 0 == pre_m_id ) {  ////////////必须用深拷贝，浅拷贝可能有危险
 		//如果前插一棵空树
-		logic_TreeNode tmpCurNode( *(mvmu_ModuleId_TreeMap[pre_m_id]->node_search(cur_m_id)) ) ; //拷贝构造
+		logic_TreeNode tmpCurNode( *(mvmu_ModuleId_TreeMap[cur_m_id]->node_search(cur_m_id)) ) ; //拷贝构造
+
+		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
+			//如果孩子不是一个，错误
+			return -4;
+		}
+
 		tmpCurNode.mvu_Parent = 0;
 		tmpCurNode.mvvu_Children.clear();
 
@@ -360,13 +366,11 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 		insTree = new logic_Tree(tmpPassNode); //新建一棵树，此node也必须新建，否则被下面的delnode了
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
-		mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
 	}else {
 		/////如果已存在，直接找到待插入树
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 		insTree->append_node(pre_m_id,cur_m_id);
-		mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 	}
 
 	///// step2、删除旧树节点（注：此处不可能有多个孩子）
@@ -383,6 +387,9 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 	}
+
+	// Step3、更新
+	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
 	return 0; //正常返回
 }
@@ -454,6 +461,11 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
 	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
 	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //待插入节点（必须在此处寻找）
+
+	if ( insNode->mvvu_Children.size() == 0 ) {
+		//可能只有一个孩子
+		return -4;
+	}
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
