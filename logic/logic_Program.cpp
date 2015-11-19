@@ -400,6 +400,9 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 
+			// Step3、（必须在此处，不然就return了）更新
+			mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
 			return 0; //正常返回
 		}else {
 			//不是唯一模块
