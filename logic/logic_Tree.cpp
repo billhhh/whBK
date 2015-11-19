@@ -302,9 +302,11 @@ bool logic_Tree::del_node(_IdDataType ID)
 		return true;
 	}
 
-	//将待删除节点的唯一儿子传给父亲
-	cur_node->mvu_Parent->mvvu_Children.push_back(cur_node->mvvu_Children[0]);
-	cur_node->mvvu_Children[0]->mvu_Parent = cur_node->mvu_Parent;
+	//将待删除节点的唯一儿子传给父亲，如果是叶子不用
+	if( cur_node->mvvu_Children.size()>0 ) {
+		cur_node->mvu_Parent->mvvu_Children.push_back(cur_node->mvvu_Children[0]);
+		cur_node->mvvu_Children[0]->mvu_Parent = cur_node->mvu_Parent;
+	}
 
 	//将其父亲的此儿子删除
 	for (int i=0;i<cur_node->mvu_Parent->mvvu_Children.size();++i)

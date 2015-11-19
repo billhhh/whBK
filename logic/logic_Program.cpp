@@ -349,9 +349,18 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 	//注：不用新建module，只用处理树节点即可
 
 	///// step1、插入新树节点
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树，早点找到会更靠谱
 	logic_Tree *insTree = NULL;
 	if( 0 == pre_m_id ) {  ////////////必须用深拷贝，浅拷贝可能有危险
+
 		//如果前插一棵空树
+
+		if ( cur_m_id == oldTree->mvi_TreeID && oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			//如果是前插空树，同时又是 唯一模块 错误
+			return -5;
+		}
+
 		logic_TreeNode tmpCurNode( *(mvmu_ModuleId_TreeMap[cur_m_id]->node_search(cur_m_id)) ) ; //拷贝构造
 
 		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
@@ -368,24 +377,36 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 
 	}else {
+
+		////// pre_m_id 不为0
+
 		/////如果已存在，直接找到待插入树
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 		insTree->append_node(pre_m_id,cur_m_id);
 	}
 
 	///// step2、删除旧树节点（注：此处不可能有多个孩子）
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
 		//并非树根
 		oldTree->del_node(cur_m_id);
-	}else if(cur_m_id == oldTree->mvi_TreeID 
-		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
+	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
-			//树中唯一模块，删除树
+		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			//树中唯一模块，删除树（ 进入这个分支 pre_m_id 必然不会是0，上面已判断，详见错误-5 ）
+
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
+
+			return 0; //正常返回
+		}else {
+			//不是唯一模块
+
+			oldTree->setFirstChildAsRoot();
+		}
+
 	}
 
 	// Step3、更新
