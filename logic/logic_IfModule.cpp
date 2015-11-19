@@ -28,6 +28,12 @@ logic_IfModule::~logic_IfModule() {
 void logic_IfModule::Init() {
 
 	mvmu_BranchMap.clear();
+	whBranch newBranch;
+	newBranch.curActiveTree = -1;
+	newBranch.contentInt = INT_MIN;
+	newBranch.contentStr = "";
+	mvmu_BranchMap[0] = newBranch; ////////mvmu_BranchMap ÒªÕÒmax
+
 	mvmis_TreeId_BranchMap.clear();
 }
 
