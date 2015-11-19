@@ -88,10 +88,17 @@ public:
 	/// \brief 添加模块
 	/// \para 前驱或后继模块id，是前插（true）还是后插，是哪种类型的模块新加入
 	/// 如果后插，前驱id为0，相当于放空
-	/// parent_id 默认参数为0（即不操作），如果不为0，代表放入哪一个for或if中
-	/// branch_id 默认参数为0（for 参数为0），代表放入哪一个分支
-	bool insertModule(int m_id,bool isFI,int m_type); //old
-	//bool insertModule(int m_id,bool isFI,int m_type,int parent_id,int branch_id); //new 悬而未决
+	bool insertModule(int m_id,bool isFI,int m_type);
+	//bool insertModule(int m_id,bool isFI,int m_type,int parent_id,int branch_id); //插入 for if
+
+	////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/// \brief for if模块，重载
+	/// parent_id 代表放入哪一个for中
+	bool insertModule(int m_id,bool isFI,int m_type,int for_id);
+	/// branch_id 默认参数为0（for 参数为0），代表放入哪一个 if 的哪一个分支中
+	bool insertModule(int m_id,bool isFI,int m_type,int if_id,int branch_id);
+	////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	bool addLeafModule(int pre_id,int m_type);
 	
 	/// \brief 删除模块
@@ -108,8 +115,6 @@ public:
 	/// \brief 查询前驱和后继
 	int getPreId(int m_id);
 	std::vector<int > getPostId(int m_id);
-
-	/// \brief for循环模块内联
 
 	/// \brief 创建我的模块
 
