@@ -127,6 +127,22 @@ bool msgInterface::insertModule(int m_id,bool isFI,int m_type) {
 		return ctrl.ctrlFrontInsModule(m_id,m_type);
 }
 
+/// \brief for if模块，重载
+/// parent_id 代表放入哪一个for中
+bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int for_id) {
+
+
+}
+
+/// branch_id 默认参数为0（for 参数为0），代表放入哪一个 if 的哪一个分支中
+bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int branch_id) {
+
+
+}
+
+
+////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 bool msgInterface::addLeafModule(int pre_id,int m_type) {
 
 	return ctrl.ctrlAddLeafModule(pre_id,m_type);
