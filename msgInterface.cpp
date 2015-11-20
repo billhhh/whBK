@@ -195,4 +195,43 @@ bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int bran
 	return ctrl.ctrlInsertModule_If(m_id,isFI,m_type,if_id,branch_id);
 }
 
+//返回当前激活树id【注意是树id】
+//for
+int msgInterface::getActiveTree(int for_id) {
+
+	return ctrl.ctrlGetForActiveTree(for_id);
+}
+
+//if
+int msgInterface::getActiveTree(int if_id,int branch_id) {
+
+	return ctrl.ctrlGetIfActiveTree(if_id,branch_id);
+}
+
+// set 当前激活树id
+//for
+void msgInterface::setActiveTree(int for_id,int tree_id) {
+
+	return ctrl.ctrlSetForActiveTree(for_id,tree_id);
+}
+
+//if
+void msgInterface::setActiveTree(int if_id,int branch_id,int tree_id) {
+
+	return ctrl.ctrlSetIfActiveTree(if_id,branch_id,tree_id);
+}
+
+/// get set if 某个 branch 参数
+//get 指定 branch的int content
+int msgInterface::getIfBranchContentInt(int if_id,int branch_id) {
+
+	return ctrl.ctrlGetIfBranchContentInt(if_id,branch_id);
+}
+
+//string
+std::string msgInterface::getIfBranchContentStr(int if_id,int branch_id) {
+
+	return ctrl.ctrlGetIfBranchContentStr(if_id,branch_id);
+}
+
 /// \brief 创建我的模块

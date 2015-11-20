@@ -59,6 +59,15 @@ public:
 	bool ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id); //insert into for
 	bool ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int branch_id); //insert into if
 
+	int ctrlGetForActiveTree(int for_id); //for
+	int ctrlGetIfActiveTree(int if_id,int branch_id); //if
+
+	void ctrlSetForActiveTree(int for_id,int tree_id); //for
+	void ctrlSetIfActiveTree(int if_id,int branch_id,int tree_id); //if
+
+	int ctrlGetIfBranchContentInt(int if_id,int branch_id); //get 指定 branch的int content
+	std::string ctrlGetIfBranchContentStr(int if_id,int branch_id); //string
+
 //重要private函数
 private:
 	void Init();

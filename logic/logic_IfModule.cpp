@@ -110,7 +110,7 @@ std::string logic_IfModule::getBranchContentStr(int branch_id) {
 
 	//’“≤ªµΩ∏√branch£¨¥ÌŒÛ
 	if( mvmu_BranchMap.count(branch_id)==0 )
-		return "";
+		return NULL;
 
 	return mvmu_BranchMap[branch_id].contentStr;
 }

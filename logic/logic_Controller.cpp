@@ -350,3 +350,57 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 
 	return flag; //返回成功与否标志
 }
+
+// get for 当前激活树
+int logic_Controller::ctrlGetForActiveTree(int for_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->getForActiveTree(for_id);
+}
+
+//if
+int logic_Controller::ctrlGetIfActiveTree(int if_id,int branch_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->getIfActiveTree(if_id,branch_id);
+}
+
+// set for 当前激活树
+void logic_Controller::ctrlSetForActiveTree(int for_id,int tree_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	tCurProg->setForActiveTree(for_id,tree_id);
+}
+
+//if
+void logic_Controller::ctrlSetIfActiveTree(int if_id,int branch_id,int tree_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	tCurProg->setIfActiveTree(if_id,branch_id,tree_id);
+}
+
+//get 指定 branch的int content
+int logic_Controller::ctrlGetIfBranchContentInt(int if_id,int branch_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->getIfBranchContentInt(if_id,branch_id);
+}
+
+//string
+std::string logic_Controller::ctrlGetIfBranchContentStr(int if_id,int branch_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->getIfBranchContentStr(if_id,branch_id);
+}

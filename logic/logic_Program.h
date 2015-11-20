@@ -62,10 +62,6 @@ public:
 	int frontInsMultiMove(int cur_m_id,int post_m_id); //带祖先前插move
 	int backInsMultiMove(int cur_m_id,int pre_m_id); //带孩子后插move
 
-	/// \brief for if
-	bool insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id);
-	bool insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id);
-
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	////!!!!!!!!!!!!!!!!!!!【对外接口】模块内部操作!!!!!!!!!!!!!!!
@@ -106,6 +102,22 @@ public:
 
 	std::vector<int> getAllTreeNodeId(int tree_id); //拿到指定树的所有孩子id列表
 
+
+	///!!!!!!!!!!!!!!!!!!!!!!!!!!! \brief for if 模块操作
+	/// 难点在 delete 上要消除里面的tree
+	bool insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id);
+	bool insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id);
+
+	int getForActiveTree(int for_id); //for
+	int getIfActiveTree(int if_id,int branch_id); //if
+
+	void setForActiveTree(int for_id,int tree_id); //for
+	void setIfActiveTree(int if_id,int branch_id,int tree_id); //if
+
+	/// get set 某个 branch 参数
+	int getIfBranchContentInt(int if_id,int branch_id); //get 指定 branch的int content
+	std::string getIfBranchContentStr(int if_id,int branch_id); //string
+
 protected:
 	///////map[0] == NULL 防止 getMaxXXXId() 方法找不到，所有的 map 都沿用这个办法
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap;
@@ -123,10 +135,6 @@ protected:
 
 	void recurs_GetId(logic_TreeNode *some,std::vector<int> & L);
 	void recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNode *> & L);
-
-	//专注解决 for 模块的添加和删除
-	void handleForAdd();
-	void handleForDel();
 
 private:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
