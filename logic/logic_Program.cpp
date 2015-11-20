@@ -892,8 +892,8 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 	if( mvmu_ModuleMap.count(for_id) == 0 )
 		return false;
 
-	///// Step1、调用已经写好的 appendModule() 方法
-	this->appendModule(m_id,pre_id,m_type);
+	///// Step1、调用已经写好的 appendModule() 方法，pre_id 必然是0
+	this->appendModule(m_id,0,m_type);
 
 	///// Step2、往 for 模块中加树
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[for_id];
@@ -906,6 +906,8 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 	
 	if( tmpForModule->addTreeId(m_id) != 0 )
 		return false;
+
+	mvmi_TreeId_For_IfIdMap[m_id] = for_id;
 
 	return true;
 }
@@ -932,6 +934,8 @@ bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,
 	
 	if( tmpIfModule->addTreeId(branch_id,m_id) != 0 )
 		return false;
+
+	mvmi_TreeId_For_IfIdMap[m_id] = if_id;
 
 	return true;
 }
