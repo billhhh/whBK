@@ -404,3 +404,38 @@ std::string logic_Controller::ctrlGetIfBranchContentStr(int if_id,int branch_id)
 
 	return tCurProg->getIfBranchContentStr(if_id,branch_id);
 }
+
+int logic_Controller::ctrlSetIfBranchContent(int if_id,int branch_id,int con_int) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->setIfBranchContent(if_id,branch_id,con_int);
+}
+
+//重载 string
+int logic_Controller::ctrlSetIfBranchContent(int if_id,int branch_id,std::string con_str) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->setIfBranchContent(if_id,branch_id,con_str);
+}
+
+//增删 if 分支
+int logic_Controller::ctrlAddIfBranch(int if_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->addIfBranch(if_id);
+}
+
+//难点，需要删除分支中所有树
+int logic_Controller::ctrlDelIfBranch(int if_id,int branch_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->delIfBranch(if_id,branch_id);
+}

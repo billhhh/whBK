@@ -158,14 +158,40 @@ int logic_IfModule::addBranch() {
 }
 
 //删除一个branch
-int logic_IfModule::delBranch(int branch_id) {
+//返回需要在外面删除的树id列表
+std::vector<int > logic_IfModule::delBranch(int branch_id) {
+
+	std::vector<int > L;
+
+	//当残余branch数量只有2个或以下，不允许删除
+	if( mvmu_BranchMap.size() <= 3 )
+		return L;
 
 	//找不到该branch，错误
 	if( mvmu_BranchMap.count(branch_id)==0 )
-		return -1;
+		return L;
+
+	//遍历，收集待删除的树 id 列表
+	for(std::map<int ,int >::iterator it = mvmis_TreeId_BranchMap.begin(); it != mvmis_TreeId_BranchMap.end() ; ++it ) {
+
+		if(  branch_id == it->second ) {
+
+			L.push_back(it->second);
+			mvmis_TreeId_BranchMap.erase(it);
+		}
+	}
 
 	mvmu_BranchMap.erase(branch_id);
-	return 0;
+
+	//如果被删掉的分支是默认分支，将默认分支设置为第一个分支
+	if( branch_id == this->mvi_DefaultBranch ) {
+
+		std::map<int, whBranch >::iterator it = mvmu_BranchMap.begin();
+		++it;
+		this->mvi_DefaultBranch = it->first;
+	}
+
+	return L;
 }
 
 //方便累加

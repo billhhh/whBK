@@ -118,6 +118,16 @@ public:
 	int getIfBranchContentInt(int if_id,int branch_id); //get 指定 branch的int content
 	std::string getIfBranchContentStr(int if_id,int branch_id); //string
 
+	///// \返回不同错误代码，正常返回0，重载
+	int setIfBranchContent(int if_id,int branch_id,int con_int);
+	int setIfBranchContent(int if_id,int branch_id,std::string con_str); //重载 string
+
+	//增删 if 分支
+	int addIfBranch(int if_id);
+	int delIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
+
+	int delTreeThroughId(int id); //通过一棵树id，删除树
+
 protected:
 	///////map[0] == NULL 防止 getMaxXXXId() 方法找不到，所有的 map 都沿用这个办法
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap;

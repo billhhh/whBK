@@ -234,4 +234,28 @@ std::string msgInterface::getIfBranchContentStr(int if_id,int branch_id) {
 	return ctrl.ctrlGetIfBranchContentStr(if_id,branch_id);
 }
 
+///// \返回不同错误代码，正常返回0，重载
+int msgInterface::setIfBranchContent(int if_id,int branch_id,int con_int) {
+
+	return ctrl.ctrlSetIfBranchContent(if_id,branch_id,con_int);
+}
+
+//重载 string
+int msgInterface::setIfBranchContent(int if_id,int branch_id,std::string con_str) {
+
+	return ctrl.ctrlSetIfBranchContent(if_id,branch_id,con_str);
+}
+
+//增删 if 分支
+int msgInterface::addIfBranch(int if_id) {
+
+	return ctrl.ctrlAddIfBranch(if_id);
+}
+
+//难点，需要删除分支中所有树
+int msgInterface::delIfBranch(int if_id,int branch_id) {
+
+	return ctrl.ctrlDelIfBranch(if_id,branch_id);
+}
+
 /// \brief 创建我的模块

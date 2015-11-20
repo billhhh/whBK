@@ -134,7 +134,7 @@ public:
 
 	//增删 if 分支
 	int addIfBranch(int if_id);
-	int delIfBranch(int if_id,int branch_id);
+	int delIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
 
 	/// \brief 创建我的模块
 

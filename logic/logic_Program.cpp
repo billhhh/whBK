@@ -949,7 +949,7 @@ int logic_Program::getForActiveTree(int for_id) {
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[for_id];
 
 	if( 2003 != tmpModule->getModuleType() ) //不是for模块，错误
-		return false;
+		return -4;
 
 	/// type 一定是2003
 	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //强制转换成for module
@@ -968,7 +968,7 @@ int logic_Program::getIfActiveTree(int if_id,int branch_id) {
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
 	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
-		return false;
+		return -4;
 
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
@@ -1019,7 +1019,7 @@ int logic_Program::getIfBranchContentInt(int if_id,int branch_id) {
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
 	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
-		return false;
+		return -4;
 
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
@@ -1046,4 +1046,97 @@ std::string logic_Program::getIfBranchContentStr(int if_id,int branch_id) {
 	std::string content = tmpIfModule->getBranchContentStr(branch_id);
 
 	return content;
+}
+
+int logic_Program::setIfBranchContent(int if_id,int branch_id,int con_int) {
+
+	if( mvmu_ModuleMap.count(if_id) == 0 )
+		return -3;
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
+
+	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+		return -4;
+
+	/// type 一定是2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+
+	int flag = tmpIfModule->setBranchContent(if_id,con_int);
+
+	return flag;
+}
+
+//重载 string
+int logic_Program::setIfBranchContent(int if_id,int branch_id,std::string con_str) {
+
+	if( mvmu_ModuleMap.count(if_id) == 0 )
+		return -3;
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
+
+	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+		return -4;
+
+	/// type 一定是2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+
+	int flag = tmpIfModule->setBranchContent(if_id,con_str);
+
+	return flag;
+}
+
+//增删 if 分支
+int logic_Program::addIfBranch(int if_id) {
+
+	if( mvmu_ModuleMap.count(if_id) == 0 )
+		return -3;
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
+
+	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+		return -4;
+
+	/// type 一定是2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+
+	int flag = tmpIfModule->addBranch();
+
+	return flag;
+}
+
+//难点，需要删除分支中所有树
+int logic_Program::delIfBranch(int if_id,int branch_id) {
+
+	if( mvmu_ModuleMap.count(if_id) == 0 )
+		return -3;
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
+
+	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+		return -4;
+
+	/// type 一定是2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	std::vector<int > L = tmpIfModule->delBranch(branch_id);
+
+	//已获得待删除模块树id，在外部删除树以及树中的模块
+	for (int i=0;i < L.size();++i) {
+		
+		if( this->delTreeThroughId(L[i]) < 0 )
+			return -5;
+	}
+
+	return 0;
+}
+
+//通过一棵树id，删除树（包括删除树中出现的模块）
+int logic_Program::delTreeThroughId(int id) {
+
+	//此 id 必须是树根
+	if( mvmu_TreeMap.count(id) == 0 )
+		return -1;
+
+
+
+	return 0;
 }

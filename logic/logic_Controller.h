@@ -68,6 +68,13 @@ public:
 	int ctrlGetIfBranchContentInt(int if_id,int branch_id); //get 指定 branch的int content
 	std::string ctrlGetIfBranchContentStr(int if_id,int branch_id); //string
 
+	int ctrlSetIfBranchContent(int if_id,int branch_id,int con_int);
+	int ctrlSetIfBranchContent(int if_id,int branch_id,std::string con_str); //重载 string
+
+	//增删 if 分支
+	int ctrlAddIfBranch(int if_id);
+	int ctrlDelIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
+
 //重要private函数
 private:
 	void Init();

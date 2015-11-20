@@ -11,6 +11,7 @@
 #define _LOGIC_IF_MODULE_H_
 
 #include "logic_BasicModule.h"
+#include <vector>
 #include <map>
 
 typedef struct
@@ -48,7 +49,7 @@ public:
 	int setBranchContent(int branch_id,std::string con_str); //重载 string
 
 	int addBranch();
-	int delBranch(int branch_id);
+	std::vector<int > delBranch(int branch_id); //返回需要在外面删除的树id列表
 
 	int getMaxBranchId(); //方便累加
 
