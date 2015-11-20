@@ -56,6 +56,9 @@ public:
 	int ctrlFrontInsMultiMove(int cur_m_id,int post_m_id);
 	int ctrlBackInsMultiMove(int cur_m_id,int pre_m_id);
 
+	bool ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id); //insert into for
+	bool ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int branch_id); //insert into if
+
 //ÖØÒªprivateº¯Êý
 private:
 	void Init();

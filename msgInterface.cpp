@@ -127,19 +127,6 @@ bool msgInterface::insertModule(int m_id,bool isFI,int m_type) {
 		return ctrl.ctrlFrontInsModule(m_id,m_type);
 }
 
-/// \brief for if模块，重载
-/// parent_id 代表放入哪一个for中
-bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int for_id) {
-
-
-}
-
-/// branch_id 默认参数为0（for 参数为0），代表放入哪一个 if 的哪一个分支中
-bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int branch_id) {
-
-
-}
-
 
 ////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -193,6 +180,19 @@ vector<int > msgInterface::getPostId(int m_id) {
 	return ctrl.ctrlGetPostId(m_id);
 }
 
-/// \brief for循环模块内联
+
+
+/// \brief for if模块，重载
+/// parent_id 代表放入哪一个for中
+bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int for_id) {
+
+	return ctrl.ctrlInsertModule_For(m_id,isFI,m_type,for_id);
+}
+
+/// branch_id 默认参数为0（for 参数为0），代表放入哪一个 if 的哪一个分支中
+bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int branch_id) {
+
+	return ctrl.ctrlInsertModule_If(m_id,isFI,m_type,if_id,branch_id);
+}
 
 /// \brief 创建我的模块

@@ -308,3 +308,45 @@ int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 
 	return tCurProg->backInsMultiMove(cur_m_id,pre_m_id);
 }
+
+//insert into for
+bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id) {
+
+	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
+	if ( 0 != pre_id )
+		return false;
+
+	if ( false != isFI) //必须不是前插，否则错误
+		return false;
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	int max_module_id = tCurProg->getMaxModuleId();
+	max_module_id++;
+
+	bool flag = tCurProg->insertModuleIntoFor(max_module_id,pre_id,m_type,for_id); //具体在下一层将树id放入for
+
+	return flag; //返回成功与否标志
+}
+
+//insert into if
+bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int branch_id) {
+
+	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
+	if ( 0 != pre_id )
+		return false;
+
+	if ( false != isFI) //必须不是前插，否则错误
+		return false;
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	int max_module_id = tCurProg->getMaxModuleId();
+	max_module_id++;
+
+	bool flag = tCurProg->insertModuleIntoIf(max_module_id,pre_id,m_type,if_id,branch_id); //具体在下一层将树id放入if
+
+	return flag; //返回成功与否标志
+}

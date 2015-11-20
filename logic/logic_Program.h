@@ -62,6 +62,10 @@ public:
 	int frontInsMultiMove(int cur_m_id,int post_m_id); //带祖先前插move
 	int backInsMultiMove(int cur_m_id,int pre_m_id); //带孩子后插move
 
+	/// \brief for if
+	bool insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id);
+	bool insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id);
+
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	////!!!!!!!!!!!!!!!!!!!【对外接口】模块内部操作!!!!!!!!!!!!!!!

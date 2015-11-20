@@ -16,6 +16,8 @@
 #include "logic_Tree.h"
 #include <assert.h>
 #include "../TransStringNum.h"
+#include "logic_ForModule.h"
+#include "logic_IfModule.h"
 
 using namespace std;
 
@@ -878,4 +880,58 @@ void logic_Program::recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNo
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
 		recurs_GetNode(some->mvvu_Children[i],L);
 	}
+}
+
+/// \brief for if
+
+//insert into for
+bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id) {
+
+	/////此处已必然是 append 了，且 pre_id 必然是0
+
+	if( mvmu_ModuleMap.count(for_id) == 0 )
+		return false;
+
+	///// Step1、调用已经写好的 appendModule() 方法
+	this->appendModule(m_id,pre_id,m_type);
+
+	///// Step2、往 for 模块中加树
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[for_id];
+
+	if( 2003 != tmpModule->getModuleType() ) //不是for模块，错误
+		return false;
+
+	/// type 一定是2003
+	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //强制转换成for module
+	
+	if( tmpForModule->addTreeId(m_id) != 0 )
+		return false;
+
+	return true;
+}
+
+//insert into if
+bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id) {
+
+	/////此处已必然是 append 了，且 pre_id 必然是0
+
+	if( mvmu_ModuleMap.count(if_id) == 0 )
+		return false;
+
+	///// Step1、调用已经写好的 appendModule() 方法
+	this->appendModule(m_id,pre_id,m_type);
+
+	///// Step2、往 for 模块中加树
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
+
+	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+		return false;
+
+	/// type 一定是2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	
+	if( tmpIfModule->addTreeId(branch_id,m_id) != 0 )
+		return false;
+
+	return true;
 }
