@@ -613,6 +613,7 @@ bool logic_Program::delModule(int m_id) {
 
 			//原树直接设置孩子为root（tree没有改变，不必更新映射表）
 			tree->setFirstChildAsRoot();
+			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
 		}else if(oldRoot->mvvu_Children.size() == 0) {
@@ -1137,9 +1138,55 @@ int logic_Program::delTreeThroughId(int id) {
 	if( mvmu_TreeMap.count(id) == 0 )
 		return -1;
 
+	logic_TreeNode * root = mvmu_TreeMap[id]->getRoot();
+	recurs_DelTreeNodeModule(root); //销毁模块实体
 
+	SAFE_DELETE(mvmu_TreeMap[id]); //销毁树
+	//抹除树痕迹
+	mvmu_TreeMap.erase(id);
+	mvmi_TreeId_For_IfIdMap.erase(id);
 
 	return 0;
+}
+
+//完全删除一棵树所有节点的所有信息（各种实体map和connection map）
+void logic_Program::recurs_DelTreeNodeModule(logic_TreeNode *some) {
+
+	///// do sth here
+	int tmpId = some->getID();
+	if( mvmu_ModuleMap.count(tmpId) == 0 )
+		assert(false);
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[tmpId];
+	mvmu_ModuleMap.erase(tmpId);
+	mvmu_ModuleId_TreeMap.erase(tmpId);
+	SAFE_DELETE(tmpModule);
+
+	//处理连线
+	for( map<whPort ,whPort >::iterator it = mvvu_Conn_From_ToMap.begin(); it != mvvu_Conn_From_ToMap.end(); ++it ) {
+
+		if( tmpId == it->first.moduleId ) {
+
+			//如果 from 是该模块，所有这个 outModule 相关就需要删除
+			whPort outPort = it->first;
+			whPort inPort = mvvu_Conn_From_ToMap[outPort];
+			mvvu_Conn_From_ToMap.erase(outPort);
+			mvvu_Conn_To_FromMap.erase(inPort);
+
+		}else if(tmpId == it->second.moduleId) {
+
+			//如果 to 是该模块
+			whPort outPort = it->first;   // 相当于 whPort inPort = it->second;
+			whPort inPort = mvvu_Conn_From_ToMap[outPort];
+			mvvu_Conn_From_ToMap.erase(outPort);
+			mvvu_Conn_To_FromMap.erase(inPort);
+		}
+	}
+
+	//和 getAllTreeNodeId() 连用，递归get id
+	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
+		recurs_DelTreeNodeModule(some->mvvu_Children[i]);
+	}
 }
 
 /// \brief 模块参数连线

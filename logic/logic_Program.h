@@ -162,8 +162,8 @@ protected:
 	void recurs_GetId(logic_TreeNode *some,std::vector<int> & L);
 	void recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNode *> & L);
 
-	//完全删除一棵树所有节点的所有信息（各种实体map和connection map）
-	void recurs_DelTreeNode(logic_TreeNode *some);
+	//完全删除一棵树所有节点模块的所有信息（各种实体map和connection map）
+	void recurs_DelTreeNodeModule(logic_TreeNode *some);
 
 private:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
