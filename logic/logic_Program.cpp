@@ -168,6 +168,28 @@ bool logic_Program::del_Module(_IdDataType moduleId)
 		return false;
 
 	mvmu_ModuleMap.erase(moduleId);
+
+	//处理连线
+	for( map<whPort ,whPort >::iterator it = mvvu_Conn_From_ToMap.begin(); it != mvvu_Conn_From_ToMap.end(); ++it ) {
+
+		if( moduleId == it->first.moduleId ) {
+
+			//如果 from 是该模块，所有这个 outModule 相关就需要删除
+			whPort outPort = it->first;
+			whPort inPort = mvvu_Conn_From_ToMap[outPort];
+			mvvu_Conn_From_ToMap.erase(outPort);
+			mvvu_Conn_To_FromMap.erase(inPort);
+
+		}else if(moduleId == it->second.moduleId) {
+
+			//如果 to 是该模块
+			whPort outPort = it->first;   // 相当于 whPort inPort = it->second;
+			whPort inPort = mvvu_Conn_From_ToMap[outPort];
+			mvvu_Conn_From_ToMap.erase(outPort);
+			mvvu_Conn_To_FromMap.erase(inPort);
+		}
+	}
+
 	return true;
 }
 
@@ -598,6 +620,30 @@ bool logic_Program::delModule(int m_id) {
 			tree->del_node(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
+			//但如果此树（root）在 for 或 if 中，需要特殊处理
+			if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) {
+
+				int module_id = mvmi_TreeId_For_IfIdMap[m_id];
+				logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+
+				if( tmpModule->getModuleType() == 2003 ) {
+
+					//for
+					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
+					tmpForModule->delTreeId(m_id);
+
+				}else if( tmpModule->getModuleType() == 2004 ) {
+
+					//if
+					logic_IfModule * tmpIfModule = (logic_IfModule *) tmpModule;
+					tmpIfModule->delTreeId(m_id);
+
+				}
+
+				mvmi_TreeId_For_IfIdMap.erase(m_id);
+
+			}
+
 		}else if(oldRoot->mvvu_Children.size() > 1) {
 
 			//2、root有n个孩子，拆成n棵树，每棵树是树根
@@ -616,12 +662,60 @@ bool logic_Program::delModule(int m_id) {
 			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
+			//但如果此树（root）在 for 或 if 中，需要特殊处理
+			if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) {
+
+				int module_id = mvmi_TreeId_For_IfIdMap[m_id];
+				logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+
+				if( tmpModule->getModuleType() == 2003 ) {
+
+					//for
+					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
+					tmpForModule->delTreeId(m_id);
+
+				}else if( tmpModule->getModuleType() == 2004 ) {
+
+					//if
+					logic_IfModule * tmpIfModule = (logic_IfModule *) tmpModule;
+					tmpIfModule->delTreeId(m_id);
+
+				}
+
+				mvmi_TreeId_For_IfIdMap.erase(m_id);
+
+			}
+
 		}else if(oldRoot->mvvu_Children.size() == 0) {
 
 			//树中唯一的模块，删除树
 			SAFE_DELETE(mvmu_ModuleId_TreeMap[m_id]);
 			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
+
+			//但如果此树（root）在 for 或 if 中，需要特殊处理
+			if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) {
+
+				int module_id = mvmi_TreeId_For_IfIdMap[m_id];
+				logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+
+				if( tmpModule->getModuleType() == 2003 ) {
+
+					//for
+					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
+					tmpForModule->delTreeId(m_id);
+
+				}else if( tmpModule->getModuleType() == 2004 ) {
+
+					//if
+					logic_IfModule * tmpIfModule = (logic_IfModule *) tmpModule;
+					tmpIfModule->delTreeId(m_id);
+
+				}
+
+				mvmi_TreeId_For_IfIdMap.erase(m_id);
+
+			}
 		}
 		
 	}

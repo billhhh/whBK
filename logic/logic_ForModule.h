@@ -40,17 +40,17 @@ private:
 
 //泛型函数：判断特定值在 vector 里面是否存在
 template <class Type>
-bool whIsInVector(std::vector<Type> vec,Type value ) {
+int whIsInVector(std::vector<Type> vec,Type value ) {
 
 	std::vector<Type>::iterator it;
 	it = find(vec.begin(),vec.end(),value);
 
 	if (it!=vec.end()){
 		//vec中存在value值
-		return true;
+		return it-vec.begin();
 	}else {
 		//vec中不存在value值
-		return false;
+		return -1;
 	}
 }
 

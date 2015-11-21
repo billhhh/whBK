@@ -1,60 +1,146 @@
-﻿生成启动时间为 2015/11/18 18:15:15。
-     1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Build 个目标)。
-     1>InitializeBuildStatus:
+﻿生成启动时间为 2015/11/21 23:40:11。
+     1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
+       InitializeBuildStatus:
          正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
-         所有输出均为最新。
+         Moc'ing mainwindow.h...
+         Uic'ing mainwindow.ui...
+         Moc'ing bottom_label.h...
+         Moc'ing menuitem.h...
+         Moc'ing ports.h...
+         Moc'ing mode_select.h...
+         Moc'ing module.h...
+         Moc'ing graphic.h...
+         Moc'ing view.h...
+         Rcc'ing image.qrc...
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 logic\logic_Program.cpp mainwindow.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_IfModule.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
+         bottom_label.cpp
+     1>bottom_label.cpp(35): warning C4189: “dropAction”: 局部变量已初始化但不引用
+         moc_bottom_label.cpp
+         moc_graphic.cpp
+         moc_mainwindow.cpp
+         moc_menuitem.cpp
+         moc_mode_select.cpp
+         moc_module.cpp
+         moc_ports.cpp
+         moc_view.cpp
+         graphic.cpp
+         logger.cpp
+     1>logger.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>e:\bill github\whbk\logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+         logic_BasicModule.cpp
+     1>logic\logic_BasicModule.cpp(36): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_BasicModule.cpp(41): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_BasicModule.cpp(53): warning C4100: “ParaReturnList”: 未引用的形参
+     1>logic\logic_BasicModule.cpp(53): warning C4100: “modeID”: 未引用的形参
+     1>logic\logic_BasicModule.cpp(58): warning C4100: “paraID”: 未引用的形参
+     1>logic\logic_BasicModule.cpp(70): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_BasicModule.cpp(134): warning C4018: “<”: 有符号/无符号不匹配
+         logic_ForModule.cpp
+     1>logic\logic_ForModule.cpp(44): warning C4805: “==”: 在操作中将类型“bool”与类型“int”混合不安全
+         logic_IfModule.cpp
          logic_Program.cpp
-     1>logic\logic_Program.cpp(550): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(579): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(667): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(599): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(652): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(626): warning C4189: “module_id”: 局部变量已初始化但不引用
+     1>logic\logic_Program.cpp(668): warning C4189: “module_id”: 局部变量已初始化但不引用
+     1>logic\logic_Program.cpp(699): warning C4189: “module_id”: 局部变量已初始化但不引用
+     1>logic\logic_Program.cpp(789): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(984): warning C4100: “pre_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1147): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1166): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1219): warning C4018: “<”: 有符号/无符号不匹配
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::vector<_Ty,_Alloc> &,const std::vector<_Ty,_Alloc> &)”: 未能从“const whPort”为“const std::vector<_Ty,_Alloc> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\vector(1726) : 参见“std::operator <”的声明
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(179): 编译类 模板 成员函数“bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const”时
+                 with
+                 [
+                     _Ty=whPort
+                 ]
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\map(194): 参见对正在编译的函数 模板 实例化“bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const”的引用
+                 with
+                 [
+                     _Ty=whPort
+                 ]
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\type_traits(743): 参见对正在编译的类 模板 实例化“std::less<_Ty>”的引用
+                 with
+                 [
+                     _Ty=whPort
+                 ]
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtree(1028): 参见对正在编译的类 模板 实例化“std::is_empty<_Ty>”的引用
+                 with
+                 [
+                     _Ty=std::less<whPort>
+                 ]
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\map(67): 参见对正在编译的类 模板 实例化“std::_Tree<_Traits>”的引用
+                 with
+                 [
+                     _Traits=std::_Tmap_traits<whPort,whPort,std::less<whPort>,std::allocator<std::pair<const whPort,whPort>>,false>
+                 ]
+                 e:\bill github\whbk\logic\logic_Program.h(153): 参见对正在编译的类 模板 实例化“std::map<_Kty,_Ty>”的引用
+                 with
+                 [
+                     _Kty=whPort,
+                     _Ty=whPort
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *)”: 未能从“const whPort”为“const std::basic_string<_Elem,_Traits,_Alloc> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string(245) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const _Elem *,const std::basic_string<_Elem,_Traits,_Alloc> &)”: 未能从“const whPort”为“const _Elem *”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string(235) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &)”: 未能从“const whPort”为“const std::basic_string<_Elem,_Traits,_Alloc> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string(225) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::_Tree<_Traits> &,const std::_Tree<_Traits> &)”: 未能从“const whPort”为“const std::_Tree<_Traits> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xtree(2245) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::move_iterator<_RanIt> &,const std::move_iterator<_RanIt2> &)”: 未能从“const whPort”为“const std::move_iterator<_RanIt> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(1983) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::reverse_iterator<_RanIt> &,const std::reverse_iterator<_RanIt2> &)”: 未能从“const whPort”为“const std::reverse_iterator<_RanIt> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(1259) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::_Revranit<_RanIt,_Base> &,const std::_Revranit<_RanIt2,_Base2> &)”: 未能从“const whPort”为“const std::_Revranit<_RanIt,_Base> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xutility(1075) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2784: “bool std::operator <(const std::pair<_Ty1,_Ty2> &,const std::pair<_Ty1,_Ty2> &)”: 未能从“const whPort”为“const std::pair<_Ty1,_Ty2> &”推导 模板 参数
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\utility(232) : 参见“std::operator <”的声明
+     1>C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\xstddef(180): error C2676: 二进制“<”:“const whPort”不定义该运算符或到预定义运算符可接收的类型的转换
+         logic_Project.cpp
+         logic_Test.cpp
+     1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+         logic_Tree.cpp
+     1>logic\logic_Tree.cpp(208): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(262): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(312): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(346): warning C4018: “<”: 有符号/无符号不匹配
+         logic_TreeNode.cpp
+     1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
+         logic_Controller.cpp
+         正在生成代码...
+         正在编译...
+         logic_VarModule.cpp
+         logic_XmlIO.cpp
+     1>logic\logic_XmlIO.cpp(9): warning C4100: “prj”: 未引用的形参
+         main.cpp
          mainwindow.cpp
      1>mainwindow.cpp(89): warning C4189: “a”: 局部变量已初始化但不引用
      1>mainwindow.cpp(100): warning C4189: “layout”: 局部变量已初始化但不引用
+         menuitem.cpp
+         mode_select.cpp
+         module.cpp
+     1>module.cpp(298): warning C4100: “action”: 未引用的形参
+         msgInterface.cpp
+     1>msgInterface.cpp(43): warning C4100: “prjID”: 未引用的形参
+     1>msgInterface.cpp(47): warning C4100: “progID”: 未引用的形参
+     1>msgInterface.cpp(95): warning C4100: “m_id”: 未引用的形参
+         ports.cpp
+         program.cpp
+         project.cpp
+         view.cpp
+     1>view.cpp(220): warning C4100: “event”: 未引用的形参
+     1>view.cpp(246): warning C4100: “event”: 未引用的形参
          正在生成代码...
-         所有输出均为最新。
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\mainwindow.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib /LIBPATH:C:/qt/5.5/msvc2012/lib /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib qtmaind.lib shell32.lib Qt5Cored.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"debug\mainwindow.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" Win32\Debug\bottom_label.obj
-         Win32\Debug\moc_bottom_label.obj
-         Win32\Debug\moc_graphic.obj
-         Win32\Debug\moc_mainwindow.obj
-         Win32\Debug\moc_menuitem.obj
-         Win32\Debug\moc_mode_select.obj
-         Win32\Debug\moc_module.obj
-         Win32\Debug\moc_ports.obj
-         Win32\Debug\moc_view.obj
-         Win32\Debug\qrc_image.obj
-         Win32\Debug\graphic.obj
-         Win32\Debug\logger.obj
-         Win32\Debug\logic_BasicModule.obj
-         Win32\Debug\logic_ForModule.obj
-         Win32\Debug\logic_IfModule.obj
-         Win32\Debug\logic_Program.obj
-         Win32\Debug\logic_Project.obj
-         Win32\Debug\logic_Test.obj
-         Win32\Debug\logic_Tree.obj
-         Win32\Debug\logic_TreeNode.obj
-         Win32\Debug\logic_Controller.obj
-         Win32\Debug\logic_VarModule.obj
-         Win32\Debug\logic_XmlIO.obj
-         Win32\Debug\main.obj
-         Win32\Debug\mainwindow.obj
-         Win32\Debug\menuitem.obj
-         Win32\Debug\mode_select.obj
-         Win32\Debug\module.obj
-         Win32\Debug\msgInterface.obj
-         Win32\Debug\ports.obj
-         Win32\Debug\program.obj
-         Win32\Debug\project.obj
-         Win32\Debug\view.obj
-         mainwindow.vcxproj -> E:\bill github\whBK\debug\mainwindow.exe
-       FinalizeBuildStatus:
-         正在删除文件“Win32\Debug\mainwindow.unsuccessfulbuild”。
-         正在对“Win32\Debug\mainwindow.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Build 个目标)的操作。
+     1>e:\bill github\whbk\msginterface.cpp(165): warning C4715: “msgInterface::moveModule”: 不是所有的控件路径都返回值
+     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:03.20
+已用时间 00:00:23.15

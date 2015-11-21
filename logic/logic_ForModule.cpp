@@ -53,12 +53,13 @@ int logic_ForModule::addTreeId(int id) {
 //在 For Module 中删除树 id，返回错误类型，正常返回0
 int logic_ForModule::delTreeId(int id) {
 
-	if ( false == whIsInVector<int > (mvvu_treeIdList,id) ){
+	int pos = whIsInVector<int > (mvvu_treeIdList,id);
+	if ( pos < 0 ){
 		//发现待删除树id并不存在存在，错误返回
 		return -1;
 	}
 
-	std::vector<int>::iterator tmpIt = mvvu_treeIdList.begin()+10;
+	std::vector<int>::iterator tmpIt = mvvu_treeIdList.begin()+pos;
 	mvvu_treeIdList.erase(tmpIt);
 	return 0;
 }
