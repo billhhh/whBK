@@ -457,3 +457,11 @@ void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
 
 	tCurProg->outParaDisconnect(out_m_id,out_para_id);
 }
+
+void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	tCurProg->inParaDisconnect(in_m_id,in_para_id);
+}

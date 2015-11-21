@@ -80,6 +80,7 @@ public:
 	//取消连线
 	//可通过 isOut 来用outModule或者inModule删除
 	void ctrlOutParaDisconnect(int out_m_id,int out_para_id);
+	void ctrlInParaDisconnect(int in_m_id,int in_para_id);
 
 //重要private函数
 private:

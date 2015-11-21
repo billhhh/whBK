@@ -139,6 +139,7 @@ public:
 	//取消连线
 	//可通过 isOut 来用outModule或者inModule删除
 	void outParaDisconnect(int out_m_id,int out_para_id);
+	void inParaDisconnect(int in_m_id,int in_para_id);
 
 protected:
 	///////map[0] == NULL 防止 getMaxXXXId() 方法找不到，所有的 map 都沿用这个办法

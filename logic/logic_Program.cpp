@@ -1204,7 +1204,13 @@ void logic_Program::outParaDisconnect(int out_m_id,int out_para_id) {
 
 	logic_BasicPara * outPara = mvmu_ModuleMap[out_m_id]->getPara(out_m_id);
 
-	//检查是否是 in 或 out
+	if( NULL == outPara ) {
+
+		//没有那么多参数，直接错
+		assert(false);
+	}
+
+	//检查是否是 out
 	if( outPara->getParaIOType() != PARA_OUT ) {
 
 		assert(false);
@@ -1215,7 +1221,44 @@ void logic_Program::outParaDisconnect(int out_m_id,int out_para_id) {
 	outPort.moduleId = out_m_id;
 	outPort.paraId = out_para_id;
 
+	if( mvvu_Conn_From_ToMap.count(outPort) == 0 )
+		assert(false);
+
 	whPort inPort = mvvu_Conn_From_ToMap[outPort];
+
+	//删除map 成员
+	mvvu_Conn_From_ToMap.erase(outPort);
+	mvvu_Conn_To_FromMap.erase(inPort);
+
+	return;
+}
+
+void logic_Program::inParaDisconnect(int in_m_id,int in_para_id) {
+
+	assert( mvmu_ModuleMap.count(in_m_id) != 0 ); //如果找不到报错
+
+	logic_BasicPara * inPara = mvmu_ModuleMap[in_m_id]->getPara(in_m_id);
+
+	if( NULL == inPara ) {
+
+		//没有那么多参数，直接错
+		assert(false);
+	}
+
+	//检查是否是 in
+	if( inPara->getParaIOType() != PARA_IN ) {
+			assert(false);
+	}
+
+	//填充连线 map
+	whPort inPort;
+	inPort.moduleId = in_m_id;
+	inPort.paraId = in_para_id;
+
+	if( mvvu_Conn_To_FromMap.count(inPort) == 0 )
+		assert(false);
+
+	whPort outPort = mvvu_Conn_To_FromMap[inPort];
 
 	//删除map 成员
 	mvvu_Conn_From_ToMap.erase(outPort);
