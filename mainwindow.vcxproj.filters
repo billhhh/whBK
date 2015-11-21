@@ -242,9 +242,6 @@
     <ClInclude Include="logic\logic_BasicPara.h">
       <Filter>Header Files\logic</Filter>
     </ClInclude>
-    <ClInclude Include="logic\logic_ModulePortLine.h">
-      <Filter>Header Files\logic</Filter>
-    </ClInclude>
     <ClInclude Include="logic\logic_MyBlocksModule.h">
       <Filter>Header Files\logic</Filter>
     </ClInclude>

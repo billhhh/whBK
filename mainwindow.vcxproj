@@ -443,7 +443,6 @@ endlocal
     <ClInclude Include="logic\logic_ForModule.h" />
     <ClInclude Include="logic\logic_Global.h" />
     <ClInclude Include="logic\logic_IfModule.h" />
-    <ClInclude Include="logic\logic_ModulePortLine.h" />
     <ClInclude Include="logic\logic_MyBlocksModule.h" />
     <ClInclude Include="logic\logic_MyBlocksProgram.h" />
     <ClInclude Include="logic\logic_ParaPointer.h" />

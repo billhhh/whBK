@@ -136,6 +136,9 @@ public:
 
 	/// \brief 模块参数连线
 	int paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
+	//取消连线
+	//可通过 isOut 来用outModule或者inModule删除
+	void outParaDisconnect(int out_m_id,int out_para_id);
 
 protected:
 	///////map[0] == NULL 防止 getMaxXXXId() 方法找不到，所有的 map 都沿用这个办法
@@ -146,7 +149,8 @@ protected:
 	std::map <int ,int > mvmi_TreeId_For_IfIdMap; //!!!!!!!!!!!!维护 treeId 和 For If 模块 Id 的映射表
 
 	/////参数连线
-	std::map<whPort, whPort > mvvu_ModuleConn_IdMap; //维护 出发模块Port---结束模块Port 哈希表
+	std::map<whPort, whPort > mvvu_Conn_From_ToMap; //维护 出发模块Port---结束模块Port 哈希表
+	std::map<whPort, whPort > mvvu_Conn_To_FromMap; //维护 结束模块Port---出发模块Port，方便双向查找
 
 	void Init();
 	void prog_Destroy();
@@ -156,6 +160,9 @@ protected:
 
 	void recurs_GetId(logic_TreeNode *some,std::vector<int> & L);
 	void recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNode *> & L);
+
+	//完全删除一棵树所有节点的所有信息（各种实体map和connection map）
+	void recurs_DelTreeNode(logic_TreeNode *some);
 
 private:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集

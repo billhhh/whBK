@@ -448,3 +448,12 @@ int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,i
 
 	return tCurProg->paraConnect(out_m_id,out_para_id,in_m_id,in_para_id);
 }
+
+//取消连线，可通过 isOut 来用outModule或者inModule删除
+void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	tCurProg->outParaDisconnect(out_m_id,out_para_id);
+}

@@ -46,8 +46,9 @@ void logic_Program::Init()
 	mvmu_ModuleId_TreeMap.clear();
 	//mvmu_ModuleId_TreeMap[0] = NULL;
 
-	mvvu_ModulePortLineMap.clear();
-	//mvvu_ModulePortLineMap[0] = NULL;
+	mvvu_Conn_From_ToMap.clear();
+	mvvu_Conn_To_FromMap.clear();
+
 	mvmi_TreeId_For_IfIdMap.clear();
 	//mvmi_TreeId_For_IfIdMap[0] = NULL;
 
@@ -1166,6 +1167,20 @@ int logic_Program::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_p
 		return -2;
 	}
 
+	//填充连线 map
+	whPort outPort;
+	outPort.moduleId = out_m_id;
+	outPort.paraId = out_para_id;
+
+	whPort inPort;
+	inPort.moduleId = in_m_id;
+	inPort.paraId = in_para_id;
+
+	if( mvvu_Conn_From_ToMap.count(outPort)
+		* mvvu_Conn_To_FromMap.count(inPort) >0
+		)
+		return -3; //如果已经存在
+
 	//检测 inModule 是否是 outModule 祖先，如果是祖先则不可能连线
 	logic_Tree * out_m_tree = mvmu_ModuleId_TreeMap[out_m_id];
 	bool flag = out_m_tree->isAncestor(out_m_id,in_m_id);
@@ -1173,19 +1188,38 @@ int logic_Program::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_p
 	//如果 flag 是 false，代表可以
 	if( NULL == flag ) {
 
-		//填充连线 map
-		whPort outPort;
-		outPort.moduleId = out_m_id;
-		outPort.paraId = out_para_id;
-
-		whPort inPort;
-		inPort.moduleId = in_m_id;
-		inPort.paraId = in_para_id;
-
-		mvvu_ModuleConn_IdMap[outPort] = inPort;
-
+		mvvu_Conn_From_ToMap[outPort] = inPort;
+		mvvu_Conn_To_FromMap[inPort] = outPort;
 		return 0;
 	}else {
-		return -3; //代表 inModule 是 outModule 祖先，不能构成连线
+		return -4; //代表 inModule 是 outModule 祖先，不能构成连线
 	}
+}
+
+//取消连线
+//可通过 isOut 来用outModule或者inModule删除
+void logic_Program::outParaDisconnect(int out_m_id,int out_para_id) {
+
+	assert( mvmu_ModuleMap.count(out_m_id) != 0 ); //如果找不到报错
+
+	logic_BasicPara * outPara = mvmu_ModuleMap[out_m_id]->getPara(out_m_id);
+
+	//检查是否是 in 或 out
+	if( outPara->getParaIOType() != PARA_OUT ) {
+
+		assert(false);
+	}
+
+	//填充 Port
+	whPort outPort;
+	outPort.moduleId = out_m_id;
+	outPort.paraId = out_para_id;
+
+	whPort inPort = mvvu_Conn_From_ToMap[outPort];
+
+	//删除map 成员
+	mvvu_Conn_From_ToMap.erase(outPort);
+	mvvu_Conn_To_FromMap.erase(inPort);
+
+	return;
 }
