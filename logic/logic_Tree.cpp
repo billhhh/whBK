@@ -446,3 +446,35 @@ int logic_Tree::getPreId(int id) {
 	return resId;
 
 }
+
+//判断 nodeB_id 是否是 nodeA_id 的祖先
+bool logic_Tree::isAncestor(int nodeA_id,int nodeB_id) {
+
+	if( nodeA_id == nodeB_id )
+		return false;
+
+	iterator *posA = search(nodeA_id);
+	iterator *posB = search(nodeB_id);
+	if ( NULL == posA || NULL == posB ) { //如果不存在，报错
+		return false;
+	}
+
+	logic_TreeNode * curNode = posA->_node;
+	while ( NULL != curNode->mvu_Parent ) {
+
+		if( curNode->getParentID() == nodeB_id ) { //发现 nodeB_id 是 nodeA_id 的祖先
+
+			SAFE_DELETE(posA);
+			SAFE_DELETE(posB);
+
+			return true;
+		}
+
+		curNode = curNode->mvu_Parent;
+	}
+
+	SAFE_DELETE(posA);
+	SAFE_DELETE(posB);
+
+	return false;
+}

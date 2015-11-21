@@ -68,6 +68,9 @@ public:
 
 	int getPreId(int id); //获得一个节点的前驱节点id
 
+	//判断 nodeB_id 是否是 nodeA_id 的祖先
+	bool isAncestor(int nodeA_id,int nodeB_id);
+
 protected:
 
 private:

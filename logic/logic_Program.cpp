@@ -46,8 +46,8 @@ void logic_Program::Init()
 	mvmu_ModuleId_TreeMap.clear();
 	//mvmu_ModuleId_TreeMap[0] = NULL;
 
-	mvvu_ModulePortLineList.clear();
-	//mvvu_ModulePortLineList[0] = NULL;
+	mvvu_ModulePortLineMap.clear();
+	//mvvu_ModulePortLineMap[0] = NULL;
 	mvmi_TreeId_For_IfIdMap.clear();
 	//mvmi_TreeId_For_IfIdMap[0] = NULL;
 
@@ -1129,7 +1129,7 @@ int logic_Program::delIfBranch(int if_id,int branch_id) {
 	return 0;
 }
 
-//通过一棵树id，删除树（包括删除树中出现的模块）
+//通过一棵树id，删除树（包括删除树中出现的模块，需要删除连线）
 int logic_Program::delTreeThroughId(int id) {
 
 	//此 id 必须是树根
@@ -1139,4 +1139,53 @@ int logic_Program::delTreeThroughId(int id) {
 
 
 	return 0;
+}
+
+/// \brief 模块参数连线
+int logic_Program::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
+
+	assert( out_m_id != in_m_id );
+
+	assert( mvmu_ModuleMap.count(out_m_id) * mvmu_ModuleMap.count(in_m_id) != 0 ); //如果找不到报错
+
+	logic_BasicPara * outPara = mvmu_ModuleMap[out_m_id]->getPara(out_m_id);
+	logic_BasicPara * inPara = mvmu_ModuleMap[in_m_id]->getPara(in_m_id);
+
+	if( NULL == outPara || NULL == inPara ) {
+
+		//没有那么多参数，直接错
+		//assert(false);
+		return -1;
+	}
+
+	//检查是否是 in 或 out
+	if( outPara->getParaIOType() != PARA_OUT
+		|| inPara->getParaIOType() != PARA_IN
+		) {
+		//assert(false);
+		return -2;
+	}
+
+	//检测 inModule 是否是 outModule 祖先，如果是祖先则不可能连线
+	logic_Tree * out_m_tree = mvmu_ModuleId_TreeMap[out_m_id];
+	bool flag = out_m_tree->isAncestor(out_m_id,in_m_id);
+
+	//如果 flag 是 false，代表可以
+	if( NULL == flag ) {
+
+		//填充连线 map
+		whPort outPort;
+		outPort.moduleId = out_m_id;
+		outPort.paraId = out_para_id;
+
+		whPort inPort;
+		inPort.moduleId = in_m_id;
+		inPort.paraId = in_para_id;
+
+		mvvu_ModuleConn_IdMap[outPort] = inPort;
+
+		return 0;
+	}else {
+		return -3; //代表 inModule 是 outModule 祖先，不能构成连线
+	}
 }

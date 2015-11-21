@@ -101,7 +101,8 @@ public:
 	int moveModule(int cur_m_id,int other_m_id,MoveType move_type);
 
 	/// \brief 模块参数连线
-	void paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
+	int paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
+	void paraDisconnect(int out_m_id,int out_para_id); //取消连线
 
 	/// \brief 查询前驱和后继
 	int getPreId(int m_id);

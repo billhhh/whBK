@@ -439,3 +439,12 @@ int logic_Controller::ctrlDelIfBranch(int if_id,int branch_id) {
 
 	return tCurProg->delIfBranch(if_id,branch_id);
 }
+
+/// \brief 模块参数连线
+int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->paraConnect(out_m_id,out_para_id,in_m_id,in_para_id);
+}

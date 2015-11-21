@@ -75,6 +75,9 @@ public:
 	int ctrlAddIfBranch(int if_id);
 	int ctrlDelIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
 
+	/// \brief 模块参数连线
+	int ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
+
 //重要private函数
 private:
 	void Init();

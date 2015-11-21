@@ -164,11 +164,6 @@ int msgInterface::moveModule(int cur_m_id,int other_m_id,MoveType move_type) {
 		return ctrl.ctrlFrontInsMultiMove(cur_m_id,other_m_id);
 }
 
-/// \brief 模块参数连线
-void msgInterface::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
-
-}
-
 /// \brief 查询前驱和后继
 int msgInterface::getPreId(int m_id) {
 
@@ -256,6 +251,18 @@ int msgInterface::addIfBranch(int if_id) {
 int msgInterface::delIfBranch(int if_id,int branch_id) {
 
 	return ctrl.ctrlDelIfBranch(if_id,branch_id);
+}
+
+/// \brief 模块参数连线
+int msgInterface::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
+
+	return ctrl.ctrlParaConnect(out_m_id,out_para_id,in_m_id,in_para_id);
+}
+
+//模块参数取消连线
+void paraDisconnect(int out_m_id,int out_para_id) {
+
+
 }
 
 /// \brief 创建我的模块

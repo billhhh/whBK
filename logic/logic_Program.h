@@ -16,7 +16,12 @@
 #include "logic_Tree.h"
 #include "logic_BasicModule.h"
 #include "logic_Global.h"
-#include "logic_ModulePortLine.h"
+
+typedef struct
+{
+	int moduleId;
+	int paraId;
+}whPort;  //一个出口定义，完全定义一个port
 
 class logic_Program //等效于森林
 {
@@ -52,6 +57,7 @@ public:
 	bool appendModule(int m_id,int pre_id,int m_type); //直接后接，前驱为0代表新建树
 	bool addLeafModule(int m_id,int pre_id,int m_type); //加一个叶子节点
 
+	///////最麻烦的方法，还需要同步删除参数连线
 	bool delModule(int m_id);
 	int getModulePreId(int m_id); //得到某一模块的前驱id
 	std::vector<int > getModulePostId(int m_id);
@@ -128,14 +134,19 @@ public:
 
 	int delTreeThroughId(int id); //通过一棵树id，删除树
 
+	/// \brief 模块参数连线
+	int paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
+
 protected:
 	///////map[0] == NULL 防止 getMaxXXXId() 方法找不到，所有的 map 都沿用这个办法
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap;
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射
 
-	std::map<int, logic_ModulePortLine *> mvvu_ModulePortLineList; //维护 出发模块id 连线表 map
 	std::map <int ,int > mvmi_TreeId_For_IfIdMap; //!!!!!!!!!!!!维护 treeId 和 For If 模块 Id 的映射表
+
+	/////参数连线
+	std::map<whPort, whPort > mvvu_ModuleConn_IdMap; //维护 出发模块Port---结束模块Port 哈希表
 
 	void Init();
 	void prog_Destroy();

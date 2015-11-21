@@ -67,6 +67,9 @@ bool logic_BasicModule::changeWinSwicher() {
 
 logic_BasicPara * logic_BasicModule::getPara(int p_id) {
 
+	if( mvvu_ParaList.size() < p_id )
+		return NULL;
+
 	return mvvu_ParaList.at(p_id);
 }
 
