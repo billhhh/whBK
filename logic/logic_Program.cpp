@@ -641,13 +641,13 @@ bool logic_Program::delModule(int m_id) {
 
 					//for
 					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
-					tmpForModule->delTree(m_id);
+					tmpForModule->delTree( mvmu_ModuleId_TreeMap[m_id] );
 
 				}else if( tmpModule->getModuleType() == 2004 ) {
 
 					//if
 					logic_IfModule * tmpIfModule = (logic_IfModule *) tmpModule;
-					tmpIfModule->delTreeId(m_id);
+					tmpIfModule->delTree( mvmu_ModuleId_TreeMap[m_id] );
 
 				}
 
@@ -1039,7 +1039,7 @@ bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
 	
-	if( tmpIfModule->addTreeId(branch_id,m_id) < 0 )
+	if( tmpIfModule->addTree( branch_id,mvmu_ModuleId_TreeMap[m_id] ) < 0 )
 		return false;
 
 	mvmi_TreeId_For_IfIdMap[m_id] = if_id;
@@ -1080,9 +1080,9 @@ int logic_Program::getIfActiveTree(int if_id,int branch_id) {
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
 
-	int tree = tmpIfModule->getCurActiveTree(branch_id); //可能小于0
+	logic_Tree * tree = tmpIfModule->getCurActiveTree(branch_id); //可能小于0
 
-	return tree;
+	return tree->mvi_TreeID;
 }
 
 // set for
@@ -1112,7 +1112,7 @@ void logic_Program::setIfActiveTree(int if_id,int branch_id,int tree_id) {
 
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
-	tmpIfModule->setCurActiveTree(branch_id,tree_id); //可能小于0
+	tmpIfModule->setCurActiveTree( branch_id,mvmu_ModuleId_TreeMap[tree_id] ); //可能小于0
 
 	return;
 }
