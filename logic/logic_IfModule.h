@@ -11,12 +11,13 @@
 #define _LOGIC_IF_MODULE_H_
 
 #include "logic_BasicModule.h"
+#include "logic_Tree.h"
 #include <vector>
 #include <map>
 
 typedef struct
 {
-	int curActiveTree;
+	logic_Tree * curActiveTree;
 	int contentInt; //分支的内容 int
 	std::string contentStr; //分支的内容 string
 }whBranch;
@@ -29,14 +30,14 @@ public:
 	explicit logic_IfModule(int id);//默认构造，for里面什么都不生成
 	~logic_IfModule();
 
-	int getCurActiveTree(int branch_id); //返回 指定 branch 当前激活树id
-	int setCurActiveTree(int branch_id,int tree_id);
+	logic_Tree * getCurActiveTree(int branch_id); //返回 指定 branch 当前激活树id
+	int setCurActiveTree(int branch_id,logic_Tree * tree);
 
 	///// \向指定 branch 中添加一棵树
 	///// \return 返回错误类型，正常返回0
-	int addTreeId(int branch_id,int tree_id);
+	int addTree(int branch_id,logic_Tree * tree);
 	///// \删除一棵树
-	int delTreeId(int tree_id);
+	int delTree(logic_Tree * tree);
 
 
 	///
@@ -59,7 +60,7 @@ protected:
 private:
 	int mvi_DefaultBranch; //if块默认分支
 	std::map<int , whBranch > mvmu_BranchMap; //维护每个 branch id 和 branch实体 的对应
-	std::map<int , int > mvmis_TreeId_BranchMap; //维护每个 TreeId 和 branch 对应
+	std::map<logic_Tree * , int > mvmis_Tree_BranchMap; //维护每个 Tree 和 branch 对应
 
 	void Init();
 

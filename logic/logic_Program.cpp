@@ -637,7 +637,7 @@ bool logic_Program::delModule(int m_id) {
 
 					//for
 					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
-					tmpForModule->delTreeId(m_id);
+					tmpForModule->delTree(m_id);
 
 				}else if( tmpModule->getModuleType() == 2004 ) {
 
@@ -679,7 +679,7 @@ bool logic_Program::delModule(int m_id) {
 
 					//for
 					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
-					tmpForModule->delTreeId(m_id);
+					tmpForModule->delTree(m_id);
 
 				}else if( tmpModule->getModuleType() == 2004 ) {
 
@@ -710,7 +710,7 @@ bool logic_Program::delModule(int m_id) {
 
 					//for
 					logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
-					tmpForModule->delTreeId(m_id);
+					tmpForModule->delTree(m_id);
 
 				}else if( tmpModule->getModuleType() == 2004 ) {
 
@@ -1057,9 +1057,9 @@ int logic_Program::getForActiveTree(int for_id) {
 	/// type 一定是2003
 	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //强制转换成for module
 
-	int tree = tmpForModule->getCurActiveTree(); //可能小于0
+	logic_Tree * tree = tmpForModule->getCurActiveTree(); //可能小于0
 
-	return tree;
+	return tree->mvi_TreeID;
 }
 
 //if 当前active树
@@ -1092,7 +1092,7 @@ void logic_Program::setForActiveTree(int for_id,int tree_id) {
 
 	/// type 一定是2003
 	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //强制转换成for module
-	tmpForModule->setCurActiveTree(tree_id); //可能小于0
+	tmpForModule->setCurActiveTree( mvmu_ModuleId_TreeMap[tree_id] );
 
 	return;
 }

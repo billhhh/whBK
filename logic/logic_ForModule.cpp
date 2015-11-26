@@ -53,8 +53,9 @@ int logic_ForModule::addTree(logic_Tree * tree) {
 }
 
 //在 For Module 中删除树 id，返回错误类型，正常返回0
-int logic_ForModule::delTree(int id) {
+int logic_ForModule::delTree(logic_Tree * tree) {
 
+	int id = tree->mvi_TreeID;
 	if ( mvvu_treeList.count(id) == 0 ){
 		//发现待删除树id并不存在存在，错误返回
 		return -1;

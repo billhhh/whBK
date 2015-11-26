@@ -12,6 +12,7 @@
 
 #include "logic_TreeNode.h"
 #include "logic_Global.h"
+#include <assert.h>
 
 class logic_Tree
 {
