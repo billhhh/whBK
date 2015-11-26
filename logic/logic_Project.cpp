@@ -29,9 +29,9 @@ logic_Project::~logic_Project()
 //!!!!!初始化干净的prj
 void logic_Project::Init() {
 	mvvu_ProgMap.clear();
-	mvvu_ProgMap[0] = NULL;
+	//mvvu_ProgMap[0] = NULL;
 	mvmu_PrjVariety.clear();
-	mvmu_PrjVariety[0] = NULL;
+	//mvmu_PrjVariety[0] = NULL;
 
 	logic_Program * prog = new logic_Program(1,"Program");//第一个program
 	mvvu_ProgMap[1] = prog;
@@ -113,6 +113,10 @@ logic_Program* logic_Project::getProgram(int id)
 }
 
 int logic_Project::getMaxProgId() {
+
+	if( mvvu_ProgMap.size() == 0 )
+		return 0;
+
 	std::map<int, logic_Program *>::const_iterator it = mvvu_ProgMap.end();
 	it--;
 	return it->first;

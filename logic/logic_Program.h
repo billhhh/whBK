@@ -162,7 +162,7 @@ public:
 	void inParaDisconnect(int in_m_id,int in_para_id);
 
 protected:
-	///////map[0] == NULL 防止 getMaxXXXId() 方法找不到，所有的 map 都沿用这个办法
+
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap;
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射

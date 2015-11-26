@@ -42,7 +42,7 @@ void logic_Program::Init()
 	mvmu_TreeMap.clear();
 	//mvmu_TreeMap[0] = NULL;
 	mvmu_ModuleMap.clear();
-	mvmu_ModuleMap[0] = NULL;  //Module 需要 getMax
+	//mvmu_ModuleMap[0] = NULL;  //Module 需要 getMax
 	mvmu_ModuleId_TreeMap.clear();
 	//mvmu_ModuleId_TreeMap[0] = NULL;
 
@@ -235,6 +235,10 @@ int logic_Program::getID()
 }
 
 int logic_Program::getMaxModuleId() {
+
+	if( mvmu_ModuleMap.size() == 0 )
+		return 0;
+
 	std::map<int, logic_BasicModule *>::const_iterator it = mvmu_ModuleMap.end();
 	it--;
 	return it->first;

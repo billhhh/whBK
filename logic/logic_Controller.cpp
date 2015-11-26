@@ -22,7 +22,7 @@ logic_Controller::logic_Controller() {
 void logic_Controller::Init() {
 	//≥ı ºªØ Global
 	prjMap.clear();
-	prjMap[0] = NULL;
+	//prjMap[0] = NULL;
 
  	curPrjId=0;
  	curProgId=0;
@@ -68,6 +68,10 @@ int logic_Controller::ctrlNewProg() {
 }
 
 int logic_Controller::getMaxPrjId() {
+
+	if( prjMap.size() == 0 )
+		return 0;
+
 	std::map<int ,logic_Project* >::const_iterator it = prjMap.end();
 	it--;
 	return it->first;
