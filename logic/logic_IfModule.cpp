@@ -86,6 +86,11 @@ int logic_IfModule::delTree(logic_Tree * tree) {
 	if( mvmis_Tree_BranchMap.count(tree) == 0 )
 		return -1;
 
+	int tmpBranchId = this->getTreeBranch(tree);
+	//如果是当前激活树被删，置空
+	if( tree->mvi_TreeID == tmpBranchId )
+		mvmu_BranchMap[tmpBranchId].curActiveTree = NULL;
+
 	mvmis_Tree_BranchMap.erase(tree);
 
 	return 0;
@@ -204,4 +209,10 @@ int logic_IfModule::getMaxBranchId() {
 	std::map<int, whBranch >::const_iterator it = mvmu_BranchMap.end();
 	it--;
 	return it->first;
+}
+
+//获得某个tree属于哪个branch
+int logic_IfModule::getTreeBranch(logic_Tree * tree) {
+
+	return mvmis_Tree_BranchMap[tree];
 }

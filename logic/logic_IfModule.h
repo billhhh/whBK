@@ -54,6 +54,8 @@ public:
 
 	int getMaxBranchId(); //方便累加
 
+	int getTreeBranch(logic_Tree * tree); //获得某个tree属于哪个branch
+
 protected:
 
 

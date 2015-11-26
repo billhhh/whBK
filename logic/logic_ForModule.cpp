@@ -61,6 +61,10 @@ int logic_ForModule::delTree(logic_Tree * tree) {
 		return -1;
 	}
 
+	//如果是当前激活树被删，置空
+	if( tree->mvi_TreeID == this->mvi_CurActiveTree->mvi_TreeID )
+		this->mvi_CurActiveTree = NULL;
+
 	mvvu_treeList.erase(id);
 	return 0;
 }
