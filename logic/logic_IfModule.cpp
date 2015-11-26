@@ -154,7 +154,7 @@ int logic_IfModule::addBranch() {
 
 	mvmu_BranchMap[max_branch_id] = newBranch;
 
-	return 0;
+	return max_branch_id;
 }
 
 //É¾³ýÒ»¸öbranch

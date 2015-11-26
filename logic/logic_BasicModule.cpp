@@ -8,18 +8,20 @@ logic_BasicModule::logic_BasicModule()
 	:mvi_ModuleID(1),mvb_IsRun(0),mvs_ModuleType(2001)
 {
 	//默认生成start
+	Init();
 }
 
 logic_BasicModule::logic_BasicModule(int id)
 	:mvi_ModuleID(id),mvb_IsRun(0),mvs_ModuleType(2001)
 {
 	//默认生成start
+	Init();
 }
 
 logic_BasicModule::logic_BasicModule(int id,int moduleType)
 	:mvi_ModuleID(id),mvb_IsRun(0),mvs_ModuleType(moduleType)
 {
-
+	Init();
 }
 
 logic_BasicModule::~logic_BasicModule()
@@ -28,6 +30,15 @@ logic_BasicModule::~logic_BasicModule()
 	cout<<"进入logic_BasicModule析构函数"<<endl;
 
 	Destroy();
+}
+
+void logic_BasicModule::Init() {
+
+	//!!!!!!!!!临时写死30个参数，用不完
+	for (int i=0 ; i<31 ; ++i) {
+		logic_BasicPara * tmpPara = new logic_BasicPara();
+		mvvu_ParaList.push_back(tmpPara);
+	}
 }
 
 void logic_BasicModule::Destroy() {

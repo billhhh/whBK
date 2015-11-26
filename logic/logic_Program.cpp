@@ -156,7 +156,14 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 	if (mvmu_ModuleMap.count(moduleId)>0) //已存在，错误返回
 		return false;
 
-	logic_BasicModule *bm = new logic_BasicModule(moduleId,m_Type);
+	logic_BasicModule *bm = NULL;
+	if( 2003 == m_Type )
+		bm = new logic_ForModule(moduleId);
+	else if( 2004 == m_Type )
+		bm = new logic_IfModule(moduleId);
+	else
+		bm = new logic_BasicModule(moduleId,m_Type);
+
 	mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
 
 	return true;
@@ -1195,7 +1202,12 @@ int logic_Program::addIfBranch(int if_id) {
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
 
-	int flag = tmpIfModule->addBranch();
+	int newBranchId = tmpIfModule->addBranch();
+
+	//此flag是 把一个32位整数分成：
+	///高16位做moduleId，低15位做branchId
+	int flag = if_id<<15;
+	flag += newBranchId;
 
 	return flag;
 }

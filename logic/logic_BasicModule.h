@@ -75,6 +75,7 @@ protected:
 	/////合成代码
 	bool generateCodeBlocks();
 
+	void Init(); //负责初始化操作
 	void Destroy(); //在析构时调用
 
 private:
