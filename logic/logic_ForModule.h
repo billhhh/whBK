@@ -11,7 +11,9 @@
 #define _LOGIC_FOR_MODULE_H_
 
 #include "logic_BasicModule.h"
-#include <vector>
+#include "logic_Tree.h"
+//#include <vector>
+#include <map>
 
 class logic_ForModule 
 	: public logic_BasicModule
@@ -21,18 +23,18 @@ public:
 	explicit logic_ForModule(int id);//默认构造，for里面什么都不生成
 	~logic_ForModule();
 
-	int getCurActiveTree(); //返回当前激活树id【注意是树id】
-	void setCurActiveTree(int id); //设置当前激活树
+	logic_Tree * getCurActiveTree(); //返回当前激活树
+	void setCurActiveTree(logic_Tree * tree); //设置当前激活树
 
-	int addTreeId(int id); //向 For Module 添加一棵树 id，返回错误类型，正常返回0
-	int delTreeId(int id); //在 For Module 中删除树 id，返回错误类型，正常返回0
+	int addTreeId(logic_Tree * tree); //向 For Module 添加一棵树，返回错误类型，正常返回0
+	int delTreeId(int id); //在 For Module 中删除树id，返回错误类型，正常返回0
 
 protected:
 
 
 private:
-	int mvi_CurActiveTree; //当前哪棵树是连接for的激活状态，也可能无激活树
-	std::vector<int > mvvu_treeIdList; //for模块中的所有树
+	logic_Tree * mvi_CurActiveTree; //当前哪棵树是连接for的激活状态，也可能无激活树
+	std::map<int ,logic_Tree * > mvvu_treeList; //for模块中的所有树
 
 	void Init();
 

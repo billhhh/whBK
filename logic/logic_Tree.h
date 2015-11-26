@@ -71,6 +71,25 @@ public:
 	//判断 nodeB_id 是否是 nodeA_id 的祖先
 	bool isAncestor(int nodeA_id,int nodeB_id);
 
+	//重载小于号操作符，方便
+	bool operator < (const logic_Tree &t) const
+	{
+		if( moduleId < port.moduleId ) { //小于直接返回true
+			return true;
+		}else if( moduleId > port.moduleId ) { //大于返回false
+			return false;
+		}else {
+
+			//如果moduleId一样，继续比较paraId，不可能都一样
+			if( paraId < port.paraId )
+				return true;
+			else if(paraId > port.paraId)
+				return false;
+			else
+				assert(false);
+		}
+	}
+
 protected:
 
 private:
