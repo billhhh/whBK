@@ -26,8 +26,8 @@ public:
 	logic_Tree * getCurActiveTree(); //返回当前激活树
 	void setCurActiveTree(logic_Tree * tree); //设置当前激活树
 
-	int addTreeId(logic_Tree * tree); //向 For Module 添加一棵树，返回错误类型，正常返回0
-	int delTreeId(int id); //在 For Module 中删除树id，返回错误类型，正常返回0
+	int addTree(logic_Tree * tree); //向 For Module 添加一棵树，返回错误类型，正常返回0
+	int delTree(int id); //在 For Module 中删除树id，返回错误类型，正常返回0
 
 protected:
 

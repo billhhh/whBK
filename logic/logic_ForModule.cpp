@@ -23,43 +23,43 @@ logic_ForModule::~logic_ForModule() {
 
 void logic_ForModule::Init() {
 
-	mvvu_treeIdList.clear();
+	//初始化类
+	mvvu_treeList.clear();
 }
 
-//返回当前激活树id【注意是树id】
-int logic_ForModule::getCurActiveTree() {
+//返回当前激活树
+logic_Tree * logic_ForModule::getCurActiveTree() {
 
 	return mvi_CurActiveTree;
 }
 
 //设置当前激活树
-void logic_ForModule::setCurActiveTree(int id) {
+void logic_ForModule::setCurActiveTree(logic_Tree * tree) {
 
-	mvi_CurActiveTree = id;
+	mvi_CurActiveTree = tree;
 }
 
 //向 For Module 添加一棵树 id，返回错误类型，正常返回0
-int logic_ForModule::addTreeId(int id) {
+int logic_ForModule::addTree(logic_Tree * tree) {
 
-	if ( true == whIsInVector<int > (mvvu_treeIdList,id) ){
+	int id = tree->mvi_TreeID;
+	if ( mvvu_treeList.count(id) > 0 ){
 		//发现已存在，错误返回
 		return -1;
 	}
 
-	mvvu_treeIdList.push_back(id);
+	mvvu_treeList[id] = tree;
 	return 0;
 }
 
 //在 For Module 中删除树 id，返回错误类型，正常返回0
-int logic_ForModule::delTreeId(int id) {
+int logic_ForModule::delTree(int id) {
 
-	int pos = whIsInVector<int > (mvvu_treeIdList,id);
-	if ( pos < 0 ){
+	if ( mvvu_treeList.count(id) == 0 ){
 		//发现待删除树id并不存在存在，错误返回
 		return -1;
 	}
 
-	std::vector<int>::iterator tmpIt = mvvu_treeIdList.begin()+pos;
-	mvvu_treeIdList.erase(tmpIt);
+	mvvu_treeList.erase(id);
 	return 0;
 }

@@ -1007,7 +1007,7 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 	/// type 一定是2003
 	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //强制转换成for module
 	
-	if( tmpForModule->addTreeId(m_id) < 0 )
+	if( tmpForModule->addTree(mvmu_ModuleId_TreeMap[m_id]) < 0 )
 		return false;
 
 	mvmi_TreeId_For_IfIdMap[m_id] = for_id;
