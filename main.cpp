@@ -10,6 +10,9 @@
 #include<QBitmap>
 #include"button.h"
 #include "logic/logic_Tree.h"
+#include <iostream>
+
+using namespace std;
 
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
@@ -37,20 +40,25 @@ void test() {
 	std::map <logic_Tree * ,int > testMap;
 	logic_Tree *tmpTree = new logic_Tree();
 
-	testMap[]
+	testMap[tmpTree] = 1;
+	logic_Tree *tmpTree2 = tmpTree;
+	logic_Tree *tmpTree3 = NULL;
+
+	cout<< testMap.count(tmpTree2) <<endl;
+	cout<< testMap.count(tmpTree3) <<endl;
 }
 
 int main(int argc, char *argv[])
 {
-	/*detect_memory_leaks(true);
+	detect_memory_leaks(true);
 
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    return a.exec();*/
+    return a.exec();
 
-	test();
+	//test();
 
 	system("pause");
 }
