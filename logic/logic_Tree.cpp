@@ -17,7 +17,7 @@ typedef logic_TreeNode tree_node;
 
 //logic_Tree 构造、析构方法
 logic_Tree::logic_Tree() //默认构建一棵root ID为0的节点
-	:mvu_root(new logic_TreeNode(0))
+	:mvu_root(new logic_TreeNode(1))
 {
 	Init();
 }

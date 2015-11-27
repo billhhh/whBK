@@ -9,6 +9,7 @@
 #include<QPainter>
 #include<QBitmap>
 #include"button.h"
+#include "logic/logic_Tree.h"
 
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
@@ -30,15 +31,26 @@ void detect_memory_leaks( bool on_off )
 	_CrtSetDbgFlag( flags );
 }
 
+
+void test() {
+
+	std::map <logic_Tree * ,int > testMap;
+	logic_Tree *tmpTree = new logic_Tree();
+
+	testMap[]
+}
+
 int main(int argc, char *argv[])
 {
-	detect_memory_leaks(true);
+	/*detect_memory_leaks(true);
 
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    return a.exec();
+    return a.exec();*/
+
+	test();
 
 	system("pause");
 }
