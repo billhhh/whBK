@@ -633,14 +633,7 @@ bool logic_Program::delModule(int m_id) {
 			tree->del_node(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
-			// root 在 for 或 if 中，需要特殊处理
-			if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) {
-
-				//模块内用树指针处理，只用处理program
-				int for_if_id = mvmi_TreeId_For_IfIdMap[m_id];
-				mvmi_TreeId_For_IfIdMap.erase(m_id);
-				mvmi_TreeId_For_IfIdMap[tree->mvi_TreeID] = for_if_id; //加入old root后一个节点
-			}
+			/////// tree不变，不用更新 mvmi_TreeId_For_IfIdMap
 
 		}else if(oldRoot->mvvu_Children.size() > 1) {
 
@@ -656,9 +649,8 @@ bool logic_Program::delModule(int m_id) {
 
 
 				//如果此树（root）在 for 或 if 中，需要特殊处理
-				if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) {
+				if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
-					int module_id = mvmi_TreeId_For_IfIdMap[m_id];
 					logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
 
 					if( tmpModule->getModuleType() == 2003 ) {
@@ -676,8 +668,8 @@ bool logic_Program::delModule(int m_id) {
 						tmpIfModule->addTree(tmpBranchId,tmpTree);
 					}
 
-					int for_if_id = mvmi_TreeId_For_IfIdMap[m_id];
-					mvmi_TreeId_For_IfIdMap[tmpTree->mvi_TreeID] = for_if_id;
+					int for_if_id = mvmi_TreeId_For_IfIdMap[tree];
+					mvmi_TreeId_For_IfIdMap[tmpTree] = for_if_id;
 
 				}
 
@@ -688,14 +680,6 @@ bool logic_Program::delModule(int m_id) {
 			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
-			if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) { //if for 收尾
-
-				//if for 中原tree不变
-				int for_if_id = mvmi_TreeId_For_IfIdMap[m_id];
-				mvmi_TreeId_For_IfIdMap.erase(m_id);
-				mvmi_TreeId_For_IfIdMap[tree->mvi_TreeID] = for_if_id;
-			}
-
 		}else if(oldRoot->mvvu_Children.size() == 0) {
 
 			//树中唯一的模块，删除树
@@ -704,9 +688,8 @@ bool logic_Program::delModule(int m_id) {
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
 			//但如果此树（root）在 for 或 if 中，需要特殊处理
-			if( mvmi_TreeId_For_IfIdMap.count(m_id) > 0 ) {
+			if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
-				int module_id = mvmi_TreeId_For_IfIdMap[m_id];
 				logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
 
 				if( tmpModule->getModuleType() == 2003 ) {
@@ -723,7 +706,7 @@ bool logic_Program::delModule(int m_id) {
 
 				}
 
-				mvmi_TreeId_For_IfIdMap.erase(m_id); //完全删除
+				mvmi_TreeId_For_IfIdMap.erase(tree); //完全删除
 
 			}
 		}
@@ -1013,7 +996,7 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 	if( tmpForModule->addTree(mvmu_ModuleId_TreeMap[m_id]) < 0 )
 		return false;
 
-	mvmi_TreeId_For_IfIdMap[m_id] = for_id;
+	mvmi_TreeId_For_IfIdMap[mvmu_ModuleId_TreeMap[m_id]] = for_id;
 
 	return true;
 }
@@ -1041,7 +1024,7 @@ bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,
 	if( tmpIfModule->addTree( branch_id,mvmu_ModuleId_TreeMap[m_id] ) < 0 )
 		return false;
 
-	mvmi_TreeId_For_IfIdMap[m_id] = if_id;
+	mvmi_TreeId_For_IfIdMap[mvmu_ModuleId_TreeMap[m_id]] = if_id;
 
 	return true;
 }
@@ -1250,10 +1233,10 @@ int logic_Program::delTreeThroughId(int id) {
 	logic_TreeNode * root = mvmu_TreeMap[id]->getRoot();
 	recurs_DelTreeNodeModule(root); //销毁模块实体
 
+	mvmi_TreeId_For_IfIdMap.erase(mvmu_TreeMap[id]);
 	SAFE_DELETE(mvmu_TreeMap[id]); //销毁树
 	//抹除树痕迹
 	mvmu_TreeMap.erase(id);
-	mvmi_TreeId_For_IfIdMap.erase(id);
 
 	return 0;
 }
