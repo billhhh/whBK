@@ -13,7 +13,8 @@
 #include "logic_Program.h"
 #include "logic_BasicPara.h"
 
-class logic_MyBlocksProgram : public logic_Program
+class logic_MyBlocksProgram
+	: public logic_Program
 {
 public:
 	std::vector <logic_BasicPara *> mvvu_InportParaList; //我的模块输入参数列表

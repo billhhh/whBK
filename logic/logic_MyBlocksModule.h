@@ -14,7 +14,8 @@
 #include "logic_Global.h"
 #include <map>
 
-class logic_MyBlocksModule : public logic_BasicModule
+class logic_MyBlocksModule
+	: public logic_BasicModule
 {
 public:
 	int mvi_ProgID; //属于哪个program，是program的ID
