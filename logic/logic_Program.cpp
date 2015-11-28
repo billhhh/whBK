@@ -393,9 +393,11 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 
 		//如果前插一棵空树
 
-		if ( cur_m_id == oldTree->mvi_TreeID && oldTree->getRoot()->mvvu_Children.size()==0 ) {
+		if ( cur_m_id == oldTree->mvi_TreeID 
+			&& oldTree->getRoot()->mvvu_Children.size()==0 
+			) {
 
-			//如果是前插空树，同时又是 唯一模块 错误
+			///如果是前插空树，同时又是 唯一模块 错误
 			return -5;
 		}
 
