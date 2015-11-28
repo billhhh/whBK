@@ -83,10 +83,10 @@ public:
 	std::vector<int > getModulePostId(int m_id);
 
 	//////move 操作
-	int frontInsSingMove(int cur_m_id,int post_m_id); //前插move
-	int backInsSingMove(int cur_m_id,int pre_m_id); //后插move
-	int frontInsMultiMove(int cur_m_id,int post_m_id); //带祖先前插move
-	int backInsMultiMove(int cur_m_id,int pre_m_id); //带孩子后插move
+	int frontInsSingMove(int cur_m_id,int post_m_id); //前插move，不允许后继为0
+	int backInsSingMove(int cur_m_id,int pre_m_id); //后插move，前驱为0代表move到新建树
+	int frontInsMultiMove(int cur_m_id,int post_m_id); //带祖先前插move，不允许后继为0
+	int backInsMultiMove(int cur_m_id,int pre_m_id); //带孩子后插move，前驱为0代表move到新建树
 
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

@@ -318,6 +318,8 @@ bool logic_Program::frontInsModule(int m_id,int post_id,int m_type) {
 //post_m_id 是节点后继
 int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 
+	///// 上一层已判断 post_m_id 是否为 0
+
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
 		return -2; //没找到插入点
 	}
@@ -457,6 +459,8 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 //带祖先前插move
 ////////////////注：必然是插在一棵树的最前面/////////////////
 int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
+
+	///// 上一层已判断 post_m_id 是否为 0
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
 		return -2; //没找到插入点
