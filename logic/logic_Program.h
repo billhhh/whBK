@@ -77,7 +77,7 @@ public:
 	bool appendModule(int m_id,int pre_id,int m_type); //直接后接，前驱为0代表新建树
 	bool addLeafModule(int m_id,int pre_id,int m_type); //加一个叶子节点
 
-	///////最麻烦的方法，还需要同步删除参数连线
+	///////最麻烦的方法，还需要同步删除参数连线，还有 for 和 if
 	bool delModule(int m_id);
 	int getModulePreId(int m_id); //得到某一模块的前驱id
 	std::vector<int > getModulePostId(int m_id);

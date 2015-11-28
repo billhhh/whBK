@@ -397,7 +397,7 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 			return -5;
 		}
 
-		logic_TreeNode tmpCurNode( *(mvmu_ModuleId_TreeMap[cur_m_id]->node_search(cur_m_id)) ) ; //拷贝构造
+		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //深拷贝构造到栈
 
 		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
 			//如果孩子不是一个，错误
@@ -407,7 +407,7 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 		tmpCurNode.mvu_Parent = 0;
 		tmpCurNode.mvvu_Children.clear();
 
-		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //深拷贝构造
+		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //深拷贝构造到堆
 		insTree = new logic_Tree(tmpPassNode); //新建一棵树，此node也必须新建，否则被下面的delnode了
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
