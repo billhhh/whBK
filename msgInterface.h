@@ -145,8 +145,9 @@ public:
 	//int moveModuleIntoIf(int cur_m_id,int if_id,int branch_id);
 
 	///将module加入 for 和 if
-	int addModuleIntoFor(int m_id,int for_id);
-	int addModuleIntoIf(int m_id,int if_id,int branch_id);
+	int moveInModuleIntoFor(int m_id,int for_id);
+	int moveInleModuleIntoIf(int m_id,int if_id,int branch_id);
+	int moveOutModule(int m_id); //for或者if同一个函数
 
 	/// \brief 创建我的模块
 
