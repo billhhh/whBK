@@ -138,16 +138,15 @@ public:
 	int addIfBranch(int if_id);
 	int delIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
 
+	///方案1
 	///move进if或者for的分支
 	///只在前驱为0的时候使用，如果后插的前驱不为0，或者前插的后驱不为0还是用 moveModule
-	//int moveModuleIntoFor(int cur_m_id,int for_id);
-	/// 放入哪一个 if 的哪一个分支中
-	//int moveModuleIntoIf(int cur_m_id,int if_id,int branch_id);
+	int moveModuleForIf(int cur_m_id,int other_m_id,MoveType move_type,int container_id,int ui_branch_id);
 
+	///方案2
 	///将module加入 for 和 if
-	int moveInModuleIntoFor(int m_id,int for_id);
-	int moveInleModuleIntoIf(int m_id,int if_id,int branch_id);
-	int moveOutModule(int m_id); //for或者if同一个函数
+	//int moveInModule(int m_id,int container_id,int ui_branch_id);
+	//int moveOutModule(int m_id); //for或者if同一个函数
 
 	/// \brief 创建我的模块
 
