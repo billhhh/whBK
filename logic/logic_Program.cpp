@@ -620,6 +620,31 @@ bool logic_Program::delModule(int m_id) {
 				logic_Tree * tmpTree = new logic_Tree(delNode->mvvu_Children.at(i)); //新建树
 				mvmu_TreeMap[tmpTree->mvi_TreeID] = tmpTree; //树map 新增
 				updateMId_TreeMap(tmpTree); //更新映射表
+
+				//如果此树（root）在 for 或 if 中，需要特殊处理
+				if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
+
+					logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+
+					if( tmpModule->getModuleType() == 2003 ) {
+
+						//for
+						logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
+						//不用删除原树，直接加入新树
+						tmpForModule->addTree(tmpTree);
+
+					}else if( tmpModule->getModuleType() == 2004 ) {
+
+						//if
+						logic_IfModule * tmpIfModule = (logic_IfModule *) tmpModule;
+						int tmpBranchId = tmpIfModule->getTreeBranch( mvmu_ModuleId_TreeMap[m_id] );
+						tmpIfModule->addTree(tmpBranchId,tmpTree);
+					}
+
+					int for_if_id = mvmi_TreeId_For_IfIdMap[tree];
+					mvmi_TreeId_For_IfIdMap[tmpTree] = for_if_id;
+
+				}
 			}
 
 			//原树不动，只须将当前节点父节点这点移除
@@ -682,7 +707,7 @@ bool logic_Program::delModule(int m_id) {
 			}
 
 			//原树直接设置孩子为root（tree没有改变，不必更新映射表）
-			tree->setFirstChildAsRoot();
+			tree->setFirstChildAsRoot(); //将root的唯一孩子设置为root，同时删除oldRoot
 			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 

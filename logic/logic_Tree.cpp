@@ -97,7 +97,7 @@ void logic_Tree::setRoot(tree_node *some) {
 	this->mvi_TreeID = some->getID();
 }
 
-//将root的唯一孩子设置为root
+//将root的唯一孩子设置为root，同时删除oldRoot
 bool logic_Tree::setFirstChildAsRoot() {
 
 	logic_TreeNode * oldRoot = this->mvu_root;
