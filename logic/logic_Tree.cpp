@@ -323,7 +323,7 @@ bool logic_Tree::del_node(_IdDataType ID)
 	return true;
 }
 
-//散开ID节点后，但不删除
+//端开ID节点连接，但不删除
 bool logic_Tree::del_node_notConn(int ID) {
 
 	iterator* position = search(ID);
