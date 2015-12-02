@@ -140,7 +140,6 @@ public:
 
 	///方案1 暂时选定
 	///for if move
-	///只在前驱为0的时候使用
 	int moveModuleForIf(int cur_m_id,int other_m_id,MoveType move_type,int container_id,int ui_branch_id);
 
 	///方案2 （给UI进行的原子操作）
