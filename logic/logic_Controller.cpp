@@ -432,7 +432,10 @@ int logic_Controller::ctrlAddIfBranch(int if_id) {
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	return tCurProg->addIfBranch(if_id);
+	int newBranchId = tCurProg->addIfBranch(if_id);
+	int ui_branch_id = encryptBranchId(if_id,newBranchId);
+
+	return ui_branch_id;
 }
 
 //难点，需要删除分支中所有树
@@ -468,4 +471,19 @@ void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
 	tCurProg->inParaDisconnect(in_m_id,in_para_id);
+}
+
+///
+/// \brief 加解密 ui_branch_id
+///
+
+//加密 返回加密后id
+int logic_Controller::encryptBranchId(int if_id,int branch_id) {
+
+	//此flag是 把一个32位整数分成：
+	///高16位做moduleId，低15位做branchId
+	int ui_branch_id = if_id<<15;
+	ui_branch_id += branch_id;
+
+	return ui_branch_id;
 }

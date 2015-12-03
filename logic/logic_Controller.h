@@ -89,15 +89,6 @@ public:
 	void ctrlOutParaDisconnect(int out_m_id,int out_para_id);
 	void ctrlInParaDisconnect(int in_m_id,int in_para_id);
 
-	///
-	/// \brief 加解密 ui_branch_id
-	///
-
-	//加密
-	int encryptBranchId(int if_id,int branch_id); //返回加密后id
-	//解密
-	void decryptBranchId(int ui_branch_id,int &if_id,int branch_id);
-
 //重要private函数
 private:
 	void Init();
@@ -113,6 +104,15 @@ private:
 	std::string whIntToString(int i);
 
 	std::map <_IdDataType, logic_BasicModule *> mvmu_InitModuleMap; //加载在内存中module Init总map
+
+	///
+	/// \brief 逻辑层，加解密 ui_branch_id
+	///
+
+	//加密
+	int encryptBranchId(int if_id,int branch_id); //返回加密后id
+	//解密
+	void decryptBranchId(int ui_branch_id,int &if_id,int branch_id);
 
 };
 
