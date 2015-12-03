@@ -197,10 +197,10 @@ int msgInterface::getActiveTree(int for_id) {
 	return ctrl.ctrlGetForActiveTree(for_id);
 }
 
-//if
-int msgInterface::getActiveTree(int if_id,int branch_id) {
+//if 激活树
+int msgInterface::getActiveTree(int if_id,int ui_branch_id) {
 
-	return ctrl.ctrlGetIfActiveTree(if_id,branch_id);
+	return ctrl.ctrlGetIfActiveTree(if_id,ui_branch_id);
 }
 
 // set 当前激活树id
@@ -211,34 +211,34 @@ void msgInterface::setActiveTree(int for_id,int tree_id) {
 }
 
 //if
-void msgInterface::setActiveTree(int if_id,int branch_id,int tree_id) {
+void msgInterface::setActiveTree(int if_id,int ui_branch_id,int tree_id) {
 
-	return ctrl.ctrlSetIfActiveTree(if_id,branch_id,tree_id);
+	return ctrl.ctrlSetIfActiveTree(if_id,ui_branch_id,tree_id);
 }
 
 /// get set if 某个 branch 参数
 //get 指定 branch的int content
-int msgInterface::getIfBranchContentInt(int if_id,int branch_id) {
+int msgInterface::getIfBranchContentInt(int if_id,int ui_branch_id) {
 
-	return ctrl.ctrlGetIfBranchContentInt(if_id,branch_id);
+	return ctrl.ctrlGetIfBranchContentInt(if_id,ui_branch_id);
 }
 
-//string
-std::string msgInterface::getIfBranchContentStr(int if_id,int branch_id) {
+//string content
+std::string msgInterface::getIfBranchContentStr(int if_id,int ui_branch_id) {
 
-	return ctrl.ctrlGetIfBranchContentStr(if_id,branch_id);
+	return ctrl.ctrlGetIfBranchContentStr(if_id,ui_branch_id);
 }
 
 ///// \返回不同错误代码，正常返回0，重载
-int msgInterface::setIfBranchContent(int if_id,int branch_id,int con_int) {
+int msgInterface::setIfBranchContent(int if_id,int ui_branch_id,int con_int) {
 
-	return ctrl.ctrlSetIfBranchContent(if_id,branch_id,con_int);
+	return ctrl.ctrlSetIfBranchContent(if_id,ui_branch_id,con_int);
 }
 
 //重载 string
-int msgInterface::setIfBranchContent(int if_id,int branch_id,std::string con_str) {
+int msgInterface::setIfBranchContent(int if_id,int ui_branch_id,std::string con_str) {
 
-	return ctrl.ctrlSetIfBranchContent(if_id,branch_id,con_str);
+	return ctrl.ctrlSetIfBranchContent(if_id,ui_branch_id,con_str);
 }
 
 //增删 if 分支
@@ -248,9 +248,9 @@ int msgInterface::addIfBranch(int if_id) {
 }
 
 //难点，需要删除分支中所有树
-int msgInterface::delIfBranch(int if_id,int branch_id) {
+int msgInterface::delIfBranch(int if_id,int ui_branch_id) {
 
-	return ctrl.ctrlDelIfBranch(if_id,branch_id);
+	return ctrl.ctrlDelIfBranch(if_id,ui_branch_id);
 }
 
 /// \brief 模块参数连线
