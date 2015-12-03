@@ -184,7 +184,7 @@ bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int for_id) {
 	return ctrl.ctrlInsertModule_For(m_id,isFI,m_type,for_id);
 }
 
-/// branch_id 默认参数为0（for 参数为0），代表放入哪一个 if 的哪一个分支中
+/// branch_id，代表放入哪一个 if 的哪一个分支中
 bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int branch_id) {
 
 	return ctrl.ctrlInsertModule_If(m_id,isFI,m_type,if_id,branch_id);
