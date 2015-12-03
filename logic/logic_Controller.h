@@ -112,7 +112,7 @@ private:
 	//加密
 	int encryptBranchId(int if_id,int branch_id); //返回加密后id
 	//解密
-	void decryptBranchId(int ui_branch_id,int &if_id,int branch_id);
+	void decryptBranchId(int ui_branch_id,int &if_id,int &branch_id);
 
 };
 

@@ -480,10 +480,16 @@ void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
 //加密 返回加密后id
 int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 
-	//此flag是 把一个32位整数分成：
+	//把一个32位整数分成：
 	///高16位做moduleId，低15位做branchId
 	int ui_branch_id = if_id<<15;
 	ui_branch_id += branch_id;
 
 	return ui_branch_id;
+}
+
+//解密
+void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_id) {
+
+	//高16位
 }
