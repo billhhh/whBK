@@ -56,24 +56,31 @@ public:
 	int ctrlFrontInsMultiMove(int cur_m_id,int post_m_id);
 	int ctrlBackInsMultiMove(int cur_m_id,int pre_m_id);
 
+
+	///
+	/// \brief for和if处理
+	///        注意：ui_branch_id需要在逻辑层合成和分开
+	/// \para 传入都是ui_branch_id，但是输入给下一级函数的是正确的branch_id
+	///
+
 	bool ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id); //insert into for
-	bool ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int branch_id); //insert into if
+	bool ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int ui_branch_id); //insert into if
 
 	int ctrlGetForActiveTree(int for_id); //for
-	int ctrlGetIfActiveTree(int if_id,int branch_id); //if
+	int ctrlGetIfActiveTree(int if_id,int ui_branch_id); //if
 
 	void ctrlSetForActiveTree(int for_id,int tree_id); //for
-	void ctrlSetIfActiveTree(int if_id,int branch_id,int tree_id); //if
+	void ctrlSetIfActiveTree(int if_id,int ui_branch_id,int tree_id); //if
 
-	int ctrlGetIfBranchContentInt(int if_id,int branch_id); //get 指定 branch的int content
-	std::string ctrlGetIfBranchContentStr(int if_id,int branch_id); //string
+	int ctrlGetIfBranchContentInt(int if_id,int ui_branch_id); //get 指定 branch的int content
+	std::string ctrlGetIfBranchContentStr(int if_id,int ui_branch_id); //string
 
-	int ctrlSetIfBranchContent(int if_id,int branch_id,int con_int);
-	int ctrlSetIfBranchContent(int if_id,int branch_id,std::string con_str); //重载 string
+	int ctrlSetIfBranchContent(int if_id,int ui_branch_id,int con_int);
+	int ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::string con_str); //重载 string
 
 	//增删 if 分支
 	int ctrlAddIfBranch(int if_id);
-	int ctrlDelIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
+	int ctrlDelIfBranch(int if_id,int ui_branch_id); //难点，需要删除分支中所有树
 
 	/// \brief 模块参数连线
 	int ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
@@ -81,6 +88,15 @@ public:
 	//可通过 isOut 来用outModule或者inModule删除
 	void ctrlOutParaDisconnect(int out_m_id,int out_para_id);
 	void ctrlInParaDisconnect(int in_m_id,int in_para_id);
+
+	///
+	/// \brief 加解密 ui_branch_id
+	///
+
+	//加密
+	int encryptBranchId(int if_id,int branch_id); //返回加密后id
+	//解密
+	void decryptBranchId(int ui_branch_id,int &if_id,int branch_id);
 
 //重要private函数
 private:
