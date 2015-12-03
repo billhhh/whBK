@@ -184,10 +184,10 @@ bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int for_id) {
 	return ctrl.ctrlInsertModule_For(m_id,isFI,m_type,for_id);
 }
 
-/// branch_id，代表放入哪一个 if 的哪一个分支中
-bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int branch_id) {
+/// ui_branch_id，组合id，代表放入哪一个 if 的哪一个分支中
+bool msgInterface::insertModule(int m_id,bool isFI,int m_type,int if_id,int ui_branch_id) {
 
-	return ctrl.ctrlInsertModule_If(m_id,isFI,m_type,if_id,branch_id);
+	return ctrl.ctrlInsertModule_If(m_id,isFI,m_type,if_id,ui_branch_id);
 }
 
 //返回当前激活树id【注意是树id】
