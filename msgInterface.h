@@ -126,12 +126,15 @@ public:
 	/// 放入哪一个 if 的哪一个分支中
 	bool insertModule(int m_id,bool isFI,int m_type,int if_id,int ui_branch_id);
 
-	//返回当前激活树id【注意是树id】（废弃）
+
+	///!!!!!!!!!!!!!!!!! 废弃 !!!!!!!!!!!!!!!!!!!!!!
+	//返回当前激活树id【注意是树id】
 	int getActiveTree(int for_id); //for
 	int getActiveTree(int if_id,int ui_branch_id); //if
 
 	void setActiveTree(int for_id,int tree_id); //for
 	void setActiveTree(int if_id,int ui_branch_id,int tree_id); //if
+	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	/// get set 某个 branch 参数
 	int getIfBranchContentInt(int if_id,int ui_branch_id); //get 指定 branch的int content
