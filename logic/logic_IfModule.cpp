@@ -39,11 +39,11 @@ void logic_IfModule::Init() {
 	mvmu_BranchMap[1] = newBranch;
 
 	//branch 2
-	whBranch newBranch;
-	newBranch.curActiveTree = new logic_Tree(-1);
-	newBranch.contentInt = INT_MIN;
-	newBranch.contentStr = "";
-	mvmu_BranchMap[2] = newBranch;
+	whBranch newBranch2;
+	newBranch2.curActiveTree = new logic_Tree(-1);
+	newBranch2.contentInt = INT_MIN;
+	newBranch2.contentStr = "";
+	mvmu_BranchMap[2] = newBranch2;
 }
 
 //返回 指定 branch 当前激活树id
