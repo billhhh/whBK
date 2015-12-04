@@ -33,7 +33,9 @@ protected:
 
 
 private:
-	logic_Tree * mvi_CurActiveTree; //当前哪棵树是连接for的激活状态，也可能无激活树
+	///!!!!!!!所有前端关于ActiveTree操作全部作废
+	///有一棵空节点的树
+	logic_Tree * mvi_CurActiveTree;
 	std::map<int ,logic_Tree * > mvvu_treeList; //for模块中的所有树
 
 	void Init();

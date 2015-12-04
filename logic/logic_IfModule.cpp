@@ -28,14 +28,22 @@ logic_IfModule::~logic_IfModule() {
 void logic_IfModule::Init() {
 
 	mvmu_BranchMap.clear();
-
-// 	whBranch newBranch;
-// 	newBranch.curActiveTree = NULL;
-// 	newBranch.contentInt = INT_MIN;
-// 	newBranch.contentStr = "";
-// 	mvmu_BranchMap[0] = newBranch; ////////mvmu_BranchMap 要找max
-
 	mvmis_Tree_BranchMap.clear();
+
+	/// init声明两个默认branch
+	//branch 1
+	whBranch newBranch;
+	newBranch.curActiveTree = new logic_Tree(-1);
+	newBranch.contentInt = INT_MIN;
+	newBranch.contentStr = "";
+	mvmu_BranchMap[1] = newBranch;
+
+	//branch 2
+	whBranch newBranch;
+	newBranch.curActiveTree = new logic_Tree(-1);
+	newBranch.contentInt = INT_MIN;
+	newBranch.contentStr = "";
+	mvmu_BranchMap[1] = newBranch;
 }
 
 //返回 指定 branch 当前激活树id

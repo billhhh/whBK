@@ -25,6 +25,7 @@ void logic_ForModule::Init() {
 
 	//初始化类
 	mvvu_treeList.clear();
+	mvi_CurActiveTree = new logic_Tree(-1); //activeTree root节点编号为-1
 }
 
 //返回当前激活树
