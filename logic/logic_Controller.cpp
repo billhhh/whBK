@@ -327,7 +327,7 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 	if ( 0 != pre_id )
 		return false;
 
-	if ( false != isFI) //必须不是前插，否则错误
+	if ( false != isFI) //必须不是前插（必是后插），否则错误
 		return false;
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
