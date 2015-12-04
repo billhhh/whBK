@@ -126,7 +126,7 @@ public:
 	/// 放入哪一个 if 的哪一个分支中
 	bool insertModule(int m_id,bool isFI,int m_type,int if_id,int ui_branch_id);
 
-	//返回当前激活树id【注意是树id】
+	//返回当前激活树id【注意是树id】（废弃）
 	int getActiveTree(int for_id); //for
 	int getActiveTree(int if_id,int ui_branch_id); //if
 
