@@ -313,6 +313,13 @@ int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 	return tCurProg->backInsMultiMove(cur_m_id,pre_m_id);
 }
 
+
+///
+/// \brief for和if处理
+///        注意：ui_branch_id需要在逻辑层合成和分开
+/// \para 传入都是ui_branch_id，但是输入给下一级函数的是正确的branch_id
+///
+
 //insert into for
 bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id) {
 
@@ -335,7 +342,7 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 }
 
 //insert into if
-bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int branch_id) {
+bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int ui_branch_id) {
 
 	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
 	if ( 0 != pre_id )
@@ -349,6 +356,8 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 
 	int max_module_id = tCurProg->getMaxModuleId();
 	max_module_id++;
+
+
 
 	bool flag = tCurProg->insertModuleIntoIf(max_module_id,pre_id,m_type,if_id,branch_id); //具体在下一层将树id放入if
 
@@ -480,9 +489,9 @@ void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
 //加密 返回加密后id
 int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 
-	//把一个32位整数分成：
-	///高16位做moduleId，低15位做branchId
-	int ui_branch_id = if_id<<15;
+	//把一个32位 unsigned 整数分成：
+	///高16位做moduleId，低16位做branchId
+	unsigned int ui_branch_id = if_id<<15;
 	ui_branch_id += branch_id;
 
 	return ui_branch_id;
@@ -492,4 +501,6 @@ int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_id) {
 
 	//高16位先分出来
+	if_id = ui_branch_id>>16;
+	branch_id = ui_branch_id - (if_id<<16);
 }
