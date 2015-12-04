@@ -491,5 +491,5 @@ int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 //解密
 void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_id) {
 
-	//高16位
+	//高16位先分出来
 }
