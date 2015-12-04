@@ -93,8 +93,8 @@ public:
 	///
 	/// \brief for与if的move操作
 	///
-	int ctrlMoveModuleFor(int cur_m_id,int other_m_id,MoveType move_type,int for_id);
-	int ctrlMoveModuleIf(int cur_m_id,int other_m_id,MoveType move_type,int if_id,int ui_branch_id);
+	int ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id);
+	int ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id);
 
 //重要private函数
 private:

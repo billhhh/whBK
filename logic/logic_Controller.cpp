@@ -527,7 +527,39 @@ int logic_Controller::decryptBranchId(int ui_branch_id) {
 ///
 /// \brief for与if的move操作
 ///
-int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,MoveType move_type,int for_id) {
+/// \para move_type
+///       case 0:单模块直接后插 move（即一个模块从一棵树移动到另一棵树）
+///       case 1:单模块直接前插
+///       case 2:带孩子后插 move（后有线，只能接在树的某个叶子节点）
+///       case 3:带孩子前插 move（前有线，只能接在一棵树root处，原root不能为开始模块）
+int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	if( -1 == other_m_id ) {
+
+		//如果是接到activeTree的后面
+		assert( 0 == move_type ); //必须为0
+
+	}else {
+
+		//如果是普通move
+		if ( 0 == move_type) //单模块后插 move
+			return this->ctrlBackInsSingMove(cur_m_id,other_m_id);
+
+		else if( 1 == move_type) //单模块前插 move
+			return this->ctrlFrontInsSingMove(cur_m_id,other_m_id);
+
+		else if( 2 == move_type) //带孩子后插 move
+			return this->ctrlBackInsMultiMove(cur_m_id,other_m_id);
+
+		else if( 3 == move_type) //带祖先前插 move
+			return this->ctrlFrontInsMultiMove(cur_m_id,other_m_id);
+	}
+}
+
+int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id) {
 
 
 }

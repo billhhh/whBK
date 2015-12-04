@@ -143,10 +143,10 @@ bool msgInterface::deleteModule(int m_id) {
 /// \brief 移动模块模块
 ///
 /// \para 着重说一下 move_type
-///       case 1:单模块直接后插 move（即一个模块从一棵树移动到另一棵树）
-///       case 2:单模块直接前插
-///       case 3:带孩子后插 move（后有线，只能接在树的某个叶子节点）
-///       case 4:带孩子前插 move（前有线，只能接在一棵树root处，原root不能为开始模块）
+///       case 0:单模块直接后插 move（即一个模块从一棵树移动到另一棵树）
+///       case 1:单模块直接前插
+///       case 2:带孩子后插 move（后有线，只能接在树的某个叶子节点）
+///       case 3:带孩子前插 move（前有线，只能接在一棵树root处，原root不能为开始模块）
 ///
 /// \return 返回错误编号，正常返回0
 int msgInterface::moveModule(int cur_m_id,int other_m_id,MoveType move_type) {
