@@ -43,7 +43,7 @@ void logic_IfModule::Init() {
 	newBranch.curActiveTree = new logic_Tree(-1);
 	newBranch.contentInt = INT_MIN;
 	newBranch.contentStr = "";
-	mvmu_BranchMap[1] = newBranch;
+	mvmu_BranchMap[2] = newBranch;
 }
 
 //返回 指定 branch 当前激活树id
