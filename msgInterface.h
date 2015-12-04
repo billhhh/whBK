@@ -149,6 +149,9 @@ public:
 
 	///方案1 暂时选定
 	///跟for if 相关的所有 move
+	/// \para cur_m_id 指的是被拖动的主动模块id，other_m_id 指的是被动接受的模块id
+	/// \para move_type 移动模式，container_id 目的地容器id，ui_branch_id 前端的奇葩设计id
+	/// \return 返回错误编号，正常返回0
 	int moveModuleForIf(int cur_m_id,int other_m_id,MoveType move_type,int container_id,int ui_branch_id);
 
 	///方案2 （给UI进行的原子操作）
