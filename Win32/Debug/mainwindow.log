@@ -1,9 +1,9 @@
-﻿生成启动时间为 2015/12/4 14:58:30。
+﻿生成启动时间为 2015/12/4 23:13:41。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -49,6 +49,8 @@
      1>logic\logic_Program.cpp(1171): warning C4100: “branch_id”: 未引用的形参
      1>logic\logic_Program.cpp(1190): warning C4100: “branch_id”: 未引用的形参
      1>logic\logic_Program.cpp(1242): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1613): warning C4100: “for_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1692): warning C4100: “for_id”: 未引用的形参
          logic_Project.cpp
          logic_Test.cpp
      1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
@@ -60,8 +62,14 @@
          logic_TreeNode.cpp
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
+     1>logic\logic_Controller.cpp(562): warning C4100: “ui_branch_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(562): warning C4100: “if_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(562): warning C4100: “move_type”: 未引用的形参
+     1>logic\logic_Controller.cpp(562): warning C4100: “other_m_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(562): warning C4100: “cur_m_id”: 未引用的形参
          正在生成代码...
-     1>e:\bill github\whbk\logic\logic_program.h(42): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(560): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_program.h(44): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
          正在编译...
          logic_VarModule.cpp
          logic_XmlIO.cpp
@@ -78,9 +86,6 @@
      1>msgInterface.cpp(43): warning C4100: “prjID”: 未引用的形参
      1>msgInterface.cpp(47): warning C4100: “progID”: 未引用的形参
      1>msgInterface.cpp(95): warning C4100: “m_id”: 未引用的形参
-     1>msgInterface.cpp(276): warning C4100: “move_type”: 未引用的形参
-     1>msgInterface.cpp(275): warning C4100: “other_m_id”: 未引用的形参
-     1>msgInterface.cpp(275): warning C4100: “cur_m_id”: 未引用的形参
          ports.cpp
          program.cpp
          project.cpp
@@ -133,4 +138,4 @@
 
 生成成功。
 
-已用时间 00:00:24.05
+已用时间 00:00:24.03
