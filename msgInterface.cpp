@@ -278,6 +278,7 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 
 	if( container_id == ui_branch_id ) //目的地是for模块
 		return ;
+	else 
 }
 
 /// \brief 创建我的模块
