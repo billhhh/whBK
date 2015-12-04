@@ -357,8 +357,7 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 	int max_module_id = tCurProg->getMaxModuleId();
 	max_module_id++;
 
-	int branch_id;
-
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	bool flag = tCurProg->insertModuleIntoIf(max_module_id,pre_id,m_type,if_id,branch_id); //具体在下一层将树id放入if
 
 	return flag; //返回成功与否标志
@@ -374,11 +373,12 @@ int logic_Controller::ctrlGetForActiveTree(int for_id) {
 }
 
 //if
-int logic_Controller::ctrlGetIfActiveTree(int if_id,int branch_id) {
+int logic_Controller::ctrlGetIfActiveTree(int if_id,int ui_branch_id) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	return tCurProg->getIfActiveTree(if_id,branch_id);
 }
 
@@ -392,46 +392,51 @@ void logic_Controller::ctrlSetForActiveTree(int for_id,int tree_id) {
 }
 
 //if
-void logic_Controller::ctrlSetIfActiveTree(int if_id,int branch_id,int tree_id) {
+void logic_Controller::ctrlSetIfActiveTree(int if_id,int ui_branch_id,int tree_id) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	tCurProg->setIfActiveTree(if_id,branch_id,tree_id);
 }
 
 //get 指定 branch的int content
-int logic_Controller::ctrlGetIfBranchContentInt(int if_id,int branch_id) {
+int logic_Controller::ctrlGetIfBranchContentInt(int if_id,int ui_branch_id) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	return tCurProg->getIfBranchContentInt(if_id,branch_id);
 }
 
 //string
-std::string logic_Controller::ctrlGetIfBranchContentStr(int if_id,int branch_id) {
+std::string logic_Controller::ctrlGetIfBranchContentStr(int if_id,int ui_branch_id) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	return tCurProg->getIfBranchContentStr(if_id,branch_id);
 }
 
-int logic_Controller::ctrlSetIfBranchContent(int if_id,int branch_id,int con_int) {
+int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,int con_int) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	return tCurProg->setIfBranchContent(if_id,branch_id,con_int);
 }
 
 //重载 string
-int logic_Controller::ctrlSetIfBranchContent(int if_id,int branch_id,std::string con_str) {
+int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::string con_str) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	return tCurProg->setIfBranchContent(if_id,branch_id,con_str);
 }
 
@@ -448,11 +453,12 @@ int logic_Controller::ctrlAddIfBranch(int if_id) {
 }
 
 //难点，需要删除分支中所有树
-int logic_Controller::ctrlDelIfBranch(int if_id,int branch_id) {
+int logic_Controller::ctrlDelIfBranch(int if_id,int ui_branch_id) {
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	return tCurProg->delIfBranch(if_id,branch_id);
 }
 
