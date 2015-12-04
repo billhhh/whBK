@@ -148,7 +148,7 @@ public:
 	int delIfBranch(int if_id,int ui_branch_id); //难点，需要删除分支中所有树
 
 	///方案1 暂时选定
-	///for if move
+	///跟for if 相关的所有 move
 	int moveModuleForIf(int cur_m_id,int other_m_id,MoveType move_type,int container_id,int ui_branch_id);
 
 	///方案2 （给UI进行的原子操作）
