@@ -546,20 +546,20 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 
 		//如果是普通move
 		if ( 0 == move_type) //单模块后插 move
-			return this->ctrlBackInsSingMove(cur_m_id,other_m_id);
+			return tCurProg->backInsSingMoveFor(cur_m_id,other_m_id,for_id);
 
 		else if( 1 == move_type) //单模块前插 move
-			return this->ctrlFrontInsSingMove(cur_m_id,other_m_id);
+			return tCurProg->frontInsSingMoveFor(cur_m_id,other_m_id,for_id);
 
 		else if( 2 == move_type) //带孩子后插 move
-			return this->ctrlBackInsMultiMove(cur_m_id,other_m_id);
+			return tCurProg->backInsMultiMoveFor(cur_m_id,other_m_id,for_id);
 
 		else if( 3 == move_type) //带祖先前插 move
-			return this->ctrlFrontInsMultiMove(cur_m_id,other_m_id);
+			return tCurProg->frontInsMultiMoveFor(cur_m_id,other_m_id,for_id);
 	}
 }
 
 int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id) {
 
-
+	return 0;
 }

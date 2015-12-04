@@ -17,6 +17,8 @@
 #include "logic_Tree.h"
 #include "logic_BasicModule.h"
 #include "logic_Global.h"
+#include "logic_ForModule.h"
+#include "logic_IfModule.h"
 
 typedef struct structPort
 {
@@ -161,10 +163,16 @@ public:
 	void outParaDisconnect(int out_m_id,int out_para_id);
 	void inParaDisconnect(int in_m_id,int in_para_id);
 
+	//////特殊处理for的move操作
+	int backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id);
+	int frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id);
+	int backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id);
+	int frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id);
+
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
-	///且 rootId = moduleId*100000+branchId
+	///且 rootId = moduleId*100000+branchId，这种 tree 只维护mvmu_TreeMap
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap; // rootId 与 树实体的对应
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射
@@ -190,6 +198,10 @@ protected:
 private:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
 	std::string mvs_ProgName;
+
+	//通过id得到模块
+	logic_ForModule* getForModuleById(int id);
+	logic_IfModule* getIfModuleById(int id);
 
 };
 

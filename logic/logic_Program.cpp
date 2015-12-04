@@ -1046,11 +1046,11 @@ bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,
 	///// Step2、往 for 模块中加树
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return false;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 	
 	if( tmpIfModule->addTree( branch_id,mvmu_ModuleId_TreeMap[m_id] ) < 0 )
 		return false;
@@ -1087,11 +1087,11 @@ int logic_Program::getIfActiveTree(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return -4;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	logic_Tree * tree = tmpIfModule->getCurActiveTree(branch_id); //可能小于0
 
@@ -1121,10 +1121,10 @@ void logic_Program::setIfActiveTree(int if_id,int branch_id,int tree_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	assert( 2004 == tmpModule->getModuleType() ); //不是for模块，错误
+	assert( 2004 == tmpModule->getModuleType() ); //不是if模块，错误
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 	tmpIfModule->setCurActiveTree( branch_id,mvmu_ModuleId_TreeMap[tree_id] ); //可能小于0
 
 	return;
@@ -1138,11 +1138,11 @@ int logic_Program::getIfBranchContentInt(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return -4;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	int content = tmpIfModule->getBranchContentInt(branch_id); //可能小于0
 
@@ -1157,11 +1157,11 @@ std::string logic_Program::getIfBranchContentStr(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return NULL;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	std::string content = tmpIfModule->getBranchContentStr(branch_id);
 
@@ -1175,11 +1175,11 @@ int logic_Program::setIfBranchContent(int if_id,int branch_id,int con_int) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return -4;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	int flag = tmpIfModule->setBranchContent(if_id,con_int);
 
@@ -1194,11 +1194,11 @@ int logic_Program::setIfBranchContent(int if_id,int branch_id,std::string con_st
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return -4;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	int flag = tmpIfModule->setBranchContent(if_id,con_str);
 
@@ -1231,11 +1231,11 @@ int logic_Program::delIfBranch(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //不是for模块，错误
+	if( 2004 != tmpModule->getModuleType() ) //不是if模块，错误
 		return -4;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 	std::vector<int > L = tmpIfModule->delBranch(branch_id);
 
 	//已获得待删除模块树id，在外部删除树以及树中的模块
@@ -1429,4 +1429,341 @@ void logic_Program::inParaDisconnect(int in_m_id,int in_para_id) {
 	mvvu_Conn_To_FromMap.erase(inPort);
 
 	return;
+}
+
+//特殊处理for的move操作
+int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
+
+	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+	}
+
+	// pre_id 和 cur_id 均不能是开始模块
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
+		|| mvmu_ModuleMap[pre_m_id]->getModuleType() == 2001 ) {
+			return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树，早点找到会更靠谱
+	logic_Tree *insTree = NULL;
+	if( 0 == pre_m_id ) {  ////////////必须用深拷贝，浅拷贝可能有危险
+
+		//如果前插一棵空树
+
+		///如果是前插空树，同时又是【唯一模块】是可以的，从if或者for移过来
+
+		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //深拷贝构造到栈
+
+		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
+			//如果孩子不是一个，错误
+			return -4;
+		}
+
+		tmpCurNode.mvu_Parent = 0;
+		tmpCurNode.mvvu_Children.clear();
+
+		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //深拷贝构造到堆
+		insTree = new logic_Tree(tmpPassNode); //新建一棵树，此node也必须新建，否则被下面的delnode了
+
+		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
+
+		///////////////////////////////特殊处理for的地方///////////////////////////////
+
+		///
+		/// \brief root拖入for
+		///
+		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = for_id; //建立for模块映射
+		tmpForModule->addTree(mvmu_TreeMap[cur_m_id]); //add tree
+
+	}else {
+
+		////// pre_m_id 不为0
+
+		//////pre_m_id必须在for中
+		assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
+
+		/////如果已存在，直接找到待插入树
+		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
+		insTree->append_node(pre_m_id,cur_m_id);
+	}
+
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID ) {
+
+		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			//树中唯一模块，删除树（ 进入这个分支 pre_m_id 也可能为0 ）
+
+			///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+			///
+			/// \brief root移出if和for
+			///
+			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+
+				tmpForModule->delTree(oldTree);
+				mvmi_TreeId_For_IfIdMap.erase(oldTree);
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+
+			// Step3、（必须在此处，不然就return了）更新
+			mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+			return 0; //正常返回
+		}else {
+			//不是唯一模块
+
+			oldTree->setFirstChildAsRoot();
+		}
+
+	}
+
+	// Step3、更新
+	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+	return 0; //正常返回
+
+}
+
+int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
+
+	assert(post_m_id>0);
+
+	//////pre_m_id必须在for中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
+		return -2; //没找到插入点
+	}
+
+	//如果 post_m_id 和 cur_id 模块都是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
+		&& mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+			return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //待插入树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+
+	int oldRootId = insTree->mvi_TreeID;
+	if( post_m_id == oldRootId ) {
+
+		//待插入节点要插在原树root之前
+		mvmu_TreeMap.erase(post_m_id);
+		insTree->exchangeRoot(cur_m_id);
+	}else {
+
+		//正常插入地方
+		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
+	}
+
+	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID 
+		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+			///
+			/// \brief root移出if和for
+			///
+			logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+
+				tmpForModule->delTree(oldTree);
+				mvmi_TreeId_For_IfIdMap.erase(oldTree);
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			//树中唯一模块，删除树
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+	}
+
+	//只有 post_m_id 是根的情况，才更新tree map
+	if( post_m_id == oldRootId )
+		mvmu_TreeMap[cur_m_id] = insTree;
+
+	return 0; //正常返回
+}
+
+int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
+
+	//////pre_m_id必须在for中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
+
+	//////cur_m_id 和 pre_m_id 必须在一个for中
+	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
+	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
+	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
+
+	/// 重复 backInsMultiMove 方法
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+	}
+
+	//如果 pre_id 和 cur_id 模块都是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
+		&& mvmu_ModuleMap[pre_m_id]->getModuleType() == 2001 ) {
+			return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	/////////////开始/////////////
+
+	///// step1、删除旧树节点
+	///// 注：删除必须是第一步，不然 del_node_notConn 方法会删掉错误 parent 的孩子
+
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //待插入节点（必须在此处寻找）
+
+	if ( insNode->mvvu_Children.size() == 0 ) {
+		//可能只有一个孩子
+		return -4;
+	}
+
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node_notConn(cur_m_id); //断开 oldTree 与此节点的连接
+
+	}else if(cur_m_id == oldTree->mvi_TreeID ) {
+
+		//ROOT，删除树
+		oldTree->del_node_notConn(cur_m_id); //如果是树根，直接将该树root置空
+		SAFE_DELETE(oldTree); //放心删除树
+		mvmu_TreeMap.erase(cur_m_id);
+	}
+
+	///// step2、插入新节点
+	logic_Tree *insTree = NULL;
+	if( 0 == pre_m_id ) { 
+		//如果前插一棵空树
+
+		insTree = new logic_Tree(insNode); //新建一棵树
+
+		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
+		mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+	}else {
+		/////如果已存在，直接找到待插入树
+		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
+
+		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_id节点
+		//如果 pre_m_id 不是叶子节点，错误返回
+		if(preNode->mvvu_Children.size()>0) {
+			return -4;
+		}
+
+		insTree->add_node(pre_m_id,insNode);
+
+	}
+
+	///// step3、更新 module tree映射
+	recurs_update(insTree,insNode);
+
+	return 0; //正常返回
+}
+
+int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
+
+	//////pre_m_id必须在for中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
+
+	//////cur_m_id 和 post_m_id 必须在一个for中
+	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
+	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[post_m_id];
+	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
+
+	/// 重复 frontInsMultiMove 方法
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
+		return -2; //没找到插入点
+	}
+
+	//如果 post_m_id 和 cur_id 模块都是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
+		&& mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+			return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	/////!!!!!!!!!!!!特别注意这里，这里的 insTree 和 oldtree 调换，可以转换为后插!!!!!!!!!!!!!!
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待插入树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[post_m_id]; //待删除树
+
+	//如果 post_m_id 不是根节点，错误返回
+	if( post_m_id!=oldTree->mvi_TreeID ) {
+		return -4;
+	}
+
+	///////////////////////////////////////
+	logic_TreeNode * insNode = oldTree->getRoot(); //待插入节点
+	insTree->add_node(cur_m_id,insNode);
+
+	///// step2、删除旧树节点
+
+	//必然是ROOT，直接删除树
+	oldTree->del_node_notConn(post_m_id); //断开 oldTree 此节点后的所有连接
+	SAFE_DELETE(oldTree); //放心删除树
+	mvmu_TreeMap.erase(post_m_id);
+
+	///// step3、更新 module tree映射
+
+	recurs_update(insTree,insNode);
+
+	return 0; //正常返回
+}
+
+//通过id得到模块
+logic_ForModule* logic_Program::getForModuleById(int id) {
+
+	assert( mvmu_ModuleMap.count(id) > 0 ); //假定 count 大于0
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[id];
+	assert( 2003 == tmpModule->getModuleType() ); //不是for模块，错误
+
+	/// type 一定是2003
+	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //强制转换成for module
+
+	return tmpForModule;
+}
+
+logic_IfModule* logic_Program::getIfModuleById(int id) {
+
+	assert( mvmu_ModuleMap.count(id) > 0 ); //假定 count 大于0
+
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[id];
+
+	assert( 2004 == tmpModule->getModuleType() ); //不是if模块，错误
+
+	/// type 一定是2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
+
+	return tmpIfModule;
 }
