@@ -357,7 +357,7 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 	int max_module_id = tCurProg->getMaxModuleId();
 	max_module_id++;
 
-	int 
+	int branch_id;
 
 	bool flag = tCurProg->insertModuleIntoIf(max_module_id,pre_id,m_type,if_id,branch_id); //具体在下一层将树id放入if
 
@@ -490,7 +490,7 @@ void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
 int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 
 	//把一个32位 unsigned 整数分成：
-	///高16位做moduleId，低15位做branchId
+	///高16位做moduleId，低15位做branchId，符号位保留（不允许为负）
 	int ui_branch_id = if_id<<15;
 	ui_branch_id += branch_id;
 
@@ -505,6 +505,15 @@ void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_i
 	assert( ui_branch_id > 0 );
 
 	//高16位先分出来
-	if_id = ui_branch_id>>15;
-	branch_id = ui_branch_id - (if_id<<15);
+	if_id = ui_branch_id >> 15;
+	branch_id = ui_branch_id & 0x8FFF; //抹去高位
+}
+
+//解密
+int logic_Controller::decryptBranchId(int ui_branch_id) {
+
+	assert( ui_branch_id > 0 );
+
+	int branch_id = ui_branch_id & 0x8FFF; //抹去高位
+	return branch_id;
 }
