@@ -89,6 +89,13 @@ public:
 	void ctrlOutParaDisconnect(int out_m_id,int out_para_id);
 	void ctrlInParaDisconnect(int in_m_id,int in_para_id);
 
+
+	///
+	/// \brief for与if的move操作
+	///
+	int ctrlMoveModuleFor(int cur_m_id,int other_m_id,MoveType move_type,int for_id);
+	int ctrlMoveModuleIf(int cur_m_id,int other_m_id,MoveType move_type,int if_id,int ui_branch_id);
+
 //重要private函数
 private:
 	void Init();

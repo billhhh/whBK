@@ -523,3 +523,11 @@ int logic_Controller::decryptBranchId(int ui_branch_id) {
 	int branch_id = ui_branch_id & 0x8FFF; //抹去高位
 	return branch_id;
 }
+
+///
+/// \brief for与if的move操作
+///
+int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,MoveType move_type,int for_id) {
+
+
+}

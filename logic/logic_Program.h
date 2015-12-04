@@ -163,6 +163,8 @@ public:
 
 protected:
 
+	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
+	///且 rootId = moduleId*100000+branchId
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap; // rootId 与 树实体的对应
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射

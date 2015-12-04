@@ -277,9 +277,9 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 					) {
 
 	if( container_id == ui_branch_id ) //目的地是for模块
-		return 0;
+		return ctrl.ctrlMoveModuleFor(cur_m_id,other_m_id,move_type,container_id);
 	else //目的地是if模块
-		return 0;
+		return ctrl.ctrlMoveModuleIf(cur_m_id,other_m_id,move_type,container_id,ui_branch_id);
 }
 
 /// \brief 创建我的模块
