@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/12/5 15:24:37。
+﻿生成启动时间为 2015/12/5 15:50:34。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -60,13 +60,13 @@
          logic_TreeNode.cpp
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
-     1>logic\logic_Controller.cpp(574): warning C4100: “ui_branch_id”: 未引用的形参
-     1>logic\logic_Controller.cpp(574): warning C4100: “if_id”: 未引用的形参
-     1>logic\logic_Controller.cpp(574): warning C4100: “move_type”: 未引用的形参
-     1>logic\logic_Controller.cpp(574): warning C4100: “other_m_id”: 未引用的形参
-     1>logic\logic_Controller.cpp(574): warning C4100: “cur_m_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(576): warning C4100: “ui_branch_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(576): warning C4100: “if_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(576): warning C4100: “move_type”: 未引用的形参
+     1>logic\logic_Controller.cpp(576): warning C4100: “other_m_id”: 未引用的形参
+     1>logic\logic_Controller.cpp(576): warning C4100: “cur_m_id”: 未引用的形参
          正在生成代码...
-     1>e:\bill github\whbk\logic\logic_controller.cpp(572): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(574): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_program.h(44): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
          正在编译...
          logic_VarModule.cpp
@@ -136,4 +136,4 @@
 
 生成成功。
 
-已用时间 00:00:22.25
+已用时间 00:00:22.85
