@@ -14,6 +14,7 @@
 #include "logic_Tree.h"
 //#include <vector>
 #include <map>
+#include "logic_whPort.h"
 
 class logic_ForModule 
 	: public logic_BasicModule
