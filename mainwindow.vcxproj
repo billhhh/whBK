@@ -452,6 +452,7 @@ endlocal
     <ClInclude Include="logic\logic_Tree.h" />
     <ClInclude Include="logic\logic_TreeNode.h" />
     <ClInclude Include="logic\logic_VarModule.h" />
+    <ClInclude Include="logic\logic_whPort.h" />
     <ClInclude Include="logic\logic_WinSwitcher.h" />
     <ClInclude Include="logic\logic_Controller.h" />
     <ClInclude Include="logic\logic_XmlIO.h" />
