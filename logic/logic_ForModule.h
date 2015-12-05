@@ -21,6 +21,7 @@ class logic_ForModule
 public:
 	/////构造函数和析构函数
 	explicit logic_ForModule(int id);//默认构造，for里面什么都不生成
+	explicit logic_ForModule(int id,);//默认构造，for里面什么都不生成
 	~logic_ForModule();
 
 	logic_Tree * getCurActiveTree(); //返回当前激活树
