@@ -17,8 +17,7 @@ logic_ForModule::logic_ForModule(int id)
 
 logic_ForModule::~logic_ForModule() {
 
-	//析构，子类并不用做什么
-	//先析构子类，再析构父类
+	Destroy(); //销毁内置所有对象
 }
 
 void logic_ForModule::Init() {
@@ -26,6 +25,13 @@ void logic_ForModule::Init() {
 	//初始化类
 	mvvu_treeList.clear();
 	mvi_CurActiveTree = new logic_Tree(-1); //activeTree root节点编号为-1
+}
+
+//析构是删掉所有树和模块
+void Destroy() {
+
+	//析构函数调用
+
 }
 
 //返回当前激活树
