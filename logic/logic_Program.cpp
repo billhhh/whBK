@@ -199,13 +199,6 @@ bool logic_Program::del_Module(_IdDataType moduleId)
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[moduleId];
 	mvmu_ModuleMap.erase(moduleId);
 
-	if( tmpModule->getModuleType() == 2003 ) {
-		//for
-
-	}else if( tmpModule->getModuleType() == 2004 ) {
-		//if
-
-	}
 	SAFE_DELETE(tmpModule);
 
 	//删除所有连线
