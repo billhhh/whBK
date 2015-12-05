@@ -159,11 +159,25 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 	logic_BasicModule *bm = NULL;
 	if( 2003 == m_Type ) {
 
-		bm = new logic_ForModule(moduleId);
+		//for
+		logic_ForModule* tmpForModule = new logic_ForModule(moduleId);
+		bm = tmpForModule;
+
+		//得到默认activeTree，维护map
+		logic_Tree * tmpActiveTree = tmpForModule->getCurActiveTree();
+		mvmu_TreeMap[this->composeTreeId(moduleId)] = tmpActiveTree;
 
 	}else if( 2004 == m_Type ) {
 
-		bm = new logic_IfModule(moduleId);
+		//if
+		logic_IfModule* tmpIfModule = new logic_IfModule(moduleId);
+		bm = tmpIfModule;
+
+		//得到默认的两个branch activeTree，维护map
+		logic_Tree * tmpActiveTree = tmpIfModule->getCurActiveTree(1);
+		mvmu_TreeMap[this->composeTreeId(moduleId,1)] = tmpActiveTree;
+		tmpActiveTree = tmpIfModule->getCurActiveTree(2);
+		mvmu_TreeMap[this->composeTreeId(moduleId,2)] = tmpActiveTree;
 
 	}else //普通模块
 		bm = new logic_BasicModule(moduleId,m_Type);
@@ -1770,4 +1784,17 @@ logic_IfModule* logic_Program::getIfModuleById(int id) {
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	return tmpIfModule;
+}
+
+//rootId = moduleId*100000+branchId
+//合成for和if放入tree map中的id
+inline int logic_Program::composeTreeId(int for_id) {
+
+	return for_id*100000;
+}
+
+//rootId = moduleId*100000+branchId
+inline int logic_Program::composeTreeId(int if_id,int branch_id) {
+
+	return if_id*100000+branch_id;
 }

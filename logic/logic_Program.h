@@ -204,6 +204,10 @@ private:
 	logic_ForModule* getForModuleById(int id);
 	logic_IfModule* getIfModuleById(int id);
 
+	//合成for和if放入tree map中的id
+	inline int composeTreeId(int for_id);
+	inline int composeTreeId(int if_id,int branch_id);
+
 };
 
 
