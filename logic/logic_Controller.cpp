@@ -512,7 +512,7 @@ void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_i
 
 	//高16位先分出来
 	if_id = ui_branch_id >> 15;
-	branch_id = ui_branch_id & 0x8FFF; //抹去高位
+	branch_id = ui_branch_id & 0x7FFF; //抹去高位
 }
 
 //解密
@@ -520,7 +520,7 @@ int logic_Controller::decryptBranchId(int ui_branch_id) {
 
 	assert( ui_branch_id > 0 );
 
-	int branch_id = ui_branch_id & 0x8FFF; //抹去高位
+	int branch_id = ui_branch_id & 0x7FFF; //抹去高位
 	return branch_id;
 }
 
