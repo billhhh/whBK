@@ -551,6 +551,8 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 		//如果是接到activeTree的后面
 		assert( 0 == move_type ); //必须为0
 
+		return tCurProg->appendActiveTreeFor(cur_m_id,for_id);
+
 	}else {
 
 		//如果是普通move

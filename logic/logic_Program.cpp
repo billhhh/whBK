@@ -1534,6 +1534,8 @@ int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = for_id; //建立for模块映射
 		tmpForModule->addTree(mvmu_TreeMap[cur_m_id]); //add tree
 
+		////////////////////////////////////////////////////////////////////////////////
+
 	}else {
 
 		////// pre_m_id 不为0
@@ -1680,7 +1682,8 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
 	//如果 cur_id 模块是开始
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-			return -3; //模块类型错误
+		assert(false);
+		return -3; //模块类型错误
 	}
 
 	//注：不用新建module，只用处理树节点即可
@@ -1916,4 +1919,73 @@ inline int logic_Program::composeTreeId(int for_id) {
 inline int logic_Program::composeTreeId(int if_id,int branch_id) {
 
 	return if_id*100000+branch_id;
+}
+
+//只在接到activeTree根节点的时候调用
+int logic_Program::appendActiveTreeFor(int cur_m_id,int for_id) {
+
+	//将某一模块接到 for_id activeTree后面
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(for_id)) ) {
+		assert(false);
+		return -2; // 首先 cur_m_id 和 for_id 都要有
+	}
+
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+		assert(false);
+		return -3; //模块类型错误
+	}
+
+	//得到 activeTree
+	logic_Tree * curActiveTree = this->getForModuleById(for_id)->getCurActiveTree();
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
+
+	///// Step1、插入节点
+	curActiveTree->append_node(-1,cur_m_id);
+
+
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID ) {
+
+		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			//树中唯一模块，删除树（ 进入这个分支 pre_m_id 也可能为0 ）
+
+			///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+			///
+			/// \brief root移出if和for
+			///
+			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+				logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+				tmpForModule->delTree(oldTree);
+				mvmi_TreeId_For_IfIdMap.erase(oldTree);
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+
+			// Step3、（必须在此处，不然就return了）更新
+			mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
+
+			return 0; //正常返回
+		}else {
+			//不是唯一模块
+
+			oldTree->setFirstChildAsRoot();
+		}
+
+	}
+
+	// Step3、更新
+	mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
+
+	return 0;
 }
