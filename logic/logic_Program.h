@@ -132,7 +132,8 @@ public:
 
 
 	///!!!!!!!!!!!!!!!!!!!!!!!!!!! \brief for if 模块操作
-	/// 难点在 delete 上要消除里面的tree
+	
+	/// 向 for和if 中新加入模块
 	bool insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id);
 	bool insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id);
 

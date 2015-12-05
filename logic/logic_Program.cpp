@@ -157,11 +157,15 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 		return false;
 
 	logic_BasicModule *bm = NULL;
-	if( 2003 == m_Type )
+	if( 2003 == m_Type ) {
+
 		bm = new logic_ForModule(moduleId);
-	else if( 2004 == m_Type )
+
+	}else if( 2004 == m_Type ) {
+
 		bm = new logic_IfModule(moduleId);
-	else
+
+	}else //ÆÕÍ¨Ä£¿é
 		bm = new logic_BasicModule(moduleId,m_Type);
 
 	mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
