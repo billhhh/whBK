@@ -565,6 +565,9 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 
 		else if( 3 == move_type) //带祖先前插 move
 			return tCurProg->frontInsMultiMoveFor(cur_m_id,other_m_id,for_id);
+
+		else if( 4 == move_type ) //新增叶子 move（直接连线）
+			return tCurProg->addLeafMoveFor(cur_m_id,other_m_id,for_id);
 	}
 }
 

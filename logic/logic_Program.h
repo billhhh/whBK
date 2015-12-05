@@ -171,6 +171,7 @@ public:
 	int frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id);
 	int backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id);
 	int frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id);
+	int addLeafMoveFor(int cur_m_id,int pre_m_id,int for_id);
 
 protected:
 
