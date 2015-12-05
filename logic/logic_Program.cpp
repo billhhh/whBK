@@ -602,6 +602,14 @@ int logic_Program::addLeafMove(int cur_m_id,int pre_m_id) {
 			return -3; //模块类型错误
 	}
 
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+	//该节点必须是该树的根节点
+	if( oldTree->mvi_TreeID != cur_m_id )
+		assert(false);
+
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
+	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //待插入节点
+
 
 }
 
