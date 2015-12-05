@@ -93,8 +93,10 @@ tree_node* logic_Tree::getRoot()
 
 //有安全隐患，不建议使用
 void logic_Tree::setRoot(tree_node *some) {
+	
 	this->mvu_root = some;
-	this->mvi_TreeID = some->getID();
+	if( NULL != some )
+		this->mvi_TreeID = some->getID();
 }
 
 //将root的唯一孩子设置为root，同时删除oldRoot

@@ -319,7 +319,7 @@ int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	return tCurProg->
+	return tCurProg->addLeafMove(cur_m_id,pre_m_id);
 }
 
 

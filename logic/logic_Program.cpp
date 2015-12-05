@@ -609,8 +609,20 @@ int logic_Program::addLeafMove(int cur_m_id,int pre_m_id) {
 
 	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //待插入节点
+	logic_TreeNode * curNode = oldTree->getRoot(); //当前节点
 
+	/// Step1、接入新节点
+	insNode->mvvu_Children.push_back(curNode);
 
+	/// Step2、删除旧树map信息
+	mvmu_TreeMap.erase(cur_m_id);
+	oldTree->setRoot(NULL);
+	SAFE_DELETE(oldTree);
+
+	/// Step3、更新模块树map信息
+	recurs_update(insTree,curNode);
+
+	return 0;
 }
 
 //通过一个模块id，找到所在树
