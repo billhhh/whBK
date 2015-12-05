@@ -53,12 +53,12 @@ private:
 	void Destroy(); //析构是删掉所有树和模块
 
 	//完全对应外部的map，方便删除操作
-	std::map <int,logic_Tree *> treeMap;
-	std::map <int, logic_BasicModule *> moduleMap;
-	std::map <int ,logic_Tree * > mTreeMap;
-	std::map <logic_Tree * ,int > treeForIfmap;
-	std::map<whPort, whPort > connFromToMap;
-	std::map<whPort, whPort > connToFromMap;
+	std::map <int,logic_Tree *> *treeMap;
+	std::map <int, logic_BasicModule *> *moduleMap;
+	std::map <int ,logic_Tree * > *mTreeMap;
+	std::map <logic_Tree * ,int > *treeForIfmap;
+	std::map<whPort, whPort > *connFromToMap;
+	std::map<whPort, whPort > *connToFromMap;
 
 };
 
