@@ -52,6 +52,8 @@ private:
 	void Init();
 	void Destroy(); //析构是删掉所有树和模块
 
+	void DelAllParaConnect(int id); //删除关于某一模块的所有连线
+
 	//完全对应外部的map，方便删除操作
 	std::map <int,logic_Tree *> *treeMap;
 	std::map <int, logic_BasicModule *> *moduleMap;

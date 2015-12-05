@@ -9,6 +9,8 @@
 
 #include "logic_ForModule.h"
 
+using namespace std;
+
 logic_ForModule::logic_ForModule(int id)
 	:logic_BasicModule(id,2003){
 		//调用父类的构造函数 初始化id和type
@@ -42,9 +44,9 @@ void logic_ForModule::Init() {
 }
 
 //析构是删掉所有树和模块
-void Destroy() {
+void logic_ForModule::Destroy() {
 
-	//析构函数调用
+	//析构函数调用，销毁所有包含模块
 
 }
 
@@ -88,4 +90,29 @@ int logic_ForModule::delTree(logic_Tree * tree) {
 
 	mvvu_treeList.erase(id);
 	return 0;
+}
+
+//删除关于某一模块的所有连线
+void logic_ForModule::DelAllParaConnect(int id) {
+
+	//处理连线
+	for( map<whPort ,whPort >::iterator it = connFromToMap->begin(); it != connFromToMap->end(); ++it ) {
+
+		if( id == it->first.moduleId ) {
+
+			//如果 from 是该模块，所有这个 outModule 相关就需要删除
+			whPort outPort = it->first;
+			whPort inPort = (*connFromToMap)[outPort];
+			connFromToMap->erase(outPort);
+			connToFromMap->erase(inPort);
+
+		}else if(id == it->second.moduleId) {
+
+			//如果 to 是该模块
+			whPort outPort = it->first;   // 相当于 whPort inPort = it->second;
+			whPort inPort = (*connFromToMap)[outPort];
+			connFromToMap->erase(outPort);
+			connToFromMap->erase(inPort);
+		}
+	}
 }

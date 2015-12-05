@@ -203,13 +203,13 @@ bool logic_Program::del_Module(_IdDataType moduleId)
 	SAFE_DELETE(tmpModule);
 
 	//删除所有连线
-	this->innerDelAllParaConnect(moduleId);
+	this->DelAllParaConnect(moduleId);
 
 	return true;
 }
 
 //删除关于某一模块的所有连线
-void logic_Program::innerDelAllParaConnect(int id) {
+void logic_Program::DelAllParaConnect(int id) {
 
 	//处理连线
 	for( map<whPort ,whPort >::iterator it = mvvu_Conn_From_ToMap.begin(); it != mvvu_Conn_From_ToMap.end(); ++it ) {

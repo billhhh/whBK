@@ -45,7 +45,6 @@ public:
 	bool add_Module(_IdDataType moduleId , logic_BasicModule* modulePtr);
 	bool add_Module(_IdDataType moduleId , int m_Type);
 	bool del_Module(_IdDataType moduleId);
-	void innerDelAllParaConnect(int id); //删除关于某一模块的所有连线
 	logic_BasicModule* searchModule(_IdDataType moduleId);
 	_IdDataType searchModule(logic_BasicModule* modulePtr);
 
@@ -142,6 +141,8 @@ public:
 	//可通过 isOut 来用outModule或者inModule删除
 	void outParaDisconnect(int out_m_id,int out_para_id);
 	void inParaDisconnect(int in_m_id,int in_para_id);
+
+	void DelAllParaConnect(int id); //删除关于某一模块的所有连线
 
 	//////特殊处理for的move操作
 	int backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id);
