@@ -313,6 +313,15 @@ int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 	return tCurProg->backInsMultiMove(cur_m_id,pre_m_id);
 }
 
+//新增孩子move
+int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->
+}
+
 
 ///
 /// \brief for和if处理

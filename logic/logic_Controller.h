@@ -55,6 +55,7 @@ public:
 
 	int ctrlFrontInsMultiMove(int cur_m_id,int post_m_id);
 	int ctrlBackInsMultiMove(int cur_m_id,int pre_m_id);
+	int ctrlAddLeafMove(int cur_m_id,int pre_m_id);
 
 
 	///

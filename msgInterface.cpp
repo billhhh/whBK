@@ -162,6 +162,9 @@ int msgInterface::moveModule(int cur_m_id,int other_m_id,MoveType move_type) {
 
 	else if( FRONT_MULTI == move_type) //带祖先前插 move
 		return ctrl.ctrlFrontInsMultiMove(cur_m_id,other_m_id);
+	
+	else if( ADD_LEAF == move_type ) //新增叶子 move（直接连线）
+
 }
 
 /// \brief 查询前驱和后继

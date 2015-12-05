@@ -342,9 +342,8 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 		return -2; //没找到插入点
 	}
 
-	//如果 post_m_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+	//如果 post_m_id 模块是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 
@@ -396,9 +395,8 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
-	//如果 pre_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[pre_m_id]->getModuleType() == 2001 ) {
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 
@@ -486,9 +484,8 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 		return -2; //没找到插入点
 	}
 
-	//如果 post_m_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+	//如果 post_m_id 模块是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 
@@ -530,9 +527,8 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
-	//如果 pre_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[pre_m_id]->getModuleType() == 2001 ) {
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 
@@ -592,6 +588,21 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 	recurs_update(insTree,insNode);
 
 	return 0; //正常返回
+}
+
+//新增孩子move
+int logic_Program::addLeafMove(int cur_m_id,int pre_m_id) {
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+	}
+
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+			return -3; //模块类型错误
+	}
+
+
 }
 
 //通过一个模块id，找到所在树
@@ -1568,9 +1579,8 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 		return -2; //没找到插入点
 	}
 
-	//如果 post_m_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+	//如果 post_m_id 是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 
@@ -1643,9 +1653,8 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
-	//如果 pre_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[pre_m_id]->getModuleType() == 2001 ) {
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 
@@ -1722,9 +1731,8 @@ int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 		return -2; //没找到插入点
 	}
 
-	//如果 post_m_id 和 cur_id 模块都是开始
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 
-		&& mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+	//如果 post_m_id 模块是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
 	}
 

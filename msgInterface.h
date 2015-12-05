@@ -26,7 +26,8 @@ enum MoveType
 	BACK_SINGLE = 0, // 单模块 后插（不带线）
 	FRONT_SINGLE,    // 单模块 前插（不带线）
 	BACK_MULTI,      // 多模块 后插
-	FRONT_MULTI      // 多模块 前插
+	FRONT_MULTI,     // 多模块 前插
+	ADD_LEAF         //增加一个叶子
 };
 
 class msgInterface

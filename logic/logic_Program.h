@@ -90,6 +90,8 @@ public:
 	int frontInsMultiMove(int cur_m_id,int post_m_id); //带祖先前插move，不允许后继为0
 	int backInsMultiMove(int cur_m_id,int pre_m_id); //带孩子后插move，前驱为0代表move到新建树
 
+	int addLeafMove(int cur_m_id,int pre_m_id); //新增叶子move
+
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	////!!!!!!!!!!!!!!!!!!!【对外接口】模块内部操作!!!!!!!!!!!!!!!
