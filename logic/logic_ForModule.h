@@ -21,8 +21,17 @@ class logic_ForModule
 public:
 	/////构造函数和析构函数
 	explicit logic_ForModule(int id);//默认构造，for里面什么都不生成
-	explicit logic_ForModule(int id,);//默认构造，for里面什么都不生成
-	~logic_ForModule();
+	//完整map构造函数，方便for内部析构操作
+	explicit logic_ForModule(int id,
+		std::map <int,logic_Tree *> &tree_map,
+		std::map <int, logic_BasicModule *> &module_map,
+		std::map <int ,logic_Tree * > &m_tree_map,
+		std::map <logic_Tree * ,int > &tree_forif_map,
+		std::map<whPort, whPort > &conn_fromto_map,
+		std::map<whPort, whPort > &conn_tofrom_map
+		);
+
+	~logic_ForModule(); //析构
 
 	logic_Tree * getCurActiveTree(); //返回当前激活树
 	void setCurActiveTree(logic_Tree * tree); //设置当前激活树
@@ -40,6 +49,7 @@ private:
 	std::map<int ,logic_Tree * > mvvu_treeList; //for模块中的所有树
 
 	void Init();
+	void Destroy(); //析构是删掉所有树和模块
 
 };
 
