@@ -189,15 +189,38 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 
 bool logic_Program::del_Module(_IdDataType moduleId)
 {
-	if (mvmu_ModuleMap.count(moduleId)==0) //不存在，删除错误
+	if (mvmu_ModuleMap.count(moduleId)==0) {
+		//不存在，删除错误
+		assert(false);
 		return false;
+	}
 
+	//删除module实体
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[moduleId];
 	mvmu_ModuleMap.erase(moduleId);
+
+	if( tmpModule->getModuleType() == 2003 ) {
+		//for
+
+	}else if( tmpModule->getModuleType() == 2004 ) {
+		//if
+
+	}
+	SAFE_DELETE(tmpModule);
+
+	//删除所有连线
+	this->innerDelAllParaConnect(moduleId);
+
+	return true;
+}
+
+//删除关于某一模块的所有连线
+void logic_Program::innerDelAllParaConnect(int id) {
 
 	//处理连线
 	for( map<whPort ,whPort >::iterator it = mvvu_Conn_From_ToMap.begin(); it != mvvu_Conn_From_ToMap.end(); ++it ) {
 
-		if( moduleId == it->first.moduleId ) {
+		if( id == it->first.moduleId ) {
 
 			//如果 from 是该模块，所有这个 outModule 相关就需要删除
 			whPort outPort = it->first;
@@ -205,7 +228,7 @@ bool logic_Program::del_Module(_IdDataType moduleId)
 			mvvu_Conn_From_ToMap.erase(outPort);
 			mvvu_Conn_To_FromMap.erase(inPort);
 
-		}else if(moduleId == it->second.moduleId) {
+		}else if(id == it->second.moduleId) {
 
 			//如果 to 是该模块
 			whPort outPort = it->first;   // 相当于 whPort inPort = it->second;
@@ -214,8 +237,6 @@ bool logic_Program::del_Module(_IdDataType moduleId)
 			mvvu_Conn_To_FromMap.erase(inPort);
 		}
 	}
-
-	return true;
 }
 
 logic_BasicModule* logic_Program::searchModule(_IdDataType moduleId)
@@ -660,7 +681,7 @@ bool logic_Program::delModule(int m_id) {
 
 		}else if(delNode->mvvu_Children.size() > 1) {
 
-			//2、有多个孩子，拆成多棵树
+			//2、非root，有多个孩子，拆成多棵树
 
 			//后面的孩子需要建立n颗树
 			for (int i=0; i<delNode->mvvu_Children.size() ; ++i ) {
@@ -673,7 +694,8 @@ bool logic_Program::delModule(int m_id) {
 				//如果此树（root）在 for 或 if 中，需要特殊处理
 				if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
-					logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+					//得到容器Module
+					logic_BasicModule * tmpModule = mvmu_ModuleMap[mvmi_TreeId_For_IfIdMap[tree]];
 
 					if( tmpModule->getModuleType() == 2003 ) {
 
@@ -731,7 +753,7 @@ bool logic_Program::delModule(int m_id) {
 				//如果此树（root）在 for 或 if 中，需要特殊处理
 				if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
-					logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+					logic_BasicModule * tmpModule = mvmu_ModuleMap[mvmi_TreeId_For_IfIdMap[tree]];
 
 					if( tmpModule->getModuleType() == 2003 ) {
 
@@ -770,7 +792,7 @@ bool logic_Program::delModule(int m_id) {
 			//但如果此树（root）在 for 或 if 中，需要特殊处理
 			if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
-				logic_BasicModule * tmpModule = mvmu_ModuleMap[m_id];
+				logic_BasicModule * tmpModule = mvmu_ModuleMap[mvmi_TreeId_For_IfIdMap[tree]];
 
 				if( tmpModule->getModuleType() == 2003 ) {
 

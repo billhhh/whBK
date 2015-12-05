@@ -64,11 +64,12 @@ public:
 
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	/////!!!!!!!!!!!!!!!!!!!!!!!!!模块 Map 操作!!!!!!!!!!!!!!!!!!!!!!!
+	/////!!!!!!!!!!!!!!!!!!!!!!!!!类内部操作!!!!!!!!!!!!!!!!!!!!!!!
 	//这个是只加入 moduleMap
 	bool add_Module(_IdDataType moduleId , logic_BasicModule* modulePtr);
 	bool add_Module(_IdDataType moduleId , int m_Type);
 	bool del_Module(_IdDataType moduleId);
+	void innerDelAllParaConnect(int id); //删除关于某一模块的所有连线
 	logic_BasicModule* searchModule(_IdDataType moduleId);
 	_IdDataType searchModule(logic_BasicModule* modulePtr);
 
