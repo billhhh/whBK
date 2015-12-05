@@ -199,6 +199,7 @@ bool logic_Program::del_Module(_IdDataType moduleId)
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[moduleId];
 	mvmu_ModuleMap.erase(moduleId);
 
+	//父类virtual析构函数，可以自动析构 for和if
 	SAFE_DELETE(tmpModule);
 
 	//删除所有连线
