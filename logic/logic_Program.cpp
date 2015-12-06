@@ -65,7 +65,7 @@ void logic_Program::prog_Destroy()
 {
 	cout<<"进入prog_Destroy"<<endl;
 
-	//清空mvmu_ModuleMap，安全释放
+	//清空mvmu_ModuleMap，【安全释放了for和if，也不会造成activeTree错误】
 	for(map<_IdDataType , logic_BasicModule *>::iterator it = mvmu_ModuleMap.begin();it != mvmu_ModuleMap.end(); ++it)
 		SAFE_DELETE(it->second);
 
@@ -78,12 +78,12 @@ void logic_Program::prog_Destroy()
 	}
 
 	//清空映射表
-	for(map<int , logic_Tree *>::iterator it = mvmu_ModuleId_TreeMap.begin();it != mvmu_ModuleId_TreeMap.end(); ++it)
-	{
-		logic_Tree *tmpT = it->second;
-		//tmpT->Destroy(tmpT->getRoot()); //这样会调用两次，堆错误
-		SAFE_DELETE(tmpT);
-	}
+// 	for(map<int , logic_Tree *>::iterator it = mvmu_ModuleId_TreeMap.begin();it != mvmu_ModuleId_TreeMap.end(); ++it)
+// 	{
+// 		logic_Tree *tmpT = it->second;
+// 		//tmpT->Destroy(tmpT->getRoot()); //这样会调用两次，堆错误
+// 		SAFE_DELETE(tmpT);
+// 	}
 }
 
 bool logic_Program::add_Tree(_IdDataType rootId)

@@ -1,3 +1,15 @@
+/* 
+* 
+* function: 连线接口
+* 
+* Date:2015-12-05
+* 
+*    Author: Bill Wang
+*/
+
+#ifndef _LOGIC_WH_PORT_H_
+#define _LOGIC_WH_PORT_H_
+
 #include <assert.h>
 
 typedef struct structPort
@@ -24,3 +36,5 @@ typedef struct structPort
 	}
 
 }whPort;  //一个出口定义，完全定义一个port
+
+#endif

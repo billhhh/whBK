@@ -62,13 +62,27 @@ void logic_ForModule::Destroy() {
 //通过树指针，完全销毁树中的模块
 void logic_ForModule::DelTreeThroughPointer(logic_Tree * tree) {
 
+	logic_TreeNode * root = tree->getRoot();
+	recurs_DelTreeModule(root); //销毁模块实体
 
+	treeForIfmap->erase(tree);
+	SAFE_DELETE(tree); //销毁树
+	//抹除树痕迹
+	treeMap->erase(tree->mvi_TreeID);
 }
 
 //删除本模块的 activeTree
 void logic_ForModule::DelActiveTree() {
 
+	logic_TreeNode * root = mvi_CurActiveTree->getRoot();
 
+	for (int i=0;i<root->mvvu_Children.size();++i) {
+		//销毁没颗子树中的模块
+		recurs_DelTreeModule(root->mvvu_Children[i]);
+	}
+
+	//抹除activeTree痕迹
+	treeMap->erase();
 }
 
 //完全删除一棵树所有节点的所有信息（各种实体map和connection map）
@@ -91,7 +105,10 @@ void logic_ForModule::recurs_DelTreeModule(logic_TreeNode *some) {
 void logic_ForModule::DelModule(int id) {
 
 	//删除所有map
+	moduleMap->erase(id);
+	mTreeMap->erase(id);
 
+	DelAllParaConnect(id);
 }
 
 //返回当前激活树
