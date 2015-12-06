@@ -44,12 +44,14 @@ protected:
 
 
 private:
-	///!!!!!!!所有前端关于ActiveTree操作全部作废
+
 	///有一棵空节点的树
 	logic_Tree * mvi_CurActiveTree;
 	std::map<int ,logic_Tree * > mvvu_treeList; //for模块中的所有树
 
 	void Init();
+
+	//////////模块内部自动处理销毁模块操作///////////////
 	void Destroy(); //析构是删掉所有树和模块
 
 	void DelAllParaConnect(int id); //删除关于某一模块的所有连线

@@ -19,6 +19,20 @@ logic_IfModule::logic_IfModule(int id)
 		Init(); //初始化
 }
 
+//完整map构造函数，方便for内部析构操作
+logic_IfModule::logic_IfModule(int id,
+								 std::map <int,logic_Tree *> &tree_map,
+								 std::map <int, logic_BasicModule *> &module_map,
+								 std::map <int ,logic_Tree * > &m_tree_map,
+								 std::map <logic_Tree * ,int > &tree_forif_map,
+								 std::map<whPort, whPort > &conn_fromto_map,
+								 std::map<whPort, whPort > &conn_tofrom_map
+								 ):treeMap(&tree_map),moduleMap(&module_map),mTreeMap(&m_tree_map),
+								 treeForIfmap(&tree_forif_map),connFromToMap(&conn_fromto_map),connToFromMap(&conn_tofrom_map)
+{
+	Init();
+}
+
 logic_IfModule::~logic_IfModule() {
 
 	//析构，子类并不用做什么

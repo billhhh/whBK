@@ -14,6 +14,7 @@
 #include "logic_Tree.h"
 #include <vector>
 #include <map>
+#include "logic_whPort.h"
 
 typedef struct
 {
@@ -75,6 +76,26 @@ private:
 	std::map<logic_Tree * , int > mvmis_Tree_BranchMap; //维护每个 Tree 和 branch 对应
 
 	void Init();
+
+	//////////模块内部自动处理销毁模块操作///////////////
+	void Destroy(); //析构是删掉所有树和模块
+
+	void DelAllParaConnect(int id); //删除关于某一模块的所有连线
+	void DelTreeThroughPointer(logic_Tree * tree); //通过树指针，完全销毁树中的模块
+	void DelActiveTree(int branch_id); //删除具体branch的 activeTree
+
+	//完全删除一棵树所有节点模块的所有信息（各种实体map和connection map）
+	void recurs_DelTreeModule(logic_TreeNode *some);
+	void DelModule(int id); //销毁关于一个module的一切信息
+
+private:
+	//完全对应外部的map，方便删除操作
+	std::map <int,logic_Tree *> *treeMap;
+	std::map <int, logic_BasicModule *> *moduleMap;
+	std::map <int ,logic_Tree * > *mTreeMap;
+	std::map <logic_Tree * ,int > *treeForIfmap;
+	std::map<whPort, whPort > *connFromToMap;
+	std::map<whPort, whPort > *connToFromMap;
 
 };
 
