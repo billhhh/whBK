@@ -293,5 +293,8 @@
     <ClInclude Include="logic\logic_whPort.h">
       <Filter>Header Files\logic</Filter>
     </ClInclude>
+    <ClInclude Include="logic\logic_WhData.h">
+      <Filter>Header Files\logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
