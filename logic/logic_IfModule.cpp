@@ -9,6 +9,7 @@
 
 #include "logic_IfModule.h"
 #include <limits.h>
+#include <assert.h>
 
 // #define INT_MAX 0x7fffffff
 // #define INT_MIN 0x80000000
@@ -256,7 +257,8 @@ void logic_IfModule::Destroy() {
 
 	for (std::map<int ,whBranch>::iterator it = mvmu_BranchMap.begin(); it != mvmu_BranchMap.end() ; ++it ) {
 
-		whDelBranch(it->first);  //删除所有分支
+		if( whDelBranch(it->first)<0 )  //删除所有分支
+			assert(false);
 	}
 
 }
@@ -270,19 +272,21 @@ int logic_IfModule::whDelBranch(int branch_id) {
 
 	//找不到该branch，错误
 	if( mvmu_BranchMap.count(branch_id)==0 )
-		return L;
+		return -2;
 
-	//遍历，收集待删除的树 id 列表
+	/// Step1、遍历，销毁所有包含树（不包括 activeTree）
 	for(std::map<logic_Tree *  ,int >::iterator it = mvmis_Tree_BranchMap.begin(); it != mvmis_Tree_BranchMap.end() ; ++it ) {
 
 		if(  branch_id == it->second ) {
 
-			L.push_back(it->first->mvi_TreeID);
-			mvmis_Tree_BranchMap.erase(it);
+			DelTreeThroughPointer(it->first);
 		}
 	}
 
-	mvmu_BranchMap.erase(branch_id);
+	/// Step2、销毁 activeTree
+	DelActiveTree(branch_id);
+
+	mvmu_BranchMap.erase(branch_id); //删除分支map信息
 
 	//如果被删掉的分支是默认分支，将默认分支设置为第一个分支
 	if( branch_id == this->mvi_DefaultBranch ) {
@@ -292,14 +296,7 @@ int logic_IfModule::whDelBranch(int branch_id) {
 		this->mvi_DefaultBranch = it->first;
 	}
 
-	/// Step1、销毁所有包含树（不包括 activeTree）
-	for (int i = 0;i<mvvu_treeList.size() ;++i) {
-
-		DelTreeThroughPointer(mvvu_treeList[i]);
-	}
-
-	/// Step2、销毁 activeTree
-	DelActiveTree(branch_id);
+	return 0;
 }
 
 //通过树指针，完全销毁树中的模块

@@ -1306,14 +1306,18 @@ int logic_Program::delIfBranch(int if_id,int branch_id) {
 
 	/// type 一定是2004
 	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
-	std::vector<int > L = tmpIfModule->delBranch(branch_id);
+	if( tmpIfModule->whDelBranch(branch_id) < 0 )
+		return -1; //删除失败
 
-	//已获得待删除模块树id，在外部删除树以及树中的模块
-	for (int i=0;i < L.size();++i) {
-		
-		if( this->delTreeThroughId(L[i]) < 0 )
-			return -5;
-	}
+	//将如下操作放在if内部完成
+// 	std::vector<int > L = tmpIfModule->delBranch(branch_id);
+// 
+// 	//已获得待删除模块树id，在外部删除树以及树中的模块
+// 	for (int i=0;i < L.size();++i) {
+// 		
+// 		if( this->delTreeThroughId(L[i]) < 0 )
+// 			return -5;
+// 	}
 
 	return 0;
 }

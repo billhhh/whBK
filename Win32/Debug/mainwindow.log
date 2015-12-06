@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/12/6 22:57:57。
+﻿生成启动时间为 2015/12/7 0:04:40。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -41,17 +41,18 @@
      1>logic\logic_BasicModule.cpp(145): warning C4018: “<”: 有符号/无符号不匹配
          logic_ForModule.cpp
      1>logic\logic_ForModule.cpp(23): warning C4100: “id”: 未引用的形参
-     1>logic\logic_ForModule.cpp(54): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_ForModule.cpp(80): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_ForModule.cpp(101): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_ForModule.cpp(127): warning C4018: “<”: 有符号/无符号不匹配
          logic_IfModule.cpp
+     1>logic\logic_IfModule.cpp(26): warning C4100: “id”: 未引用的形参
+     1>logic\logic_IfModule.cpp(321): warning C4018: “<”: 有符号/无符号不匹配
          logic_Program.cpp
-     1>logic\logic_Program.cpp(682): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(740): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(879): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1074): warning C4100: “pre_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1237): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1256): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1308): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(686): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(744): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(883): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1078): warning C4100: “pre_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1241): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1260): warning C4100: “branch_id”: 未引用的形参
          logic_Project.cpp
          logic_Test.cpp
      1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
@@ -70,6 +71,7 @@
      1>logic\logic_Controller.cpp(576): warning C4100: “cur_m_id”: 未引用的形参
          正在生成代码...
      1>e:\bill github\whbk\logic\logic_controller.cpp(574): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
          正在编译...
@@ -140,4 +142,4 @@
 
 生成成功。
 
-已用时间 00:00:22.33
+已用时间 00:00:23.32
