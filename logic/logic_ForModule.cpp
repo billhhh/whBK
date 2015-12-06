@@ -129,6 +129,7 @@ void logic_ForModule::DelActiveTree() {
 		recurs_DelTreeModule(root->mvvu_Children[i]);
 	}
 
+	SAFE_DELETE(mvi_CurActiveTree); //Ïú»ÙÊ÷
 	//Ä¨³ýactiveTreeºÛ¼£
 	treeMap->erase( composeActiveTreeId() );
 }

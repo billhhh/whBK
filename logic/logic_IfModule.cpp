@@ -254,6 +254,16 @@ void logic_IfModule::Destroy() {
 
 	//析构函数调用，销毁所有包含模块
 
+	for (int i = 0; i < mvmu_BranchMap.size();++i) {
+
+		whDelBranch
+	}
+
+}
+
+//从内部删除一个branch
+void logic_IfModule::whDelBranch(int branch_id) {
+
 	/// Step1、销毁所有包含树（不包括 activeTree）
 	for (int i = 0;i<mvvu_treeList.size() ;++i) {
 
@@ -261,7 +271,7 @@ void logic_IfModule::Destroy() {
 	}
 
 	/// Step2、销毁 activeTree
-	DelActiveTree();
+	DelActiveTree(branch_id);
 }
 
 //通过树指针，完全销毁树中的模块
@@ -270,6 +280,7 @@ void logic_IfModule::DelTreeThroughPointer(logic_Tree * tree) {
 	logic_TreeNode * root = tree->getRoot();
 	recurs_DelTreeModule(root); //销毁模块实体
 
+	mvmis_Tree_BranchMap.erase(tree);
 	treeForIfmap->erase(tree);
 	SAFE_DELETE(tree); //销毁树
 	//抹除树痕迹
@@ -279,12 +290,15 @@ void logic_IfModule::DelTreeThroughPointer(logic_Tree * tree) {
 //删除本模块的 activeTree
 void logic_IfModule::DelActiveTree(int branch_id) {
 
-	logic_TreeNode * root = mvmu_BranchMap[branch_id].curActiveTree->getRoot();
+	logic_Tree * activeTree = mvmu_BranchMap[branch_id].curActiveTree;
+	logic_TreeNode * root = activeTree->getRoot();
 
 	for (int i=0;i<root->mvvu_Children.size();++i) {
 		//销毁没颗子树中的模块
 		recurs_DelTreeModule(root->mvvu_Children[i]);
 	}
+
+	SAFE_DELETE(activeTree); //销毁树
 
 	//抹除activeTree痕迹
 	treeMap->erase( this->composeActiveTreeId(branch_id) );
