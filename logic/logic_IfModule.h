@@ -63,7 +63,8 @@ public:
 
 	int addBranch();
 	std::vector<int > delBranch(int branch_id); //返回需要在外面删除的树id列表【废弃】
-	void whDelBranch(int branch_id); //从内部删除一个branch
+	//返回错误编号
+	int whDelBranch(int branch_id); //从内部删除一个branch【供外部调用】
 
 	int getMaxBranchId(); //方便累加
 	int getTreeBranch(logic_Tree * tree); //获得某个tree属于哪个branch
