@@ -8,6 +8,7 @@
 */
 
 #include "logic_ForModule.h"
+#include <assert.h>
 
 using namespace std;
 
@@ -48,6 +49,48 @@ void logic_ForModule::Destroy() {
 
 	//析构函数调用，销毁所有包含模块
 
+	/// Step1、销毁所有包含树（不包括 activeTree）
+	for (int i = 0;i<mvvu_treeList.size() ;++i) {
+
+		DelTreeThroughPointer(mvvu_treeList[i]);
+	}
+
+	/// Step2、销毁 activeTree
+	DelActiveTree();
+}
+
+//通过树指针，完全销毁树中的模块
+void logic_ForModule::DelTreeThroughPointer(logic_Tree * tree) {
+
+
+}
+
+//删除本模块的 activeTree
+void logic_ForModule::DelActiveTree() {
+
+
+}
+
+//完全删除一棵树所有节点的所有信息（各种实体map和connection map）
+void logic_ForModule::recurs_DelTreeModule(logic_TreeNode *some) {
+
+	///// do sth here
+	int tmpId = some->getID();
+	if( moduleMap->count(tmpId) == 0 )
+		assert(false);
+
+	DelModule(tmpId);
+
+	//和 getAllTreeNodeId() 连用，递归get id
+	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
+		recurs_DelTreeModule(some->mvvu_Children[i]);
+	}
+}
+
+//销毁关于一个module的一切信息
+void logic_ForModule::DelModule(int id) {
+
+	//删除所有map
 
 }
 

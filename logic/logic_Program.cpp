@@ -78,12 +78,12 @@ void logic_Program::prog_Destroy()
 	}
 
 	//清空映射表
-// 	for(map<int , logic_Tree *>::iterator it = mvmu_ModuleId_TreeMap.begin();it != mvmu_ModuleId_TreeMap.end(); ++it)
-// 	{
-// 		logic_Tree *tmpT = it->second;
-// 		//tmpT->Destroy(tmpT->getRoot()); //这样会调用两次，堆错误
-// 		SAFE_DELETE(tmpT);
-// 	}
+	for(map<int , logic_Tree *>::iterator it = mvmu_ModuleId_TreeMap.begin();it != mvmu_ModuleId_TreeMap.end(); ++it)
+	{
+		logic_Tree *tmpT = it->second;
+		//tmpT->Destroy(tmpT->getRoot()); //这样会调用两次，堆错误
+		SAFE_DELETE(tmpT);
+	}
 }
 
 bool logic_Program::add_Tree(_IdDataType rootId)
