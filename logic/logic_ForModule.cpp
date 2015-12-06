@@ -9,6 +9,7 @@
 
 #include "logic_ForModule.h"
 #include <assert.h>
+#include "logic_WhData.h"
 
 using namespace std;
 
@@ -82,7 +83,7 @@ void logic_ForModule::DelActiveTree() {
 	}
 
 	//抹除activeTree痕迹
-	treeMap->erase();
+	treeMap->erase( this->mvi_ModuleID * ACTIVE_TREE_MAP_FACTOR );
 }
 
 //完全删除一棵树所有节点的所有信息（各种实体map和connection map）

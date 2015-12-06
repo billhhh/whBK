@@ -18,6 +18,7 @@
 #include "../TransStringNum.h"
 #include "logic_ForModule.h"
 #include "logic_IfModule.h"
+#include "logic_WhData.h"
 
 using namespace std;
 
@@ -1928,13 +1929,13 @@ logic_IfModule* logic_Program::getIfModuleById(int id) {
 //合成for和if放入tree map中的id
 inline int logic_Program::composeTreeId(int for_id) {
 
-	return for_id*100000;
+	return for_id * ACTIVE_TREE_MAP_FACTOR;
 }
 
 //rootId = moduleId*100000+branchId
 inline int logic_Program::composeTreeId(int if_id,int branch_id) {
 
-	return if_id*100000+branch_id;
+	return if_id * ACTIVE_TREE_MAP_FACTOR + branch_id;
 }
 
 //只在接到activeTree根节点的时候调用
