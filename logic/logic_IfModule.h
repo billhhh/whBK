@@ -15,6 +15,7 @@
 #include <vector>
 #include <map>
 #include "logic_whPort.h"
+#include "logic_WhData.h"
 
 typedef struct
 {
@@ -97,6 +98,11 @@ private:
 	std::map<whPort, whPort > *connFromToMap;
 	std::map<whPort, whPort > *connToFromMap;
 
+	//rootId = moduleId*100000+branchId
+	inline int composeActiveTreeId(int branch_id) {
+
+		return this->mvi_ModuleID * ACTIVE_TREE_MAP_FACTOR + branch_id;
+	}
 };
 
 

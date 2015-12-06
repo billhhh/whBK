@@ -13,6 +13,8 @@
 // #define INT_MAX 0x7fffffff
 // #define INT_MIN 0x80000000
 
+using namespace std;
+
 logic_IfModule::logic_IfModule(int id)
 	:logic_BasicModule(id,2004){
 		//调用父类的构造函数 初始化id和type
@@ -35,8 +37,7 @@ logic_IfModule::logic_IfModule(int id,
 
 logic_IfModule::~logic_IfModule() {
 
-	//析构，子类并不用做什么
-	//先析构子类，再析构父类
+	Destroy(); //销毁内置所有对象
 }
 
 void logic_IfModule::Init() {
@@ -58,6 +59,10 @@ void logic_IfModule::Init() {
 	newBranch2.contentInt = INT_MIN;
 	newBranch2.contentStr = "";
 	mvmu_BranchMap[2] = newBranch2;
+
+	//将activeTree加入treeMap
+	(*treeMap)[this->composeActiveTreeId(1)] = newBranch.curActiveTree;
+	(*treeMap)[this->composeActiveTreeId(2)] = newBranch2.curActiveTree;
 }
 
 //返回 指定 branch 当前激活树id
@@ -182,6 +187,9 @@ int logic_IfModule::addBranch() {
 
 	mvmu_BranchMap[max_branch_id] = newBranch;
 
+	//将activeTree加入treeMap
+	(*treeMap)[this->composeActiveTreeId(max_branch_id)] = newBranch.curActiveTree;
+
 	return max_branch_id;
 }
 
@@ -237,4 +245,98 @@ int logic_IfModule::getMaxBranchId() {
 int logic_IfModule::getTreeBranch(logic_Tree * tree) {
 
 	return mvmis_Tree_BranchMap[tree];
+}
+
+
+///////////////////新增删除/////////////
+//析构是删掉所有树和模块
+void logic_IfModule::Destroy() {
+
+	//析构函数调用，销毁所有包含模块
+
+	/// Step1、销毁所有包含树（不包括 activeTree）
+	for (int i = 0;i<mvvu_treeList.size() ;++i) {
+
+		DelTreeThroughPointer(mvvu_treeList[i]);
+	}
+
+	/// Step2、销毁 activeTree
+	DelActiveTree();
+}
+
+//通过树指针，完全销毁树中的模块
+void logic_IfModule::DelTreeThroughPointer(logic_Tree * tree) {
+
+	logic_TreeNode * root = tree->getRoot();
+	recurs_DelTreeModule(root); //销毁模块实体
+
+	treeForIfmap->erase(tree);
+	SAFE_DELETE(tree); //销毁树
+	//抹除树痕迹
+	treeMap->erase(tree->mvi_TreeID);
+}
+
+//删除本模块的 activeTree
+void logic_IfModule::DelActiveTree(int branch_id) {
+
+	logic_TreeNode * root = mvmu_BranchMap[branch_id].curActiveTree->getRoot();
+
+	for (int i=0;i<root->mvvu_Children.size();++i) {
+		//销毁没颗子树中的模块
+		recurs_DelTreeModule(root->mvvu_Children[i]);
+	}
+
+	//抹除activeTree痕迹
+	treeMap->erase( this->composeActiveTreeId(branch_id) );
+}
+
+//完全删除一棵树所有节点的所有信息（各种实体map和connection map）
+void logic_IfModule::recurs_DelTreeModule(logic_TreeNode *some) {
+
+	///// do sth here
+	int tmpId = some->getID();
+	if( moduleMap->count(tmpId) == 0 )
+		assert(false);
+
+	DelModule(tmpId);
+
+	//和 getAllTreeNodeId() 连用，递归get id
+	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
+		recurs_DelTreeModule(some->mvvu_Children[i]);
+	}
+}
+
+//销毁关于一个module的一切信息
+void logic_IfModule::DelModule(int id) {
+
+	//删除所有map
+	moduleMap->erase(id);
+	mTreeMap->erase(id);
+
+	DelAllParaConnect(id);
+}
+
+//删除关于某一模块的所有连线
+void logic_IfModule::DelAllParaConnect(int id) {
+
+	//处理连线
+	for( map<whPort ,whPort >::iterator it = connFromToMap->begin(); it != connFromToMap->end(); ++it ) {
+
+		if( id == it->first.moduleId ) {
+
+			//如果 from 是该模块，所有这个 outModule 相关就需要删除
+			whPort outPort = it->first;
+			whPort inPort = (*connFromToMap)[outPort];
+			connFromToMap->erase(outPort);
+			connToFromMap->erase(inPort);
+
+		}else if(id == it->second.moduleId) {
+
+			//如果 to 是该模块
+			whPort outPort = it->first;   // 相当于 whPort inPort = it->second;
+			whPort inPort = (*connFromToMap)[outPort];
+			connFromToMap->erase(outPort);
+			connToFromMap->erase(inPort);
+		}
+	}
 }

@@ -66,7 +66,7 @@ void logic_Program::prog_Destroy()
 {
 	cout<<"进入prog_Destroy"<<endl;
 
-	//清空mvmu_ModuleMap，【安全释放了for和if，也不会造成activeTree错误】
+	//清空mvmu_ModuleMap
 	for(map<_IdDataType , logic_BasicModule *>::iterator it = mvmu_ModuleMap.begin();it != mvmu_ModuleMap.end(); ++it)
 		SAFE_DELETE(it->second);
 
@@ -161,24 +161,28 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 	if( 2003 == m_Type ) {
 
 		//for
-		logic_ForModule* tmpForModule = new logic_ForModule(moduleId);
+		logic_ForModule* tmpForModule = new logic_ForModule(moduleId,mvmu_TreeMap,mvmu_ModuleMap,
+			mvmu_ModuleId_TreeMap,mvmi_TreeId_For_IfIdMap,mvvu_Conn_From_ToMap,mvvu_Conn_To_FromMap);
 		bm = tmpForModule;
 
+		/// activeTree 操作放入for模块
 		//得到默认activeTree，维护map
-		logic_Tree * tmpActiveTree = tmpForModule->getCurActiveTree();
-		mvmu_TreeMap[this->composeTreeId(moduleId)] = tmpActiveTree;
+// 		logic_Tree * tmpActiveTree = tmpForModule->getCurActiveTree();
+// 		mvmu_TreeMap[this->composeTreeId(moduleId)] = tmpActiveTree;
 
 	}else if( 2004 == m_Type ) {
 
 		//if
-		logic_IfModule* tmpIfModule = new logic_IfModule(moduleId);
+		logic_IfModule* tmpIfModule = new logic_IfModule(moduleId,mvmu_TreeMap,mvmu_ModuleMap,
+			mvmu_ModuleId_TreeMap,mvmi_TreeId_For_IfIdMap,mvvu_Conn_From_ToMap,mvvu_Conn_To_FromMap);
 		bm = tmpIfModule;
 
+		/// activeTree 操作放入if模块
 		//得到默认的两个branch activeTree，维护map
-		logic_Tree * tmpActiveTree = tmpIfModule->getCurActiveTree(1);
-		mvmu_TreeMap[this->composeTreeId(moduleId,1)] = tmpActiveTree;
-		tmpActiveTree = tmpIfModule->getCurActiveTree(2);
-		mvmu_TreeMap[this->composeTreeId(moduleId,2)] = tmpActiveTree;
+// 		logic_Tree * tmpActiveTree = tmpIfModule->getCurActiveTree(1);
+// 		mvmu_TreeMap[this->composeTreeId(moduleId,1)] = tmpActiveTree;
+// 		tmpActiveTree = tmpIfModule->getCurActiveTree(2);
+// 		mvmu_TreeMap[this->composeTreeId(moduleId,2)] = tmpActiveTree;
 
 	}else //普通模块
 		bm = new logic_BasicModule(moduleId,m_Type);
@@ -1925,7 +1929,7 @@ logic_IfModule* logic_Program::getIfModuleById(int id) {
 	return tmpIfModule;
 }
 
-//rootId = moduleId*100000+branchId
+//rootId = moduleId*100000
 //合成for和if放入tree map中的id
 inline int logic_Program::composeTreeId(int for_id) {
 

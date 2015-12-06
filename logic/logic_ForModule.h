@@ -15,6 +15,7 @@
 //#include <vector>
 #include <map>
 #include "logic_whPort.h"
+#include "logic_WhData.h"
 
 class logic_ForModule 
 	: public logic_BasicModule
@@ -71,6 +72,11 @@ private:
 	std::map<whPort, whPort > *connFromToMap;
 	std::map<whPort, whPort > *connToFromMap;
 
+	//rootId = moduleId*100000
+	inline int composeActiveTreeId() {
+
+		return this->mvi_ModuleID * ACTIVE_TREE_MAP_FACTOR;
+	}
 };
 
 //泛型函数：判断特定值在 vector 里面是否存在
