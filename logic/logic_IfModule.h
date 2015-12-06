@@ -28,6 +28,16 @@ class logic_IfModule
 public:
 	/////构造函数和析构函数
 	explicit logic_IfModule(int id);//默认构造，for里面什么都不生成
+	//完整map构造函数，方便for内部析构操作
+	explicit logic_IfModule(int id,
+		std::map <int,logic_Tree *> &tree_map,
+		std::map <int, logic_BasicModule *> &module_map,
+		std::map <int ,logic_Tree * > &m_tree_map,
+		std::map <logic_Tree * ,int > &tree_forif_map,
+		std::map<whPort, whPort > &conn_fromto_map,
+		std::map<whPort, whPort > &conn_tofrom_map
+		);
+
 	~logic_IfModule();
 
 	logic_Tree * getCurActiveTree(int branch_id); //返回 指定 branch 当前激活树id
