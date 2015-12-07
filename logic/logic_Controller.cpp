@@ -554,7 +554,7 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 		if( 0 == move_type )
 			return tCurProg->appendActiveTreeMoveFor(cur_m_id,for_id);
 
-		else if( 4 == move_type )
+		else if( 4 == move_type ) //直接添一个叶子
 			return tCurProg->addLeafActiveTreeMoveFor(cur_m_id,for_id);
 
 	}else {

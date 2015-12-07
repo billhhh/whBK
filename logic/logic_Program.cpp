@@ -1518,7 +1518,8 @@ int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) 
+		*(mvmu_ModuleMap.count(for_id)) ) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
@@ -1630,7 +1631,8 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 	//////post_m_id必须在for中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
+		*(mvmu_ModuleMap.count(for_id)) ) {
 		return -2; //没找到插入点
 	}
 
@@ -1704,8 +1706,10 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
 	/// 重复 backInsMultiMove 方法
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
-		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+	/// 重复 addLeafMove 方法
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
+		*(mvmu_ModuleMap.count(for_id)) ) {
+		return -2; // 首先 cur_m_id 和 pre_m_id for_id 都要有
 	}
 
 	//如果 cur_id 模块是开始
@@ -1797,7 +1801,8 @@ int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
 	/// 重复 frontInsMultiMove 方法
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
+		*(mvmu_ModuleMap.count(for_id)) ) {
 		return -2; //没找到插入点
 	}
 
@@ -1861,8 +1866,9 @@ int logic_Program::addLeafMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
 	/// 重复 addLeafMove 方法
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
-		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
+		*(mvmu_ModuleMap.count(for_id)) ) {
+		return -2; // 首先 cur_m_id 和 pre_m_id for_id 都要有
 	}
 
 	//如果 cur_id 模块是开始
@@ -2014,6 +2020,42 @@ int logic_Program::appendActiveTreeMoveFor(int cur_m_id,int for_id) {
 
 	// Step3、更新
 	mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
+
+	return 0;
+}
+
+//activeTree直接添加叶子
+int logic_Program::addLeafActiveTreeMoveFor(int cur_m_id,int for_id) {
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(for_id)) ) {
+		assert(false);
+		return -2; // 首先 cur_m_id 和 for_id 都要有
+	}
+
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+		return -3; //模块类型错误
+	}
+
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+	//该节点必须是该树的根节点
+	if( oldTree->mvi_TreeID != cur_m_id )
+		assert(false);
+
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
+	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //待插入节点
+	logic_TreeNode * curNode = oldTree->getRoot(); //当前节点
+
+	/// Step1、接入新节点
+	insNode->mvvu_Children.push_back(curNode);
+
+	/// Step2、删除旧树map信息
+	mvmu_TreeMap.erase(cur_m_id);
+	oldTree->setRoot(NULL);
+	SAFE_DELETE(oldTree);
+
+	/// Step3、更新模块树map信息
+	recurs_update(insTree,curNode);
 
 	return 0;
 }
