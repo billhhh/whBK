@@ -151,7 +151,7 @@ public:
 	int frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id);
 	int addLeafMoveFor(int cur_m_id,int pre_m_id,int for_id);
 
-	int appendActiveTreeFor(int cur_m_id,int for_id); //只在接到activeTree根节点的时候调用
+	int appendActiveTreeMoveFor(int cur_m_id,int for_id); //只在接到activeTree根节点的时候调用
 
 protected:
 

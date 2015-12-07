@@ -1082,6 +1082,9 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 	if( mvmu_ModuleMap.count(for_id) == 0 )
 		return false;
 
+	if( -1 == pre_id )
+
+
 	///// Step1、调用已经写好的 appendModule() 方法，pre_id 必然是0
 	this->appendModule(m_id,0,m_type);
 
@@ -1947,7 +1950,7 @@ inline int logic_Program::composeTreeId(int if_id,int branch_id) {
 }
 
 //只在接到activeTree根节点的时候调用
-int logic_Program::appendActiveTreeFor(int cur_m_id,int for_id) {
+int logic_Program::appendActiveTreeMoveFor(int cur_m_id,int for_id) {
 
 	//将某一模块接到 for_id activeTree后面
 
