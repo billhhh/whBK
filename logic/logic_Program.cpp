@@ -1751,11 +1751,10 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 		/// \brief root移出if和for
 		///
 		logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-		if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+		assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在同一个for中
 
-			tmpForModule->delTree(oldTree);
-			mvmi_TreeId_For_IfIdMap.erase(oldTree);
-		}
+		tmpForModule->delTree(oldTree);
+		mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 		///////////////////////////////////////////////////////////////////////////////////
 	}
@@ -1840,11 +1839,10 @@ int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 	/// \brief root移出if和for
 	///
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-	if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在同一个for中
 
-		tmpForModule->delTree(oldTree);
-		mvmi_TreeId_For_IfIdMap.erase(oldTree);
-	}
+	tmpForModule->delTree(oldTree);
+	mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 	///////////////////////////////////////////////////////////////////////////////////
 
@@ -1899,11 +1897,10 @@ int logic_Program::addLeafMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 	/// \brief root移出if和for
 	///
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-	if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在一个for中
 
-		tmpForModule->delTree(oldTree);
-		mvmi_TreeId_For_IfIdMap.erase(oldTree);
-	}
+	tmpForModule->delTree(oldTree);
+	mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 	///////////////////////////////////////////////////////////////////////////////////
 
@@ -2027,9 +2024,13 @@ int logic_Program::appendActiveTreeMoveFor(int cur_m_id,int for_id) {
 //activeTree直接添加叶子
 int logic_Program::addLeafActiveTreeMoveFor(int cur_m_id,int for_id) {
 
+	//////cur_m_id 和 activeTree 必须在同一个for中
+	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
+	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == for_id );
+
+	/// 重复 addLeafMove 方法
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(for_id)) ) {
-		assert(false);
-		return -2; // 首先 cur_m_id 和 for_id 都要有
+			return -2; // 首先 cur_m_id 和 for_id 都要有
 	}
 
 	//如果 cur_id 模块是开始
@@ -2042,8 +2043,10 @@ int logic_Program::addLeafActiveTreeMoveFor(int cur_m_id,int for_id) {
 	if( oldTree->mvi_TreeID != cur_m_id )
 		assert(false);
 
-	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
-	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //待插入节点
+	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+
+	logic_Tree *insTree = tmpForModule->getCurActiveTree();
+	logic_TreeNode * insNode = insTree->getRoot(); //待插入节点
 	logic_TreeNode * curNode = oldTree->getRoot(); //当前节点
 
 	/// Step1、接入新节点
@@ -2053,6 +2056,18 @@ int logic_Program::addLeafActiveTreeMoveFor(int cur_m_id,int for_id) {
 	mvmu_TreeMap.erase(cur_m_id);
 	oldTree->setRoot(NULL);
 	SAFE_DELETE(oldTree);
+
+	///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+	///
+	/// \brief root移出if和for
+	///
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在一个for中
+
+	tmpForModule->delTree(oldTree);
+	mvmi_TreeId_For_IfIdMap.erase(oldTree);
+
+	///////////////////////////////////////////////////////////////////////////////////
 
 	/// Step3、更新模块树map信息
 	recurs_update(insTree,curNode);
