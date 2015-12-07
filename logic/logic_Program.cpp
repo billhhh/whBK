@@ -298,7 +298,7 @@ bool logic_Program::appendModule(int m_id,int pre_id,int m_type) {
 
 	}else {
 		//如果 pre_id 不为 0 ，插在 pre_id 后面
-		if ( mvmu_ModuleMap[pre_id]->getModuleType() == 2001 && m_type == 2001 ) {
+		if ( m_type == 2001 ) {
 			return false;
 		}
 
@@ -324,8 +324,8 @@ bool logic_Program::frontInsModule(int m_id,int post_id,int m_type) {
 
 	// step1、在森林中加入这个id
 
-	//都是开始模块，不允许插入
-	if ( mvmu_ModuleMap[post_id]->getModuleType() == 2001 && m_type == 2001 ) {
+	//post模块是开始模块，不允许插入
+	if ( mvmu_ModuleMap[post_id]->getModuleType() == 2001 ) {
 		return false;
 	}
 
@@ -843,7 +843,7 @@ bool logic_Program::addLeafModule(int m_id,int pre_id,int m_type) {
 	}
 
 	//如果 pre_id 不为 0 ，插在 pre_id 后面
-	if ( mvmu_ModuleMap[pre_id]->getModuleType() == 2001 && m_type == 2001 ) {
+	if ( m_type == 2001 ) {
 		return false;
 	}
 
@@ -1082,8 +1082,8 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 	if( mvmu_ModuleMap.count(for_id) == 0 )
 		return false;
 
-	if( -1 == pre_id )
-
+	if( -1 == pre_id ) //向activeTree后面直接插入一个模块
+		return this->appendActiveTreeInsertFor(m_id,m_type,for_id);
 
 	///// Step1、调用已经写好的 appendModule() 方法，pre_id 必然是0
 	this->appendModule(m_id,0,m_type);
@@ -2071,6 +2071,28 @@ int logic_Program::addLeafActiveTreeMoveFor(int cur_m_id,int for_id) {
 
 	/// Step3、更新模块树map信息
 	recurs_update(insTree,curNode);
+
+	return 0;
+}
+
+//单模块新插入activeTree
+int logic_Program::appendActiveTreeInsertFor(int m_id,int m_type,int for_id) {
+
+	assert( mvmu_ModuleMap.count(for_id)>0 );
+
+	// step1、在森林中加入这个id
+
+	if ( m_type == 2001 ) {
+		return false;
+	}
+
+	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+	logic_Tree *tree = tmpForModule->getCurActiveTree();
+	tree->append_node(-1,m_id);
+
+
+	// step2、真正生成这个module实体
+	this->add_Module(m_id,m_type);
 
 	return 0;
 }

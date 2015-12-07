@@ -333,8 +333,13 @@ int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
 bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id) {
 
 	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
-	if ( 0 != pre_id )
+	if ( pre_id > 0 ) {
+
+		//为0：新放入for
+		//为-1：新插入activeTree
+		assert(false);
 		return false;
+	}
 
 	if ( false != isFI) //必须不是前插（必是后插），否则错误
 		return false;
