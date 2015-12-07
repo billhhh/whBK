@@ -549,9 +549,13 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 	if( -1 == other_m_id ) {
 
 		//如果是接到activeTree的后面
-		assert( 0 == move_type ); //必须为0
+		assert( 0 == move_type || 4 == move_type ); //必须为0
 
-		return tCurProg->appendActiveTreeMoveFor(cur_m_id,for_id);
+		if( 0 == move_type )
+			return tCurProg->appendActiveTreeMoveFor(cur_m_id,for_id);
+
+		else if( 4 == move_type )
+			return tCurProg->addLeafActiveTreeMoveFor(cur_m_id,for_id);
 
 	}else {
 
