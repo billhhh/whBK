@@ -594,27 +594,27 @@ int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type
 		assert( 0 == move_type || 4 == move_type ); //必须为0
 
 		if( 0 == move_type )
-			return tCurProg->appendActiveTreeMoveFor(cur_m_id,for_id);
+			return tCurProg->appendActiveTreeMoveIf(cur_m_id,if_id,branch_id);
 
 		else if( 4 == move_type ) //直接添一个叶子
-			return tCurProg->addLeafActiveTreeMoveFor(cur_m_id,for_id);
+			return tCurProg->addLeafActiveTreeMoveIf(cur_m_id,if_id,branch_id);
 
 	}else {
 
 		//如果是普通move
 		if ( 0 == move_type) //单模块后插 move
-			return tCurProg->backInsSingMoveFor(cur_m_id,other_m_id,for_id);
+			return tCurProg->backInsSingMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
 		else if( 1 == move_type) //单模块前插 move
-			return tCurProg->frontInsSingMoveFor(cur_m_id,other_m_id,for_id);
+			return tCurProg->frontInsSingMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
 		else if( 2 == move_type) //带孩子后插 move
-			return tCurProg->backInsMultiMoveFor(cur_m_id,other_m_id,for_id);
+			return tCurProg->backInsMultiMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
 		else if( 3 == move_type) //带祖先前插 move
-			return tCurProg->frontInsMultiMoveFor(cur_m_id,other_m_id,for_id);
+			return tCurProg->frontInsMultiMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
 		else if( 4 == move_type ) //新增叶子 move（直接连线）
-			return tCurProg->addLeafMoveFor(cur_m_id,other_m_id,for_id);
+			return tCurProg->addLeafMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 	}
 }
