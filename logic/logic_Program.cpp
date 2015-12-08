@@ -2096,3 +2096,137 @@ int logic_Program::appendActiveTreeInsertFor(int m_id,int m_type,int for_id) {
 
 	return 0;
 }
+
+///
+/// \brief 特殊处理if的move操作
+///
+int logic_Program::backInsSingMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id) {
+
+
+	assert( pre_m_id >= 0 );
+
+	//////pre_m_id必须在if中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) 
+		*(mvmu_ModuleMap.count(if_id)) ) {
+			return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+	}
+
+	// cur_id 不能是开始模块
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+		assert(false);
+		return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树，早点找到会更靠谱
+	logic_Tree *insTree = NULL;
+	if( 0 == pre_m_id ) {  ////////////必须用深拷贝，浅拷贝可能有危险
+
+		//如果前插一棵空树
+
+		///如果是前插空树，同时又是【唯一模块】是可以的，从if或者for移过来
+
+		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //深拷贝构造到栈
+
+		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
+			//如果孩子不是一个，错误
+			return -4;
+		}
+
+		tmpCurNode.mvu_Parent = 0;
+		tmpCurNode.mvvu_Children.clear();
+
+		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //深拷贝构造到堆
+		insTree = new logic_Tree(tmpPassNode); //新建一棵树，此node也必须新建，否则被下面的delnode了
+
+		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
+
+		///////////////////////////////特殊处理if的地方///////////////////////////////
+
+		///
+		/// \brief root拖入if
+		///
+		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = if_id; //建立模块映射
+		tmpIfModule->addTree(branch_id,mvmu_TreeMap[cur_m_id]); //add tree
+
+		////////////////////////////////////////////////////////////////////////////////
+
+	}else {
+
+		////// pre_m_id 不为0
+
+		//////pre_m_id必须在if中
+		assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
+
+		/////如果已存在，直接找到待插入树
+		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
+		insTree->append_node(pre_m_id,cur_m_id);
+	}
+
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID ) {
+
+		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			//树中唯一模块，删除树（ 进入这个分支 pre_m_id 也可能为0 ）
+
+			///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+			///
+			/// \brief root移出if和for
+			///
+			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+
+				tmpIfModule->delTree(oldTree);
+				mvmi_TreeId_For_IfIdMap.erase(oldTree);
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+
+			// Step3、（必须在此处，不然就return了）更新
+			mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+			return 0; //正常返回
+		}else {
+			//不是唯一模块
+
+			oldTree->setFirstChildAsRoot();
+		}
+
+	}
+
+	// Step3、更新
+	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+	return 0; //正常返回
+
+}
+
+int frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id) {
+
+
+}
+
+int backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id);
+int frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id);
+int addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id);
+
+//只在接到activeTree根节点的时候调用
+int appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id); //单模块接入activeTree
+int addLeafActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id); //activeTree直接添加叶子
+
+int appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
