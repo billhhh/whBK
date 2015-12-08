@@ -2512,7 +2512,13 @@ int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_
 }
 
 //只在接到activeTree根节点的时候调用
-int appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id); //单模块接入activeTree
+
+//单模块接入activeTree
+int logic_Program::appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id) {
+
+	
+}
+
 int addLeafActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id); //activeTree直接添加叶子
 
 int appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
