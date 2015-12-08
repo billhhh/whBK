@@ -587,6 +587,7 @@ int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
+	int branch_id = this->decryptBranchId(ui_branch_id);
 	if( -1 == other_m_id ) {
 
 		//如果是接到activeTree的后面

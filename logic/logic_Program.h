@@ -144,7 +144,9 @@ public:
 
 	void DelAllParaConnect(int id); //删除关于某一模块的所有连线
 
-	//////特殊处理for的move操作
+	///
+	/// \brief 特殊处理for的move操作
+	///
 	int backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id);
 	int frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id);
 	int backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id);
@@ -156,6 +158,21 @@ public:
 	int addLeafActiveTreeMoveFor(int cur_m_id,int for_id); //activeTree直接添加叶子
 
 	int appendActiveTreeInsertFor(int m_id,int m_type,int for_id); //单模块新插入activeTree
+
+	///
+	/// \brief 特殊处理if的move操作
+	///
+	int backInsSingMoveif(int cur_m_id,int pre_m_id,int if_id,int branch_id);
+	int frontInsSingMoveif(int cur_m_id,int post_m_id,int if_id,int branch_id);
+	int backInsMultiMoveif(int cur_m_id,int pre_m_id,int if_id,int branch_id);
+	int frontInsMultiMoveif(int cur_m_id,int post_m_id,int if_id,int branch_id);
+	int addLeafMoveif(int cur_m_id,int pre_m_id,int if_id,int branch_id);
+
+	//只在接到activeTree根节点的时候调用
+	int appendActiveTreeMoveif(int cur_m_id,int if_id,int branch_id); //单模块接入activeTree
+	int addLeafActiveTreeMoveif(int cur_m_id,int if_id,int branch_id); //activeTree直接添加叶子
+
+	int appendActiveTreeInsertif(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
 
 protected:
 
