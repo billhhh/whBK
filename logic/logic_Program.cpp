@@ -2388,7 +2388,7 @@ int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int br
 
 int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id) {
 
-	//////post_m_id必须在for中
+	//////post_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
 	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
@@ -2452,7 +2452,64 @@ int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int 
 	return 0; //正常返回
 }
 
-int addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id);
+int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id) {
+
+	//////pre_m_id必须在if中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
+
+	//////cur_m_id 和 pre_m_id 必须在一个if中
+	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
+	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
+	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
+
+	/// 重复 addLeafMove 方法
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
+		*(mvmu_ModuleMap.count(if_id)) ) {
+			return -2; // 首先 cur_m_id 和 pre_m_id if_id 都要有
+	}
+
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+		return -3; //模块类型错误
+	}
+
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+	//该节点必须是该树的根节点
+	if( oldTree->mvi_TreeID != cur_m_id )
+		assert(false);
+
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
+	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //待插入节点
+	logic_TreeNode * curNode = oldTree->getRoot(); //当前节点
+
+	/// Step1、接入新节点
+	insNode->mvvu_Children.push_back(curNode);
+
+	/// Step2、删除旧树map信息
+	mvmu_TreeMap.erase(cur_m_id);
+	oldTree->setRoot(NULL);
+	SAFE_DELETE(oldTree);
+
+	///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+	///
+	/// \brief root移出if和for
+	///
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在一个for中
+
+	tmpIfModule->delTree(oldTree);
+	mvmi_TreeId_For_IfIdMap.erase(oldTree);
+
+	///////////////////////////////////////////////////////////////////////////////////
+
+	/// Step3、更新模块树map信息
+	recurs_update(insTree,curNode);
+
+	return 0;
+}
 
 //只在接到activeTree根节点的时候调用
 int appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id); //单模块接入activeTree
