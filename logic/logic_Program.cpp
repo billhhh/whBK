@@ -2109,6 +2109,7 @@ int logic_Program::backInsSingMoveIf(int cur_m_id,int pre_m_id,int if_id,int bra
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
 	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) 
 		*(mvmu_ModuleMap.count(if_id)) ) {
@@ -2223,6 +2224,9 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 	//////post_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
+
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
 		*(mvmu_ModuleMap.count(if_id)) ) {
 			return -2; //没找到插入点
@@ -2266,10 +2270,9 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 			///
 			/// \brief root移出if和for
 			///
-			logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
 
-				tmpForModule->delTree(oldTree);
+				tmpIfModule->delTree(oldTree);
 				mvmi_TreeId_For_IfIdMap.erase(oldTree);
 			}
 
