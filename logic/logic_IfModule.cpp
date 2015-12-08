@@ -379,3 +379,12 @@ void logic_IfModule::DelAllParaConnect(int id) {
 		}
 	}
 }
+
+//ÅĞ¶ÏbranchÊÇ·ñ´æÔÚ
+bool logic_IfModule::isBranchExist(int branch_id) {
+
+	if( mvmu_BranchMap.count(branch_id) > 0 ) //´æÔÚ
+		return true;
+	else
+		return false;
+}

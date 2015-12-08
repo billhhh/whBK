@@ -2216,9 +2216,75 @@ int logic_Program::backInsSingMoveIf(int cur_m_id,int pre_m_id,int if_id,int bra
 
 }
 
-int frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id) {
+int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id) {
 
+	assert(post_m_id>0);
 
+	//////post_m_id必须在if中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
+		*(mvmu_ModuleMap.count(if_id)) ) {
+			return -2; //没找到插入点
+	}
+
+	//如果 post_m_id 是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+		return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //待插入树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+
+	int oldRootId = insTree->mvi_TreeID;
+	if( post_m_id == oldRootId ) {
+
+		//待插入节点要插在原树root之前
+		mvmu_TreeMap.erase(post_m_id);
+		insTree->exchangeRoot(cur_m_id);
+	}else {
+
+		//正常插入地方
+		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
+	}
+
+	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
+
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID 
+		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+			///
+			/// \brief root移出if和for
+			///
+			logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+
+				tmpForModule->delTree(oldTree);
+				mvmi_TreeId_For_IfIdMap.erase(oldTree);
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			//树中唯一模块，删除树
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+	}
+
+	//只有 post_m_id 是根的情况，才更新tree map
+	if( post_m_id == oldRootId )
+		mvmu_TreeMap[cur_m_id] = insTree;
+
+	return 0; //正常返回
 }
 
 int backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id);
