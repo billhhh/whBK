@@ -2386,7 +2386,72 @@ int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int br
 	return 0; //正常返回
 }
 
-int frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id);
+int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id) {
+
+	//////post_m_id必须在for中
+	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
+
+	//////cur_m_id 和 post_m_id 必须在一个if中
+	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
+	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[post_m_id];
+	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
+
+	/// 重复 frontInsMultiMove 方法
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
+		*(mvmu_ModuleMap.count(if_id)) ) {
+			return -2; //没找到插入点
+	}
+
+	//如果 post_m_id 模块是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+		return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	/////!!!!!!!!!!!!特别注意这里，这里的 insTree 和 oldtree 调换，可以转换为后插!!!!!!!!!!!!!!
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待插入树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[post_m_id]; //待删除树
+
+	//如果 post_m_id 不是根节点，错误返回
+	if( post_m_id!=oldTree->mvi_TreeID ) {
+		return -4;
+	}
+
+	///////////////////////////////////////
+	logic_TreeNode * insNode = oldTree->getRoot(); //待插入节点
+	insTree->add_node(cur_m_id,insNode);
+
+	///// step2、删除旧树节点
+
+	//必然是ROOT，直接删除树
+	oldTree->del_node_notConn(post_m_id); //断开 oldTree 此节点后的所有连接
+	SAFE_DELETE(oldTree); //放心删除树
+	mvmu_TreeMap.erase(post_m_id);
+
+	///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+	///
+	/// \brief root移出if和for
+	///
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在同一个if中
+
+	tmpIfModule->delTree(oldTree);
+	mvmi_TreeId_For_IfIdMap.erase(oldTree);
+
+	///////////////////////////////////////////////////////////////////////////////////
+
+	///// step3、更新 module tree映射
+
+	recurs_update(insTree,insNode);
+
+	return 0; //正常返回
+}
+
 int addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id);
 
 //只在接到activeTree根节点的时候调用
