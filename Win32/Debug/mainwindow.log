@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/12/7 19:32:11。
+﻿生成启动时间为 2015/12/8 23:51:48。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -51,8 +51,9 @@
      1>logic\logic_Program.cpp(744): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Program.cpp(883): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Program.cpp(1086): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1244): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1263): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1117): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1247): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1266): warning C4100: “branch_id”: 未引用的形参
          logic_Project.cpp
          logic_Test.cpp
      1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
@@ -64,13 +65,9 @@
          logic_TreeNode.cpp
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
-     1>logic\logic_Controller.cpp(585): warning C4100: “ui_branch_id”: 未引用的形参
-     1>logic\logic_Controller.cpp(585): warning C4100: “if_id”: 未引用的形参
-     1>logic\logic_Controller.cpp(585): warning C4100: “move_type”: 未引用的形参
-     1>logic\logic_Controller.cpp(585): warning C4100: “other_m_id”: 未引用的形参
-     1>logic\logic_Controller.cpp(585): warning C4100: “cur_m_id”: 未引用的形参
          正在生成代码...
      1>e:\bill github\whbk\logic\logic_controller.cpp(583): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(620): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
@@ -142,4 +139,4 @@
 
 生成成功。
 
-已用时间 00:00:24.20
+已用时间 00:00:27.98
