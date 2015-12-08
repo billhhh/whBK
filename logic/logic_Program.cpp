@@ -2292,13 +2292,13 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 
 int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id) {
 
-	//////pre_m_id必须在for中
+	//////pre_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
 	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//////cur_m_id 和 pre_m_id 必须在一个for中
+	//////cur_m_id 和 pre_m_id 必须在一个if中
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
