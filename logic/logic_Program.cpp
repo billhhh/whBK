@@ -1113,6 +1113,9 @@ bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,
 	if( mvmu_ModuleMap.count(if_id) == 0 )
 		return false;
 
+	if( -1 == pre_id ) //向activeTree后面直接插入一个模块
+		return this->appendActiveTreeInsertIf(m_id,m_type,if_id,branch_id);
+
 	///// Step1、调用已经写好的 appendModule() 方法
 	this->appendModule(m_id,pre_id,m_type);
 
@@ -2108,13 +2111,13 @@ int logic_Program::backInsSingMoveIf(int cur_m_id,int pre_m_id,int if_id,int bra
 	//////pre_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
-	assert( tmpIfModule->isBranchExist(branch_id) == true );
-
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) 
 		*(mvmu_ModuleMap.count(if_id)) ) {
 			return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
 	// cur_id 不能是开始模块
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
@@ -2224,13 +2227,13 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 	//////post_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
-	assert( tmpIfModule->isBranchExist(branch_id) == true );
-
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
 		*(mvmu_ModuleMap.count(if_id)) ) {
 			return -2; //没找到插入点
 	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
 	//如果 post_m_id 是开始
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
@@ -2295,9 +2298,6 @@ int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int br
 	//////pre_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
-	assert( tmpIfModule->isBranchExist(branch_id) == true );
-
 	//////cur_m_id 和 pre_m_id 必须在一个if中
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
@@ -2309,6 +2309,9 @@ int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int br
 		*(mvmu_ModuleMap.count(if_id)) ) {
 			return -2; // 首先 cur_m_id 和 pre_m_id for_id 都要有
 	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
 	//如果 cur_id 模块是开始
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
@@ -2391,9 +2394,6 @@ int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int 
 	//////post_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
-	assert( tmpIfModule->isBranchExist(branch_id) == true );
-
 	//////cur_m_id 和 post_m_id 必须在一个if中
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[post_m_id];
@@ -2404,6 +2404,9 @@ int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int 
 		*(mvmu_ModuleMap.count(if_id)) ) {
 			return -2; //没找到插入点
 	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
 	//如果 post_m_id 模块是开始
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
@@ -2457,9 +2460,6 @@ int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_
 	//////pre_m_id必须在if中
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
-	assert( tmpIfModule->isBranchExist(branch_id) == true );
-
 	//////cur_m_id 和 pre_m_id 必须在一个if中
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
@@ -2470,6 +2470,9 @@ int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_
 		*(mvmu_ModuleMap.count(if_id)) ) {
 			return -2; // 首先 cur_m_id 和 pre_m_id if_id 都要有
 	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
 	//如果 cur_id 模块是开始
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
@@ -2516,9 +2519,149 @@ int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_
 //单模块接入activeTree
 int logic_Program::appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id) {
 
-	
+	//将某一模块接到 branch activeTree后面
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(if_id)) ) {
+		assert(false);
+		return -2; // 首先 cur_m_id 和 if_id 都要有
+	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
+
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+		assert(false);
+		return -3; //模块类型错误
+	}
+
+	//得到 activeTree
+	logic_Tree * curActiveTree = tmpIfModule->getCurActiveTree(branch_id);
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
+
+	///// Step1、插入节点
+	curActiveTree->append_node(-1,cur_m_id);
+
+
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+	if( cur_m_id != oldTree->mvi_TreeID ) {
+
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID ) {
+
+		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
+
+			//树中唯一模块，删除树（ 进入这个分支 pre_m_id 也可能为0 ）
+
+			///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+			///
+			/// \brief root移出if和for
+			///
+			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
+				tmpIfModule->delTree(oldTree);
+				mvmi_TreeId_For_IfIdMap.erase(oldTree);
+			}
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+
+			// Step3、（必须在此处，不然就return了）更新
+			mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
+
+			return 0; //正常返回
+		}else {
+			//不是唯一模块
+
+			oldTree->setFirstChildAsRoot();
+		}
+
+	}
+
+	// Step3、更新
+	mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
+
+	return 0;
 }
 
-int addLeafActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id); //activeTree直接添加叶子
+//activeTree直接添加叶子
+int logic_Program::addLeafActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id) {
 
-int appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
+	//////cur_m_id 和 activeTree 必须在同一个if中
+	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
+	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == if_id );
+
+	/// 重复 addLeafMove 方法
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(if_id)) ) {
+		return -2; // 首先 cur_m_id 和 for_id 都要有
+	}
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
+
+	//如果 cur_id 模块是开始
+	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
+		return -3; //模块类型错误
+	}
+
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+	//该节点必须是该树的根节点
+	if( oldTree->mvi_TreeID != cur_m_id )
+		assert(false);
+
+	logic_Tree *insTree = tmpIfModule->getCurActiveTree(branch_id);
+	logic_TreeNode * insNode = insTree->getRoot(); //待插入节点
+	logic_TreeNode * curNode = oldTree->getRoot(); //当前节点
+
+	/// Step1、接入新节点
+	insNode->mvvu_Children.push_back(curNode);
+
+	/// Step2、删除旧树map信息
+	mvmu_TreeMap.erase(cur_m_id);
+	oldTree->setRoot(NULL);
+	SAFE_DELETE(oldTree);
+
+	///////////////////////////////特殊处理if和for的地方///////////////////////////////
+
+	///
+	/// \brief root移出if和for
+	///
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //必然在一个for中
+
+	tmpIfModule->delTree(oldTree);
+	mvmi_TreeId_For_IfIdMap.erase(oldTree);
+
+	///////////////////////////////////////////////////////////////////////////////////
+
+	/// Step3、更新模块树map信息
+	recurs_update(insTree,curNode);
+
+	return 0;
+}
+
+//单模块新插入activeTree
+int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id) {
+
+	assert( mvmu_ModuleMap.count(if_id)>0 );
+
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //判断branch分支是否存在
+	assert( tmpIfModule->isBranchExist(branch_id) == true );
+
+	// step1、在森林中加入这个id
+
+	if ( m_type == 2001 ) {
+		return false;
+	}
+
+	logic_Tree *tree = tmpIfModule->getCurActiveTree(branch_id);
+	tree->append_node(-1,m_id);
+
+
+	// step2、真正生成这个module实体
+	this->add_Module(m_id,m_type);
+
+	return 0;
+}
