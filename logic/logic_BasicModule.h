@@ -56,6 +56,9 @@ public:
 
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+	/////合成代码
+	bool generateCodeBlocks();
+
 protected:
 	int mvi_CurModeID; //当前模式
 	int mvs_ModuleType; //模块类型 方便去xml load
@@ -71,9 +74,6 @@ protected:
 
 	//当前端口选择器，包括菊链层号
 	WinSwitcher mve_CurWinSwitcher;
-
-	/////合成代码
-	bool generateCodeBlocks();
 
 private:
 	void Init(); //负责初始化操作
