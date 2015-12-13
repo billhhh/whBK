@@ -66,7 +66,8 @@ private:
 
 	//program map
 	std::map <int, logic_Program *> mvvu_ProgMap;
-	//我的变量my virable and its type
+
+	//变量（整个prj通用） my virable and its type
 	std::map<_IdDataType ,logic_VarModule*> mvmu_PrjVariety;
 
 	std::string genNewProgName(int id); //生成新 prj 的名字
