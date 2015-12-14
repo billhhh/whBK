@@ -2665,3 +2665,9 @@ int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int br
 
 	return 0;
 }
+
+//初始化获得prj的变量map
+void logic_Program::initPrjVariety(std::map<int  ,logic_VarModule*> &map) {
+
+	this->prjVariety = &map;
+}

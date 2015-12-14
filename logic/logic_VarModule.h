@@ -1,8 +1,15 @@
+/* 
+* 
+* function: Âß¼­²ã±äÁ¿Àà
+* 
+* Date:2015-11-05
+* 
+*    Author: Bill Wang
+*/
+
 #pragma once
 #include "logic_BasicModule.h"
 #include "logic_Global.h"
-
-
 
 class logic_VarModule :
 	public logic_BasicModule

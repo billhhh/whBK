@@ -20,6 +20,7 @@
 #include "logic_ForModule.h"
 #include "logic_IfModule.h"
 #include "logic_whPort.h"
+#include "logic_VarModule.h"
 
 class logic_Program //等效于森林
 {
@@ -174,6 +175,9 @@ public:
 
 	int appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
 
+	//初始化获得prj的变量map
+	void initPrjVariety(std::map<int  ,logic_VarModule*> &map);
+
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
@@ -187,6 +191,9 @@ protected:
 	/////参数连线
 	std::map<whPort, whPort > mvvu_Conn_From_ToMap; //维护 出发模块Port---结束模块Port 哈希表
 	std::map<whPort, whPort > mvvu_Conn_To_FromMap; //维护 结束模块Port---出发模块Port，方便双向查找
+
+	//变量（整个prj通用）
+	std::map<_IdDataType ,logic_VarModule*> *prjVariety;
 
 	void Init();
 	void prog_Destroy();
