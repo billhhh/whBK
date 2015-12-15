@@ -175,8 +175,11 @@ public:
 
 	int appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
 
-	//从prj初始化prog，v_map是引用，init_m_map是副本
-	void outInitProg(std::map<int  ,logic_VarModule*> &v_map ,std::map <int, logic_BasicModule *> init_m_map);
+	//从prj初始化prog
+	//初始化 “变量”map，v_map是引用
+	void setInitVarMap(std::map<int  ,logic_VarModule*> &v_map);
+	//初始化 initModule，init_m_map是副本
+	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
 
 protected:
 

@@ -52,10 +52,8 @@ public:
 	std::string getPrjPhotoDscrpt(); // 【XmlIO】
 	std::map <int ,logic_Program* > getAllProgram();  //【XmlIO】
 
-protected:
-
-	void Init();
-	void prj_Destroy();
+	//初始化 initModule，init_m_map是副本
+	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
 
 private:
 	/**************变量名称表和循环名称表*****************/
@@ -77,6 +75,9 @@ private:
 
 //工具private函数
 private:
+	void Init();
+	void prj_Destroy();
+
 	std::string whIntToString(int i);
 	std::string genNewProgName(int id); //生成新 prj 的名字
 

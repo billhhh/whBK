@@ -108,7 +108,7 @@ private:
 	///
 	/// \brief load from xml which is on the disk
 	///
-	std::map <int, logic_BasicModule *> initModuleMap;
+	std::map <int, logic_BasicModule *> mvmu_InitModuleMap; //加载在内存中module Init总map
 
 //工具private函数
 private:
@@ -117,7 +117,6 @@ private:
 	std::string genNewPrjName(int id); //生成新 prj 的名字
 
 	std::string whIntToString(int i);
-	std::map <_IdDataType, logic_BasicModule *> mvmu_InitModuleMap; //加载在内存中module Init总map
 
 	///
 	/// \brief 逻辑层，加解密 ui_branch_id
@@ -128,6 +127,9 @@ private:
 	//解密
 	void decryptBranchId(int ui_branch_id,int &if_id,int &branch_id);
 	int decryptBranchId(int ui_branch_id); //直接返回 branch_id
+
+	///init module map函数
+	void initModuleMapFunc();
 
 };
 

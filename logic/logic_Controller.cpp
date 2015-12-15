@@ -26,6 +26,9 @@ void logic_Controller::Init() {
 
  	curPrjId=0;
  	curProgId=0;
+
+	//初始化 init Module map
+	this->initModuleMapFunc();
 }
 
 int logic_Controller::ctrlNewPrj() {
@@ -617,4 +620,10 @@ int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type
 		else if( 4 == move_type ) //新增叶子 move（直接连线）
 			return tCurProg->addLeafMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 	}
+}
+
+///init module map函数
+void logic_Controller::initModuleMapFunc() {
+
+	//此处应读持久化xml，填满整个最原始的 mvmu_InitModuleMap
 }

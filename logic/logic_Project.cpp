@@ -92,7 +92,9 @@ int logic_Project::newProgram() {
 	logic_Program * tprog = new logic_Program(max_prog_id,genNewProgName(max_prog_id));
 	mvvu_ProgMap[max_prog_id] = tprog;
 
-	tprog->outInitProg(this->mvmu_PrjVariety,this->initModuleMap); //初始化新prog
+	//初始化新 prog 特殊参数
+	tprog->setInitVarMap(this->mvmu_PrjVariety);
+	tprog->setInitModuleMap(this->initModuleMap);
 
 	return max_prog_id;
 }
@@ -156,4 +158,10 @@ std::string logic_Project::getPrjPhotoDscrpt() {
 
 std::map <int ,logic_Program* > logic_Project::getAllProgram() {
 	return mvvu_ProgMap;
+}
+
+//初始化 initModule，init_m_map是副本
+void logic_Project::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map) {
+
+	this->initModuleMap = init_m_map; //初始化 所有init module副本
 }
