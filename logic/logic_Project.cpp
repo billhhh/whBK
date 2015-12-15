@@ -92,7 +92,7 @@ int logic_Project::newProgram() {
 	logic_Program * tprog = new logic_Program(max_prog_id,genNewProgName(max_prog_id));
 	mvvu_ProgMap[max_prog_id] = tprog;
 
-	tprog->initPrjVariety(this->mvmu_PrjVariety); //传入父prj 变量
+	tprog->initProgFromPrj() //初始化新prog
 
 	return max_prog_id;
 }

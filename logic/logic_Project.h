@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "logic_Program.h"
 #include "logic_VarModule.h"
-
+#include "logic_BasicModule.h"
 
 class logic_Project
 {
@@ -66,15 +66,13 @@ private:
 
 	//program map
 	std::map <int, logic_Program *> mvvu_ProgMap;
-
 	//变量（整个prj通用） my virable and its type
 	std::map<_IdDataType ,logic_VarModule*> mvmu_PrjVariety;
-
-	std::string genNewProgName(int id); //生成新 prj 的名字
 
 //工具private函数
 private:
 	std::string whIntToString(int i);
+	std::string genNewProgName(int id); //生成新 prj 的名字
 
 };
 
