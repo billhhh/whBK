@@ -207,7 +207,7 @@ protected:
 	//完全删除一棵树所有节点模块的所有信息（各种实体map和connection map）
 	void recurs_DelTreeNodeModule(logic_TreeNode *some);
 
-private:
+protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
 	std::string mvs_ProgName;
 
