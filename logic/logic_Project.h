@@ -69,6 +69,12 @@ private:
 	//变量（整个prj通用） my virable and its type
 	std::map<_IdDataType ,logic_VarModule*> mvmu_PrjVariety;
 
+	//!!!!!!!init module map，保存所有的初始化 Module 指针 map 副本!!!!!!!
+	///
+	/// \brief load from xml which is on the disk
+	///
+	std::map <int, logic_BasicModule *> initModuleMap;
+
 //工具private函数
 private:
 	std::string whIntToString(int i);

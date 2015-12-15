@@ -175,8 +175,8 @@ public:
 
 	int appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id); //单模块新插入activeTree
 
-	//从prj初始化prog
-	void initProgFromPrj(std::map<int  ,logic_VarModule*> &map);
+	//从prj初始化prog，v_map是引用，init_m_map是副本
+	void outInitProg(std::map<int  ,logic_VarModule*> &v_map ,std::map <int, logic_BasicModule *> init_m_map);
 
 protected:
 
@@ -192,6 +192,8 @@ protected:
 	std::map<whPort, whPort > mvvu_Conn_From_ToMap; //维护 出发模块Port---结束模块Port 哈希表
 	std::map<whPort, whPort > mvvu_Conn_To_FromMap; //维护 结束模块Port---出发模块Port，方便双向查找
 
+	///////init module map
+	std::map <int, logic_BasicModule *> allInitModuleMap;
 	//变量（整个prj通用）
 	std::map<_IdDataType ,logic_VarModule*> *prjVariety;
 
@@ -206,9 +208,6 @@ protected:
 
 	//完全删除一棵树所有节点模块的所有信息（各种实体map和connection map）
 	void recurs_DelTreeNodeModule(logic_TreeNode *some);
-
-	//初始化获得prj的变量map
-	void initPrjVariety(std::map<int  ,logic_VarModule*> &map);
 
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
