@@ -193,7 +193,7 @@ protected:
 	std::map<whPort, whPort > mvvu_Conn_To_FromMap; //维护 结束模块Port---出发模块Port，方便双向查找
 
 	///////init module map
-	std::map <int, logic_BasicModule *> allInitModuleMap;
+	std::map <int, logic_BasicModule *> initModuleMap;
 	//变量（整个prj通用）
 	std::map<_IdDataType ,logic_VarModule*> *prjVariety;
 

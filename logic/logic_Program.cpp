@@ -2670,5 +2670,5 @@ int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int br
 void logic_Program::outInitProg(std::map<int  ,logic_VarModule*> &v_map ,std::map <int, logic_BasicModule *> init_m_map) {
 
 	this->prjVariety = &v_map; //初始化prj 变量 map
-	this->allInitModuleMap = init_m_map; //初始化 所有init module副本
+	this->initModuleMap = init_m_map; //初始化 所有init module副本
 }
