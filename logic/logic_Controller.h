@@ -97,20 +97,26 @@ public:
 	int ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id);
 	int ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id);
 
-//重要private函数
+//private变量
 private:
-	void Init();
-	int getMaxPrjId(); //获得最大 PrjID，方便累计
-	std::string genNewPrjName(int id); //生成新 prj 的名字
 
 	std::map <int ,logic_Project* > prjMap;
 	int curPrjId;
 	int curProgId;
 
+	//!!!!!!!init module map，保存所有的初始化 Module 指针 map 副本!!!!!!!
+	///
+	/// \brief load from xml which is on the disk
+	///
+	std::map <int, logic_BasicModule *> initModuleMap;
+
 //工具private函数
 private:
-	std::string whIntToString(int i);
+	void Init();
+	int getMaxPrjId(); //获得最大 PrjID，方便累计
+	std::string genNewPrjName(int id); //生成新 prj 的名字
 
+	std::string whIntToString(int i);
 	std::map <_IdDataType, logic_BasicModule *> mvmu_InitModuleMap; //加载在内存中module Init总map
 
 	///
