@@ -165,3 +165,9 @@ void logic_Project::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_
 
 	this->initModuleMap = init_m_map; //初始化 所有init module副本
 }
+
+//project id 生成就无法改变
+int logic_Project::getPrjId() {
+
+	return mvstr_PrjId;
+}
