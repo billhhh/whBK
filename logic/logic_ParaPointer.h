@@ -21,6 +21,8 @@ public:
 	std::vector <int> mvvi_ParaIDList; //指向具体的参数ID列表，为空代表没有
 	WinSwitcher mve_WS;
 
+	std::string mvs_initCodeBlocks; //初始化代码片
+
 protected:
 
 
