@@ -41,8 +41,8 @@ public:
 	int addTree(logic_Tree * tree); //向 For Module 添加一棵树，返回错误类型，正常返回0
 	int delTree(logic_Tree * tree); //在 For Module 中删除树id，返回错误类型，正常返回0
 
-	//返回该 for 模块所有激活树节点
-	std::vector<int > findActiveRoots();
+	//返回该 for 模块所有树root节点
+	std::vector<int > findAllRoots();
 
 protected:
 

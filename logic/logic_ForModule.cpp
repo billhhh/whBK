@@ -184,3 +184,24 @@ void logic_ForModule::DelAllParaConnect(int id) {
 		}
 	}
 }
+
+//返回该 for 模块所有树root节点
+std::vector<int > logic_ForModule::findAllRoots() {
+
+	vector <int > L;
+	for( std::map<int ,logic_Tree * >::iterator it = mvvu_treeList.begin();it != mvvu_treeList.end() ; ++it) {
+
+		L.push_back(it->first);
+	}
+
+	logic_TreeNode * root = mvi_CurActiveTree->getRoot();
+	if( root->mvvu_Children.size() > 0 ) {
+
+		for (int i = 0;i < root->mvvu_Children.size() ; ++i ) {
+
+			L.push_back( root->mvvu_Children.at(i)->getID() );
+		}
+	}
+
+	return L;
+}
