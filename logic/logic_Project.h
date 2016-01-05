@@ -26,6 +26,7 @@ public:
 
 	//set and get
 	int getPrjId();//project id 生成就无法改变
+	void setPrjId(int id);
 
 	void setPrjName(const std::string name);
 	std::string getPrjName();

@@ -160,6 +160,13 @@ public:
 	//int moveInModule(int m_id,int container_id,int ui_branch_id);
 	//int moveOutModule(int m_id); //for或者if同一个函数
 
+	///
+	/// \brief 获取根节点
+	/// \para 容器编号，如果是0，获取最外层root集合
+	/// \return 根节点集合
+	///
+	std::vector<int > findRootsInContainer(int containerId);
+
 	/// \brief 创建我的模块
 
 protected:

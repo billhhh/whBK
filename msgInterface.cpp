@@ -285,4 +285,15 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 		return ctrl.ctrlMoveModuleIf(cur_m_id,other_m_id,move_type,container_id,ui_branch_id);
 }
 
+///
+/// \brief 获取根节点
+/// \para 容器编号，如果是0，获取最外层root集合
+/// \return 根节点集合
+///
+std::vector<int > msgInterface::findRootsInContainer(int containerId) {
+
+	return ctrl.ctrlFindRootsInContainer(containerId);
+}
+
+
 /// \brief 创建我的模块

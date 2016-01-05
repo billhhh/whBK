@@ -527,6 +527,9 @@ void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_i
 
 	assert( ui_branch_id > 0 );
 
+	if( ui_branch_id < 0x7FFF )
+		return ; //如果并没有高位
+
 	//高16位先分出来
 	if_id = ui_branch_id >> 15;
 	branch_id = ui_branch_id & 0x7FFF; //抹去高位
@@ -536,6 +539,9 @@ void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_i
 int logic_Controller::decryptBranchId(int ui_branch_id) {
 
 	assert( ui_branch_id > 0 );
+
+	if( ui_branch_id < 0x7FFF )
+		return ui_branch_id; //如果并没有高位
 
 	int branch_id = ui_branch_id & 0x7FFF; //抹去高位
 	return branch_id;
@@ -626,4 +632,17 @@ int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type
 void logic_Controller::initModuleMapFunc() {
 
 	//此处应读持久化xml，填满整个最原始的 mvmu_InitModuleMap
+}
+
+///
+/// \brief 获取根节点
+/// \para 容器编号，如果是0，获取最外层root集合
+/// \return 根节点集合
+///
+std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->
 }

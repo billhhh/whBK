@@ -97,6 +97,13 @@ public:
 	int ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id);
 	int ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id);
 
+	///
+	/// \brief 获取根节点
+	/// \para 容器编号，如果是0，获取最外层root集合
+	/// \return 根节点集合
+	///
+	std::vector<int > ctrlFindRootsInContainer(int containerId);
+
 //private变量
 private:
 

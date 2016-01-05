@@ -171,3 +171,8 @@ int logic_Project::getPrjId() {
 
 	return mvstr_PrjId;
 }
+
+void logic_Project::setPrjId(int id) {
+
+	this->mvstr_PrjId = id;
+}
