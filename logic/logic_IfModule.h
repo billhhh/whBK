@@ -71,6 +71,9 @@ public:
 
 	bool isBranchExist(int branch_id); //判断branch是否存在
 
+	//返回该 if 模块所有树root节点
+	std::vector<int > findBranchAllRoots(int branch_id);
+
 protected:
 
 

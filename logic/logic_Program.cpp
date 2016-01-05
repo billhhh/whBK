@@ -2688,7 +2688,21 @@ void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_
 //获取program大画布rootsId
 std::vector<int > logic_Program::findRootsInContainer() {
 
+	vector<int > L;
+	map<int , logic_Tree * > map = mvmu_TreeMap;
 
+	//剔除所有不用的root
+	for( std::map<logic_Tree * ,int >::iterator it = mvmi_TreeId_For_IfIdMap.begin();it != mvmi_TreeId_For_IfIdMap.end() ; ++it) {
+
+		map.erase(it->first->mvi_TreeID);
+	}
+
+	for( std::map<int ,logic_Tree * >::iterator it = map.begin();it != map.end() ; ++it) {
+
+		L.push_back(it->first);
+	}
+
+	return L;
 }
 
 //重载：获取指定 for 中 rootsId
@@ -2697,11 +2711,14 @@ std::vector<int > logic_Program::findRootsInContainer(int for_id) {
 	assert( mvmu_ModuleMap.count(for_id)>0 );
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 
-	return tmpForModule;
+	return tmpForModule->findAllRoots();
 }
 
 //重载：获取指定 if 中 rootsId
-std::vector<int > findRootsInContainer(int if_id,int branch_id) {
+std::vector<int > logic_Program::findRootsInContainer(int if_id,int branch_id) {
 
+	assert( mvmu_ModuleMap.count(if_id)>0 );
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
 
+	return tmpIfModule->findBranchAllRoots(branch_id);
 }
