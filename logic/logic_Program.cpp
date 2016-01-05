@@ -2678,3 +2678,27 @@ void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_
 
 	this->initModuleMap = init_m_map; //初始化 所有init module副本
 }
+
+///
+/// \brief 获取根节点
+/// \para 容器编号，如果是0，获取最外层root集合
+/// \return 根节点集合
+///
+
+//获取program大画布rootsId
+std::vector<int > logic_Program::findRootsInContainer() {
+
+
+}
+
+//重载：获取指定 for 中 rootsId
+std::vector<int > logic_Program::findRootsInContainer(int for_id) {
+
+
+}
+
+//重载：获取指定 if 中 rootsId
+std::vector<int > findRootsInContainer(int if_id,int branch_id) {
+
+
+}

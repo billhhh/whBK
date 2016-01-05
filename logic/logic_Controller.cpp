@@ -644,5 +644,15 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	return tCurProg->
+	if( 0 == containerId ) //´ó»­²¼
+		return tCurProg->findRootsInContainer();
+	else if( containerId < 0x7FFF ) //for
+		return tCurProg->findRootsInContainer(containerId);
+	else {
+
+		int if_id;
+		int branch_id;
+		decryptBranchId(containerId,if_id,branch_id);
+		return tCurProg->findRootsInContainer(if_id,branch_id);
+	}
 }

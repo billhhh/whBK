@@ -181,6 +181,15 @@ public:
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
 
+	///
+	/// \brief 获取根节点
+	/// \para 容器编号，如果是0，获取最外层root集合
+	/// \return 根节点集合
+	///
+	std::vector<int > findRootsInContainer();
+	std::vector<int > findRootsInContainer(int for_id);
+	std::vector<int > findRootsInContainer(int if_id,int branch_id);
+
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
