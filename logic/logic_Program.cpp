@@ -2694,7 +2694,10 @@ std::vector<int > logic_Program::findRootsInContainer() {
 //重载：获取指定 for 中 rootsId
 std::vector<int > logic_Program::findRootsInContainer(int for_id) {
 
+	assert( mvmu_ModuleMap.count(for_id)>0 );
+	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 
+	return tmpForModule;
 }
 
 //重载：获取指定 if 中 rootsId
