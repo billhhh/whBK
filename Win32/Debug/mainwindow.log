@@ -1,9 +1,9 @@
-﻿生成启动时间为 2015/12/15 23:34:07。
+﻿生成启动时间为 2016/1/5 22:50:46。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -43,6 +43,7 @@
      1>logic\logic_ForModule.cpp(23): warning C4100: “id”: 未引用的形参
      1>logic\logic_ForModule.cpp(101): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_ForModule.cpp(127): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_ForModule.cpp(200): warning C4018: “<”: 有符号/无符号不匹配
          logic_IfModule.cpp
      1>logic\logic_IfModule.cpp(26): warning C4100: “id”: 未引用的形参
      1>logic\logic_IfModule.cpp(321): warning C4018: “<”: 有符号/无符号不匹配
@@ -66,8 +67,8 @@
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
          正在生成代码...
-     1>e:\bill github\whbk\logic\logic_controller.cpp(586): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
-     1>e:\bill github\whbk\logic\logic_controller.cpp(623): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(592): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(629): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
@@ -131,12 +132,10 @@
          Win32\Debug\program.obj
          Win32\Debug\project.obj
          Win32\Debug\view.obj
-         mainwindow.vcxproj -> E:\bill github\whBK\debug\mainwindow.exe
-       FinalizeBuildStatus:
-         正在删除文件“Win32\Debug\mainwindow.unsuccessfulbuild”。
-         正在对“Win32\Debug\mainwindow.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Rebuild 个目标)的操作。
+     1>logic_Program.obj : error LNK2019: 无法解析的外部符号 "public: class std::vector<int,class std::allocator<int> > __thiscall logic_IfModule::findBranchAllRoots(int)" (?findBranchAllRoots@logic_IfModule@@QAE?AV?$vector@HV?$allocator@H@std@@@std@@H@Z)，该符号在函数 "public: class std::vector<int,class std::allocator<int> > __thiscall logic_Program::findRootsInContainer(int,int)" (?findRootsInContainer@logic_Program@@QAE?AV?$vector@HV?$allocator@H@std@@@std@@HH@Z) 中被引用
+     1>debug\\mainwindow.exe : fatal error LNK1120: 1 个无法解析的外部命令
+     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:27.24
+已用时间 00:00:22.42

@@ -6,7 +6,7 @@
  */
 #include "logic_XmlIO.h"
 
-bool logic_XmlIO::FillPrj(std::string path,logic_Project &prj)
-{
+int logic_XmlIO::FillPrj(std::string path,logic_Project &prj) {
+
 	return true;
 }
