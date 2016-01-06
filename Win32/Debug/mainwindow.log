@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/1/5 22:50:46。
+﻿生成启动时间为 2016/1/6 22:17:17。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -47,6 +47,7 @@
          logic_IfModule.cpp
      1>logic\logic_IfModule.cpp(26): warning C4100: “id”: 未引用的形参
      1>logic\logic_IfModule.cpp(321): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_IfModule.cpp(405): warning C4018: “<”: 有符号/无符号不匹配
          logic_Program.cpp
      1>logic\logic_Program.cpp(686): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Program.cpp(744): warning C4018: “<”: 有符号/无符号不匹配
@@ -132,10 +133,12 @@
          Win32\Debug\program.obj
          Win32\Debug\project.obj
          Win32\Debug\view.obj
-     1>logic_Program.obj : error LNK2019: 无法解析的外部符号 "public: class std::vector<int,class std::allocator<int> > __thiscall logic_IfModule::findBranchAllRoots(int)" (?findBranchAllRoots@logic_IfModule@@QAE?AV?$vector@HV?$allocator@H@std@@@std@@H@Z)，该符号在函数 "public: class std::vector<int,class std::allocator<int> > __thiscall logic_Program::findRootsInContainer(int,int)" (?findRootsInContainer@logic_Program@@QAE?AV?$vector@HV?$allocator@H@std@@@std@@HH@Z) 中被引用
-     1>debug\\mainwindow.exe : fatal error LNK1120: 1 个无法解析的外部命令
-     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Rebuild 个目标)的操作 - 失败。
+         mainwindow.vcxproj -> E:\bill github\whBK\debug\mainwindow.exe
+       FinalizeBuildStatus:
+         正在删除文件“Win32\Debug\mainwindow.unsuccessfulbuild”。
+         正在对“Win32\Debug\mainwindow.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Rebuild 个目标)的操作。
 
-生成失败。
+生成成功。
 
-已用时间 00:00:22.42
+已用时间 00:00:22.92

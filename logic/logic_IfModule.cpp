@@ -392,5 +392,21 @@ bool logic_IfModule::isBranchExist(int branch_id) {
 //返回该 if 模块所有树root节点
 std::vector<int > logic_IfModule::findBranchAllRoots(int branch_id) {
 
+	vector <int > L;
+	for( std::map<logic_Tree * , int >::iterator it = mvmis_Tree_BranchMap.begin();it != mvmis_Tree_BranchMap.end() ; ++it) {
 
+		if( it->second == branch_id )
+			L.push_back(it->first->getRoot()->getID());
+	}
+
+	logic_TreeNode * root = mvmu_BranchMap[branch_id].curActiveTree->getRoot();
+	if( root->mvvu_Children.size() > 0 ) {
+
+		for (int i = 0;i < root->mvvu_Children.size() ; ++i ) {
+
+			L.push_back( root->mvvu_Children.at(i)->getID() );
+		}
+	}
+
+	return L;
 }
