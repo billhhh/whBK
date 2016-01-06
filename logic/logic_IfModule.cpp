@@ -388,3 +388,9 @@ bool logic_IfModule::isBranchExist(int branch_id) {
 	else
 		return false;
 }
+
+//返回该 if 模块所有树root节点
+std::vector<int > logic_IfModule::findBranchAllRoots(int branch_id) {
+
+
+}
