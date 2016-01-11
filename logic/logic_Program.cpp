@@ -285,7 +285,7 @@ int logic_Program::getMaxModuleId() {
 //真正在森林中添加id，并实例化此 module
 bool logic_Program::appendModule(int m_id,int pre_id,int m_type) {
 
-	assert( mvmu_ModuleMap.count(pre_id)>0 );
+	assert( mvmu_ModuleMap.count(pre_id)>=0 );
 
 	// step1、在森林中加入这个id
 
