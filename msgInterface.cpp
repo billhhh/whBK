@@ -130,9 +130,9 @@ bool msgInterface::insertModule(int m_id,bool isFI,int m_type) {
 
 ////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-bool msgInterface::addLeafModule(int pre_id,int m_type) {
+bool msgInterface::addLeafModule(int pre_id,int m_id) {
 
-	return ctrl.ctrlAddLeafModule(pre_id,m_type);
+	return ctrl.ctrlAddLeafModule(pre_id,m_id);
 }
 
 /// \brief É¾³ýÄ£¿é

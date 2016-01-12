@@ -137,17 +137,14 @@ bool logic_Controller::ctrlFrontInsModule(int post_id,int m_type) {
 	return flag;
 }
 
-bool logic_Controller::ctrlAddLeafModule(int pre_id,int m_type) {
+bool logic_Controller::ctrlAddLeafModule(int pre_id,int m_id) {
 
 	assert(pre_id); //pre_id ²»ÄÜÎª 0
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	int max_module_id = tCurProg->getMaxModuleId();
-	max_module_id++;
-
-	bool flag = tCurProg->addLeafModule(max_module_id,pre_id,m_type);
+	bool flag = tCurProg->addLeafModule(pre_id,m_id);
 
 	return flag;
 

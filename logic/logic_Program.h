@@ -54,7 +54,7 @@ public:
 	////!!!!!!!!!!!!!!!!!!!【对外接口】模块间操作!!!!!!!!!!!!!!!
 	bool frontInsModule(int m_id,int post_id,int m_type); //前插，不允许后继为0
 	bool appendModule(int m_id,int pre_id,int m_type); //直接后接，前驱为0代表新建树
-	bool addLeafModule(int m_id,int pre_id,int m_type); //加一个叶子节点
+	bool addLeafModule(int pre_id,int m_id); //加一个叶子节点
 
 	///////最麻烦的方法之一，还需要同步删除参数连线，还有 for 和 if（包括散开处理）
 	bool delModule(int m_id);

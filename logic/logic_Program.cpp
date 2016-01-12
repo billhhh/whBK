@@ -411,7 +411,7 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 //单模块后插move
 int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+	if ( pre_m_id != 0 && 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
@@ -836,24 +836,15 @@ void logic_Program::recurs_update(logic_Tree *tree,logic_TreeNode *some) {
 	}
 }
 
-bool logic_Program::addLeafModule(int m_id,int pre_id,int m_type) {
+bool logic_Program::addLeafModule(int pre_id,int m_id) {
 
 	if ( 0 == pre_id ) {
 		return false;
 	}
 
-	//如果 pre_id 不为 0 ，插在 pre_id 后面
-	if ( m_type == 2001 ) {
-		return false;
-	}
+	assert(mvmu_ModuleMap.count(pre_id)!=0); //不存在pre，错误
 
-	logic_Tree *tree = mvmu_ModuleId_TreeMap[pre_id];
-	tree->add_node(pre_id,m_id);
-
-	mvmu_ModuleId_TreeMap[m_id] = tree;
-
-	// step2、真正生成这个module实体
-	this->add_Module(m_id,m_type);
+	
 
 	return true;
 }

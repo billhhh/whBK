@@ -91,7 +91,7 @@ public:
 	/// 如果后插，前驱id为0，相当于放空
 	bool insertModule(int m_id,bool isFI,int m_type);
 
-	bool addLeafModule(int pre_id,int m_type);
+	bool addLeafModule(int pre_id,int m_id);
 	
 	/// \brief 删除模块
 	bool deleteModule(int m_id);

@@ -28,7 +28,7 @@ public:
 
 	bool ctrlAppendModule(int pre_id,int m_type); //后插节点，传入前驱id，如果前驱为0，代表新建树
 	bool ctrlFrontInsModule(int post_id,int m_type); //前插节点，不允许新建树时调用
-	bool ctrlAddLeafModule(int pre_id,int m_type); //直接加一个叶子模块
+	bool ctrlAddLeafModule(int pre_id,int m_id); //直接加一个叶子模块
 
 	bool ctrlDelModule(int m_id);
 
