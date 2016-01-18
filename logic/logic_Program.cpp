@@ -631,6 +631,8 @@ int logic_Program::addLeafMove(int cur_m_id,int pre_m_id) {
 	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //待插入节点
 	logic_TreeNode * curNode = oldTree->getRoot(); //当前节点
 
+	curNode->mvu_Parent = insNode;
+
 	/// Step1、接入新节点
 	insNode->mvvu_Children.push_back(curNode);
 
