@@ -198,7 +198,9 @@ protected:
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射
 
-	std::map <logic_Tree * ,int > mvmi_TreeId_For_IfIdMap; //!!!!!!!!!!!!维护 treeId 和 For If 模块 Id 的映射表
+	//!!!!!!!!!!!!维护 treeId 和 For If 模块 Id 的映射表
+	//表示tree在for和if中
+	std::map <logic_Tree * ,int > mvmi_TreeId_For_IfIdMap;
 
 	/////参数连线
 	std::map<whPort, whPort > mvvu_Conn_From_ToMap; //维护 出发模块Port---结束模块Port 哈希表
