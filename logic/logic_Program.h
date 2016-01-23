@@ -235,6 +235,12 @@ protected:
 	inline int composeTreeId(int for_id);
 	inline int composeTreeId(int if_id,int branch_id);
 
+	//连线时检测：只有一种情况有问题，即连接自己的祖先
+	//（其实判断这两个模块如果在一棵树就有问题）
+	//para： cur_id是连线出口模块，another_id是被连接模块
+	//
+	int addLeafCheckPre(int cur_id,int another_id);
+
 };
 
 

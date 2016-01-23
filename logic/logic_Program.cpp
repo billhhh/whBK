@@ -622,6 +622,10 @@ int logic_Program::addLeafMove(int cur_m_id,int pre_m_id) {
 			return -3; //模块类型错误
 	}
 
+	if ( addLeafCheckPre(cur_m_id,pre_m_id) < 0 ) {
+		return -4;
+	}
+
 	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
 	//该节点必须是该树的根节点
 	if( oldTree->mvi_TreeID != cur_m_id )
@@ -1870,6 +1874,10 @@ int logic_Program::addLeafMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 		return -3; //模块类型错误
 	}
 
+	if ( addLeafCheckPre(cur_m_id,pre_m_id) < 0 ) {
+		return -4;
+	}
+
 	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
 	//该节点必须是该树的根节点
 	if( oldTree->mvi_TreeID != cur_m_id )
@@ -2476,6 +2484,10 @@ int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_
 		return -3; //模块类型错误
 	}
 
+	if ( addLeafCheckPre(cur_m_id,pre_m_id) < 0 ) {
+		return -4;
+	}
+
 	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
 	//该节点必须是该树的根节点
 	if( oldTree->mvi_TreeID != cur_m_id )
@@ -2722,4 +2734,19 @@ std::vector<int > logic_Program::findRootsInContainer(int if_id,int branch_id) {
 	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
 
 	return tmpIfModule->findBranchAllRoots(branch_id);
+}
+
+//连线时检测：只有一种情况有问题，即连接自己的祖先
+//（其实判断这两个模块如果在一棵树就有问题）
+//para： cur_id是连线出口模块，another_id是被连接模块
+//
+int logic_Program::addLeafCheckPre(int cur_id,int another_id) {
+
+	if ( mvmu_ModuleId_TreeMap[cur_id]->mvi_TreeID 
+		== mvmu_ModuleId_TreeMap[another_id]->mvi_TreeID ) {
+
+		return -1;
+	}
+
+	return 0;
 }
