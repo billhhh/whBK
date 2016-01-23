@@ -262,13 +262,10 @@ int msgInterface::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_pa
 	return ctrl.ctrlParaConnect(out_m_id,out_para_id,in_m_id,in_para_id);
 }
 
-//取消连线，可通过 isOut 来用outModule或者inModule删除
-void msgInterface::paraDisconnect(int m_id,int para_id,bool isOut) {
+//取消连线
+void msgInterface::paraDisconnect(int m_id,int para_id) {
 
-	if( true == isOut )
-		ctrl.ctrlOutParaDisconnect(m_id,para_id);
-	else
-		ctrl.ctrlInParaDisconnect(m_id,para_id);
+	ctrl.ctrlInParaDisconnect(m_id,para_id);
 }
 
 ///跟for if 相关的所有 move

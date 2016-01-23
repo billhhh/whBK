@@ -103,8 +103,8 @@ public:
 
 	/// \brief 模块参数连线
 	int paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id);
-	//取消连线，可通过 isOut 来用outModule或者inModule删除
-	void paraDisconnect(int m_id,int para_id,bool isOut);
+	//取消连线，只能通过inModule删除
+	void paraDisconnect(int m_id,int para_id);
 
 	/// \brief 查询前驱和后继
 	int getPreId(int m_id);
