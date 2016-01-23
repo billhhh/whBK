@@ -18,9 +18,6 @@ class logic_Gragh
 public:
 	int gragh[GRAGH_LENGTH][GRAGH_WIDTH];
 
-	int** getGragh();
-	void setGragh(int ** tmpGragh);
-
 protected:
 
 
