@@ -1,9 +1,9 @@
-﻿生成启动时间为 2016/1/6 22:17:17。
+﻿生成启动时间为 2016/1/23 16:53:57。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -40,22 +40,21 @@
      1>logic\logic_BasicModule.cpp(81): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_BasicModule.cpp(145): warning C4018: “<”: 有符号/无符号不匹配
          logic_ForModule.cpp
-     1>logic\logic_ForModule.cpp(23): warning C4100: “id”: 未引用的形参
      1>logic\logic_ForModule.cpp(101): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_ForModule.cpp(127): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_ForModule.cpp(200): warning C4018: “<”: 有符号/无符号不匹配
          logic_IfModule.cpp
-     1>logic\logic_IfModule.cpp(26): warning C4100: “id”: 未引用的形参
      1>logic\logic_IfModule.cpp(321): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_IfModule.cpp(405): warning C4018: “<”: 有符号/无符号不匹配
          logic_Program.cpp
-     1>logic\logic_Program.cpp(686): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(744): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(883): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1086): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1117): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1247): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1266): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(688): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(746): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(841): warning C4100: “m_id”: 未引用的形参
+     1>logic\logic_Program.cpp(876): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1079): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1110): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1240): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1259): warning C4100: “branch_id”: 未引用的形参
          logic_Project.cpp
          logic_Test.cpp
      1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
@@ -68,8 +67,8 @@
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
          正在生成代码...
-     1>e:\bill github\whbk\logic\logic_controller.cpp(592): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
-     1>e:\bill github\whbk\logic\logic_controller.cpp(629): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(589): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(626): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
@@ -141,4 +140,4 @@
 
 生成成功。
 
-已用时间 00:00:22.92
+已用时间 00:00:25.77
