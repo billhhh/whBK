@@ -75,6 +75,8 @@ private:
 	///
 	std::map <int, logic_BasicModule *> initModuleMap;
 
+	std::map<int, logic_Gragh *> graghMap;
+
 //¹¤¾ßprivateº¯Êý
 private:
 	void Init();

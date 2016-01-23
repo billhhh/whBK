@@ -199,6 +199,7 @@
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="logic\logic_BasicModule.cpp" />
     <ClCompile Include="logic\logic_ForModule.cpp" />
+    <ClCompile Include="logic\logic_Gragh.cpp" />
     <ClCompile Include="logic\logic_IfModule.cpp" />
     <ClCompile Include="logic\logic_Program.cpp" />
     <ClCompile Include="logic\logic_Project.cpp" />
@@ -442,6 +443,7 @@ endlocal
     <ClInclude Include="logic\logic_BasicPara.h" />
     <ClInclude Include="logic\logic_ForModule.h" />
     <ClInclude Include="logic\logic_Global.h" />
+    <ClInclude Include="logic\logic_Gragh.h" />
     <ClInclude Include="logic\logic_IfModule.h" />
     <ClInclude Include="logic\logic_MyBlocksModule.h" />
     <ClInclude Include="logic\logic_MyBlocksProgram.h" />

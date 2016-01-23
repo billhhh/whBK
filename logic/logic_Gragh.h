@@ -13,9 +13,15 @@
 #define GRAGH_LENGTH 180
 #define GRAGH_WIDTH 128
 
+#include <string>
+
 class logic_Gragh
 {
 public:
+
+	int id;
+	std::string name;
+
 	int* getGragh();
 	int setGragh(int *tmpGragh);
 
