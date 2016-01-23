@@ -28,6 +28,9 @@ class logic_IfModule
 	: public logic_BasicModule
 {
 public:
+
+	std::string forName;
+
 	/////构造函数和析构函数
 	explicit logic_IfModule(int id);//默认构造，for里面什么都不生成
 	//完整map构造函数，方便for内部析构操作
