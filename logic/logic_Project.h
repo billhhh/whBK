@@ -16,6 +16,7 @@
 #include "logic_Program.h"
 #include "logic_VarModule.h"
 #include "logic_BasicModule.h"
+#include "logic_Gragh.h"
 
 class logic_Project
 {

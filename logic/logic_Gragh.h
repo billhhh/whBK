@@ -16,13 +16,14 @@
 class logic_Gragh
 {
 public:
-	int gragh[GRAGH_LENGTH][GRAGH_WIDTH];
+	int* getGragh();
+	int setGragh(int *tmpGragh);
 
 protected:
 
 
 private:
-
+	int gragh[GRAGH_LENGTH][GRAGH_WIDTH];
 
 };
 
