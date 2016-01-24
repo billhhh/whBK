@@ -19,6 +19,7 @@
 
 typedef struct
 {
+	int branchId;
 	logic_Tree * curActiveTree;
 	int contentInt; //分支的内容 int
 	std::string contentStr; //分支的内容 string
@@ -29,7 +30,7 @@ class logic_IfModule
 {
 public:
 
-	std::string forName;
+	std::string IfName;
 
 	/////构造函数和析构函数
 	explicit logic_IfModule(int id);//默认构造，for里面什么都不生成
