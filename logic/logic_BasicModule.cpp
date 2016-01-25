@@ -28,12 +28,23 @@ logic_BasicModule::logic_BasicModule(int id,int moduleType)
 logic_BasicModule::logic_BasicModule(int id,int moduleType,const logic_BasicModule &bm)
 	:mvi_ModuleID(id),mvb_IsRun(0),mvs_ModuleType(moduleType)
 {
-	////mvvu_ModeMenu
-
+	////¿½±´ mvvu_ModeMenu
+	for(int i=0;i<bm.mvvu_ModeMenu.size();++i) {
+		logic_ParaPointer *tmp = new logic_ParaPointer(*(bm.mvvu_ModeMenu[i]));
+		this->mvvu_ModeMenu.push_back(tmp);
+	}
 	
-	////mvvu_ParaList ºÍ mvvu_InitParaList
+	////¿½±´ mvvu_ParaList ºÍ mvvu_InitParaList
+	for(int i=0;i<bm.mvvu_ParaList.size();++i) {
+		logic_BasicPara *tmp = new logic_BasicPara(*(bm.mvvu_ParaList[i]));
+		this->mvvu_ParaList.push_back(tmp);
 
-	////mve_CurWinSwitcher
+		tmp = new logic_BasicPara(*(bm.mvvu_ParaList[i]));
+		this->mvvu_InitParaList.push_back(tmp);
+	}
+
+	////¿½±´ mve_CurWinSwitcher
+	this->mve_CurWinSwitcher = bm.mve_CurWinSwitcher;
 
 	Init();
 }
