@@ -24,6 +24,14 @@ logic_BasicModule::logic_BasicModule(int id,int moduleType)
 	Init();
 }
 
+////深拷贝构造函数
+logic_BasicModule::logic_BasicModule(int id,int moduleType,const logic_BasicModule &bm)
+	:mvi_ModuleID(id),mvb_IsRun(0),mvs_ModuleType(moduleType)
+{
+
+	Init();
+}
+
 logic_BasicModule::~logic_BasicModule()
 {
 	/////释放所有modemenu和para_list
@@ -35,10 +43,10 @@ logic_BasicModule::~logic_BasicModule()
 void logic_BasicModule::Init() {
 
 	//!!!!!!!!!临时写死30个参数，用不完
-	for (int i=0 ; i<31 ; ++i) {
-		logic_BasicPara * tmpPara = new logic_BasicPara();
-		mvvu_ParaList.push_back(tmpPara);
-	}
+// 	for (int i=0 ; i<30 ; ++i) {
+// 		logic_BasicPara * tmpPara = new logic_BasicPara();
+// 		mvvu_ParaList.push_back(tmpPara);
+// 	}
 }
 
 void logic_BasicModule::Destroy() {

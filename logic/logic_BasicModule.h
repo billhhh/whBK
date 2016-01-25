@@ -25,6 +25,8 @@ public:
 	explicit logic_BasicModule();//默认生成start
 	explicit logic_BasicModule(int id);//默认生成start
 	explicit logic_BasicModule(int id,int moduleType); //根据信息，自动填充其他信息
+	////深拷贝构造函数
+	explicit logic_BasicModule(int id,int moduleType,const logic_BasicModule &bm);
 	virtual ~logic_BasicModule();
 
 	/////!!! useless !!!!!!!!!!!!
@@ -71,6 +73,8 @@ public:
 	std::vector <logic_ParaPointer *> mvvu_ModeMenu;
 	std::vector <logic_BasicPara *> mvvu_ParaList; //参数列表
 	std::vector <std::string > mvvu_CodeBlocksList; //代码片列表
+
+	std::vector <logic_BasicPara *> mvvu_InitParaList; //参数列表
 
 	//当前端口选择器，包括菊链层号
 	WinSwitcher mve_CurWinSwitcher;
