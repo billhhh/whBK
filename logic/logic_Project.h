@@ -22,6 +22,7 @@ class logic_Project
 {
 public:
 	explicit logic_Project(int id,std::string name);
+	explicit logic_Project(int id,std::string name,std::map <int, logic_BasicModule *> imap);
 	~logic_Project();
 
 

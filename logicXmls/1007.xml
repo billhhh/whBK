@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="1007" Mode="2" WinSwitcherValue="" WinSwitcherType="0" ChainLayer="0">
+    <Mode>
+        <close id="1" include="000000" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <open id="2" include="11" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <reset id="3" include="00" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+    </Mode>
+    <InputList>
+        <color id="1" default="1" type="PARA_NUM" max="2" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <blink id="2" default="1" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_IN" IsPort="0" />
+    </InputList>
+</Moudule>

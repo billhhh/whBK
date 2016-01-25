@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="4001" Mode="5" WinSwitcherValue="0" WinSwitcherType="0" ChainLayer="0">
+    <Mode>
+        <mode1 id="1" include="000100" WinSwitcherType="0" WinSwitcherValue="0" ChainLayer="0" />
+        <mode2 id="2" include="000010" WinSwitcherType="0" WinSwitcherValue="0" ChainLayer="0" />
+        <mode3 id="3" include="000001" WinSwitcherType="0" WinSwitcherValue="0" ChainLayer="0" />
+        <mode4 id="4" include="100000" WinSwitcherType="0" WinSwitcherValue="0" ChainLayer="0" />
+        <mode5 id="5" include="010000" WinSwitcherType="0" WinSwitcherValue="0" ChainLayer="0" />
+        <mode6 id="6" include="001000" WinSwitcherType="0" WinSwitcherValue="0" ChainLayer="0" />
+    </Mode>
+    <InputList>
+        <input1 id="1" default="2" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <input2 id="2" default="0" type="PARA_NUM" max="2147483647" min="-2147483648" InOrOut="PARA_IN" IsPort="0" />
+        <input3 id="3" default="0" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <input4 id="4" default="0" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_OUT" IsPort="0" />
+        <input5 id="5" default="0" type="PARA_NUM" max="2147483647" min="-2147483648" InOrOut="PARA_OUT" IsPort="0" />
+        <input6 id="6" default="0" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_OUT" IsPort="0" />
+    </InputList>
+</Moudule>

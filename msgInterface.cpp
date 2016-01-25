@@ -42,10 +42,12 @@ int msgInterface::newModuleAddId() {
 /// \brief ¸Ä±äcurPrjºÍcurProg
 void msgInterface::setCurPrj(int prjID) {
 
+	return ctrl.ctrlSetCurPrj(prjID);
 }
 
 void msgInterface::setCurProg(int progID) {
 
+	return ctrl.ctrlSetCurProg(progID);
 }
 
 

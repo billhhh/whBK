@@ -21,6 +21,12 @@ logic_Project::logic_Project(int id,std::string name)
 	Init();
 }
 
+logic_Project::logic_Project(int id,std::string name,std::map <int, logic_BasicModule *> imap)
+	:mvstr_PrjId(id),mvstr_PrjName(name),initModuleMap(imap)
+{
+	Init();
+}
+
 logic_Project::~logic_Project()
 {
 	prj_Destroy();
@@ -89,7 +95,8 @@ int logic_Project::newProgram() {
 	int max_prog_id = getMaxProgId();
 	max_prog_id ++;
 
-	logic_Program * tprog = new logic_Program(max_prog_id,genNewProgName(max_prog_id));
+	//logic_Program * tprog = new logic_Program(max_prog_id,genNewProgName(max_prog_id));
+	logic_Program * tprog = new logic_Program(max_prog_id,genNewProgName(max_prog_id),this->initModuleMap);
 	mvvu_ProgMap[max_prog_id] = tprog;
 
 	//初始化新 prog 特殊参数

@@ -32,6 +32,12 @@ logic_Program::logic_Program(int id,std::string prog_name)
 
 }
 
+logic_Program::logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> imap)
+	:mvs_ProgId(id),mvs_ProgName(prog_name),initModuleMap(imap)
+{
+	Init();
+}
+
 logic_Program::~logic_Program()
 {
 	prog_Destroy();
@@ -2749,4 +2755,14 @@ int logic_Program::addLeafCheckPre(int cur_id,int another_id) {
 	}
 
 	return 0;
+}
+
+void logic_Program::setModuleMap(std::map <int ,logic_BasicModule* > moduleMap)
+{
+	mvmu_ModuleMap = moduleMap;
+}
+
+void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
+{
+	mvmu_TreeMap = treeMap;
 }

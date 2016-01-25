@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="1006" Mode="2" WinSwitcherValue="" WinSwitcherType="8" ChainLayer="0">
+    <Mode>
+        <stop id="1" include="000000" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <openFile id="2" include="100011" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <openFrequency id="3" include="001111" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <openNotes id="4" include="010111" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+    </Mode>
+    <InputList>
+        <fileName id="1" default="" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <notes id="2" default="A5" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <frequency id="3" default="440" type="PARA_NUM" max="10000" min="300" InOrOut="PARA_IN" IsPort="0" />
+        <lastTime id="4" default="1" type="PARA_NUM" max="2147483647" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <volume id="5" default="100" type="PARA_NUM" max="100" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <type id="6" default="0" type="PARA_NUM" max="2" min="0" InOrOut="PARA_IN" IsPort="0" />
+    </InputList>
+</Moudule>

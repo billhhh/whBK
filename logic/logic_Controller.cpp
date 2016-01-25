@@ -14,6 +14,7 @@
 #include <sstream> 
 #include <string>
 #include <assert.h>
+#include "logic_XmlIO.h"
 
 logic_Controller::logic_Controller() {
 	Init();
@@ -36,7 +37,8 @@ int logic_Controller::ctrlNewPrj() {
 	int max_prj_id = this->getMaxPrjId(); //获得当前最大 prj 的 ID
 	max_prj_id++; //新 prj ID
 
-	logic_Project * tprj = new logic_Project(max_prj_id,genNewPrjName(max_prj_id));
+	//logic_Project * tprj = new logic_Project(max_prj_id,genNewPrjName(max_prj_id));
+	logic_Project * tprj = new logic_Project(max_prj_id,genNewPrjName(max_prj_id),this->mvmu_InitModuleMap);
 	prjMap[max_prj_id] = tprj;
 
 	curPrjId = max_prj_id;
@@ -629,6 +631,9 @@ int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type
 void logic_Controller::initModuleMapFunc() {
 
 	//此处应读持久化xml，填满整个最原始的 mvmu_InitModuleMap
+
+	logic_XmlIO io;
+	io.IO_Initial(this->mvmu_InitModuleMap);
 }
 
 ///

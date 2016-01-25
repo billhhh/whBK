@@ -209,6 +209,10 @@
     <ClCompile Include="logic\logic_Controller.cpp" />
     <ClCompile Include="logic\logic_VarModule.cpp" />
     <ClCompile Include="logic\logic_XmlIO.cpp" />
+    <ClCompile Include="logic\tinyXML\tinystr.cpp" />
+    <ClCompile Include="logic\tinyXML\tinyxml.cpp" />
+    <ClCompile Include="logic\tinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="logic\tinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="menuitem.cpp" />
@@ -459,6 +463,8 @@ endlocal
     <ClInclude Include="logic\logic_WinSwitcher.h" />
     <ClInclude Include="logic\logic_Controller.h" />
     <ClInclude Include="logic\logic_XmlIO.h" />
+    <ClInclude Include="logic\tinyXML\tinystr.h" />
+    <ClInclude Include="logic\tinyXML\tinyxml.h" />
     <ClInclude Include="TransStringNum.h" />
     <CustomBuild Include="msgInterface.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

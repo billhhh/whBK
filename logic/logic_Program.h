@@ -27,6 +27,7 @@ class logic_Program //等效于森林
 public:
 
 	explicit logic_Program(int id, std::string prog_name);
+	explicit logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> imap);
 	virtual ~logic_Program();
 
 
@@ -95,6 +96,10 @@ public:
 	std::map<int,logic_Tree*> getTreeMap(); //【XmlIO】
 	std::map <int ,logic_BasicModule* > getModuleMap(); //【XmlIO】
 	std::vector<logic_TreeNode *> getAllTreeNode(int rootID); //得到所有treenode list
+
+	//整合
+	void setModuleMap(std::map <int ,logic_BasicModule* > moduleMap);
+	void setTreeMap(std::map<int,logic_Tree*> treeMap);
 
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

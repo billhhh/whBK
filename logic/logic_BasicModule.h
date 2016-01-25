@@ -59,7 +59,7 @@ public:
 	/////合成代码
 	bool generateCodeBlocks();
 
-protected:
+//protected:
 	int mvi_CurModeID; //当前模式
 	int mvs_ModuleType; //模块类型 方便去xml load
 	std::string mvs_CurCodeBlocks; //代码片

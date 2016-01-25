@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="2002" Mode="67" WinSwitcherValue="" WinSwitcherType="0" ChainLayer="0">
+    <mode>
+        <mode1 id="1" include="00001110" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <mode2 id="2" include="00000010" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <mode3 id="3" include="00000110" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode4 id="4" include="01100010" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode5 id="5" include="01100010" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode6 id="6" include="00000010" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode7 id="7" include="00011010" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode8 id="8" include="00011010" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode9 id="9" include="01100010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode10 id="10" include="01100010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode11 id="11" include="00011010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode12 id="12" include="00011010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode13 id="13" include="01100010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode14 id="14" include="01100110" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode15 id="15" include="01101010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode16 id="16" include="00001110" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode17 id="17" include="01100010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode18 id="18" include="01100110" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode19 id="19" include="01101010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode20 id="20" include="00001110" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode21 id="21" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode22 id="22" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode23 id="23" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode24 id="24" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode25 id="25" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode26 id="26" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode27 id="27" include="01100010" WinSwitcherType="2" WinSwitcherValue="1" ChainLayer="0" />
+        <mode28 id="28" include="01100010" WinSwitcherType="2" WinSwitcherValue="1" ChainLayer="0" />
+        <mode29 id="29" include="01100010" WinSwitcherType="2" WinSwitcherValue="1" ChainLayer="0" />
+        <mode30 id="30" include="01100010" WinSwitcherType="2" WinSwitcherValue="1" ChainLayer="0" />
+        <mode31 id="31" include="01100110" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <mode32 id="32" include="00001110" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <mode33 id="33" include="00001001" WinSwitcherType="2" WinSwitcherValue="1" ChainLayer="0" />
+        <mode34 id="34" include="00000001" WinSwitcherType="2" WinSwitcherValue="1" ChainLayer="0" />
+        <mode35 id="35" include="01100010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode36 id="36" include="01100010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode37 id="37" include="01100010" WinSwitcherType="2" WinSwitcherValue="A" ChainLayer="0" />
+        <mode38 id="38" include="00000000" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode39 id="39" include="00011010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode40 id="40" include="00011010" WinSwitcherType="2" WinSwitcherValue="4" ChainLayer="0" />
+        <mode41 id="41" include="01100001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode42 id="42" include="01100001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode43 id="43" include="01100001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode44 id="44" include="01100001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode45 id="45" include="01100001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode46 id="46" include="01100001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode47 id="47" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode48 id="48" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode49 id="49" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode50 id="50" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode51 id="51" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode52 id="52" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode53 id="53" include="00011001" WinSwitcherType="2" WinSwitcherValue="3" ChainLayer="0" />
+        <mode54 id="54" include="01100010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode55 id="55" include="01100010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode56 id="56" include="00011010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode57 id="57" include="00011010" WinSwitcherType="2" WinSwitcherValue="2" ChainLayer="0" />
+        <mode58 id="58" include="01000110" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode59 id="59" include="01100010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode60 id="60" include="00000010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode61 id="61" include="00000010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode62 id="62" include="00000010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode63 id="63" include="00000010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode64 id="64" include="00000010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode65 id="65" include="00011010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode66 id="66" include="00000010" WinSwitcherType="4" WinSwitcherValue="abc" ChainLayer="0" />
+        <mode67 id="67" include="10000000" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+    </mode>
+    <InputList>
+        <input1 id="1" default="1" type="PARA_NUM" max="2147483647" min="-2147483648" InOrOut="PARA_IN" IsPort="0" />
+        <input2 id="2" default="1" type="PARA_NUM" max="5" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <input3 id="3" default="1" type="PARA_NUM" max="2147483647" min="-2147483648" InOrOut="PARA_IN" IsPort="0" />
+        <input4 id="4" default="1" type="PARA_NUM" max="2" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <input5 id="5" default="1" type="PARA_NUM" max="2147483647" min="-2147483648" InOrOut="PARA_IN" IsPort="0" />
+        <input6 id="6" default="1" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <input7 id="7" default="1" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_OUT" IsPort="0" />
+        <input8 id="8" default="1" type="PARA_NUM" max="2147483647" min="-2147483648" InOrOut="PARA_OUT" IsPort="0" />
+    </InputList>
+</Moudule>

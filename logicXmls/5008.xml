@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="5008" Mode="1" WinSwitcherValue="A" WinSwitcherType="2" ChainLayer="0">
+    <Mode>
+        <mode1 id="1" include="1" ChainLayer="0" />
+    </Mode>
+    <InputList>
+        <input1 id="1" default="1" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_IN" IsPort="0" />
+    </InputList>
+</Moudule>

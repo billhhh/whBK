@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="2005" Mode="1" WinSwitcherValue="01" WinSwitcherType="4" ChainLayer="0">
+    <Mode>
+        <stop id="1" include="" WinSwitcherType="4" WinSwitcherValue="01" ChainLayer="0" />
+    </Mode>
+    <InputList />
+</Moudule>

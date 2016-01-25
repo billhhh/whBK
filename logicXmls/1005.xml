@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Moudule typeid="1005" Mode="7" WinSwitcherValue="" WinSwitcherType="8" ChainLayer="0">
+    <Mode>
+        <pixel id="1" include="11000110000000011" WinSwitcherType="4" WinSwitcherValue="IAISROBOT" ChainLayer="0" />
+        <grid id="2" include="11011000000000011" WinSwitcherType="4" WinSwitcherValue="IAISROBOT" ChainLayer="0" />
+        <line id="3" include="10000001111000010" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <circle id="4" include="10000110000100110" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <rectangle id="5" include="10000110000011110" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <dot id="6" include="10000110000000010" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+        <photo id="7" include="11000110000000000" WinSwitcherType="8" WinSwitcherValue="" ChainLayer="0" />
+        <reset id="8" include="00000000000000000" WinSwitcherType="0" WinSwitcherValue="" ChainLayer="0" />
+    </Mode>
+    <InputList>
+        <clear id="1" default="1" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <fileName id="2" default="" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <context id="3" default="" type="PARA_TEXT" max="0" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <columns id="4" default="0" type="PARA_NUM" max="21" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <rows id="5" default="0" type="PARA_NUM" max="11" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <X id="6" default="0" type="PARA_NUM" max="177" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <Y id="7" default="0" type="PARA_NUM" max="127" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <X1 id="8" default="0" type="PARA_NUM" max="177" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <Y1 id="9" default="0" type="PARA_NUM" max="127" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <X2 id="10" default="0" type="PARA_NUM" max="177" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <Y2 id="11" default="0" type="PARA_NUM" max="127" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <radius id="12" default="40" type="PARA_NUM" max="2147483647" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <width id="13" default="80" type="PARA_NUM" max="2147483647" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <height id="14" default="80" type="PARA_NUM" max="2147483647" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <isFull id="15" default="0" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <color id="16" default="0" type="PARA_LOGIC" max="1" min="0" InOrOut="PARA_IN" IsPort="0" />
+        <font id="17" default="2" type="PARA_NUM" max="2" min="0" InOrOut="PARA_IN" IsPort="0" />
+    </InputList>
+</Moudule>
