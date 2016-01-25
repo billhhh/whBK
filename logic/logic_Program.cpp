@@ -191,7 +191,10 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 // 		mvmu_TreeMap[this->composeTreeId(moduleId,2)] = tmpActiveTree;
 
 	}else //ÆÕÍ¨Ä£¿é
-		bm = new logic_BasicModule(moduleId,m_Type);
+	{
+		//bm = new logic_BasicModule(moduleId,m_Type);
+
+	}
 
 	mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
 
