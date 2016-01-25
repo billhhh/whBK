@@ -28,6 +28,12 @@ logic_BasicModule::logic_BasicModule(int id,int moduleType)
 logic_BasicModule::logic_BasicModule(int id,int moduleType,const logic_BasicModule &bm)
 	:mvi_ModuleID(id),mvb_IsRun(0),mvs_ModuleType(moduleType)
 {
+	////mvvu_ModeMenu
+
+	
+	////mvvu_ParaList ºÍ mvvu_InitParaList
+
+	////mve_CurWinSwitcher
 
 	Init();
 }

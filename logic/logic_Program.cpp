@@ -2721,6 +2721,9 @@ std::vector<int > logic_Program::findRootsInContainer() {
 
 	for( std::map<int ,logic_Tree * >::iterator it = map.begin();it != map.end() ; ++it) {
 
+		if( it->first > ACTIVE_TREE_MAP_FACTOR )
+			continue;
+
 		L.push_back(it->first);
 	}
 

@@ -74,7 +74,7 @@ public:
 	std::vector <logic_BasicPara *> mvvu_ParaList; //参数列表
 	std::vector <std::string > mvvu_CodeBlocksList; //代码片列表
 
-	std::vector <logic_BasicPara *> mvvu_InitParaList; //参数列表
+	std::vector <logic_BasicPara *> mvvu_InitParaList; //init参数列表
 
 	//当前端口选择器，包括菊链层号
 	WinSwitcher mve_CurWinSwitcher;
