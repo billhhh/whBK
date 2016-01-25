@@ -109,6 +109,15 @@ logic_BasicPara * logic_BasicModule::getPara(int p_id) {
 	return mvvu_ParaList.at(p_id);
 }
 
+//返回某一init参数的引用
+logic_BasicPara* logic_BasicModule::getInitPara(int p_id) {
+
+	if( mvvu_InitParaList.size() < p_id )
+		return NULL;
+
+	return mvvu_InitParaList.at(p_id);
+}
+
 int logic_BasicModule::getModuleType() {
 	return mvs_ModuleType;
 }

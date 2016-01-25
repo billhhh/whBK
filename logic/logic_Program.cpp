@@ -944,7 +944,8 @@ std::string logic_Program::getModulePara(int type,int m_id,int p_id) {
 		break;
 
 	case 2: //init
-
+		logic_BasicPara *tInitPara = mvmu_ModuleMap[m_id]->getInitPara(p_id);
+		res = tInitPara->mvs_Value;
 		break;
 
 	case 3: //cur

@@ -36,6 +36,7 @@ public:
 	////////////////////////////////
 
 	logic_BasicPara* getPara(int p_id); //返回某一参数的引用
+	logic_BasicPara* getInitPara(int p_id); //返回某一init参数的引用
 
 	int getModuleType();
 
