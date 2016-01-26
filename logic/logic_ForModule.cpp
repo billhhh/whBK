@@ -26,8 +26,9 @@ logic_ForModule::logic_ForModule(int id,
 						 std::map <int ,logic_Tree * > &m_tree_map,
 						 std::map <logic_Tree * ,int > &tree_forif_map,
 						 std::map<whPort, whPort > &conn_fromto_map,
-						 std::map<whPort, whPort > &conn_tofrom_map
-						 ):logic_BasicModule(id,2003),treeMap(&tree_map),moduleMap(&module_map),mTreeMap(&m_tree_map),
+						 std::map<whPort, whPort > &conn_tofrom_map,
+						 const logic_BasicModule &bm
+						 ):logic_BasicModule(id,2003,bm),treeMap(&tree_map),moduleMap(&module_map),mTreeMap(&m_tree_map),
 						 treeForIfmap(&tree_forif_map),connFromToMap(&conn_fromto_map),connToFromMap(&conn_tofrom_map)
 {
 	Init();

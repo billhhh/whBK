@@ -168,7 +168,8 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 
 		//for
 		logic_ForModule* tmpForModule = new logic_ForModule(moduleId,mvmu_TreeMap,mvmu_ModuleMap,
-			mvmu_ModuleId_TreeMap,mvmi_TreeId_For_IfIdMap,mvvu_Conn_From_ToMap,mvvu_Conn_To_FromMap);
+			mvmu_ModuleId_TreeMap,mvmi_TreeId_For_IfIdMap,mvvu_Conn_From_ToMap,mvvu_Conn_To_FromMap,
+			*(this->initModuleMap[2003]));
 		bm = tmpForModule;
 
 		/// activeTree 操作放入for模块
@@ -180,7 +181,8 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 
 		//if
 		logic_IfModule* tmpIfModule = new logic_IfModule(moduleId,mvmu_TreeMap,mvmu_ModuleMap,
-			mvmu_ModuleId_TreeMap,mvmi_TreeId_For_IfIdMap,mvvu_Conn_From_ToMap,mvvu_Conn_To_FromMap);
+			mvmu_ModuleId_TreeMap,mvmi_TreeId_For_IfIdMap,mvvu_Conn_From_ToMap,mvvu_Conn_To_FromMap,
+			*(this->initModuleMap[2004]));
 		bm = tmpIfModule;
 
 		/// activeTree 操作放入if模块
@@ -193,7 +195,7 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 	}else //普通模块
 	{
 		//bm = new logic_BasicModule(moduleId,m_Type);
-
+		bm = new logic_BasicModule(moduleId,m_Type,*(this->initModuleMap[m_Type]));
 	}
 
 	mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
@@ -944,9 +946,11 @@ std::string logic_Program::getModulePara(int type,int m_id,int p_id) {
 		break;
 
 	case 2: //init
-		logic_BasicPara *tInitPara = mvmu_ModuleMap[m_id]->getInitPara(p_id);
-		res = tInitPara->mvs_Value;
-		break;
+		{
+			logic_BasicPara *tInitPara = mvmu_ModuleMap[m_id]->getInitPara(p_id);
+			res = tInitPara->mvs_Value;
+			break;
+		}
 
 	case 3: //cur
 		res = tPara->mvs_Value;

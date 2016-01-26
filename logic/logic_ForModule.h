@@ -33,7 +33,8 @@ public:
 		std::map <int ,logic_Tree * > &m_tree_map,
 		std::map <logic_Tree * ,int > &tree_forif_map,
 		std::map<whPort, whPort > &conn_fromto_map,
-		std::map<whPort, whPort > &conn_tofrom_map
+		std::map<whPort, whPort > &conn_tofrom_map,
+		const logic_BasicModule &bm
 		);
 
 	~logic_ForModule(); //Îö¹¹
