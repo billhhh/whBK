@@ -7,14 +7,20 @@
 #include<Windows.h>
 #include<atlstr.h>
 #include<limits>
+#include<iomanip>
 
 #include"tinyXML\tinyxml.h"
 #include"tinyXML\tinystr.h"
 #include"logic_Project.h"
-#include "logic_BasicModule.h"
 
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
+
+struct TreeNode{
+	int id;
+	int parentId;
+};
+
 
 class logic_XmlIO
 {
@@ -23,73 +29,16 @@ public:
 
 	bool IO_FillPrj(const char* fileName, logic_Project &prj); //读取xml，填充满一个prj
 	bool IO_SavePrj(const std::string fileName, logic_Project prj); //读取一个prj，写入一个xml文件
-	bool IO_SaveProgram(const std::string fileName,TiXmlElement* rootElement);
+	bool IO_SaveProgram(const std::string fileName,TiXmlElement* rootElement);//将一个program文件单独存储为一个新的xml文件
 	bool IO_Initial(std::map <int, logic_BasicModule *> &InitModuleMap);
 
-	//*******************initial bottom***********************
-	bool initialBottom();
-
-	bool initial1001();
-	bool initial1002();
-	bool initial1003();
-	bool initial1004();
-	bool initial1005();
-	bool initial1006();
-	bool initial1007();
-
-	bool initial2001();
-	bool initial2002();
-	bool initial2003();
-	bool initial2004();
-	bool initial2005();
-
-	bool initial3001();
-	bool initial3002();
-	bool initial3003();
-	bool initial3004();
-	bool initial3005();
-	bool initial3006();
-	bool initial3007();
-	bool initial3008();
-	bool initial3009();
-	bool initial3010();
-	bool initial3011();
-
-	bool initial4001();
-	bool initial4002();
-	//阵列运算去除
-    //bool initial4003();
-	bool initial4004();
-	bool initial4005();
-	bool initial4006();
-	bool initial4007();
-	bool initial4008();
-	bool initial4009();
-	bool initial4010();
-
-	bool initial5001();
-	//5002去除
-	//bool initial5002();
-	bool initial5003();
-	bool initial5004();
-	bool initial5005();
-	bool initial5006();
-	bool initial5007();
-	bool initial5008();
-	bool initial5009();
-
-	//第一个参数是xml文件名，第二个参数用来存储初始化值
-	bool readInitial(const char* fileName,std::map <int, logic_BasicModule *> &InitModuleMap);
-
 	bool initialMyModule();
-	//*******************end initial****************************
-
 
 	//测试存储的Module Map,将所有信息打印出来
 	void testAllModule(std::map <int, logic_BasicModule *> &InitModuleMap);
 	
 
-	//*******************unit test******************************
+#pragma region unit_test
 	void testConstruct()
 	{
 		logic_Project newProject(1,"oneNewProject");
@@ -177,7 +126,7 @@ public:
 		}
 
 	};
-
+#pragma endregion unit_test
 
 	//***********************end test******************************
 
@@ -194,9 +143,72 @@ private:
 	static const unsigned int NUM_INDENTS_PER_SPACE = 2;
 	void traverSaveTree(logic_TreeNode* root,TiXmlElement* parent);
 
+
+#pragma region initial
+	//*******************initial bottom***********************
+	bool initialBottom();
+
+	bool initial1001();
+	bool initial1002();
+	bool initial1003();
+	bool initial1004();
+	bool initial1005();
+	bool initial1006();
+	bool initial1007();
+
+	bool initial2001();
+	bool initial2002();
+	bool initial2003();
+	bool initial2004();
+	bool initial2005();
+
+	bool initial3001();
+	bool initial3002();
+	bool initial3003();
+	bool initial3004();
+	bool initial3005();
+	bool initial3006();
+	bool initial3007();
+	bool initial3008();
+	bool initial3009();
+	bool initial3010();
+	bool initial3011();
+
+	bool initial4001();
+	bool initial4002();
+	//阵列运算去除
+    //bool initial4003();
+	bool initial4004();
+	bool initial4005();
+	bool initial4006();
+	bool initial4007();
+	bool initial4008();
+	bool initial4009();
+	bool initial4010();
+
+	bool initial5001();
+	//5002去除
+	//bool initial5002();
+	bool initial5003();
+	bool initial5004();
+	bool initial5005();
+	bool initial5006();
+	bool initial5007();
+	bool initial5008();
+	bool initial5009();
+
+#pragma endregion initial
+
 	//**********************virables***********************
 
 	//***********************Tools**************************
+	
+	//第一个参数是xml文件名，第二个参数用来存储初始化值
+	bool readInitial(const char* fileName,std::map <int, logic_BasicModule *> &InitModuleMap);
+
+	//还原树
+	bool rebuildTree(logic_Tree* treeRoot, std::vector<TreeNode*> allNode);
+
 	//get current root path
 	CString GetAppPath()
 	{

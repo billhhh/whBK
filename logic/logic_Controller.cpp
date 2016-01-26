@@ -658,3 +658,8 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 		return tCurProg->findRootsInContainer(if_id,branch_id);
 	}
 }
+
+std::map <int, logic_BasicModule *> logic_Controller::ctrlGetInitMap() {
+
+	return this->mvmu_InitModuleMap;
+}

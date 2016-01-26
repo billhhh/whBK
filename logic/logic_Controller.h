@@ -104,6 +104,8 @@ public:
 	///
 	std::vector<int > ctrlFindRootsInContainer(int containerId);
 
+	std::map <int, logic_BasicModule *> ctrlGetInitMap();
+
 //private±‰¡ø
 private:
 
