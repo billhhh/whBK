@@ -1,9 +1,9 @@
-﻿生成启动时间为 2016/1/26 17:02:22。
+﻿生成启动时间为 2016/1/26 20:03:33。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -16,7 +16,7 @@
          Moc'ing view.h...
          Rcc'ing image.qrc...
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_Gragh.cpp logic\logic_IfModule.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp logic\tinyXML\tinystr.cpp logic\tinyXML\tinyxml.cpp logic\tinyXML\tinyxmlerror.cpp logic\tinyXML\tinyxmlparser.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_Graph.cpp logic\logic_IfModule.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp logic\tinyXML\tinystr.cpp logic\tinyXML\tinyxml.cpp logic\tinyXML\tinyxmlerror.cpp logic\tinyXML\tinyxmlparser.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
          bottom_label.cpp
      1>bottom_label.cpp(35): warning C4189: “dropAction”: 局部变量已初始化但不引用
          moc_bottom_label.cpp
@@ -42,11 +42,12 @@
      1>logic\logic_BasicModule.cpp(106): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_BasicModule.cpp(115): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_BasicModule.cpp(179): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_BasicModule.cpp(192): warning C4018: “<”: 有符号/无符号不匹配
          logic_ForModule.cpp
      1>logic\logic_ForModule.cpp(102): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_ForModule.cpp(128): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_ForModule.cpp(201): warning C4018: “<”: 有符号/无符号不匹配
-         logic_Gragh.cpp
+         logic_Graph.cpp
          logic_IfModule.cpp
      1>logic\logic_IfModule.cpp(322): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_IfModule.cpp(406): warning C4018: “<”: 有符号/无符号不匹配
@@ -180,7 +181,7 @@
          Win32\Debug\logger.obj
          Win32\Debug\logic_BasicModule.obj
          Win32\Debug\logic_ForModule.obj
-         Win32\Debug\logic_Gragh.obj
+         Win32\Debug\logic_Graph.obj
          Win32\Debug\logic_IfModule.obj
          Win32\Debug\logic_Program.obj
          Win32\Debug\logic_Project.obj
@@ -212,4 +213,4 @@
 
 生成成功。
 
-已用时间 00:00:26.06
+已用时间 00:00:26.58

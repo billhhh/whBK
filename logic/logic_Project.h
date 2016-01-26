@@ -16,7 +16,7 @@
 #include "logic_Program.h"
 #include "logic_VarModule.h"
 #include "logic_BasicModule.h"
-#include "logic_Gragh.h"
+#include "logic_Graph.h"
 
 class logic_Project
 {
@@ -76,7 +76,7 @@ private:
 	///
 	std::map <int, logic_BasicModule *> initModuleMap;
 
-	std::map<int, logic_Gragh *> graghMap;
+	std::map<int, logic_Graph *> graghMap;
 
 //¹¤¾ßprivateº¯Êý
 private:
