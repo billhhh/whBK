@@ -57,6 +57,8 @@ public:
 	std::vector <logic_BasicPara*> getCurParaList(); //get 当前模式 的所有参数
 	WinSwitcherType getCurWSType(); //得到当前 端口选择器 type
 
+	void setCurParaList(std::vector <logic_BasicPara*> paraList);
+
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	/////合成代码

@@ -106,7 +106,7 @@ logic_BasicPara * logic_BasicModule::getPara(int p_id) {
 	if( mvvu_ParaList.size() < p_id )
 		return NULL;
 
-	return mvvu_ParaList.at(p_id);
+	return mvvu_ParaList.at(p_id-1);
 }
 
 //返回某一init参数的引用
@@ -115,7 +115,7 @@ logic_BasicPara* logic_BasicModule::getInitPara(int p_id) {
 	if( mvvu_InitParaList.size() < p_id )
 		return NULL;
 
-	return mvvu_InitParaList.at(p_id);
+	return mvvu_InitParaList.at(p_id-1);
 }
 
 int logic_BasicModule::getModuleType() {
@@ -182,4 +182,15 @@ std::vector <logic_BasicPara*> logic_BasicModule::getCurParaList() {
 	}
 
 	return resL;
+}
+
+void logic_BasicModule::setCurParaList(std::vector <logic_BasicPara*> paraList)
+{
+	logic_ParaPointer * tCurMode = mvvu_ModeMenu.at(this->mvi_CurModeID-1);
+	std::vector <int> tAllParaIds = tCurMode->mvvi_ParaIDList;
+
+	for (int i=0;i<tAllParaIds.size();++i) {
+		int p_id = tAllParaIds.at(i);
+		mvvu_ParaList.at(p_id) = paraList.at(i);
+	}
 }
