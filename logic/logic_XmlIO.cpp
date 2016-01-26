@@ -156,7 +156,6 @@ bool logic_XmlIO::IO_FillPrj(const char* fileName, logic_Project &prj)
 						TiXmlElement* program = child->FirstChildElement();
 						std::map <int ,logic_Program* > programMap;
 						saveProgram(programMap,program);
-
 					}
 					std::cout<<"prgrams is ok"<<std::endl;
 				}
@@ -243,7 +242,7 @@ bool logic_XmlIO::IO_SavePrj(const std::string fileName, logic_Project prj)
 				treeRoot->LinkEndChild(node);
 				node->SetAttribute("ID",(*index)->getID());
 				node->SetAttribute("fatherID",(*index)->getParentID());
-				//确定该模块
+				//模块信息
 				auto moduleID = (*index)->getID();
 				auto moduleMap = prg->getModuleMap();
 				auto module = moduleMap[moduleID];
@@ -261,7 +260,7 @@ bool logic_XmlIO::IO_SavePrj(const std::string fileName, logic_Project prj)
 					for(auto paraIndex = paraList.begin();paraIndex!=paraList.end();++paraIndex)
 					{
 						TiXmlElement* para = new TiXmlElement("para");
-						para->SetAttribute("id",(*paraIndex)->mvi_ParaID);
+						para->SetAttribute("ID",(*paraIndex)->mvi_ParaID);
 						para->SetAttribute("value",(*paraIndex)->mvs_Value.c_str());
 						para->SetAttribute("isInPort",(*paraIndex)->mvb_IsInport);
 						paraInfo->LinkEndChild(para);
@@ -6292,10 +6291,8 @@ bool logic_XmlIO::readInitial(const char* fileName,std::map <int, logic_BasicMod
 		{
 			for(TiXmlAttribute* rootAttribute = root->FirstAttribute();rootAttribute;rootAttribute = rootAttribute = rootAttribute->Next())
 			{
-				std::cout<<rootAttribute->Name()<<" = "<<rootAttribute->Value()<<"\t";
 				saveModule(currentModule,rootAttribute->Name(),rootAttribute->Value());
 			}
-			std::cout<<std::endl;
 		}
 
 		TiXmlHandle docHandle(root);
@@ -6310,48 +6307,39 @@ bool logic_XmlIO::readInitial(const char* fileName,std::map <int, logic_BasicMod
 				for(TiXmlElement* leave = child->FirstChildElement()->ToElement();leave;leave = leave->NextSiblingElement())
 				{
 					//traverse every mode
-					std::cout<<leave->Value()<<std::endl;
 					logic_ParaPointer* modeTmp = new logic_ParaPointer;
 					if(leave->FirstAttribute())
 					{
 						//travers every attributes
 						for(TiXmlAttribute* currentAttribute = leave->FirstAttribute();currentAttribute;currentAttribute = currentAttribute->Next())
 						{
-							std::cout<<"Mode "<<leave->Value()<<" has "<<currentAttribute->Name()<<" : "<<currentAttribute->Value()<<std::endl;
 							saveMode(modeTmp,currentAttribute->Name(),currentAttribute->Value());
 						}
 					}
 					modeMenu.push_back(modeTmp);
 				}
-				std::cout<<"Now modeMenu is finished"<<std::endl;
 			}
 			
 			//InputList layer
 			if(child->NextSiblingElement())
 			{
 				child = child->NextSiblingElement();
-				std::cout<<"Here is "<<child->Value()<<std::endl;
 				//traverse InputList leaves
 				if(child->FirstChildElement())
 				{
 					for(TiXmlElement* leave = child->FirstChildElement()->ToElement();leave;leave = leave->NextSiblingElement())
 					{
-						std::cout<<"The "<<leave->Value()<<" has attributes below:"<<std::endl;
 						logic_BasicPara* paraTmp = new logic_BasicPara;
 						if(leave->FirstAttribute())
 						{
 							for(TiXmlAttribute* attributeTmp = leave->FirstAttribute();attributeTmp;attributeTmp = attributeTmp->Next())
 							{
-
-								std::cout<<"The "<< attributeTmp->Name()<<" : "<<attributeTmp->Value()<<"\t";
 								savePara(paraTmp,attributeTmp->Name(),attributeTmp->Value());
 							}
-							std::cout<<std::endl;
 						}
 						paraList.push_back(paraTmp);
 					}
 				}
-				std::cout<<"Now InputList is finished"<<std::endl;
 			}
 		}
 		
@@ -6363,7 +6351,6 @@ bool logic_XmlIO::readInitial(const char* fileName,std::map <int, logic_BasicMod
 	}
 	catch(std::string& e)
 	{
-		std::cout<<"Happen some error in readInitial1001 "<<std::endl;
 		return false;
 	}
 	return true;
@@ -6648,81 +6635,113 @@ void logic_XmlIO::saveProject(logic_Project &prj,const std::string name, std::st
 
 void logic_XmlIO::saveProgram(std::map<int,logic_Program*> &prgMap,TiXmlElement* firstPrgChild)
 {
-	if(firstPrgChild->NextSiblingElement())
+	for(firstPrgChild;firstPrgChild;firstPrgChild = firstPrgChild->NextSiblingElement())
 	{
-		for(firstPrgChild;firstPrgChild;firstPrgChild = firstPrgChild->NextSiblingElement())
-		{
-			int prgId = firstPrgChild->FirstAttribute()->IntValue();                  //program id
-			std::string name = firstPrgChild->FirstAttribute()->Next()->Value();      //program name
-			std::cout<<"The program ID is: "<<prgId<<" And the name is: "<<name<<std::endl;
-			logic_Program* program = new logic_Program(prgId,name);
-			prgMap[prgId] = program;
-
-			//traverse all the tree to initial treeMap
-			if(firstPrgChild->FirstChildElement()) 
-			{   
-				std::map<int,logic_Tree*> treeMap;
-				for(auto treeRoot = firstPrgChild->FirstChildElement();treeRoot;treeRoot = treeRoot->NextSiblingElement())
+		int prgId = firstPrgChild->FirstAttribute()->IntValue();                          //program id
+		std::string name = firstPrgChild->FirstAttribute()->Next()->Value();      //program name
+		std::cout<<"The program ID is: "<<prgId<<" And the name is: "<<name<<std::endl;
+		logic_Program* program = new logic_Program(prgId,name);
+		prgMap[prgId] = program;
+		
+		//traverse all the tree to initial treeMap
+		if(firstPrgChild->FirstChildElement()) 
+		{   
+			for(auto treeRoot = firstPrgChild->FirstChildElement();treeRoot;treeRoot = treeRoot->NextSiblingElement())
+			{
+				int rootId = treeRoot->FirstAttribute()->IntValue();
+				std::cout<<"The Tree ID is: "<<rootId<<std::endl;
+				logic_Tree* tree = new logic_Tree(rootId);
+				program->add_Tree(tree);
+				//initial the tree node
+				//std::vector<logic_TreeNode*> nodeMap;
+				
+				if(treeRoot->FirstChild())
 				{
-					int rootId = treeRoot->FirstAttribute()->IntValue();
-					std::cout<<"The Tree ID is: "<<rootId<<std::endl;
-					logic_Tree* tree = new logic_Tree(rootId);
-					treeMap[rootId] = tree;
-					//initial the tree node
-					std::vector<logic_TreeNode*> nodeMap;
-					if(treeRoot->FirstChild())
+					std::vector<TreeNode*> allNode;
+					for(TiXmlElement* treeNode = treeRoot->FirstChild()->ToElement();treeNode;treeNode = treeNode->NextSiblingElement())
 					{
-						for(TiXmlElement* treeNode = treeRoot->FirstChild()->ToElement();treeNode;treeNode = treeNode->NextSiblingElement())
+						auto nodeIdAttribute = treeNode->FirstAttribute();
+						auto fatherIdAttribute = nodeIdAttribute->Next();
+						auto moduleTypeAttribute = fatherIdAttribute->Next();
+						auto currentModeTypeAttribute = moduleTypeAttribute->Next();
+						//模块信息
+						int nodeID = nodeIdAttribute->IntValue();                     //模块ID
+						int fatherID = fatherIdAttribute->IntValue();                 //父亲节点ID
+						int moduleType = moduleTypeAttribute->IntValue();			  //模块类型
+						int currentModeType = currentModeTypeAttribute->IntValue();	  //模块当前模式
+
+						//还原模块信息
+						logic_BasicModule moduleNodeTmp(nodeID,moduleType);    
+						logic_BasicModule* moduleNode = new logic_BasicModule(nodeID,moduleType,moduleNodeTmp);
+						moduleNode->mvi_CurModeID = currentModeType;                   //模块当前模式
+						//将还原的模块放入program
+						program->add_Module(nodeID,moduleNode);
+						
+
+						std::cout<<"The Tree node ID is: "<<nodeID<<" and its father's ID is: "<< fatherID<<std::endl;
+						
+						//用来还原树
+						TreeNode* node = new TreeNode();
+						node->id = nodeID;
+						node->parentId = fatherID;
+						allNode.push_back(node);
+
+						//模块中当前模式下的参数列表
+						std::vector <logic_BasicPara*> paraList;
+						logic_BasicPara* para = new logic_BasicPara();
+						//遍历参数列表
+						if(treeNode->FirstChildElement())
 						{
-							int nodeID = treeNode->FirstAttribute()->IntValue();
-							int fatherID = treeNode->FirstAttribute()->Next()->IntValue();
-							std::cout<<"	The Tree node ID is: "<<nodeID<<" and its father's ID is: "<< fatherID<<std::endl;
-							logic_TreeNode* node = new logic_TreeNode(nodeID);
-							if(treeNode->FirstChildElement())
+							auto paraInfo = treeNode->FirstChildElement();
+							std::cout<<"Now here is: "<<paraInfo->Value()<<std::endl;
+							if(paraInfo->FirstChild())                               //paraInfo        
 							{
-								auto paraInfo = treeNode->FirstChildElement();
-								std::cout<<"Now here is: "<<paraInfo->Value()<<std::endl;
-								if(paraInfo->FirstChild())                        //paraInfo        
+								//遍历para
+								for(auto paraNode = paraInfo->FirstChildElement();paraNode;paraNode = paraNode->NextSiblingElement())
 								{
-									auto paraNode = paraInfo->FirstChildElement();//para node and switcher node
-									if(paraNode->FirstAttribute())				  //para attribute
+									if(paraNode->FirstAttribute())			             //para attribute
 									{	
 										int id,isInPort;
 										std::string value;
 										for(auto paraNodeAttribute = paraNode->FirstAttribute();paraNodeAttribute;paraNodeAttribute = paraNodeAttribute->Next())
 										{
-											if(paraNodeAttribute->Name() == "id")
+											std::string name = paraNodeAttribute->Name();
+											if(name == "ID")
 											{
-												std::cout<<"The parameter's id is: "<<paraNodeAttribute->IntValue()<<std::endl;
-												id = paraNodeAttribute->IntValue();		
+												std::cout<<std::setiosflags(std::ios::right)<<std::setw(10)<<name<<"\t"<<paraNodeAttribute->IntValue()<<"\t";
+												id = paraNodeAttribute->IntValue();
+												para->mvi_ParaID = id;
 											}
-											else if(paraNodeAttribute->Name() == "value")
+											else if(name == "value")
 											{
-												std::cout<<"The parameter's value is: "<<paraNodeAttribute->Value()<<std::endl;
+												std::cout<<std::setiosflags(std::ios::right)<<std::setw(10)<<name<<"\t"<<paraNodeAttribute->Value()<<"\t";
 												value = paraNodeAttribute->Value();
+												para->mvs_Value = value;
 											}
-											else if(paraNodeAttribute->Name() == "isInPort")
+											else if(name == "isInPort")
 											{
-												std::cout<<"The parameter's isInPort is: "<<paraNodeAttribute->IntValue()<<std::endl;
+												std::cout<<std::setiosflags(std::ios::right)<<std::setw(10)<<name<<"\t"<<paraNodeAttribute->IntValue()<<"\t";
 												isInPort = paraNodeAttribute->IntValue();
+												para->mvb_IsInport = isInPort;
 											}
 										}
-
-											
+										std::cout<<std::endl;
 									}
+									//遍历一个para结束，将para压入list
+									paraList.push_back(para);
 								}
+								//list填充完毕，将list写入module
+								moduleNode->setCurParaList(paraList);
 							}
-
-							nodeMap.push_back(node);
 						}
-					//	program->setTreeNode(rootId,nodeMap);
+						
 					}
-
+					rebuildTree(tree,allNode);
+//					tree->recurs_print(tree->getRoot());
 				}
-				program->setTreeMap(treeMap);
 			}
-
 		}
+
 	}
 }
 
@@ -6942,4 +6961,38 @@ bool logic_XmlIO::IO_Initial(std::map <int, logic_BasicModule *> &InitModuleMap)
 		return false;
 	}
 	
+}
+
+
+bool logic_XmlIO::rebuildTree(logic_Tree* treeRoot, std::vector<TreeNode*> allNode)
+{
+	if(allNode.empty())
+	{
+		return false;
+	}
+	else
+	{
+		std::map<int,logic_TreeNode*> treeNodeMap;
+		for(auto index: allNode)
+		{
+			logic_TreeNode* node = new logic_TreeNode(index->id);
+			treeNodeMap[index->id] = node;
+		}
+		for(auto child:allNode)
+		{
+			for(auto parent:allNode)
+			{
+				if(child->parentId == parent->id)
+				{
+					auto childNode = treeNodeMap[child->id];
+					auto parentNode = treeNodeMap[parent->id];
+					childNode->mvu_Parent = parentNode;
+					parentNode->mvvu_Children.push_back(childNode);
+				}
+			}
+
+		}
+		treeRoot->setRoot(treeNodeMap.begin()->second);
+	}
+
 }
