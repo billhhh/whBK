@@ -10,6 +10,9 @@
 #ifndef _LOGIC_WIN_SWITHCER_H_
 #define _LOGIC_WIN_SWITHCER_H_
 
+#include <string>
+#include <vector>
+
 //端口选择器类型
 enum WinSwitcherType{
 	WS_NONE = 0,
@@ -30,6 +33,8 @@ public:
 	WinSwitcherType mve_WSType;
 	std::string mvs_WSValue;
 	int mvi_ChainLayer; //菊链层号
+
+	std::vector<int ,std::string > mvvu_PopUp;
 
 protected:
 private:
