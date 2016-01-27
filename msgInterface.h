@@ -190,11 +190,11 @@ public:
 	std::vector <int, std::string> getPrjProgNameMap();
 	int delPrjProgThroughId(int id); //删除prog编号
 
-	//获取graph名字列表
+	//获取 变量 名字列表
 	std::vector <int, std::string> getPrjVarietyNameMap();
 	int delPrjVarietyThroughId(int id);
 
-	//获取变量名字列表
+	//获取 graph 名字列表
 	std::vector <int, std::string> getPrjGraphNameMap();
 	int delPrjGraphThroughId(int id);
 

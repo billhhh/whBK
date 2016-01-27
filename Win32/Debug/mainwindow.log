@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/1/27 16:30:03。
+﻿生成启动时间为 2016/1/27 19:43:06。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -52,14 +52,14 @@
      1>logic\logic_IfModule.cpp(322): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_IfModule.cpp(406): warning C4018: “<”: 有符号/无符号不匹配
          logic_Program.cpp
-     1>logic\logic_Program.cpp(703): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(761): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(856): warning C4100: “m_id”: 未引用的形参
-     1>logic\logic_Program.cpp(891): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1097): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1128): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1258): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1277): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(706): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(764): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(859): warning C4100: “m_id”: 未引用的形参
+     1>logic\logic_Program.cpp(894): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1100): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1131): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1261): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1280): warning C4100: “branch_id”: 未引用的形参
          logic_Project.cpp
          logic_Test.cpp
      1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
@@ -76,10 +76,12 @@
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
          正在编译...
          logic_Controller.cpp
-     1>e:\bill github\whbk\logic\logic_XmlIO.h(124): warning C4101: “e”: 未引用的局部变量
+     1>e:\bill github\whbk\logic\logic_XmlIO.h(50): warning C4189: “testVarmodule”: 局部变量已初始化但不引用
+     1>e:\bill github\whbk\logic\logic_XmlIO.h(125): warning C4101: “e”: 未引用的局部变量
          logic_VarModule.cpp
          logic_XmlIO.cpp
-     1>e:\bill github\whbk\logic\logic_XmlIO.h(124): warning C4101: “e”: 未引用的局部变量
+     1>e:\bill github\whbk\logic\logic_XmlIO.h(50): warning C4189: “testVarmodule”: 局部变量已初始化但不引用
+     1>e:\bill github\whbk\logic\logic_XmlIO.h(125): warning C4101: “e”: 未引用的局部变量
      1>logic\logic_XmlIO.cpp(183): warning C4101: “e”: 未引用的局部变量
      1>logic\logic_XmlIO.cpp(432): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(456): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
@@ -144,6 +146,9 @@
      1>logic\logic_XmlIO.cpp(6421): warning C4101: “e”: 未引用的局部变量
      1>logic\logic_XmlIO.cpp(6808): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
      1>logic\logic_XmlIO.cpp(6980): warning C4101: “e”: 未引用的局部变量
+     1>logic\logic_XmlIO.cpp(6989): warning C4100: “prj”: 未引用的形参
+     1>logic\logic_XmlIO.cpp(7015): warning C4189: “variety”: 局部变量已初始化但不引用
+     1>logic\logic_XmlIO.cpp(7046): warning C4189: “variety”: 局部变量已初始化但不引用
          tinystr.cpp
          tinyxml.cpp
          tinyxmlerror.cpp
@@ -220,4 +225,4 @@
 
 生成成功。
 
-已用时间 00:00:30.07
+已用时间 00:00:26.66

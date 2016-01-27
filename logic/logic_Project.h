@@ -40,7 +40,7 @@ public:
 	std::string getPrjPhotoPath();
 
 	void addPrjVariety(const _IdDataType, VarProperty); //增加一个变量
-	std::map<_IdDataType ,VarProperty> getPrjVariety();
+	std::map<_IdDataType ,VarProperty> getPrjVarietyMap(); //获得变量Map
 
 	//新增program
 	int newProgram(); //重载新建program，完全自动化新建program，返回新建program ID
@@ -78,7 +78,7 @@ private:
 	//program map
 	std::map <int, logic_Program *> mvvu_ProgMap;
 	//变量（整个prj通用） my virable and its type
-	std::map<_IdDataType ,VarProperty> mvmu_PrjVariety;
+	std::map<_IdDataType ,VarProperty> mvmu_PrjVarietyMap;
 
 	//!!!!!!!init module map，保存所有的初始化 Module 指针 map 副本!!!!!!!
 	///

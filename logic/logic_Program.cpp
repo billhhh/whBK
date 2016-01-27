@@ -2698,9 +2698,9 @@ int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int br
 
 //从prj初始化prog
 //初始化 “变量”map，v_map是引用
-void logic_Program::setInitVarMap(std::map<int  ,logic_VarModule*> &v_map) {
+void logic_Program::setInitVarMap(std::map<int  ,VarProperty> &v_map) {
 
-	this->prjVariety = &v_map; //初始化prj 变量 map
+	this->prjVarietyMap = &v_map; //初始化prj 变量 map
 }
 
 //初始化 initModule，init_m_map是副本

@@ -13,11 +13,11 @@
 #include <string>
 
 enum VarietyType{  //变量类型
-	TEXT = 0,          //文本
-	NUM,       //数字
-	BOOL,       //逻辑
-	NUM_ARR,  //数字阵列
-	BOOL_ARR   //逻辑阵列
+	Text = 0,          //文本
+	Numeric,       //数字 
+	Boolean,       //逻辑
+	NumericArray,  //数字阵列
+	BooleanArray   //逻辑阵列
 };
 
 typedef struct

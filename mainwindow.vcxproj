@@ -463,6 +463,7 @@ endlocal
     <ClInclude Include="logic\logic_WinSwitcher.h" />
     <ClInclude Include="logic\logic_Controller.h" />
     <ClInclude Include="logic\logic_XmlIO.h" />
+    <ClInclude Include="logic\logic_PrjPropertyGlobal.h" />
     <ClInclude Include="logic\tinyXML\tinystr.h" />
     <ClInclude Include="logic\tinyXML\tinyxml.h" />
     <ClInclude Include="TransStringNum.h" />

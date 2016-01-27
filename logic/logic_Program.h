@@ -20,7 +20,7 @@
 #include "logic_ForModule.h"
 #include "logic_IfModule.h"
 #include "logic_whPort.h"
-#include "logic_VarModule.h"
+#include "logic_PrjPropertyGlobal.h"
 
 class logic_Program //等效于森林
 {
@@ -188,7 +188,7 @@ public:
 
 	//从prj初始化prog
 	//初始化 “变量”map，v_map是引用
-	void setInitVarMap(std::map<int  ,logic_VarModule*> &v_map);
+	void setInitVarMap(std::map<int  ,VarProperty> &v_map);
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
 
@@ -215,7 +215,7 @@ public:
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
-	///且 rootId = moduleId*100000+branchId，这种 tree 只维护mvmu_TreeMap
+	///且 key = moduleId*100000+branchId，这种 tree 只维护mvmu_TreeMap
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap; // rootId 与 树实体的对应
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射
@@ -231,7 +231,7 @@ protected:
 	///////init module map
 	std::map <int, logic_BasicModule *> initModuleMap;
 	//变量（整个prj通用）
-	std::map<_IdDataType ,logic_VarModule*> *prjVariety;
+	std::map<_IdDataType ,VarProperty> *prjVarietyMap;
 
 	void Init();
 	void prog_Destroy();

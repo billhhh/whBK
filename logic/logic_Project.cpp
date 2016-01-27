@@ -36,7 +36,7 @@ logic_Project::~logic_Project()
 void logic_Project::Init() {
 	mvvu_ProgMap.clear();
 	//mvvu_ProgMap[0] = NULL;
-	mvmu_PrjVariety.clear();
+	mvmu_PrjVarietyMap.clear();
 	//mvmu_PrjVariety[0] = NULL;
 
 	logic_Program * prog = new logic_Program(1,"Program");//第一个program
@@ -80,14 +80,14 @@ std::string logic_Project::getPrjPhotoPath()
 	return mvstr_PhotoPath;
 }
 
-void logic_Project::setPrjVariety(const _IdDataType id, logic_VarModule* varModule)
+void logic_Project::addPrjVariety(const _IdDataType id, VarProperty var)
 {
-	mvmu_PrjVariety[id] = varModule;
+	mvmu_PrjVarietyMap[id] = var;
 }
 
-std::map<_IdDataType ,logic_VarModule*> logic_Project::getPrjVariety()
+std::map<_IdDataType ,VarProperty> logic_Project::getPrjVarietyMap()
 {
-	return mvmu_PrjVariety;
+	return mvmu_PrjVarietyMap;
 }
 
 //重载新建program，完全自动化新建program
@@ -100,7 +100,7 @@ int logic_Project::newProgram() {
 	mvvu_ProgMap[max_prog_id] = tprog;
 
 	//初始化新 prog 特殊参数
-	tprog->setInitVarMap(this->mvmu_PrjVariety);
+	tprog->setInitVarMap(this->mvmu_PrjVarietyMap);
 	tprog->setInitModuleMap(this->initModuleMap);
 
 	return max_prog_id;
@@ -193,7 +193,7 @@ void logic_Project::setProgram(std::map <int ,logic_Program* > programMap)
 	mvvu_ProgMap = programMap;
 }
 
-void logic_Project::setPrjVarietyMap(std::map<_IdDataType ,logic_VarModule*> PrjVariety)
+void logic_Project::setPrjVarietyMap(std::map<_IdDataType ,VarProperty> map)
 {
-	mvmu_PrjVariety = PrjVariety;
+	mvmu_PrjVarietyMap = map;
 }

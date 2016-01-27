@@ -13,6 +13,7 @@
 #include"tinyXML\tinystr.h"
 #include"logic_Project.h"
 #include"logic_Controller.h"
+#include "logic_VarModule.h"
 
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
@@ -52,7 +53,7 @@ public:
 		newProject.setPrjPhotoPath("no_path_now");
 		newProject.newProgram(1,testProgram);
 		newProject.newProgram(2,"anotherNewProgram");
-		newProject.setPrjVariety(10,testVarmodule);
+		//newProject.setPrjVarietyMap(10,testVarmodule);
 		
 		//initial all the modules
 		IO_Initial(InitModuleMap);

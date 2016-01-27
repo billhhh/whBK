@@ -323,5 +323,8 @@
     <ClInclude Include="logic\logic_Graph.h">
       <Filter>Header Files\logic</Filter>
     </ClInclude>
+    <ClInclude Include="logic\logic_PrjPropertyGlobal.h">
+      <Filter>Header Files\logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

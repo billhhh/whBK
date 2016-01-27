@@ -303,17 +303,17 @@ bool logic_XmlIO::IO_SavePrj(const std::string fileName, logic_Project prj)
 	}
 	
 	//all varieties map
-	auto varietiesMap = prj.getPrjVariety();
+	auto varietiesMap = prj.getPrjVarietyMap();
 	for(auto index = varietiesMap.begin();index!=varietiesMap.end();++index)
 	{
 		TiXmlElement* variety = new TiXmlElement("variety");
 		int id = index->first;
 		auto varModule = index->second;
-		auto varType = varModule->getType();
-		auto varValue = varModule->getValue();
+// 		auto varType = varModule->getType();
+// 		auto varValue = varModule->getValue();
 		variety->SetAttribute("id",id);
-		variety->SetAttribute("type",varType.c_str());
-		variety->SetAttribute("value",varValue.c_str());
+// 		variety->SetAttribute("type",varType.c_str());
+// 		variety->SetAttribute("value",varValue.c_str());
 		prjMyvariety->LinkEndChild(variety);
 	}
 
@@ -7013,7 +7013,7 @@ void logic_XmlIO::saveVarModule(logic_Project &prj,TiXmlElement* varietiesElemen
 			break;
 	}
 	logic_VarModule* variety = new logic_VarModule(id,type,value);
-	prj.setPrjVariety(id,variety);
+	//prj.setPrjVarietyMap(id,variety);
 
 	if(varietiesElement->NextSiblingElement())
 	{
@@ -7044,7 +7044,7 @@ void logic_XmlIO::saveVarModule(logic_Project &prj,TiXmlElement* varietiesElemen
 				break;
 			}
 			logic_VarModule* variety = new logic_VarModule(id,type,value);
-			prj.setPrjVariety(id,variety);
+			//prj.setPrjVariety(id,variety);
 		}
 
 	}
