@@ -429,8 +429,8 @@ std::vector<int > logic_IfModule::findBranchAllRootsActive(int branch_id) {
 	logic_TreeNode * root = mvmu_BranchMap[branch_id].curActiveTree->getRoot();
 	this->recurs_GetId(root,L);
 
-	//std::vector<int>::iterator it = L.begin();
-	L.erase(L.begin());
+	std::vector<int>::iterator it = L.begin();
+	L.erase(it);
 
 	return L;
 }

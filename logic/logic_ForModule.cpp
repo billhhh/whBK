@@ -225,8 +225,8 @@ std::vector<int > logic_ForModule::findAllRootsActive() {
 	logic_TreeNode * root = mvi_CurActiveTree->getRoot();
 	this->recurs_GetId(root,L);
 
-	//std::vector<int>::iterator it = L.begin();
-	L.erase(L.begin());
+	std::vector<int>::iterator it = L.begin();
+	L.erase(it);
 
 	return L;
 }
