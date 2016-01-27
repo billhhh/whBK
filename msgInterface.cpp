@@ -294,5 +294,11 @@ std::vector<int > msgInterface::findRootsInContainer(int containerId) {
 	return ctrl.ctrlFindRootsInContainer(containerId);
 }
 
+//找到激活树根节点
+std::vector<int > msgInterface::findRootsInContainerActive(int containerId) {
+
+	return ctrl.ctrlFindRootsInContainerActive(containerId);
+}
+
 
 /// \brief 创建我的模块

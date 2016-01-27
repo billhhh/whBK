@@ -167,6 +167,9 @@ public:
 	///
 	std::vector<int > findRootsInContainer(int containerId);
 
+	//找到激活树根节点
+	std::vector<int > findRootsInContainerActive(int containerId);
+
 	///
 	/// \brief 项目属性
 	///
