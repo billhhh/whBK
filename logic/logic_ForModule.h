@@ -12,7 +12,7 @@
 
 #include "logic_BasicModule.h"
 #include "logic_Tree.h"
-//#include <vector>
+#include <vector>
 #include <map>
 #include "logic_whPort.h"
 #include "logic_WhData.h"

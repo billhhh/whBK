@@ -34,7 +34,7 @@ public:
 	std::string mvs_WSValue;
 	int mvi_ChainLayer; //æ’¡¥≤„∫≈
 
-	std::vector<int ,std::string > mvvu_PopUp;
+	//std::vector<int ,std::string > mvvu_PopUp;
 
 protected:
 private:
