@@ -177,7 +177,7 @@ std::vector <logic_BasicPara*> logic_BasicModule::getCurParaList() {
 	std::vector <logic_BasicPara*> resL;
 
 	for (int i=0;i<tAllParaIds.size();++i) {
-		int p_id = tAllParaIds.at(i);
+		int p_id = tAllParaIds.at(i-1);
 		resL.push_back(mvvu_ParaList.at(p_id));
 	}
 
