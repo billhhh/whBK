@@ -14,9 +14,9 @@
 #include <string>
 #include <stdlib.h>
 #include "logic_Program.h"
-#include "logic_VarModule.h"
 #include "logic_BasicModule.h"
 #include "logic_Graph.h"
+#include "logic_PrjPropertyGlobal.h"
 
 class logic_Project
 {
@@ -39,8 +39,8 @@ public:
 	void setPrjPhotoPath(const std::string path);
 	std::string getPrjPhotoPath();
 
-	void setPrjVariety(const _IdDataType, logic_VarModule*);
-	std::map<_IdDataType ,logic_VarModule*> getPrjVariety();
+	void addPrjVariety(const _IdDataType, VarProperty); //增加一个变量
+	std::map<_IdDataType ,VarProperty> getPrjVariety();
 
 	//新增program
 	int newProgram(); //重载新建program，完全自动化新建program，返回新建program ID
@@ -62,7 +62,7 @@ public:
 	/// \brief 方便xml
 	///
 	void setProgram(std::map <int ,logic_Program* > programMap);
-	void setPrjVarietyMap(std::map<_IdDataType ,logic_VarModule*>);
+	void setPrjVarietyMap(std::map<_IdDataType ,VarProperty>);
 
 	/////////////////////////////////////////////////////////
 
@@ -78,7 +78,7 @@ private:
 	//program map
 	std::map <int, logic_Program *> mvvu_ProgMap;
 	//变量（整个prj通用） my virable and its type
-	std::map<_IdDataType ,logic_VarModule*> mvmu_PrjVariety;
+	std::map<_IdDataType ,VarProperty> mvmu_PrjVariety;
 
 	//!!!!!!!init module map，保存所有的初始化 Module 指针 map 副本!!!!!!!
 	///
