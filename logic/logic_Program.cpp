@@ -66,6 +66,9 @@ void logic_Program::Init()
 	mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
 
 	mvmu_ModuleId_TreeMap[1] = mvmu_TreeMap[1];
+
+	this->isDisplay = true;
+	this->isOnlyForTeacher = false;
 }
 
 void logic_Program::prog_Destroy()
