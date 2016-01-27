@@ -1,9 +1,9 @@
-﻿生成启动时间为 2016/1/27 10:02:42。
+﻿生成启动时间为 2016/1/27 15:20:29。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -219,4 +219,4 @@
 
 生成成功。
 
-已用时间 00:00:26.49
+已用时间 00:00:27.25
