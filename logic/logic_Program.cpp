@@ -2810,3 +2810,25 @@ void logic_Program::setToFromMap(std::map<whPort, whPort > toFromMap)
 {
 	mvvu_Conn_To_FromMap = toFromMap;
 }
+
+//显示get、set
+bool logic_Program::getIsDisplay() {
+
+	return isDisplay;
+}
+
+void logic_Program::setIsDisplay(bool is) {
+
+	isDisplay = is;
+}
+
+//仅限教师
+bool logic_Program::getIsOnlyForTeacher(){
+
+	return isOnlyForTeacher;
+}
+
+void logic_Program::setIsOnlyForTeacher(bool is) {
+
+	isOnlyForTeacher = is;
+}

@@ -204,6 +204,14 @@ public:
 	std::vector<int > findRootsInContainerActive(int for_id);
 	std::vector<int > findRootsInContainerActive(int if_id,int branch_id);
 
+	//显示get、set
+	bool getIsDisplay();
+	void setIsDisplay(bool is);
+
+	//仅限教师
+	bool getIsOnlyForTeacher();
+	void setIsOnlyForTeacher(bool is);
+
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
@@ -240,6 +248,9 @@ protected:
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
 	std::string mvs_ProgName;
+
+	bool isDisplay;
+	bool isOnlyForTeacher;
 
 	//通过id得到模块
 	logic_ForModule* getForModuleById(int id);
