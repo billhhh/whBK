@@ -58,6 +58,14 @@ public:
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
 
+	///
+	/// \brief 方便xml
+	///
+	void setProgram(std::map <int ,logic_Program* > programMap);
+	void setPrjVarietyMap(std::map<_IdDataType ,logic_VarModule*>);
+
+	/////////////////////////////////////////////////////////
+
 private:
 	/**************变量名称表和循环名称表*****************/
 	int mvstr_PrjId;              // project ID

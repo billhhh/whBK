@@ -124,6 +124,11 @@ bool logic_XmlIO::IO_FillPrj(const char* fileName, logic_Project &prj)
 {
 	try
 	{
+		//所有的模块Map
+		logic_Controller control;
+		allModuleMap = control.ctrlGetInitMap();
+		
+		//打开文件
 		TiXmlDocument* xmlFileName = new TiXmlDocument(fileName);
 		xmlFileName->LoadFile();
 
@@ -156,6 +161,7 @@ bool logic_XmlIO::IO_FillPrj(const char* fileName, logic_Project &prj)
 						TiXmlElement* program = child->FirstChildElement();
 						std::map <int ,logic_Program* > programMap;
 						saveProgram(programMap,program);
+						prj.setProgram(programMap);
 					}
 					std::cout<<"prgrams is ok"<<std::endl;
 				}
@@ -165,6 +171,7 @@ bool logic_XmlIO::IO_FillPrj(const char* fileName, logic_Project &prj)
 					{
 						TiXmlElement* varieties = child->FirstChildElement();
 						saveVarModule(prj,varieties);
+
 					}
 
 				}
@@ -219,21 +226,21 @@ bool logic_XmlIO::IO_SavePrj(const std::string fileName, logic_Project prj)
 		TiXmlElement* program= new TiXmlElement("Program"); 
 
 		//set attribute
-		program->SetAttribute("ID",intToString(index->first).c_str());
-		program->SetAttribute("Name",index->second->getName().c_str());
+		program->SetAttribute("id",intToString(index->first).c_str());
+		program->SetAttribute("name",index->second->getName().c_str());
 
 		//link them
 		ProgramList->LinkEndChild(program);
 
 		//tree map
 		auto allTreeMap = prg->getTreeMap();
-		for(auto indexOfRoot = allTreeMap.begin();indexOfRoot!=allTreeMap.end();++indexOfRoot){
+		for(auto indexOfRoot = allTreeMap.begin();indexOfRoot!=allTreeMap.end();++indexOfRoot){               //TreeNode层
 			//跳过第一个标记位
 			if(indexOfRoot == allTreeMap.begin())
 				continue;
 			TiXmlElement* treeRoot = new TiXmlElement("TreeRoot");
 			program->LinkEndChild(treeRoot);
-			treeRoot->SetAttribute("ID",indexOfRoot->first);
+			treeRoot->SetAttribute("id",indexOfRoot->first);
 			
 			//遍历树，存每个节点信息---------ID和父节点ID
 			auto allNode = prg->getAllTreeNode(indexOfRoot->first);
@@ -274,7 +281,25 @@ bool logic_XmlIO::IO_SavePrj(const std::string fileName, logic_Project prj)
 				node->LinkEndChild(paraInfo);
 
 			}
+		} //TreeNode层结束
+
+		//From_To层
+		auto Conn_From_ToMap = prg->getFromMap();
+		if(Conn_From_ToMap.size() !=0)
+		{
+			TiXmlElement* From_To = new TiXmlElement("From_To");
+			for(auto index = Conn_From_ToMap.begin();index != Conn_From_ToMap.end();index++)
+			{
+				auto from = index->first;
+				auto to = index->second;
+				From_To->SetAttribute("moduleId1",from.moduleId);
+				From_To->SetAttribute("paraId1",from.paraId);
+				From_To->SetAttribute("moduleId2",to.moduleId);
+				From_To->SetAttribute("paraId2",to.paraId);
+			}
+			program->LinkEndChild(From_To);
 		}
+
 	}
 	
 	//all varieties map
@@ -321,7 +346,7 @@ logic_XmlIO::~logic_XmlIO()
 
 bool logic_XmlIO::initialBottom()
 {
-	if(initial2004())
+	if(initial5004())
 		return true;
 	else
 		return false;
@@ -4259,6 +4284,9 @@ bool logic_XmlIO::initial3010()
 	TiXmlElement* input2 = new TiXmlElement("input2");
 	TiXmlElement* input3 = new TiXmlElement("input3");
 	TiXmlElement* input4 = new TiXmlElement("input4");
+	TiXmlElement* input5 = new TiXmlElement("input5");
+	TiXmlElement* input6 = new TiXmlElement("input6");
+	TiXmlElement* input7 = new TiXmlElement("input7");
 
 	//***************set attribute********************
 	//current attribute
@@ -4270,90 +4298,91 @@ bool logic_XmlIO::initial3010()
 
 	//Mode attribute
 	mode1->SetAttribute("id",1); 
-	mode1->SetAttribute("include","0010");
+	mode1->SetAttribute("include","0010000");
 	mode1->SetAttribute("WinSwitcherType",2);
 	mode1->SetAttribute("WinSwitcherValue","3");
 	mode1->SetAttribute("ChainLayer",0);
 
 	mode2->SetAttribute("id",2);
-	mode2->SetAttribute("include","0010");
+	mode2->SetAttribute("include","0100000");
 	mode2->SetAttribute("WinSwitcherType",2);
 	mode2->SetAttribute("WinSwitcherValue","3");
 	mode2->SetAttribute("ChainLayer",0);
 
 	mode3->SetAttribute("id",3);
-	mode3->SetAttribute("include","0010");
+	mode3->SetAttribute("include","0001000");
 	mode3->SetAttribute("WinSwitcherType",2);
 	mode3->SetAttribute("WinSwitcherValue","3");
 	mode3->SetAttribute("ChainLayer",0);
 
 	mode4->SetAttribute("id",4);
-	mode4->SetAttribute("include","0010");
+	mode4->SetAttribute("include","0010000");
 	mode4->SetAttribute("WinSwitcherType",2);
 	mode4->SetAttribute("WinSwitcherValue","3");
 	mode4->SetAttribute("ChainLayer",0);
 
 	mode5->SetAttribute("id",5);
-	mode5->SetAttribute("include","0010");
+	mode5->SetAttribute("include","0100000");
 	mode5->SetAttribute("WinSwitcherType",2);
 	mode5->SetAttribute("WinSwitcherValue","3");
 	mode5->SetAttribute("ChainLayer",0);
 
 	mode6->SetAttribute("id",6);
-	mode6->SetAttribute("include","0010");
+	mode6->SetAttribute("include","0001000");
 	mode6->SetAttribute("WinSwitcherType",2);
 	mode6->SetAttribute("WinSwitcherValue","3");
 	mode6->SetAttribute("ChainLayer",0);
 
 	mode7->SetAttribute("id",7);
-	mode7->SetAttribute("include","0010");
+	mode7->SetAttribute("include","0000100");
 	mode7->SetAttribute("WinSwitcherType",2);
 	mode7->SetAttribute("WinSwitcherValue","3");
 	mode7->SetAttribute("ChainLayer",0);
 
 	mode8->SetAttribute("id",8);
-	mode8->SetAttribute("include","1111");
+	mode8->SetAttribute("include","1010011");
 	mode8->SetAttribute("WinSwitcherType",2);
 	mode8->SetAttribute("WinSwitcherValue","3");
 	mode8->SetAttribute("ChainLayer",0);
 
-	mode9->SetAttribute("id",8);
-	mode9->SetAttribute("include","1111");
+	mode9->SetAttribute("id",9);
+	mode9->SetAttribute("include","1100011");
 	mode9->SetAttribute("WinSwitcherType",2);
 	mode9->SetAttribute("WinSwitcherValue","3");
 	mode9->SetAttribute("ChainLayer",0);
 
-	mode10->SetAttribute("id",8);
-	mode10->SetAttribute("include","1111");
+	mode10->SetAttribute("id",10);
+	mode10->SetAttribute("include","1000111");
 	mode10->SetAttribute("WinSwitcherType",2);
 	mode10->SetAttribute("WinSwitcherValue","3");
 	mode10->SetAttribute("ChainLayer",0);
 
-	mode11->SetAttribute("id",8);
-	mode11->SetAttribute("include","1111");
+	mode11->SetAttribute("id",11);
+	mode11->SetAttribute("include","1010011");
 	mode11->SetAttribute("WinSwitcherType",2);
 	mode11->SetAttribute("WinSwitcherValue","3");
 	mode11->SetAttribute("ChainLayer",0);
 
-	mode12->SetAttribute("id",8);
-	mode12->SetAttribute("include","1111");
+	mode12->SetAttribute("id",12);
+	mode12->SetAttribute("include","1100011");
 	mode12->SetAttribute("WinSwitcherType",2);
 	mode12->SetAttribute("WinSwitcherValue","3");
 	mode12->SetAttribute("ChainLayer",0);
 
-	mode13->SetAttribute("id",8);
-	mode13->SetAttribute("include","1111");
+	mode13->SetAttribute("id",13);
+	mode13->SetAttribute("include","1001011");
 	mode13->SetAttribute("WinSwitcherType",2);
 	mode13->SetAttribute("WinSwitcherValue","3");
 	mode13->SetAttribute("ChainLayer",0);
 
-	mode14->SetAttribute("id",8);
-	mode14->SetAttribute("include","1111");
+	mode14->SetAttribute("id",14);
+	mode14->SetAttribute("include","1000111");
 	mode14->SetAttribute("WinSwitcherType",2);
 	mode14->SetAttribute("WinSwitcherValue","3");
 	mode14->SetAttribute("ChainLayer",0);
 
 	//input attribute
+	//比较类型
 	input1->SetAttribute("id",1);
 	input1->SetAttribute("default","2");
 	input1->SetAttribute("type","PARA_NUM");
@@ -4362,6 +4391,7 @@ bool logic_XmlIO::initial3010()
 	input1->SetAttribute("InOrOut","PARA_IN");
 	input1->SetAttribute("IsPort",0);
 
+	//A
 	input2->SetAttribute("id",2);
 	input2->SetAttribute("default","0");
 	input2->SetAttribute("type","PARA_NUM");
@@ -4370,6 +4400,7 @@ bool logic_XmlIO::initial3010()
 	input2->SetAttribute("InOrOut","PARA_IN");
 	input2->SetAttribute("IsPort",0);
 
+	//V
 	input3->SetAttribute("id",3);
 	input3->SetAttribute("default",0);
 	input3->SetAttribute("type","PARA_NUM");
@@ -4378,13 +4409,41 @@ bool logic_XmlIO::initial3010()
 	input3->SetAttribute("InOrOut","PARA_OUT");
 	input3->SetAttribute("IsPort",0);
 
+	//W
 	input4->SetAttribute("id",4);
 	input4->SetAttribute("default",0);
-	input4->SetAttribute("type","PARA_LOGIC");
-	input4->SetAttribute("max",1);
-	input4->SetAttribute("min",0);
+	input4->SetAttribute("type","PARA_NUM");
+	input4->SetAttribute("max",MAX_INT);
+	input4->SetAttribute("min",MIN_INT);
 	input4->SetAttribute("InOrOut","PARA_OUT");
 	input4->SetAttribute("IsPort",0);
+
+	//J
+	input5->SetAttribute("id",5);
+	input5->SetAttribute("default",0);
+	input5->SetAttribute("type","PARA_NUM");
+	input5->SetAttribute("max",MAX_INT);
+	input5->SetAttribute("min",MIN_INT);
+	input5->SetAttribute("InOrOut","PARA_OUT");
+	input5->SetAttribute("IsPort",0);
+
+	//阈值
+	input6->SetAttribute("id",6);
+	input6->SetAttribute("default",0);
+	input6->SetAttribute("type","PARA_NUM");
+	input6->SetAttribute("max",MAX_INT);
+	input6->SetAttribute("min",MIN_INT);
+	input6->SetAttribute("InOrOut","PARA_OUT");
+	input6->SetAttribute("IsPort",0);
+
+	//比较结果
+	input7->SetAttribute("id",7);
+	input7->SetAttribute("default",0);
+	input7->SetAttribute("type","PARA_LOGIC");
+	input7->SetAttribute("max",1);
+	input7->SetAttribute("min",0);
+	input7->SetAttribute("InOrOut","PARA_OUT");
+	input7->SetAttribute("IsPort",0);
 
 
     //***************link all the element*************
@@ -4412,6 +4471,9 @@ bool logic_XmlIO::initial3010()
 	inputList->LinkEndChild(input2);
 	inputList->LinkEndChild(input3);
 	inputList->LinkEndChild(input4);
+	inputList->LinkEndChild(input5);
+	inputList->LinkEndChild(input6);
+	inputList->LinkEndChild(input7);
 	
 	//控制台输出调试
 	dump_to_stdout(&doc);
@@ -5920,8 +5982,8 @@ bool logic_XmlIO::initial5004()
 
 	//input
 	TiXmlElement* inputList = new TiXmlElement("InputList");
-
-	//***************set attribute********************
+	TiXmlElement* input1 = new TiXmlElement("input1");
+ 	//***************set attribute********************
 	//current attribute
 	module->SetAttribute("typeid",5004);
 	module->SetAttribute("Mode",1);
@@ -5931,30 +5993,37 @@ bool logic_XmlIO::initial5004()
 
 	//Mode attribute
 	mode1->SetAttribute("id",1); 
-	mode1->SetAttribute("include","");
+	mode1->SetAttribute("include","0");
 	mode1->SetAttribute("WinSwitcherValue","");
 	mode1->SetAttribute("WinSwitcherType",0);
 	mode1->SetAttribute("ChainLayer",0);
 
 	mode2->SetAttribute("id",2); 
-	mode2->SetAttribute("include","");
+	mode2->SetAttribute("include","0");
 	mode2->SetAttribute("WinSwitcherValue","");
 	mode2->SetAttribute("WinSwitcherType",0);
 	mode2->SetAttribute("ChainLayer",0);
 
 	mode3->SetAttribute("id",3); 
-	mode3->SetAttribute("include","");
+	mode3->SetAttribute("include","1");
 	mode3->SetAttribute("WinSwitcherValue","");
 	mode3->SetAttribute("WinSwitcherType",0);
 	mode3->SetAttribute("ChainLayer",0);
 
 	mode4->SetAttribute("id",4); 
-	mode4->SetAttribute("include","");
+	mode4->SetAttribute("include","1");
 	mode4->SetAttribute("WinSwitcherValue","");
 	mode4->SetAttribute("WinSwitcherType",0);
 	mode4->SetAttribute("ChainLayer",0);
 
 	//input attribute
+	input1->SetAttribute("id",1);
+	input1->SetAttribute("default","");
+	input1->SetAttribute("type","PARA_TEXT");
+	input1->SetAttribute("max",0);
+	input1->SetAttribute("min",0);
+	input1->SetAttribute("InOrOut","PARA_IN");
+	input1->SetAttribute("IsPort",0);
     //***************link all the element*************
 	doc.LinkEndChild(module);
 	
@@ -5966,7 +6035,7 @@ bool logic_XmlIO::initial5004()
 	mode->LinkEndChild(mode3);
 	mode->LinkEndChild(mode4);
 
-
+	inputList->LinkEndChild(input1);
 	//控制台输出调试
 	dump_to_stdout(&doc);
     if(doc.SaveFile(".//logicXmls//5004.xml"))
@@ -6641,107 +6710,182 @@ void logic_XmlIO::saveProgram(std::map<int,logic_Program*> &prgMap,TiXmlElement*
 		std::string name = firstPrgChild->FirstAttribute()->Next()->Value();      //program name
 		std::cout<<"The program ID is: "<<prgId<<" And the name is: "<<name<<std::endl;
 		logic_Program* program = new logic_Program(prgId,name);
-		prgMap[prgId] = program;
-		
+		std::map<whPort, whPort > fromToMap;     //连线map
+		std::map<whPort, whPort > toFromMap;     //连线map
+
 		//traverse all the tree to initial treeMap
 		if(firstPrgChild->FirstChildElement()) 
 		{   
-			for(auto treeRoot = firstPrgChild->FirstChildElement();treeRoot;treeRoot = treeRoot->NextSiblingElement())
+			for(auto treeRoot = firstPrgChild->FirstChildElement();treeRoot;treeRoot = treeRoot->NextSiblingElement())                       //TreeRoot层
 			{
-				int rootId = treeRoot->FirstAttribute()->IntValue();
-				std::cout<<"The Tree ID is: "<<rootId<<std::endl;
-				logic_Tree* tree = new logic_Tree(rootId);
-				program->add_Tree(tree);
-				//initial the tree node
-				//std::vector<logic_TreeNode*> nodeMap;
-				
-				if(treeRoot->FirstChild())
+				std::string name = treeRoot->Value();
+
+				if(name == "TreeRoot")
 				{
-					std::vector<TreeNode*> allNode;
-					for(TiXmlElement* treeNode = treeRoot->FirstChild()->ToElement();treeNode;treeNode = treeNode->NextSiblingElement())
+					int rootId = treeRoot->FirstAttribute()->IntValue();
+					std::cout<<"The Tree ID is: "<<rootId<<std::endl;
+					logic_Tree* tree = new logic_Tree(rootId);
+					program->add_Tree(tree);
+
+					//initial the tree node
+					//std::vector<logic_TreeNode*> nodeMap;
+					
+					if(treeRoot->FirstChild())
 					{
-						auto nodeIdAttribute = treeNode->FirstAttribute();
-						auto fatherIdAttribute = nodeIdAttribute->Next();
-						auto moduleTypeAttribute = fatherIdAttribute->Next();
-						auto currentModeTypeAttribute = moduleTypeAttribute->Next();
-						//模块信息
-						int nodeID = nodeIdAttribute->IntValue();                     //模块ID
-						int fatherID = fatherIdAttribute->IntValue();                 //父亲节点ID
-						int moduleType = moduleTypeAttribute->IntValue();			  //模块类型
-						int currentModeType = currentModeTypeAttribute->IntValue();	  //模块当前模式
-
-						//还原模块信息
-						logic_BasicModule moduleNodeTmp(nodeID,moduleType);    
-						logic_BasicModule* moduleNode = new logic_BasicModule(nodeID,moduleType,moduleNodeTmp);
-						moduleNode->mvi_CurModeID = currentModeType;                   //模块当前模式
-						//将还原的模块放入program
-						program->add_Module(nodeID,moduleNode);
-						
-
-						std::cout<<"The Tree node ID is: "<<nodeID<<" and its father's ID is: "<< fatherID<<std::endl;
-						
-						//用来还原树
-						TreeNode* node = new TreeNode();
-						node->id = nodeID;
-						node->parentId = fatherID;
-						allNode.push_back(node);
-
-						//模块中当前模式下的参数列表
-						std::vector <logic_BasicPara*> paraList;
-						logic_BasicPara* para = new logic_BasicPara();
-						//遍历参数列表
-						if(treeNode->FirstChildElement())
+						std::vector<TreeNode*> allNode;
+						for(TiXmlElement* treeNode = treeRoot->FirstChild()->ToElement();treeNode;treeNode = treeNode->NextSiblingElement())          //treenode层
 						{
-							auto paraInfo = treeNode->FirstChildElement();
-							std::cout<<"Now here is: "<<paraInfo->Value()<<std::endl;
-							if(paraInfo->FirstChild())                               //paraInfo        
+							auto nodeIdAttribute = treeNode->FirstAttribute();
+							auto fatherIdAttribute = nodeIdAttribute->Next();
+							auto moduleTypeAttribute = fatherIdAttribute->Next();
+							auto currentModeTypeAttribute = moduleTypeAttribute->Next();
+							//模块信息
+							int nodeID = nodeIdAttribute->IntValue();                     //模块ID
+							int fatherID = fatherIdAttribute->IntValue();                 //父亲节点ID
+							int moduleType = moduleTypeAttribute->IntValue();			  //模块类型
+							int currentModeType = currentModeTypeAttribute->IntValue();	  //模块当前模式
+
+							//还原模块信息,注意要深拷贝
+							logic_BasicModule* moduleNode = new logic_BasicModule();
+							//深拷贝
+							moduleNode->mvi_CurModeID = allModuleMap[moduleType]->mvi_CurModeID;
+							moduleNode->mvs_ModuleType = allModuleMap[moduleType]->mvs_ModuleType;
+							moduleNode->mvvu_ModeMenu = allModuleMap[moduleType]->mvvu_ModeMenu;
+							deepCopyPara(allModuleMap[moduleType]->mvvu_ParaList,moduleNode->mvvu_ParaList);    //深拷贝
+							moduleNode->mvvu_InitParaList = allModuleMap[moduleType]->mvvu_InitParaList;
+							moduleNode->mve_CurWinSwitcher = allModuleMap[moduleType]->mve_CurWinSwitcher;
+							//当前值
+							moduleNode->mvi_ModuleID = nodeID;
+							moduleNode->mvi_CurModeID = currentModeType;                  
+
+							std::cout<<"The Tree node ID is: "<<nodeID<<" and its father's ID is: "<< fatherID<<std::endl;
+							
+							//用来还原树
+							TreeNode* node = new TreeNode();
+							node->id = nodeID;
+							node->parentId = fatherID;
+							allNode.push_back(node);
+
+							//模块中当前模式下的参数列表与端口菊链
+							std::vector <logic_BasicPara*> paraList = moduleNode->mvvu_ParaList;
+							WinSwitcher* switcher = &(moduleNode->mve_CurWinSwitcher);
+
+							//遍历参数列表
+							if(treeNode->FirstChildElement())
 							{
-								//遍历para
-								for(auto paraNode = paraInfo->FirstChildElement();paraNode;paraNode = paraNode->NextSiblingElement())
+								auto paraInfo = treeNode->FirstChildElement();
+								std::cout<<"Now here is: "<<paraInfo->Value()<<std::endl;
+								if(paraInfo->FirstChild())                               //paraInfo        
 								{
-									if(paraNode->FirstAttribute())			             //para attribute
-									{	
-										int id,isInPort;
-										std::string value;
-										for(auto paraNodeAttribute = paraNode->FirstAttribute();paraNodeAttribute;paraNodeAttribute = paraNodeAttribute->Next())
+									//遍历para
+									for(auto paraNode = paraInfo->FirstChildElement();paraNode;paraNode = paraNode->NextSiblingElement())                     //paraInfo层
+									{
+										std::string name = paraNode->Value();
+										if(name == "para")
 										{
-											std::string name = paraNodeAttribute->Name();
-											if(name == "ID")
-											{
-												std::cout<<std::setiosflags(std::ios::right)<<std::setw(10)<<name<<"\t"<<paraNodeAttribute->IntValue()<<"\t";
-												id = paraNodeAttribute->IntValue();
-												para->mvi_ParaID = id;
-											}
-											else if(name == "value")
-											{
-												std::cout<<std::setiosflags(std::ios::right)<<std::setw(10)<<name<<"\t"<<paraNodeAttribute->Value()<<"\t";
-												value = paraNodeAttribute->Value();
-												para->mvs_Value = value;
-											}
-											else if(name == "isInPort")
-											{
-												std::cout<<std::setiosflags(std::ios::right)<<std::setw(10)<<name<<"\t"<<paraNodeAttribute->IntValue()<<"\t";
-												isInPort = paraNodeAttribute->IntValue();
-												para->mvb_IsInport = isInPort;
-											}
+											if(paraNode->FirstAttribute())			             //para attribute
+											{	
+												int id,isInPort;
+												std::string value;
+												for(auto paraNodeAttribute = paraNode->FirstAttribute();paraNodeAttribute;paraNodeAttribute = paraNodeAttribute->Next())          //para层
+												{
+													std::string name = paraNodeAttribute->Name();
+													if(name == "ID")
+													{
+														id = paraNodeAttribute->IntValue();
+													}
+													else if(name == "value")
+													{
+														value = paraNodeAttribute->Value();
+													}
+													else if(name == "isInPort")
+													{
+														isInPort = paraNodeAttribute->IntValue();
+													}
+
+												}					
+												paraList[id-1]->mvs_Value = value;
+												paraList[id-1]->mvb_IsInport = isInPort;
+ 											}
 										}
-										std::cout<<std::endl;
-									}
-									//遍历一个para结束，将para压入list
-									paraList.push_back(para);
+										else if(name == "switcher")
+										{
+											if(paraNode->FirstAttribute())			             //switcher attribute
+											{
+												std::string value;
+												int chainLayer;	
+												for(auto paraNodeAttribute = paraNode->FirstAttribute();paraNodeAttribute;paraNodeAttribute = paraNodeAttribute->Next())          //para层
+												{
+													std::string name = paraNodeAttribute->Name();
+													if(name == "value")
+													{
+														value = paraNodeAttribute->Value();
+													}
+													else if(name == "chainLayer")
+													{
+														chainLayer = paraNodeAttribute->IntValue();
+													}
+												}						
+												switcher->mvs_WSValue = value;
+												switcher->mvi_ChainLayer = chainLayer;
+ 											}
+										}
+
+									}																																														//paraInfo层结束
+									//list填充完毕，将list写入module
+									moduleNode->mvvu_ParaList = paraList;
+									moduleNode->mve_CurWinSwitcher = *switcher;
 								}
-								//list填充完毕，将list写入module
-								moduleNode->setCurParaList(paraList);
+							}
+							//将还原的模块放入program
+							program->add_Module(nodeID,moduleNode);
+						}																																								//Tree层结束
+						rebuildTree(tree,allNode);
+					}
+				}
+				else if(name == "From_To")
+				{
+					if(treeRoot->FirstAttribute())
+					{
+						int module1,paraId1,module2,paraId2;
+						for(auto From_To_Attribute = treeRoot->FirstAttribute();From_To_Attribute;From_To_Attribute = From_To_Attribute->Next())
+						{
+							std::string name = From_To_Attribute->Name();
+							if(name == "moduleId1")
+							{
+								module1 = From_To_Attribute->IntValue();
+							}
+							else if(name == "paraId1")
+							{
+								paraId1 = From_To_Attribute->IntValue();
+							}
+							else if(name == "moduleId2")
+							{
+								module2 = From_To_Attribute->IntValue();
+							}
+							else if(name == "paraId2")
+							{
+								paraId2 = From_To_Attribute->IntValue();
 							}
 						}
-						
+						whPort from,to;
+						from.moduleId = module1;
+						from.paraId = paraId1;
+						to.moduleId = module2;
+						to.paraId = paraId2;
+						fromToMap[from] = to;
+						toFromMap[to] = from;
 					}
-					rebuildTree(tree,allNode);
-//					tree->recurs_print(tree->getRoot());
-				}
-			}
-		}
 
+				}
+
+			}  //TreeRoot层结束
+			//将连线的两个表放入program
+			program->setFromToMap(fromToMap);
+			program->setToFromMap(toFromMap);
+		}
+		//将program放入project
+		prgMap[prgId] = program;
 	}
 }
 
@@ -6752,20 +6896,19 @@ bool logic_XmlIO::IO_SaveProgram(const std::string fileName,TiXmlElement* rootEl
 		TiXmlDocument doc;
 		TiXmlDeclaration* dec = new TiXmlDeclaration("1.0", "", "");
 		doc.LinkEndChild(dec);
-		std::cout<<"The root's name is "<<rootElement->Value()<<std::endl;
-		TiXmlElement* root = new TiXmlElement(rootElement->Value());       //浅拷贝根元素
+		TiXmlElement* root = new TiXmlElement(rootElement->Value());       //深拷贝根元素
 		doc.LinkEndChild(root);
 		if(rootElement->FirstChild())
 		{
 			auto program = rootElement->FirstChildElement();
-			//浅拷贝所有的program
+			//深拷贝所有的program
 			while (program)
 			{
 				std::cout<<"The child is "<<rootElement->FirstChild()->Value()<<std::endl;
 				auto programName = rootElement->FirstChild()->Value();
 				TiXmlElement* programCopy = new TiXmlElement(programName);
 				root->LinkEndChild(programCopy);
-				//浅拷贝所有的attribute
+				//深拷贝所有的attribute
 				if(program->FirstAttribute())
 				{
 					auto attribute = program->FirstAttribute();
@@ -6775,14 +6918,14 @@ bool logic_XmlIO::IO_SaveProgram(const std::string fileName,TiXmlElement* rootEl
 						attribute = attribute->Next();
 					}
 				}
-				//浅拷贝所有树的子节点
+				//深拷贝所有树的子节点
 				if(program->FirstChildElement())
 				{
 					auto treeRoot = program->FirstChildElement();
 					while(treeRoot)
 					{
 						TiXmlElement* treeRootCopy = new TiXmlElement(treeRoot->Value());
-						//浅拷贝所有的树根节点的属性值
+						//深拷贝所有的树根节点的属性值
 						if(treeRoot->FirstAttribute())
 						{
 							auto attribute = treeRoot->FirstAttribute();
@@ -6792,14 +6935,14 @@ bool logic_XmlIO::IO_SaveProgram(const std::string fileName,TiXmlElement* rootEl
 								attribute = attribute->Next();
 							}
 						}
-						//浅拷贝所有树的子节点
+						//深拷贝所有树的子节点
 						if(treeRoot->FirstChildElement())
 						{
 							auto treeNode = treeRoot->FirstChildElement();
 							while(treeNode)
 							{
 								TiXmlElement* treeNodeCopy = new TiXmlElement(treeNode->Value());
-								//浅拷贝所有的子根节点的属性值
+								//深拷贝所有的子根节点的属性值
 								if(treeNode->FirstAttribute())
 								{
 									auto attribute = treeNode->FirstAttribute();
@@ -6855,19 +6998,19 @@ void logic_XmlIO::saveVarModule(logic_Project &prj,TiXmlElement* varietiesElemen
 	VarietyType type;
 	switch (typeInt)
 	{
-	case 0:
-		type = Text;
-		break;
-	case 1:
-		type = Numeric;
-		break;
-	case 2:
-		type = Boolean;
-		break;
-	default:
-		std::cout<<"find error in variety type"<<std::endl;
-		return;
-		break;
+		case 0:
+			type = Text;
+			break;
+		case 1:
+			type = Numeric;
+			break;
+		case 2:
+			type = Boolean;
+			break;
+		default:
+			std::cout<<"find error in variety type"<<std::endl;
+			return;
+			break;
 	}
 	logic_VarModule* variety = new logic_VarModule(id,type,value);
 	prj.setPrjVariety(id,variety);
@@ -6995,4 +7138,20 @@ bool logic_XmlIO::rebuildTree(logic_Tree* treeRoot, std::vector<TreeNode*> allNo
 		treeRoot->setRoot(treeNodeMap.begin()->second);
 	}
 
+}
+
+void logic_XmlIO::deepCopyPara(std::vector<logic_BasicPara*> copy,std::vector<logic_BasicPara*> &copyTo)
+{
+	for(auto index : copy)
+	{
+		logic_BasicPara* para = new logic_BasicPara();
+		para->mvi_ParaID = index->mvi_ParaID;
+		para->mve_IOType = index->mve_IOType;
+		para->mve_ParaType = index->mve_ParaType;
+		para->mvs_Value = index->mvs_Value;
+		para->mvd_Min = index->mvd_Min;
+		para->mvd_Max = index->mvd_Max;
+		para->mvb_IsInport = index->mvb_IsInport;
+		copyTo.push_back(para);
+	}
 }

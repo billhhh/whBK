@@ -183,3 +183,17 @@ void logic_Project::setPrjId(int id) {
 
 	this->mvstr_PrjId = id;
 }
+
+
+///
+/// \brief ·½±ãxml
+///
+void logic_Project::setProgram(std::map <int ,logic_Program* > programMap)
+{
+	mvvu_ProgMap = programMap;
+}
+
+void logic_Project::setPrjVarietyMap(std::map<_IdDataType ,logic_VarModule*> PrjVariety)
+{
+	mvmu_PrjVariety = PrjVariety;
+}

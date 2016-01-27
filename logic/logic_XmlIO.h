@@ -12,6 +12,7 @@
 #include"tinyXML\tinyxml.h"
 #include"tinyXML\tinystr.h"
 #include"logic_Project.h"
+#include"logic_Controller.h"
 
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
@@ -37,6 +38,7 @@ public:
 	//测试存储的Module Map,将所有信息打印出来
 	void testAllModule(std::map <int, logic_BasicModule *> &InitModuleMap);
 	
+	bool initialBottom();
 
 #pragma region unit_test
 	void testConstruct()
@@ -140,13 +142,16 @@ protected:
 	void dump_to_stdout(TiXmlNode* pParent, unsigned int);
 	void dump_to_stdout(const char* pFilename);
 private:
+	//变量
 	static const unsigned int NUM_INDENTS_PER_SPACE = 2;
+	std::map <int, logic_BasicModule *> allModuleMap;
+
+	
+	//工具函数
 	void traverSaveTree(logic_TreeNode* root,TiXmlElement* parent);
-
-
-#pragma region initial
+	#pragma region initial
 	//*******************initial bottom***********************
-	bool initialBottom();
+	
 
 	bool initial1001();
 	bool initial1002();
@@ -272,5 +277,7 @@ private:
 
 	////用于存储某个标签内的所有信息
 	//void testAttribute(TiXmlElement* src,TiXmlElement* dst);
+	void deepCopyPara(std::vector<logic_BasicPara*>,std::vector<logic_BasicPara*>&);
+
 };
 
