@@ -200,6 +200,9 @@ public:
 	std::vector<int > findRootsInContainer();
 	std::vector<int > findRootsInContainer(int for_id);
 	std::vector<int > findRootsInContainer(int if_id,int branch_id);
+	//找到激活树根节点
+	std::vector<int > findRootsInContainerActive(int for_id);
+	std::vector<int > findRootsInContainerActive(int if_id,int branch_id);
 
 protected:
 

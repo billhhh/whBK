@@ -411,3 +411,26 @@ std::vector<int > logic_IfModule::findBranchAllRoots(int branch_id) {
 
 	return L;
 }
+
+void logic_IfModule::recurs_GetId(logic_TreeNode *some,std::vector<int> & L) {
+
+	L.push_back(some->getID());
+
+	//∫Õ getAllTreeNodeId() ¡¨”√£¨µ›πÈget id
+	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
+		recurs_GetId(some->mvvu_Children[i],L);
+	}
+}
+
+std::vector<int > logic_IfModule::findBranchAllRootsActive(int branch_id) {
+
+	vector <int > L;
+
+	logic_TreeNode * root = mvmu_BranchMap[branch_id].curActiveTree->getRoot();
+	this->recurs_GetId(root,L);
+
+	//std::vector<int>::iterator it = L.begin();
+	L.erase(L.begin());
+
+	return L;
+}

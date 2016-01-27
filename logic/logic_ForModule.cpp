@@ -206,3 +206,28 @@ std::vector<int > logic_ForModule::findAllRoots() {
 
 	return L;
 }
+
+void logic_ForModule::recurs_GetId(logic_TreeNode *some,std::vector<int> & L) {
+
+	L.push_back(some->getID());
+
+	//和 getAllTreeNodeId() 连用，递归get id
+	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
+		recurs_GetId(some->mvvu_Children[i],L);
+	}
+}
+
+//返回该 for 模块Active树所有节点
+std::vector<int > logic_ForModule::findAllRootsActive() {
+
+	vector <int > L;
+
+	logic_TreeNode * root = mvi_CurActiveTree->getRoot();
+	this->recurs_GetId(root,L);
+
+	//std::vector<int>::iterator it = L.begin();
+	L.erase(L.begin());
+
+	return L;
+}
+

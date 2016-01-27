@@ -103,6 +103,8 @@ public:
 	/// \return 根节点集合
 	///
 	std::vector<int > ctrlFindRootsInContainer(int containerId);
+	//找到激活树根节点
+	std::vector<int > ctrlFindRootsInContainerActive(int containerId);
 
 	std::map <int, logic_BasicModule *> ctrlGetInitMap();
 

@@ -2753,6 +2753,23 @@ std::vector<int > logic_Program::findRootsInContainer(int if_id,int branch_id) {
 	return tmpIfModule->findBranchAllRoots(branch_id);
 }
 
+//找到激活树根节点
+std::vector<int > logic_Program::findRootsInContainerActive(int for_id) {
+
+	assert( mvmu_ModuleMap.count(for_id)>0 );
+	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
+
+	return tmpForModule->findAllRootsActive();
+}
+
+std::vector<int > logic_Program::findRootsInContainerActive(int if_id,int branch_id) {
+
+	assert( mvmu_ModuleMap.count(if_id)>0 );
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
+
+	return tmpIfModule->findBranchAllRootsActive(branch_id);
+}
+
 //连线时检测：只有一种情况有问题，即连接自己的祖先
 //（其实判断这两个模块如果在一棵树就有问题）
 //para： cur_id是连线出口模块，another_id是被连接模块

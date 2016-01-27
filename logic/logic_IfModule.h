@@ -78,6 +78,7 @@ public:
 
 	//返回该 if 模块所有树root节点
 	std::vector<int > findBranchAllRoots(int branch_id);
+	std::vector<int > findBranchAllRootsActive(int branch_id);
 
 protected:
 
@@ -99,6 +100,8 @@ private:
 	//完全删除一棵树所有节点模块的所有信息（各种实体map和connection map）
 	void recurs_DelTreeModule(logic_TreeNode *some);
 	void DelModule(int id); //销毁关于一个module的一切信息
+
+	void recurs_GetId(logic_TreeNode *some,std::vector<int> & L);
 
 private:
 	//完全对应外部的map，方便删除操作

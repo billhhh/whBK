@@ -659,6 +659,25 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 	}
 }
 
+//找到激活树根节点
+std::vector<int > logic_Controller::ctrlFindRootsInContainerActive(int containerId) {
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	if( 0 == containerId ) //大画布
+		assert(false);
+	else if( containerId < 0x7FFF ) //for
+		return tCurProg->findRootsInContainerActive(containerId);
+	else {
+
+		int if_id;
+		int branch_id;
+		decryptBranchId(containerId,if_id,branch_id);
+		return tCurProg->findRootsInContainerActive(if_id,branch_id);
+	}
+}
+
 std::map <int, logic_BasicModule *> logic_Controller::ctrlGetInitMap() {
 
 	return this->mvmu_InitModuleMap;
