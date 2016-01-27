@@ -1,9 +1,9 @@
-﻿生成启动时间为 2016/1/26 20:03:33。
+﻿生成启动时间为 2016/1/27 10:02:42。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -76,70 +76,74 @@
      1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
          正在编译...
          logic_Controller.cpp
-     1>e:\bill github\whbk\logic\logic_XmlIO.h(173): warning C4101: “e”: 未引用的局部变量
+     1>e:\bill github\whbk\logic\logic_XmlIO.h(124): warning C4101: “e”: 未引用的局部变量
          logic_VarModule.cpp
          logic_XmlIO.cpp
-     1>e:\bill github\whbk\logic\logic_XmlIO.h(173): warning C4101: “e”: 未引用的局部变量
-     1>logic\logic_XmlIO.cpp(177): warning C4101: “e”: 未引用的局部变量
-     1>logic\logic_XmlIO.cpp(408): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>e:\bill github\whbk\logic\logic_XmlIO.h(124): warning C4101: “e”: 未引用的局部变量
+     1>logic\logic_XmlIO.cpp(183): warning C4101: “e”: 未引用的局部变量
      1>logic\logic_XmlIO.cpp(432): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(539): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(456): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(563): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(679): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(587): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(703): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(820): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(727): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(844): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1917): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1933): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1949): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(868): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(1941): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(1957): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(1973): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2358): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2366): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(1997): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(2382): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(2390): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2406): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2780): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(2414): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(2430): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
      1>logic\logic_XmlIO.cpp(2804): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3144): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3301): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3462): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3640): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3648): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3656): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3779): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3907): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3915): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4154): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4370): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4378): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4518): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4661): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4685): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4788): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5019): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5027): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5035): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5043): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5051): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5146): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5154): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5162): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5264): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5272): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5357): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5365): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5373): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5546): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5554): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5562): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5570): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5672): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5818): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6018): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6080): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6088): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6150): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6364): warning C4101: “e”: 未引用的局部变量
-     1>logic\logic_XmlIO.cpp(6818): warning C4101: “e”: 未引用的局部变量
+     1>logic\logic_XmlIO.cpp(2828): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3168): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3325): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3486): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3664): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3672): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3680): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3803): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3931): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(3939): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4178): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4399): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4408): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4417): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4426): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4435): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4579): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4722): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4746): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(4849): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5080): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5088): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5096): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5104): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5112): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5207): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5215): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5223): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5325): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5333): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5418): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5426): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5434): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5607): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5615): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5623): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5631): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5733): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(5879): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(6086): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(6148): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(6156): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(6218): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>logic\logic_XmlIO.cpp(6421): warning C4101: “e”: 未引用的局部变量
+     1>logic\logic_XmlIO.cpp(6808): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_XmlIO.cpp(6980): warning C4101: “e”: 未引用的局部变量
          tinystr.cpp
          tinyxml.cpp
          tinyxmlerror.cpp
@@ -162,6 +166,8 @@
      1>view.cpp(246): warning C4100: “event”: 未引用的形参
          正在生成代码...
      1>e:\bill github\whbk\msginterface.cpp(170): warning C4715: “msgInterface::moveModule”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_xmlio.cpp(7141): warning C4715: “logic_XmlIO::rebuildTree”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_whport.h(36): warning C4715: “structPort::operator<”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_controller.cpp(591): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_controller.cpp(628): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 GeneratedFiles\qrc_image.cpp
@@ -213,4 +219,4 @@
 
 生成成功。
 
-已用时间 00:00:26.58
+已用时间 00:00:26.49

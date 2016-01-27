@@ -2777,3 +2777,19 @@ void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
 {
 	mvmu_TreeMap = treeMap;
 }
+
+//连线持久化get、set函数
+std::map<whPort, whPort > logic_Program::getFromMap()
+{
+	return mvvu_Conn_From_ToMap;
+}
+
+void logic_Program::setFromToMap(std::map<whPort, whPort > fromToMap)
+{
+	mvvu_Conn_From_ToMap = fromToMap;
+}
+
+void logic_Program::setToFromMap(std::map<whPort, whPort > toFromMap)
+{
+	mvvu_Conn_To_FromMap = toFromMap;
+}

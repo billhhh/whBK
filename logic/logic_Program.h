@@ -101,6 +101,12 @@ public:
 	void setModuleMap(std::map <int ,logic_BasicModule* > moduleMap);
 	void setTreeMap(std::map<int,logic_Tree*> treeMap);
 
+	//连线持久化get、set函数
+	std::map<whPort, whPort > getFromMap();
+	void setFromToMap(std::map<whPort, whPort >);
+	void setToFromMap(std::map<whPort, whPort >);
+
+
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	//set & get
