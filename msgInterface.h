@@ -167,6 +167,34 @@ public:
 	///
 	std::vector<int > findRootsInContainer(int containerId);
 
+	///
+	/// \brief 项目属性
+	///
+	std::string getPrjName();
+	int setPrjName(std::string name); //返回错误信息
+
+	std::string getPrjDescription();
+	int setPrjDescription(std::string desc);
+
+	std::string getPrjPhotoPath();
+	int setPrjPhotoPath(std::string path);
+
+	//菊链模式开关
+	int getPrjDaisyChainMode(); //是0（关）或者1（开），<0 错误
+	int setPrjDaisyChainMode(int mode);
+
+	//获取prog名字列表
+	std::vector <int, std::string> getPrjProgNameMap();
+	int delPrjProgThroughId(int id); //删除prog编号
+
+	//获取graph名字列表
+	std::vector <int, std::string> getPrjVarietyNameMap();
+	int delPrjVarietyThroughId(int id);
+
+	//获取变量名字列表
+	std::vector <int, std::string> getPrjGraphNameMap();
+	int delPrjGraphThroughId(int id);
+
 	/// \brief 创建我的模块
 
 protected:

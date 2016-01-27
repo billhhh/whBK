@@ -72,6 +72,8 @@ private:
 	std::string mvstr_PrjName;    // project name
 	std::string mvstr_PrjDescription;
 	std::string mvstr_PhotoPath;
+	int mvb_DaisyChainMode; //菊链模式开关，是0（关）或者1（开）
+
 
 	//program map
 	std::map <int, logic_Program *> mvvu_ProgMap;
@@ -84,7 +86,7 @@ private:
 	///
 	std::map <int, logic_BasicModule *> initModuleMap;
 
-	std::map<int, logic_Graph *> graghMap;
+	std::map<int, logic_Graph *> graphMap;
 
 //工具private函数
 private:
