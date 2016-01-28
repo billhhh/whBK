@@ -44,6 +44,7 @@ void logic_ForModule::Init() {
 	//初始化类
 	mvvu_treeList.clear();
 	mvi_CurActiveTree = new logic_Tree(-1); //activeTree root节点编号为-1
+	mvi_CurActiveTree->append_node(-1,-2); //结束节点
 
 	//将activeTree加入treeMap
 	(*treeMap)[this->composeActiveTreeId()] = mvi_CurActiveTree;

@@ -51,6 +51,7 @@ void logic_IfModule::Init() {
 	//branch 1
 	whBranch newBranch;
 	newBranch.curActiveTree = new logic_Tree(-1);
+	newBranch.curActiveTree->append_node(-1,-2); //结束节点
 	newBranch.contentInt = INT_MIN;
 	newBranch.contentStr = "";
 	mvmu_BranchMap[1] = newBranch;
@@ -58,6 +59,7 @@ void logic_IfModule::Init() {
 	//branch 2
 	whBranch newBranch2;
 	newBranch2.curActiveTree = new logic_Tree(-1);
+	newBranch2.curActiveTree->append_node(-1,-2); //结束节点
 	newBranch2.contentInt = INT_MIN;
 	newBranch2.contentStr = "";
 	mvmu_BranchMap[2] = newBranch2;
