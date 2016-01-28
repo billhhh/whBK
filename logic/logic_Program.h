@@ -215,7 +215,9 @@ public:
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
-	///且 key = moduleId*100000+branchId，这种 tree 只维护mvmu_TreeMap
+	///且 （1）如果是 for模块 key = moduleId*100000
+	//（2）如果是 if 模块 key = moduleId*100000+branchId
+	//这些特殊的 tree 只维护mvmu_TreeMap
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap; // rootId 与 树实体的对应
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射
