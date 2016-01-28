@@ -278,6 +278,9 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 					MoveType move_type,int container_id,int ui_branch_id
 					) {
 
+	if( other_m_id <= -2 ) //不允许插入-2
+		assert(false);
+
 	if( container_id == ui_branch_id ) //目的地是for模块
 		return ctrl.ctrlMoveModuleFor(cur_m_id,other_m_id,move_type,container_id);
 	else //目的地是if模块

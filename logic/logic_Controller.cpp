@@ -334,7 +334,7 @@ int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
 //insert into for
 bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id) {
 
-	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
+	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0或-1
 	if ( pre_id > 0 ) {
 
 		//为0：新放入for
@@ -342,6 +342,9 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 		assert(false);
 		return false;
 	}
+
+	if( pre_id <= -2 ) //不允许插入-2
+		assert(false);
 
 	if ( false != isFI) //必须不是前插（必是后插），否则错误
 		return false;
@@ -360,9 +363,12 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 //insert into if
 bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int ui_branch_id) {
 
-	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
+	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0或-1
 	if ( 0 != pre_id )
 		return false;
+
+	if( pre_id <= -2 ) //不允许插入-2
+		assert(false);
 
 	if ( false != isFI) //必须不是前插，否则错误
 		return false;
