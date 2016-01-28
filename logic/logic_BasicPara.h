@@ -21,7 +21,8 @@ enum ParaType{
 	PARA_LOGIC = 0,//逻辑
 	PARA_NUM, //数字
 	PARA_TEXT, //文本
-	PARA_MULTI //多选
+	PARA_MULTI, //多选
+	PARA_INPORT //端口输入
 };
 
 class logic_BasicPara
