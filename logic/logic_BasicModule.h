@@ -78,7 +78,7 @@ public:
 
 	//代码片列表---对应不同模式，不用额外存储，在初始化 mvvu_ModeMenu 已有
 
-	std::vector <logic_BasicPara *> mvvu_InitParaList; //init参数列表
+	std::vector <logic_BasicPara *> mvvu_InitParaList; //init参数列表，init数据不做修改
 
 	//当前端口选择器，包括菊链层号
 	WinSwitcher mve_CurWinSwitcher;
