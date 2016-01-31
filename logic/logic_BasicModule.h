@@ -75,7 +75,7 @@ public:
 	//模式选择器总表，初始化load进来
 	std::vector <logic_ParaPointer *> mvvu_ModeMenu;
 	std::vector <logic_BasicPara *> mvvu_ParaList; //参数列表
-	std::vector <std::string > mvvu_CodeBlocksList; //代码片列表
+	std::vector <std::string > mvvu_CodeBlocksList; //代码片列表---对应不同模式
 
 	std::vector <logic_BasicPara *> mvvu_InitParaList; //init参数列表
 
