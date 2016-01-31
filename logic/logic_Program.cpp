@@ -1058,6 +1058,10 @@ void logic_Program::setModuleModeValue(int m_id,int mode_id) {
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
 	tModule->setModeValue(mode_id);
+
+	//去掉参数连线
+
+
 }
 
 //得到所有treenode

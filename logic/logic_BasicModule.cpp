@@ -162,6 +162,10 @@ int logic_BasicModule::getModeValue() {
 void logic_BasicModule::setModeValue(int mode_id) {
 
 	mvi_CurModeID = mode_id;
+
+	//复制初始化数据到 WinSwitcher
+	this->mve_CurWinSwitcher = mvvu_ModeMenu[mode_id-1]->mve_WS;
+
 }
 
 WinSwitcherType logic_BasicModule::getCurWSType() {
