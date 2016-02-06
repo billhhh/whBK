@@ -2714,9 +2714,9 @@ void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_
 }
 
 //初始化 prjForNameMap，prjForNameMap是副本
-void logic_Program::setInitForNameMap(std::map <int, logic_BasicModule *> for_name_map) {
+void logic_Program::setInitForNameMap(std::map <int,  std::string> for_name_map) {
 
-	this->
+	this->prjForNameMap = for_name_map;
 }
 
 ///

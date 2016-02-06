@@ -192,7 +192,7 @@ public:
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
 	//初始化 prjForNameMap，prjForNameMap是副本
-	void setInitForNameMap(std::map <int, logic_BasicModule *> for_name_map);
+	void setInitForNameMap(std::map <int, std::string> for_name_map);
 
 	///
 	/// \brief 获取根节点
