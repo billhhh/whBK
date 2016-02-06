@@ -30,6 +30,7 @@ enum WinSwitcherType{
 class WinSwitcher
 {
 public:
+	std::string WSName; //为了鼠标放在上面的时候显示
 	WinSwitcherType mve_WSType; //如果发现是“端口输入”模式，那就应该去外面找连线
 	std::string mvs_WSValue;
 	int mvi_ChainLayer; //菊链层号
