@@ -2713,6 +2713,12 @@ void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_
 	this->initModuleMap = init_m_map; //初始化 所有init module副本
 }
 
+//初始化 prjForNameMap，prjForNameMap是副本
+void logic_Program::setInitForNameMap(std::map <int, logic_BasicModule *> for_name_map) {
+
+	this->
+}
+
 ///
 /// \brief 获取根节点
 /// \para 容器编号，如果是0，获取最外层root集合

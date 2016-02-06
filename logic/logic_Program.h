@@ -191,6 +191,8 @@ public:
 	void setInitVarMap(std::map<int  ,VarProperty> &v_map);
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
+	//初始化 prjForNameMap，prjForNameMap是副本
+	void setInitForNameMap(std::map <int, logic_BasicModule *> for_name_map);
 
 	///
 	/// \brief 获取根节点
@@ -234,6 +236,8 @@ protected:
 	std::map <int, logic_BasicModule *> initModuleMap;
 	//变量（整个prj通用）
 	std::map<_IdDataType ,VarProperty> *prjVarietyMap;
+
+	std::map<_IdDataType ,std::string> prjForNameMap; //for循环名称map
 
 	void Init();
 	void prog_Destroy();
