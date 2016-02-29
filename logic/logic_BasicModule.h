@@ -54,7 +54,7 @@ public:
 
 	////!!!!!!!!!!!!!!!!!!!【XmlIO】!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	std::vector <logic_BasicPara*> getCurParaList(); //get 当前模式 的所有参数
+	std::vector <logic_BasicPara*> getCurParaList(); //get 当前模式的所有参数
 	WinSwitcherType getCurWSType(); //得到当前 端口选择器 type
 
 	void setCurParaList(std::vector <logic_BasicPara*> paraList);
@@ -72,13 +72,12 @@ public:
 	bool mvb_IsRun; //是否在运行中
 	//bool mvb_IsConnectStart; //有没有跟开始模块相连
 
-	//模式选择器总表，初始化load进来，init数据不做修改
+	//模式选择器总表，初始化load进来
 	std::vector <logic_ParaPointer *> mvvu_ModeMenu;
 	std::vector <logic_BasicPara *> mvvu_ParaList; //参数列表
+	std::vector <std::string > mvvu_CodeBlocksList; //代码片列表
 
-	//代码片列表---对应不同模式，不用额外存储，在初始化 mvvu_ModeMenu 已有
-
-	std::vector <logic_BasicPara *> mvvu_InitParaList; //init参数列表，init数据不做修改
+	std::vector <logic_BasicPara *> mvvu_InitParaList; //init参数列表
 
 	//当前端口选择器，包括菊链层号
 	WinSwitcher mve_CurWinSwitcher;

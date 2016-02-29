@@ -13,6 +13,7 @@
 #include <sstream> 
 #include <string>
 #include <assert.h>
+#include "logic_XmlIO.h"
 
 
 logic_Project::logic_Project(int id,std::string name)
@@ -36,11 +37,12 @@ logic_Project::~logic_Project()
 void logic_Project::Init() {
 	mvvu_ProgMap.clear();
 	//mvvu_ProgMap[0] = NULL;
-	mvmu_PrjVarietyMap.clear();
+	mvmu_PrjVariety.clear();
 	//mvmu_PrjVariety[0] = NULL;
 
-	logic_Program * prog = new logic_Program(1,"Program");//第一个program
-	mvvu_ProgMap[1] = prog;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!让前端去驱动来新建program
+	//logic_Program * prog = new logic_Program(1,"Program");//第一个program
+	//mvvu_ProgMap[1] = prog;
 }
 
 //销毁当前prj对象
@@ -80,14 +82,20 @@ std::string logic_Project::getPrjPhotoPath()
 	return mvstr_PhotoPath;
 }
 
-void logic_Project::addPrjVariety(const _IdDataType id, VarProperty var)
+void logic_Project::setPrjVariety(const _IdDataType id, logic_VarModule* varModule)
 {
-	mvmu_PrjVarietyMap[id] = var;
+	mvmu_PrjVariety[id] = varModule;
 }
 
-std::map<_IdDataType ,VarProperty> logic_Project::getPrjVarietyMap()
+void logic_Project::setPrjVarietyMap(std::map<_IdDataType ,logic_VarModule*> PrjVariety)
 {
-	return mvmu_PrjVarietyMap;
+	mvmu_PrjVariety = PrjVariety;
+}
+
+
+std::map<_IdDataType ,logic_VarModule*> logic_Project::getPrjVariety()
+{
+	return mvmu_PrjVariety;
 }
 
 //重载新建program，完全自动化新建program
@@ -100,7 +108,7 @@ int logic_Project::newProgram() {
 	mvvu_ProgMap[max_prog_id] = tprog;
 
 	//初始化新 prog 特殊参数
-	tprog->setInitVarMap(this->mvmu_PrjVarietyMap);
+	tprog->setInitVarMap(this->mvmu_PrjVariety);
 	tprog->setInitModuleMap(this->initModuleMap);
 
 	return max_prog_id;
@@ -123,6 +131,43 @@ logic_Program* logic_Project::getProgram(int id)
 	return mvvu_ProgMap[id];
 }
 
+std::string logic_Project::copyProgram(const std::string progName)
+{
+	auto prgId = getProgId(progName);
+	if (prgId == 0)  //如果不存在
+		return "";
+	
+	auto program = getProgram(prgId);
+	auto newProgramId = newProgram();
+	auto newName = genNewProgName(newProgramId);
+	auto newProgram = getProgram(newProgramId);
+	//深拷贝过程
+	newProgram = program->copyPrg(newProgram);
+
+	return newName;
+}
+
+//根据progName删除该program
+bool logic_Project::deleteProgram(const std::string progName)
+{
+	auto prgId = getProgId(progName);
+	if (prgId == 0)  //如果不存在
+		return false;
+
+	auto program = getProgram(prgId);
+	mvvu_ProgMap.erase(prgId);
+
+	return true;
+
+}
+
+void logic_Project::setProgram(std::map <int ,logic_Program* > programMap)
+{
+	mvvu_ProgMap = programMap;
+}
+
+
+
 int logic_Project::getMaxProgId() {
 
 	if( mvvu_ProgMap.size() == 0 )
@@ -139,6 +184,24 @@ std::string logic_Project::genNewProgName(int id) {
 	res.append(idStr);
 	return res;
 }
+
+//根据项目名得到项目ID
+int logic_Project::getProgId(std::string progName)
+{
+	int programID = 0;
+	auto progMap = getAllProgram();
+	for (auto index : progMap)
+	{
+		auto prgName = index.second->getName();
+		if (prgName == progName)
+		{
+			auto prgId = index.second->getID();
+			return prgId;
+		}
+	}
+	return 0;
+}
+
 
 std::string logic_Project::whIntToString(int aa) {
 	if ( 0 == aa )
@@ -167,6 +230,13 @@ std::map <int ,logic_Program* > logic_Project::getAllProgram() {
 	return mvvu_ProgMap;
 }
 
+//【XmlIO】 根据路径名导入一个program
+bool logic_Project::importProgram(std::string progPath)
+{
+	logic_XmlIO* IOControl;
+	return IOControl->IO_ImportProgram(progPath,this);
+}
+
 //初始化 initModule，init_m_map是副本
 void logic_Project::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map) {
 
@@ -182,18 +252,4 @@ int logic_Project::getPrjId() {
 void logic_Project::setPrjId(int id) {
 
 	this->mvstr_PrjId = id;
-}
-
-
-///
-/// \brief 方便xml
-///
-void logic_Project::setProgram(std::map <int ,logic_Program* > programMap)
-{
-	mvvu_ProgMap = programMap;
-}
-
-void logic_Project::setPrjVarietyMap(std::map<_IdDataType ,VarProperty> map)
-{
-	mvmu_PrjVarietyMap = map;
 }

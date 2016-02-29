@@ -47,26 +47,27 @@ void logic_IfModule::Init() {
 	mvmu_BranchMap.clear();
 	mvmis_Tree_BranchMap.clear();
 
-	/// init声明两个默认branch
-	//branch 1
-	whBranch newBranch;
-	newBranch.curActiveTree = new logic_Tree(-1);
-	newBranch.curActiveTree->append_node(-1,-2); //结束节点
-	newBranch.contentInt = INT_MIN;
-	newBranch.contentStr = "";
-	mvmu_BranchMap[1] = newBranch;
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!不默认生成了
+	///// init声明两个默认branch
+	////branch 1
+	//whBranch newBranch;
+	//newBranch.curActiveTree = new logic_Tree(-1);
+	//newBranch.curActiveTree->append_node(-1,-2); //结束节点
+	//newBranch.contentInt = INT_MIN;
+	//newBranch.contentStr = "";
+	//mvmu_BranchMap[1] = newBranch;
 
-	//branch 2
-	whBranch newBranch2;
-	newBranch2.curActiveTree = new logic_Tree(-1);
-	newBranch2.curActiveTree->append_node(-1,-2); //结束节点
-	newBranch2.contentInt = INT_MIN;
-	newBranch2.contentStr = "";
-	mvmu_BranchMap[2] = newBranch2;
+	////branch 2
+	//whBranch newBranch2;
+	//newBranch2.curActiveTree = new logic_Tree(-1);
+	//newBranch2.curActiveTree->append_node(-1,-2); //结束节点
+	//newBranch2.contentInt = INT_MIN;
+	//newBranch2.contentStr = "";
+	//mvmu_BranchMap[2] = newBranch2;
 
-	//将activeTree加入treeMap
-	(*treeMap)[this->composeActiveTreeId(1)] = newBranch.curActiveTree;
-	(*treeMap)[this->composeActiveTreeId(2)] = newBranch2.curActiveTree;
+	////将activeTree加入treeMap
+	//(*treeMap)[this->composeActiveTreeId(1)] = newBranch.curActiveTree;
+	//(*treeMap)[this->composeActiveTreeId(2)] = newBranch2.curActiveTree;
 }
 
 //返回 指定 branch 当前激活树id
@@ -185,7 +186,8 @@ int logic_IfModule::addBranch() {
 	max_branch_id++;
 
 	whBranch newBranch;
-	newBranch.curActiveTree = NULL;
+	newBranch.curActiveTree = new logic_Tree(-1);
+	newBranch.curActiveTree->append_node(-1, -2);//结束根节点
 	newBranch.contentInt = INT_MIN;
 	newBranch.contentStr = "";
 

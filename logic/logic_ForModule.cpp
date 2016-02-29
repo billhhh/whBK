@@ -99,14 +99,6 @@ void logic_ForModule::Destroy() {
 
 	//析构函数调用，销毁所有包含模块
 
-	/// Step1、销毁所有包含树（不包括 activeTree）
-	for (int i = 0;i<mvvu_treeList.size() ;++i) {
-
-		DelTreeThroughPointer(mvvu_treeList[i]);
-	}
-
-	/// Step2、销毁 activeTree
-	DelActiveTree();
 }
 
 //通过树指针，完全销毁树中的模块
@@ -116,9 +108,13 @@ void logic_ForModule::DelTreeThroughPointer(logic_Tree * tree) {
 	recurs_DelTreeModule(root); //销毁模块实体
 
 	treeForIfmap->erase(tree);
-	SAFE_DELETE(tree); //销毁树
+
 	//抹除树痕迹
 	treeMap->erase(tree->mvi_TreeID);
+	
+
+	SAFE_DELETE(tree); //销毁树
+	
 }
 
 //删除本模块的 activeTree
@@ -126,9 +122,14 @@ void logic_ForModule::DelActiveTree() {
 
 	logic_TreeNode * root = mvi_CurActiveTree->getRoot();
 
+	//跳过-2节点
 	for (int i=0;i<root->mvvu_Children.size();++i) {
-		//销毁没颗子树中的模块
-		recurs_DelTreeModule(root->mvvu_Children[i]);
+		//销毁每颗子树中的模块
+		auto childId = root->mvvu_Children[i]->getID();
+		if (childId != -2)
+		{
+			recurs_DelTreeModule(root->mvvu_Children[i]);
+		}
 	}
 
 	SAFE_DELETE(mvi_CurActiveTree); //销毁树
@@ -197,13 +198,7 @@ std::vector<int > logic_ForModule::findAllRoots() {
 	}
 
 	logic_TreeNode * root = mvi_CurActiveTree->getRoot();
-	if( root->mvvu_Children.size() > 0 ) {
-
-		for (int i = 0;i < root->mvvu_Children.size() ; ++i ) {
-
-			L.push_back( root->mvvu_Children.at(i)->getID() );
-		}
-	}
+	L.push_back(root->getID());
 
 	return L;
 }

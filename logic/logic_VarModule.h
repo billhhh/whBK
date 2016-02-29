@@ -8,28 +8,31 @@
 */
 
 #pragma once
+#include<sstream>
 #include "logic_BasicModule.h"
-#include <map>
 #include "logic_PrjPropertyGlobal.h"
+#include "logic_Global.h"
 
 class logic_VarModule :
 	public logic_BasicModule
 {
 public:
 	logic_VarModule(void);
-	explicit logic_VarModule(int id,VarietyType type,const std::string value);
+	explicit logic_VarModule(_IdDataType id,VarietyType type,const std::string value);
 	~logic_VarModule(void);
 
-	std::string getType();     //带有类型转换
+	std::string getType();     //由于之前IO部分已经用了很多了，返回变量类型由getVarietyType函数负责
 	std::string getValue();
-	std::string getID();       //带有类型转换
-
-	//读取VarMap，写入窗口选择器
-	void setVariety(std::map<int ,logic_VarModule*> vMap);
-
+	std::string getID();      
+	
+	VarietyType getVarietyType();
+	void setName(std::string name);
+	std::string getName();      
 private:
 	//type and the value
+	_IdDataType varietyID;
 	VarietyType varType;
 	std::string varValue;
+	std::string varName;
 };
 

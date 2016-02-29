@@ -14,8 +14,9 @@
 #include <string>
 #include <stdlib.h>
 #include "logic_Program.h"
+#include "logic_VarModule.h"
 #include "logic_BasicModule.h"
-#include "logic_Graph.h"
+#include "logic_Gragh.h"
 #include "logic_PrjPropertyGlobal.h"
 
 class logic_Project
@@ -39,14 +40,19 @@ public:
 	void setPrjPhotoPath(const std::string path);
 	std::string getPrjPhotoPath();
 
-	void addPrjVariety(const _IdDataType, VarProperty); //增加一个变量
-	std::map<_IdDataType ,VarProperty> getPrjVarietyMap(); //获得变量Map
+	void setPrjVariety(const _IdDataType, logic_VarModule*);
+	void setPrjVarietyMap(std::map<_IdDataType ,logic_VarModule*> PrjVariety);
+	std::map<_IdDataType ,logic_VarModule*> getPrjVariety();
 
 	//新增program
 	int newProgram(); //重载新建program，完全自动化新建program，返回新建program ID
 	void newProgram(int id,std::string name); //重载新建program，只用传入program ID 和 name
 	void newProgram(int id,logic_Program* program);
+	void setProgram(std::map <int ,logic_Program* > programMap);
 	logic_Program* getProgram(int id);
+	std::string copyProgram(const std::string progName);
+	bool deleteProgram(const std::string progName);//根据progName删除该program
+
 
 	//获得最大 ProgID，方便累计
 	int getMaxProgId();
@@ -54,17 +60,10 @@ public:
 
 	std::string getPrjPhotoDscrpt(); // 【XmlIO】
 	std::map <int ,logic_Program* > getAllProgram();  //【XmlIO】
+	bool importProgram(std::string progPath);//【XmlIO】 根据路径名导入一个program
 
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
-
-	///
-	/// \brief 方便xml
-	///
-	void setProgram(std::map <int ,logic_Program* > programMap);
-	void setPrjVarietyMap(std::map<_IdDataType ,VarProperty>);
-
-	/////////////////////////////////////////////////////////
 
 private:
 	/**************变量名称表和循环名称表*****************/
@@ -72,14 +71,11 @@ private:
 	std::string mvstr_PrjName;    // project name
 	std::string mvstr_PrjDescription;
 	std::string mvstr_PhotoPath;
-	int mvb_DaisyChainMode; //菊链模式开关，是0（关）或者1（开）
-
 
 	//program map
 	std::map <int, logic_Program *> mvvu_ProgMap;
 	//变量（整个prj通用） my virable and its type
-	std::map<_IdDataType ,VarProperty> mvmu_PrjVarietyMap;
-	std::map<_IdDataType ,std::string> mvmu_PrjForNameMap; //for循环名称map
+	std::map<_IdDataType ,logic_VarModule*> mvmu_PrjVariety;
 
 	//!!!!!!!init module map，保存所有的初始化 Module 指针 map 副本!!!!!!!
 	///
@@ -87,7 +83,7 @@ private:
 	///
 	std::map <int, logic_BasicModule *> initModuleMap;
 
-	std::map<int, logic_Graph *> graphMap;
+	std::map<int, logic_Gragh *> graghMap;
 
 //工具private函数
 private:
@@ -96,7 +92,7 @@ private:
 
 	std::string whIntToString(int i);
 	std::string genNewProgName(int id); //生成新 prj 的名字
-
+	int getProgId(std::string progName); //根据progname名得到programID
 };
 
 #endif

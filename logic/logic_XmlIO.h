@@ -8,15 +8,16 @@
 #include<atlstr.h>
 #include<limits>
 #include<iomanip>
-
+#include<io.h>
 #include"tinyXML\tinyxml.h"
 #include"tinyXML\tinystr.h"
 #include"logic_Project.h"
 #include"logic_Controller.h"
-#include "logic_VarModule.h"
 
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
+
+class logic_Project;
 
 struct TreeNode{
 	int id;
@@ -29,10 +30,16 @@ class logic_XmlIO
 public:
 	logic_XmlIO(void);
 
-	bool IO_FillPrj(const char* fileName, logic_Project &prj); //读取xml，填充满一个prj
+	bool IO_FillPrj(const std::string fileName, logic_Project &prj); //读取xml，填充满一个prj
 	bool IO_SavePrj(const std::string fileName, logic_Project prj); //读取一个prj，写入一个xml文件
-	bool IO_SaveProgram(const std::string fileName,TiXmlElement* rootElement);//将一个program文件单独存储为一个新的xml文件
 	bool IO_Initial(std::map <int, logic_BasicModule *> &InitModuleMap);
+	bool I0_ExportProgram(const std::string fileName,logic_Program program); //项目属性中的导出文件
+	bool IO_ImportProgram(const std::string fileName,logic_Project* project);//文件中导入program
+
+//  bool IO_SaveProgram(const std::string fileName,TiXmlElement* rootElement);//将一个program文件单独存储为一个新的xml文件
+
+//	void saveFrontEndPoint(std::map<int, std::map<int, std::map<int, Point>>>); //前端存储点坐标
+//	std::map<int, std::map<int, std::map<int, Point>>> loadFrontEndPoint(); //迁都读取点坐标
 
 	bool initialMyModule();
 
@@ -53,7 +60,7 @@ public:
 		newProject.setPrjPhotoPath("no_path_now");
 		newProject.newProgram(1,testProgram);
 		newProject.newProgram(2,"anotherNewProgram");
-		//newProject.setPrjVarietyMap(10,testVarmodule);
+		newProject.setPrjVariety(10,testVarmodule);
 		
 		//initial all the modules
 		IO_Initial(InitModuleMap);
@@ -111,30 +118,31 @@ public:
 		IO_SavePrj("testXml//testXml20160101.xml",newProject);
 	};
 	
-	bool testSaveOneElement(const char* fileName)
-	{
-		try
-		{
-			TiXmlDocument* xmlFileName = new TiXmlDocument(fileName);
-			xmlFileName->LoadFile();
-			TiXmlElement* root = xmlFileName->RootElement();
-			TiXmlElement* programs = root->FirstChild()->NextSiblingElement()->NextSiblingElement()->NextSiblingElement();
-			IO_SaveProgram("testXml//testSaveOneElement.xml",programs);
+	//bool testSaveOneElement(const char* fileName)
+	//{
+	//	try
+	//	{
+	//		TiXmlDocument* xmlFileName = new TiXmlDocument(fileName);
+	//		xmlFileName->LoadFile();
+	//		TiXmlElement* root = xmlFileName->RootElement();
+	//		TiXmlElement* programs = root->FirstChild()->NextSiblingElement()->NextSiblingElement()->NextSiblingElement();
+	//		IO_SaveProgram("testXml//testSaveOneElement.xml",programs);
 
-		}
-		catch(std::string& e)
-		{
-			std::cout<<"Happen some error in open the project "<<std::endl;
-			return false;
-		}
+	//	}
+	//	catch(std::string& e)
+	//	{
+	//		std::cout<<"Happen some error in open the project "<<std::endl;
+	//		return false;
+	//	}
 
-	};
+	//};
 #pragma endregion unit_test
 
 	//***********************end test******************************
 
 	~logic_XmlIO(void);
 protected:
+	//判断该文件是否存在	
 	int dump_attribs_to_stdout(TiXmlElement* pElement, unsigned int indent);
 
 	const char* getIndent(unsigned int numIndents);
@@ -147,9 +155,14 @@ private:
 	static const unsigned int NUM_INDENTS_PER_SPACE = 2;
 	std::map <int, logic_BasicModule *> allModuleMap;
 
-	
+
 	//工具函数
 	void traverSaveTree(logic_TreeNode* root,TiXmlElement* parent);
+
+	//bool isFileExist()
+	bool isFileExist(std::vector<const char*> allFilePaths);
+	bool isFileExist(const char* filePath);
+
 	#pragma region initial
 	//*******************initial bottom***********************
 	
@@ -263,22 +276,31 @@ private:
 }
 
 	//用于初始化时的模块信息的存储
-	void saveModule(logic_BasicModule* currentModule,const std::string name, std::string value);
+	void fillModule(logic_BasicModule* currentModule,const std::string name, std::string value);
 
-	void saveMode(logic_ParaPointer* mode,const std::string name, std::string value);
+	void fillMode(logic_ParaPointer* mode,const std::string name, std::string value);
 
-	void savePara(logic_BasicPara* para,const std::string name,const std::string value);
+	void fillPara(logic_BasicPara* para,const std::string name,const std::string value);
 
 	//用于读取项目文件是的信息存储
-	void saveProject(logic_Project &prj,const std::string name, std::string value);
+	void fillProject(logic_Project &prj,const std::string name, std::string value);
 
-	void saveProgram(std::map<int,logic_Program*> &prgMap,TiXmlElement* firstPrgChild);
+	void fillProgram(std::map<int,logic_Program*> &prgMap,TiXmlElement* firstPrgChild);
+	bool saveProgram(std::map<int, logic_Program*> &programMap, TiXmlElement* parentElement);
 
-	void saveVarModule(logic_Project &prj,TiXmlElement* varieties);
+	void fillVarModule(logic_Project &prj,TiXmlElement* varieties);
 
 	////用于存储某个标签内的所有信息
 	//void testAttribute(TiXmlElement* src,TiXmlElement* dst);
 	void deepCopyPara(std::vector<logic_BasicPara*>,std::vector<logic_BasicPara*>&);
 
+	bool parseRootToString(std::vector<int>,std::string&);
+
+	bool parseRootToInt(std::vector<int>&,std::string);
+
+	std::vector<const char*> allFilePaths;
+
+
+	
 };
 

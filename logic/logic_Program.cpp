@@ -43,6 +43,31 @@ logic_Program::~logic_Program()
 	prog_Destroy();
 }
 
+//除了id,prgname,其他内容都拷贝
+logic_Program* logic_Program::copyPrg(logic_Program* newProgram)
+{
+	auto treeMap = getTreeMap();
+	auto moduleMap = getModuleMap();
+	auto moduleId_TreeMap = getModuleTreeMap();
+	auto treeIn_IFFOR_Map = getForIfMap();
+	auto fromToMap = getFromMap();
+	auto toMap = getToMap();
+	auto initModuleMap = getInit_m_map();
+	auto varietyMap = getVarMap();
+
+	newProgram->setTreeMap(treeMap);
+	newProgram->setModuleMap(moduleMap);
+	newProgram->setModuleTreeMap(mvmu_ModuleId_TreeMap);
+	newProgram->setForIfMap(treeIn_IFFOR_Map);
+	newProgram->setFromToMap(fromToMap);
+	newProgram->setToFromMap(toMap);
+	newProgram->setInitModuleMap(initModuleMap);
+	newProgram->setInitVarMap(*varietyMap);
+
+	return newProgram;
+
+}
+
 //普通初始化（干净的program）
 void logic_Program::Init()
 {
@@ -59,33 +84,35 @@ void logic_Program::Init()
 	mvmi_TreeId_For_IfIdMap.clear();
 	//mvmi_TreeId_For_IfIdMap[0] = NULL;
 
-	add_Tree(1);
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!后台不要自己生成2001，由前端驱动
+	//add_Tree(1);
 
-	//建立module表项，仅一个开始模块
-	logic_BasicModule *bm = new logic_BasicModule();
-	mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
+	////建立module表项，仅一个开始模块
+	//logic_BasicModule *bm = new logic_BasicModule();
+	//mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
 
-	mvmu_ModuleId_TreeMap[1] = mvmu_TreeMap[1];
-
-	this->isDisplay = true;
-	this->isOnlyForTeacher = false;
+	//mvmu_ModuleId_TreeMap[1] = mvmu_TreeMap[1];
 }
 
 void logic_Program::prog_Destroy()
 {
 	cout<<"进入prog_Destroy"<<endl;
 
-	//清空mvmu_ModuleMap
-	for(map<_IdDataType , logic_BasicModule *>::iterator it = mvmu_ModuleMap.begin();it != mvmu_ModuleMap.end(); ++it)
-		SAFE_DELETE(it->second);
 
 	//清空森林
-	for(map<_IdDataType , logic_Tree *>::iterator it = mvmu_TreeMap.begin();it != mvmu_TreeMap.end(); ++it)
+	for (map<_IdDataType, logic_Tree *>::iterator it = mvmu_TreeMap.begin(); it != mvmu_TreeMap.end(); ++it)
 	{
 		logic_Tree *tmpT = it->second;
 		//tmpT->Destroy(tmpT->getRoot()); //这样会调用两次，堆错误
 		SAFE_DELETE(tmpT);
 	}
+
+
+	//清空mvmu_ModuleMap
+	for(map<_IdDataType , logic_BasicModule *>::iterator it = mvmu_ModuleMap.begin();it != mvmu_ModuleMap.end(); ++it)
+		SAFE_DELETE(it->second);
+
+
 
 	//清空映射表
 // 	for(map<int , logic_Tree *>::iterator it = mvmu_ModuleId_TreeMap.begin();it != mvmu_ModuleId_TreeMap.end(); ++it)
@@ -385,7 +412,7 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 
 	///// step1、插入新树节点
 	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //待插入树
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待删除树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];  //待删除树
 
 	int oldRootId = insTree->mvi_TreeID;
 	if( post_m_id == oldRootId ) {
@@ -550,7 +577,6 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 
 	recurs_update(insTree,insNode);
 
-
 	return 0; //正常返回
 }
 
@@ -677,6 +703,26 @@ std::map<int,logic_Tree*> logic_Program::getTreeMap() {
 
 std::map <int ,logic_BasicModule* > logic_Program::getModuleMap() {
 	return mvmu_ModuleMap;
+}
+
+std::map <int ,logic_Tree * > logic_Program::getModuleTreeMap()
+{
+	return mvmu_ModuleId_TreeMap;
+}
+
+void logic_Program::setModuleTreeMap(std::map <int, logic_Tree * > moduleTreeMap)
+{
+	mvmu_ModuleId_TreeMap = moduleTreeMap;
+}
+
+std::map <logic_Tree * ,int > logic_Program::getForIfMap()
+{
+	return mvmi_TreeId_For_IfIdMap;
+}
+
+void logic_Program::setForIfMap(std::map <logic_Tree *, int > forIfMap)
+{
+	mvmi_TreeId_For_IfIdMap = forIfMap;
 }
 
 bool logic_Program::delModule(int m_id) {
@@ -872,7 +918,7 @@ bool logic_Program::addLeafModule(int pre_id,int m_id) {
 int logic_Program::getModulePreId(int m_id) {
 
 	if (mvmu_ModuleMap.count(m_id)==0) //不存在，错误
-		return -1;
+		return 0;
 
 	int resid = mvmu_ModuleId_TreeMap[m_id]->getPreId(m_id);
 
@@ -897,6 +943,100 @@ std::vector<int > logic_Program::getModulePostId(int m_id) {
 
 	return L;
 
+}
+
+//得到该模块所在树的根节点的模块id
+int logic_Program::getRootModuleId(int m_id)
+{
+	int rootModuleId = 0;
+
+	if (mvmu_ModuleMap.count(m_id) == 0) //不存在，错误
+		return rootModuleId;
+
+	logic_Tree* theTree = getTreeFromId(m_id);
+	logic_TreeNode* rootNode = theTree->getRoot();
+
+	rootModuleId = rootNode->getID();
+	return rootModuleId;
+}
+
+//查询两个module是否在同一颗树内
+bool logic_Program::IsInSameTree(int cur_m_id, int other_m_id)
+{
+	assert(mvmu_ModuleMap.count(cur_m_id) == 0 || mvmu_ModuleMap.count(other_m_id)); //不存在
+
+	logic_Tree* oneTree = getTreeFromId(cur_m_id);
+	logic_Tree* otherTree = getTreeFromId(other_m_id);
+	
+	if (oneTree == otherTree)
+		return true;
+	else
+		return false;
+}
+
+
+std::vector<int > logic_Program::getForModuleRootPostId(int for_Id){
+	std::vector<int > L;
+
+	if (mvmu_ModuleMap.count(for_Id) == 0) //不存在，错误
+		return L;
+
+	auto forModule = (logic_ForModule*)mvmu_ModuleMap[for_Id];
+	auto activeTree = forModule->getCurActiveTree();
+	auto rootNode = activeTree->getRoot();
+	for(int i = 0; i < rootNode->mvvu_Children.size();++i){
+		L.push_back(rootNode->mvvu_Children.at(i)->getID());
+	}
+
+	return L;
+}
+
+
+std::vector<int > logic_Program::getIfModuleBranchPostId(int if_id, int local_branch_id)
+{
+	std::vector<int > L;
+
+	if (mvmu_ModuleMap.count(if_id) == 0) //不存在，错误
+		return L;
+
+	auto IfModule = (logic_IfModule*)mvmu_ModuleMap[if_id];
+	if (!IfModule->isBranchExist(local_branch_id))
+		return L; 
+
+	auto activeTree = IfModule->getCurActiveTree(local_branch_id);
+	auto rootNode = activeTree->getRoot();
+	for (int i = 0; i < rootNode->mvvu_Children.size(); ++i){
+		L.push_back(rootNode->mvvu_Children.at(i)->getID());
+	}
+
+	return L;
+}
+
+int logic_Program::getForModuleEndPreId(int for_id)
+{
+	if (mvmu_ModuleMap.count(for_id) == 0) //不存在，错误
+		return 0;
+
+	auto forModule = (logic_ForModule*)mvmu_ModuleMap[for_id];
+	auto activeTree = forModule->getCurActiveTree();
+	auto preId = activeTree->getPreId(-2);
+	
+	return preId;
+}
+
+int	logic_Program::getIfModuleEndPreId(int if_id, int local_branch_id)
+{
+	if (mvmu_ModuleMap.count(if_id) == 0) //不存在，错误
+		return 0;
+
+	auto IfModule = (logic_IfModule*)mvmu_ModuleMap[if_id];
+	if (!IfModule->isBranchExist(local_branch_id))
+		return 0;
+
+	auto activeTree = IfModule->getCurActiveTree(local_branch_id);
+	auto preId = activeTree->getPreId(-2);
+
+	return preId;
 }
 
 std::vector<int> logic_Program::getAllTreeNodeId(int tree_id) {
@@ -1058,10 +1198,6 @@ void logic_Program::setModuleModeValue(int m_id,int mode_id) {
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
 	tModule->setModeValue(mode_id);
-
-	//去掉参数连线
-
-
 }
 
 //得到所有treenode
@@ -1079,6 +1215,28 @@ std::vector<logic_TreeNode *> logic_Program::getAllTreeNode(int rootID) {
 	return L;
 
 }
+
+std::map<whPort, whPort > logic_Program::getFromMap()
+{
+	return mvvu_Conn_From_ToMap;
+}
+
+std::map<whPort, whPort> logic_Program::getToMap()
+{
+	return mvvu_Conn_To_FromMap;
+}
+
+
+void logic_Program::setFromToMap(std::map<whPort, whPort > fromToMap)
+{
+	mvvu_Conn_From_ToMap = fromToMap;
+}
+
+void logic_Program::setToFromMap(std::map<whPort, whPort > toFromMap)
+{
+	mvvu_Conn_To_FromMap = toFromMap;
+}
+
 
 void logic_Program::recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNode *> & L) {
 
@@ -1311,7 +1469,7 @@ int logic_Program::addIfBranch(int if_id) {
 		return -4;
 
 	/// type 一定是2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成for module
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //强制转换成if module
 
 	int newBranchId = tmpIfModule->addBranch();
 	return newBranchId; //返回新增branch_id
@@ -1534,21 +1692,23 @@ int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
 	assert( pre_m_id >= 0 );
 
-	//////pre_m_id必须在for中
-	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
+	if (pre_m_id > 0)
+	{
+		//////如果pre_m_id != 0 则pre_m_id必须在for中
+		assert(mvmi_TreeId_For_IfIdMap.count(mvmu_ModuleId_TreeMap[pre_m_id]));
 
+		if (0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
+			*(mvmu_ModuleMap.count(for_id))) {
+			return -2; // 首先 cur_m_id 和 pre_m_id 都要有
+		}
+
+		// cur_id 不能是开始模块
+		if (mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001) {
+			assert(false);
+			return -3; //模块类型错误
+		}
+	}
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) 
-		*(mvmu_ModuleMap.count(for_id)) ) {
-		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
-	}
-
-	// cur_id 不能是开始模块
-	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-		assert(false);
-		return -3; //模块类型错误
-	}
 
 	//注：不用新建module，只用处理树节点即可
 
@@ -2702,10 +2862,17 @@ int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int br
 
 //从prj初始化prog
 //初始化 “变量”map，v_map是引用
-void logic_Program::setInitVarMap(std::map<int  ,VarProperty> &v_map) {
+void logic_Program::setInitVarMap(std::map<int  ,logic_VarModule*> &v_map) {
 
-	this->prjVarietyMap = &v_map; //初始化prj 变量 map
+	this->prjVariety = &v_map; //初始化prj 变量 map
 }
+
+
+std::map<int, logic_VarModule*>* logic_Program::getVarMap()
+{
+	return prjVariety;
+}
+
 
 //初始化 initModule，init_m_map是副本
 void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map) {
@@ -2713,10 +2880,9 @@ void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_
 	this->initModuleMap = init_m_map; //初始化 所有init module副本
 }
 
-//初始化 prjForNameMap，prjForNameMap是副本
-void logic_Program::setInitForNameMap(std::map <int,  std::string> for_name_map) {
-
-	this->prjForNameMap = for_name_map;
+std::map <int, logic_BasicModule *> logic_Program::getInit_m_map()
+{
+	return initModuleMap;
 }
 
 ///
@@ -2739,7 +2905,7 @@ std::vector<int > logic_Program::findRootsInContainer() {
 
 	for( std::map<int ,logic_Tree * >::iterator it = map.begin();it != map.end() ; ++it) {
 
-		if( it->first > ACTIVE_TREE_MAP_FACTOR )
+		if( it->first >= ACTIVE_TREE_MAP_FACTOR )
 			continue;
 
 		L.push_back(it->first);
@@ -2766,23 +2932,6 @@ std::vector<int > logic_Program::findRootsInContainer(int if_id,int branch_id) {
 	return tmpIfModule->findBranchAllRoots(branch_id);
 }
 
-//找到激活树根节点
-std::vector<int > logic_Program::findRootsInContainerActive(int for_id) {
-
-	assert( mvmu_ModuleMap.count(for_id)>0 );
-	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-
-	return tmpForModule->findAllRootsActive();
-}
-
-std::vector<int > logic_Program::findRootsInContainerActive(int if_id,int branch_id) {
-
-	assert( mvmu_ModuleMap.count(if_id)>0 );
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id);
-
-	return tmpIfModule->findBranchAllRootsActive(branch_id);
-}
-
 //连线时检测：只有一种情况有问题，即连接自己的祖先
 //（其实判断这两个模块如果在一棵树就有问题）
 //para： cur_id是连线出口模块，another_id是被连接模块
@@ -2806,42 +2955,4 @@ void logic_Program::setModuleMap(std::map <int ,logic_BasicModule* > moduleMap)
 void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
 {
 	mvmu_TreeMap = treeMap;
-}
-
-//连线持久化get、set函数
-std::map<whPort, whPort > logic_Program::getFromMap()
-{
-	return mvvu_Conn_From_ToMap;
-}
-
-void logic_Program::setFromToMap(std::map<whPort, whPort > fromToMap)
-{
-	mvvu_Conn_From_ToMap = fromToMap;
-}
-
-void logic_Program::setToFromMap(std::map<whPort, whPort > toFromMap)
-{
-	mvvu_Conn_To_FromMap = toFromMap;
-}
-
-//显示get、set
-bool logic_Program::getIsDisplay() {
-
-	return isDisplay;
-}
-
-void logic_Program::setIsDisplay(bool is) {
-
-	isDisplay = is;
-}
-
-//仅限教师
-bool logic_Program::getIsOnlyForTeacher(){
-
-	return isOnlyForTeacher;
-}
-
-void logic_Program::setIsOnlyForTeacher(bool is) {
-
-	isOnlyForTeacher = is;
 }

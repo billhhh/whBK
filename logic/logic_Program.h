@@ -20,7 +20,7 @@
 #include "logic_ForModule.h"
 #include "logic_IfModule.h"
 #include "logic_whPort.h"
-#include "logic_PrjPropertyGlobal.h"
+#include "logic_VarModule.h"
 
 class logic_Program //等效于森林
 {
@@ -30,6 +30,7 @@ public:
 	explicit logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> imap);
 	virtual ~logic_Program();
 
+	logic_Program* copyPrg(logic_Program* newProgram);//除了id,prgname,其他内容都拷贝
 
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!树操作!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	bool add_Tree(_IdDataType rootId); //添加一棵 root ID为id的树
@@ -54,19 +55,25 @@ public:
 
 	////!!!!!!!!!!!!!!!!!!!【对外接口】模块间操作!!!!!!!!!!!!!!!
 	bool frontInsModule(int m_id,int post_id,int m_type); //前插，不允许后继为0
-	bool appendModule(int m_id,int pre_id,int m_type); //直接后接，前驱为0代表新建树
-	bool addLeafModule(int pre_id,int m_id); //加一个叶子节点
+	bool appendModule(int m_id,int pre_id,int m_type);    //直接后接，前驱为0代表新建树
+	bool addLeafModule(int pre_id,int m_id);              //加一个叶子节点
 
 	///////最麻烦的方法之一，还需要同步删除参数连线，还有 for 和 if（包括散开处理）
 	bool delModule(int m_id);
+	
+	//查询普通模块前驱后继
 	int getModulePreId(int m_id); //得到某一模块的前驱id
 	std::vector<int > getModulePostId(int m_id);
+	int getRootModuleId(int m_id); //得到该模块所在树的根节点的模块id
+
+	//查询两个module是否在同一颗树内
+	bool IsInSameTree(int cur_m_id, int other_m_id);
 
 	//////move 操作
-	int frontInsSingMove(int cur_m_id,int post_m_id); //前插move，不允许后继为0
-	int backInsSingMove(int cur_m_id,int pre_m_id); //后插move，前驱为0代表move到新建树
+	int frontInsSingMove(int cur_m_id,int post_m_id);  //前插move，不允许后继为0
+	int backInsSingMove(int cur_m_id,int pre_m_id);    //后插move，前驱为0代表move到新建树
 	int frontInsMultiMove(int cur_m_id,int post_m_id); //带祖先前插move，不允许后继为0
-	int backInsMultiMove(int cur_m_id,int pre_m_id); //带孩子后插move，前驱为0代表move到新建树
+	int backInsMultiMove(int cur_m_id,int pre_m_id);   //带孩子后插move，前驱为0代表move到新建树
 
 	int addLeafMove(int cur_m_id,int pre_m_id); //新增叶子move
 
@@ -95,17 +102,23 @@ public:
 
 	std::map<int,logic_Tree*> getTreeMap(); //【XmlIO】
 	std::map <int ,logic_BasicModule* > getModuleMap(); //【XmlIO】
+	std::map <int ,logic_Tree * > getModuleTreeMap();
+	void setModuleTreeMap(std::map <int, logic_Tree * > moduleTreeMap);
+	std::map <logic_Tree * ,int > getForIfMap();
+	void setForIfMap(std::map <logic_Tree *, int > forIfMap);
 	std::vector<logic_TreeNode *> getAllTreeNode(int rootID); //得到所有treenode list
+	std::map<whPort, whPort > getFromMap();
+	std::map<whPort, whPort> getToMap();
+
+	void setFromToMap(std::map<whPort, whPort >);
+	void setToFromMap(std::map<whPort, whPort >);
+	//通过id得到模块
+	logic_ForModule* getForModuleById(int id);
+	logic_IfModule* getIfModuleById(int id);
 
 	//整合
 	void setModuleMap(std::map <int ,logic_BasicModule* > moduleMap);
 	void setTreeMap(std::map<int,logic_Tree*> treeMap);
-
-	//连线持久化get、set函数
-	std::map<whPort, whPort > getFromMap();
-	void setFromToMap(std::map<whPort, whPort >);
-	void setToFromMap(std::map<whPort, whPort >);
-
 
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -121,8 +134,13 @@ public:
 	std::vector<int> getAllTreeNodeId(int tree_id); //拿到指定树的所有孩子id列表
 
 
-	///!!!!!!!!!!!!!!!!!!!!!!!!!!! \brief for if 模块操作
-	
+	/// \brief for if 模块操作
+	///查询for和if模块的前驱和后继
+	std::vector<int > getForModuleRootPostId(int for_Id);
+	std::vector<int > getIfModuleBranchPostId(int if_id, int local_branch_id);//注意，此处是local_branch
+	int getForModuleEndPreId(int for_id);
+	int	getIfModuleEndPreId(int if_id, int local_branch_id);//注意，此处是local_branch
+
 	/// 向 for和if 中新加入模块
 	bool insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id);
 	bool insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id);
@@ -188,11 +206,11 @@ public:
 
 	//从prj初始化prog
 	//初始化 “变量”map，v_map是引用
-	void setInitVarMap(std::map<int  ,VarProperty> &v_map);
+	void setInitVarMap(std::map<int  ,logic_VarModule*> &v_map);
+	std::map<int, logic_VarModule*>* getVarMap();
 	//初始化 initModule，init_m_map是副本
 	void setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map);
-	//初始化 prjForNameMap，prjForNameMap是副本
-	void setInitForNameMap(std::map <int, std::string> for_name_map);
+	std::map <int, logic_BasicModule *> getInit_m_map();
 
 	///
 	/// \brief 获取根节点
@@ -202,24 +220,11 @@ public:
 	std::vector<int > findRootsInContainer();
 	std::vector<int > findRootsInContainer(int for_id);
 	std::vector<int > findRootsInContainer(int if_id,int branch_id);
-	//找到激活树根节点
-	std::vector<int > findRootsInContainerActive(int for_id);
-	std::vector<int > findRootsInContainerActive(int if_id,int branch_id);
-
-	//显示get、set
-	bool getIsDisplay();
-	void setIsDisplay(bool is);
-
-	//仅限教师
-	bool getIsOnlyForTeacher();
-	void setIsOnlyForTeacher(bool is);
 
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module
-	///且 （1）如果是 for模块 key = moduleId*100000
-	//（2）如果是 if 模块 key = moduleId*100000+branchId
-	//这些特殊的 tree 只维护mvmu_TreeMap
+	///且 rootId = moduleId*100000+branchId，这种 tree 只维护mvmu_TreeMap
 	std::map <_IdDataType,logic_Tree *> mvmu_TreeMap; // rootId 与 树实体的对应
 	std::map <_IdDataType, logic_BasicModule *> mvmu_ModuleMap; //维护一个module总映射
 	std::map <int ,logic_Tree * > mvmu_ModuleId_TreeMap; //维护每个 moduleID 和 tree 的映射
@@ -235,9 +240,7 @@ protected:
 	///////init module map
 	std::map <int, logic_BasicModule *> initModuleMap;
 	//变量（整个prj通用）
-	std::map<_IdDataType ,VarProperty> *prjVarietyMap;
-
-	std::map<_IdDataType ,std::string> prjForNameMap; //for循环名称map
+	std::map<_IdDataType ,logic_VarModule*> *prjVariety;
 
 	void Init();
 	void prog_Destroy();
@@ -254,13 +257,6 @@ protected:
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
 	std::string mvs_ProgName;
-
-	bool isDisplay;
-	bool isOnlyForTeacher;
-
-	//通过id得到模块
-	logic_ForModule* getForModuleById(int id);
-	logic_IfModule* getIfModuleById(int id);
 
 	//合成for和if放入tree map中的id
 	inline int composeTreeId(int for_id);

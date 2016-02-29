@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <string>
+#include <list>
 #include "logic/logic_Controller.h"
 
 enum GetPType{
@@ -29,6 +30,7 @@ enum MoveType
 	FRONT_MULTI,     // 多模块 前插
 	ADD_LEAF         //增加一个叶子
 };
+
 
 class msgInterface
 {
@@ -56,7 +58,19 @@ public:
 	void setCurPrj(int prjID);
 	void setCurProg(int progID);
 
+	/// \brief 得到当前的curPrjId
+	int getCurPrj();
 
+	/// !!!!!!!!!!!!!!!!!!!!!!!!!!项目属性部分!!!!!!!!!!!!!!!!!!!!!!!!!
+	/// \brief get项目属性的信息
+	/// get程序名称
+	std::vector<std::string> getProgName(int prjID);
+	/// get 变量类型和名称
+	std::vector<VarProperty> getVariety(int prjID);
+	std::string copyProgram(const std::string progName);
+	bool deleteProgram(const std::string progName);
+	bool importProgarm(std::string progName);//progName包含改program的路径内容
+	bool exportProgram(std::string progPath, int progId);//将当前项目下的progId的program导出成持久化文件
 
 	///!!!!!!!!!!!!!!!!!!!!!!!!!模块内部操作!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -110,9 +124,26 @@ public:
 	int getPreId(int m_id);
 	std::vector<int > getPostId(int m_id);
 
+	/// \brief 查询根节点模块id
+	int getRootModuleId(int m_id);
 
-	/// \brief for if模块操作!!!!!!
+	/// \brief 判断两个module是否在同一颗树里
+	bool isInSameTree(int cur_m_id, int other_m_id);
 
+	/// \brief!!!!!!!!!!!!!!!!!! for,if 模块前驱后继查询!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//get for模块根节点的后继节点
+	std::vector<int > getForRootPostId(int m_id);
+	//get for的-2虚拟模块的前驱
+	int getForEndPreId(int m_id);
+	//get if模块的某个branch的后继节点
+	//ui_branch_id是if模块全局的branchid
+	std::vector<int > getIfBranchPostId(int if_id, int ui_branch_id);
+	//get if的ui_branch_id的-2节点的前驱
+	//如果返回值是0表示传入信息有误
+	int getIfEndPreId(int if_id,int ui_branch_id);
+
+
+	/// \brief!!!!!!!!!!!!!!!!!! for if模块操作!!!!!!
 	///
 	/// \brief 此处特别注意，ui_branch_id是UI的branch id，是把一个32位整数分成：
 	///		   高16位做moduleId，低15位做branchId
@@ -165,40 +196,19 @@ public:
 	/// \para 容器编号，如果是0，获取最外层root集合
 	/// \return 根节点集合
 	///
-	std::vector<int > findRootsInContainer(int containerId);
-
-	//找到激活树根节点
-	std::vector<int > findRootsInContainerActive(int containerId);
-
-	///
-	/// \brief 项目属性
-	///
-	std::string getPrjName();
-	int setPrjName(std::string name); //返回错误信息
-
-	std::string getPrjDescription();
-	int setPrjDescription(std::string desc);
-
-	std::string getPrjPhotoPath();
-	int setPrjPhotoPath(std::string path);
-
-	//菊链模式开关
-	int getPrjDaisyChainMode(); //是0（关）或者1（开），<0 错误
-	int setPrjDaisyChainMode(int mode);
-
-	//获取prog名字列表
-	std::vector <int, std::string> getPrjProgNameMap();
-	int delPrjProgThroughId(int id); //删除prog编号
-
-	//获取 变量 名字列表
-	std::vector <int, std::string> getPrjVarietyNameMap();
-	int delPrjVarietyThroughId(int id);
-
-	//获取 graph 名字列表
-	std::vector <int, std::string> getPrjGraphNameMap();
-	int delPrjGraphThroughId(int id);
+	std::vector<int> findRootsInContainer(int containerId);
 
 	/// \brief 创建我的模块
+
+
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	bool saveProject(const std::string fileName, int prjId);
+	bool loadProject(const std::string fileName);
+
+	///For degug
+	//打印当前prj后台的所有Program的所有树
+	void debug_displayBackgroundTree();
 
 protected:
 

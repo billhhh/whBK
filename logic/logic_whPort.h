@@ -28,10 +28,10 @@ typedef struct structPort
 			//如果moduleId一样，继续比较paraId，不可能都一样
 			if( paraId < port.paraId )
 				return true;
-			else if(paraId > port.paraId)
+			else if (paraId > port.paraId)
 				return false;
 			else
-				assert(false);
+				return false;
 		}
 	}
 

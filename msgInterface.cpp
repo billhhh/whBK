@@ -50,7 +50,45 @@ void msgInterface::setCurProg(int progID) {
 	return ctrl.ctrlSetCurProg(progID);
 }
 
+/// \brief 得到当前的curPrjId
+int msgInterface::getCurPrj()
+{
+	return ctrl.ctrlGetCurPrj();
+}
 
+/// !!!!!!!!!!!!!!!!!!!!!!!!!!项目属性部分!!!!!!!!!!!!!!!!!!!!!!!!!
+/// \brief get项目属性的信息
+/// get程序名称
+std::vector<std::string> msgInterface::getProgName(int prjID)
+{
+	return ctrl.ctrlGetProgName(prjID); 
+}
+/// get 变量类型和名称
+std::vector<VarProperty> msgInterface::getVariety(int prjID)
+{
+	return ctrl.ctrlGetVariety(prjID);
+}
+/// 深拷贝一个program实体
+std::string msgInterface::copyProgram(const std::string progName)
+{
+	return ctrl.ctrlCopyProgram(progName);
+}
+
+bool msgInterface::deleteProgram(const std::string progName)
+{
+	return ctrl.ctrlDeleteProgram(progName);
+}
+
+bool msgInterface::importProgarm(std::string progPath)
+{
+	return ctrl.ctrlImportProgram(progPath);
+}
+
+//将当前项目下的progId的program导出成持久化文件
+bool msgInterface::exportProgram(std::string progPath, int progId)
+{
+	return ctrl.ctrlExportProgram(progPath,progId);
+}
 
 ///!!!!!!!!!!!!!!!!!!!!!!!!!模块内部操作!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -180,7 +218,40 @@ vector<int > msgInterface::getPostId(int m_id) {
 	return ctrl.ctrlGetPostId(m_id);
 }
 
+/// \brief 查询根节点模块id
+int msgInterface::getRootModuleId(int m_id)
+{
+	return ctrl.ctrlGetRootModuleId(m_id);
+}
 
+/// \brief 判断两个module是否在同一颗树里
+bool msgInterface::isInSameTree(int cur_m_id, int other_m_id){
+	return ctrl.ctrlIsInSameTree(cur_m_id, other_m_id);
+}
+
+
+std::vector<int > msgInterface::getForRootPostId(int m_id)
+{
+	return ctrl.ctrlGetForPostId(m_id);
+}
+
+//get for的-2虚拟模块的前驱
+int msgInterface::getForEndPreId(int m_id)
+{
+	return ctrl.ctrlGetForEndPreId(m_id);
+}
+
+//local_branch_id是if模块全局的id
+std::vector<int > msgInterface::getIfBranchPostId(int if_id, int ui_branch_id)
+{
+	return ctrl.ctrlGetIfBranchPostId(if_id, ui_branch_id);
+}
+
+//get if模块的ui_branch_id的前驱
+int msgInterface::getIfEndPreId(int if_id, int ui_branch_id)
+{
+	return ctrl.ctrlGetIfEndPreId(if_id, ui_branch_id);
+}
 
 /// \brief for if模块，重载
 /// parent_id 代表放入哪一个for中
@@ -278,9 +349,6 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 					MoveType move_type,int container_id,int ui_branch_id
 					) {
 
-	if( other_m_id <= -2 ) //不允许插入-2
-		assert(false);
-
 	if( container_id == ui_branch_id ) //目的地是for模块
 		return ctrl.ctrlMoveModuleFor(cur_m_id,other_m_id,move_type,container_id);
 	else //目的地是if模块
@@ -293,15 +361,32 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 /// \return 根节点集合
 ///
 std::vector<int > msgInterface::findRootsInContainer(int containerId) {
-
 	return ctrl.ctrlFindRootsInContainer(containerId);
 }
 
-//找到激活树根节点
-std::vector<int > msgInterface::findRootsInContainerActive(int containerId) {
-
-	return ctrl.ctrlFindRootsInContainerActive(containerId);
-}
 
 
 /// \brief 创建我的模块
+
+
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+bool msgInterface::saveProject(const std::string fileName, int prjId)
+{
+	return ctrl.ctrlSaveProject(fileName, prjId);
+}
+
+bool msgInterface::loadProject(const std::string fileName)
+{
+	return ctrl.ctrlLoadProject(fileName);
+}
+
+///for debug
+//打印后太所有的树
+void msgInterface::debug_displayBackgroundTree()
+{
+	int curId = ctrl.getCurPrjId();
+	auto prjMap = ctrl.getAllPrj();
+	logic_Project* curPrj = prjMap[curId];
+	ctrl.debug_displayTree(curPrj);
+}

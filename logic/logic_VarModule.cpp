@@ -5,33 +5,45 @@ logic_VarModule::logic_VarModule(void)
 {
 }
 
-logic_VarModule::logic_VarModule(int id,VarietyType type,const std::string value)
-	:logic_BasicModule(id,type),varValue(value)
+logic_VarModule::logic_VarModule(_IdDataType id,VarietyType type,const std::string value)
+	:varietyID(id),varType(type),varValue(value)
 {
-
 }
 
 
 logic_VarModule::~logic_VarModule(void)
 {
-
 }
 
 
 std::string logic_VarModule::getID()
 {
-	char id[500];                     //500注意，可能会溢出
-	_itoa_s(mvi_ModuleID,id,10);
-	return id;
+	std::stringstream ss;
+	ss << varietyID;
+	return ss.str();
 }
 
+VarietyType logic_VarModule::getVarietyType()
+{
+	return varType;
+}
+
+void logic_VarModule::setName(std::string name)
+{
+	varName = name;
+}
+
+std::string logic_VarModule::getName()
+{
+	return varName;
+}
 
 
 std::string logic_VarModule::getType()
 {
-	char type[10];
-	_itoa_s(varType,type,10);
-	return type;
+	std::stringstream ss;
+	ss << varType;
+	return ss.str();
 }
 
 
