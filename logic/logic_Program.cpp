@@ -583,7 +583,7 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 //带孩子后插move
 int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+	if ( 0!=pre_m_id && 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
