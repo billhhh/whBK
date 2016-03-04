@@ -21,7 +21,7 @@ enum WinSwitcherType{
 	WS_VALUE_DOUBLE,//值 数字 浮点型
 	WS_VALUE_BOOL,//值 逻辑
 	WS_FILE_PATH, //文件路径
-	WS_INPORT //端口输入
+	WS_IMPORT //端口输入
 };
 
 class WinSwitcher
@@ -32,7 +32,9 @@ public:
 	std::string mvs_WSValue2; //仅双端口用
 	int mvi_ChainLayer; //菊链层号（列表必定是1、2、3、4）
 
-	std::vector <std::string > WSList1;
+	//已连线 --> "import"
+	//文本输入--> "value_text"
+	std::vector <std::string > WSList; //如果为空，按 WinSwitcherType 处理
 
 protected:
 private:
