@@ -19,7 +19,7 @@
 class logic_Controller
 {
 public:
-	explicit logic_Controller();
+	logic_Controller();
 
 	std::map <int ,logic_Project* > getAllPrj(); // 【XmlIO】get 所有prj map，方便xml持久化
 	int getCurPrjId(); 
@@ -131,6 +131,7 @@ public:
 
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	bool ctrlSaveCurProject();
 	bool ctrlSaveProject(const std::string fileName, int prjId);
 	bool ctrlLoadProject(const std::string fileName);
 

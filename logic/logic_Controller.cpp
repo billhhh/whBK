@@ -818,12 +818,28 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+bool logic_Controller::ctrlSaveCurProject()
+{
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	auto fileName = tCurPrj->getPrjName();
+	if(fileName == "")
+	{
+		//调用错误，无法对空地址存储
+		assert(true);
+		return false;
+	}
+	logic_XmlIO IOControl ;
+
+	return IOControl.IO_SavePrj(fileName, *tCurPrj);
+}
+
+
 bool logic_Controller::ctrlSaveProject(const std::string fileName, int prjId)
 {
 	logic_Project * tCurPrj = prjMap[curPrjId];
-	logic_XmlIO* IOControl = new logic_XmlIO();
+	logic_XmlIO IOControl ;
 
-	return IOControl->IO_SavePrj(fileName, *tCurPrj);
+	return IOControl.IO_SavePrj(fileName, *tCurPrj);
 }
 
 

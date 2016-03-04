@@ -28,7 +28,7 @@ struct TreeNode{
 class logic_XmlIO
 {
 public:
-	logic_XmlIO(void);
+	logic_XmlIO();
 
 	bool IO_FillPrj(const std::string fileName, logic_Project &prj); //读取xml，填充满一个prj
 	bool IO_SavePrj(const std::string fileName, logic_Project prj); //读取一个prj，写入一个xml文件
@@ -286,7 +286,10 @@ private:
 	void fillProject(logic_Project &prj,const std::string name, std::string value);
 
 	void fillProgram(std::map<int,logic_Program*> &prgMap,TiXmlElement* firstPrgChild);
+	void fillProgram(logic_Program* prg, TiXmlElement* prgElement);
 	bool saveProgram(std::map<int, logic_Program*> &programMap, TiXmlElement* parentElement);
+	bool saveProgram(logic_Program* program, TiXmlDocument* parentElement);
+
 
 	void fillVarModule(logic_Project &prj,TiXmlElement* varieties);
 

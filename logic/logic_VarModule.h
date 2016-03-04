@@ -18,7 +18,7 @@ class logic_VarModule :
 {
 public:
 	logic_VarModule(void);
-	explicit logic_VarModule(_IdDataType id,VarietyType type,const std::string value);
+	logic_VarModule(_IdDataType id,VarietyType type,const std::string value);
 	~logic_VarModule(void);
 
 	std::string getType();     //由于之前IO部分已经用了很多了，返回变量类型由getVarietyType函数负责

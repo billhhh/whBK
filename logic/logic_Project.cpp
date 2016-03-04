@@ -40,6 +40,8 @@ void logic_Project::Init() {
 	mvmu_PrjVariety.clear();
 	//mvmu_PrjVariety[0] = NULL;
 
+	projectFilePath = "";
+
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!让前端去驱动来新建program
 	//logic_Program * prog = new logic_Program(1,"Program");//第一个program
 	//mvvu_ProgMap[1] = prog;
@@ -157,7 +159,18 @@ bool logic_Project::deleteProgram(const std::string progName)
 	auto program = getProgram(prgId);
 	mvvu_ProgMap.erase(prgId);
 
+	//还要把curProg设置为0
+	
+
 	return true;
+
+}
+
+//import一个program文件
+void logic_Project::addProgram(logic_Program* prg)
+{
+	auto prgId = prg->getID();
+	mvvu_ProgMap[prgId] = prg;
 
 }
 
@@ -233,7 +246,7 @@ std::map <int ,logic_Program* > logic_Project::getAllProgram() {
 //【XmlIO】 根据路径名导入一个program
 bool logic_Project::importProgram(std::string progPath)
 {
-	logic_XmlIO* IOControl;
+	logic_XmlIO* IOControl = new logic_XmlIO();
 	return IOControl->IO_ImportProgram(progPath,this);
 }
 
@@ -253,3 +266,15 @@ void logic_Project::setPrjId(int id) {
 
 	this->mvstr_PrjId = id;
 }
+
+std::string logic_Project::getPrjFilePath()
+{
+	return projectFilePath;
+}
+
+
+void logic_Project::setPrjFilePath(std::string filePath)
+{
+	projectFilePath = filePath;
+}
+

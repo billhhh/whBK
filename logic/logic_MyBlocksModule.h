@@ -20,7 +20,7 @@ class logic_MyBlocksModule
 public:
 	int mvi_ProgID; //属于哪个program，是program的ID
 
-	explicit logic_MyBlocksModule();
+	logic_MyBlocksModule();
 	~logic_MyBlocksModule();
 
 protected:

@@ -24,7 +24,7 @@ public:
 	explicit logic_TreeNode();
 	explicit logic_TreeNode(const _IdDataType data);
 	explicit logic_TreeNode(const logic_TreeNode & node); //自定义拷贝构造函数
-	explicit logic_TreeNode(logic_TreeNode *p,const _IdDataType data);
+	logic_TreeNode(logic_TreeNode *p,const _IdDataType data);
 	~logic_TreeNode();
 
 	int getID() const; //【XmlIO】

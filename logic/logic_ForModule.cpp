@@ -99,6 +99,15 @@ void logic_ForModule::Destroy() {
 
 	//析构函数调用，销毁所有包含模块
 
+	///// Step1、销毁所有包含树（不包括 activeTree）
+	///// 注意：此时应该包含对program中的map的销毁
+	//for (auto index : mvvu_treeList) {
+	//	auto tree = index.second;
+	//	DelTreeThroughPointer(tree);
+	//}
+
+	///// Step2、销毁 activeTree
+	//DelActiveTree();
 }
 
 //通过树指针，完全销毁树中的模块
@@ -112,7 +121,6 @@ void logic_ForModule::DelTreeThroughPointer(logic_Tree * tree) {
 	//抹除树痕迹
 	treeMap->erase(tree->mvi_TreeID);
 	
-
 	SAFE_DELETE(tree); //销毁树
 	
 }

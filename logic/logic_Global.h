@@ -12,5 +12,25 @@
 
 #define _IdDataType int
 #define SAFE_DELETE(p) { if(p) {delete p; p = NULL;} }
+typedef struct frontEndPoint{
+	int x;
+	int y;
+	frontEndPoint()
+	{
+		x = 0;
+		y = 0;
+	}
+	frontEndPoint(int xPoint,int yPoint)
+	{
+		x = xPoint;
+		y = yPoint;
+	}
+
+
+
+} point;
+
+
+
 
 #endif

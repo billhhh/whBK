@@ -312,7 +312,10 @@ bool logic_XmlIO::IO_SavePrj(const std::string fileName, logic_Project prj)
 		prjMyvariety->LinkEndChild(variety);
 	}
 
-	dump_to_stdout(&doc);
+	//最后对prj设置prj的文件路径
+	prj.setPrjFilePath(fileName);
+
+//	dump_to_stdout(&doc);
 
 	if(doc.SaveFile(fileName.c_str()))
 		return true;
@@ -6529,7 +6532,7 @@ void logic_XmlIO::fillMode(logic_ParaPointer* mode,const std::string name, std::
 				mode->mve_WS.mve_WSType = WS_FILE_PATH;
 				break;
 			case 9:
-				mode->mve_WS.mve_WSType = WS_INPORT;
+				mode->mve_WS.mve_WSType = WS_IMPORT;
 				break;
 			default:
 				std::cout<<"save WinSwitcherType finds error!!!"<<std::endl;
@@ -6597,7 +6600,7 @@ void logic_XmlIO::fillModule(logic_BasicModule* currentModule,const std::string 
 				currentModule->mve_CurWinSwitcher.mve_WSType = WS_FILE_PATH;
 				break;
 			case 9:
-				currentModule->mve_CurWinSwitcher.mve_WSType = WS_INPORT;
+				currentModule->mve_CurWinSwitcher.mve_WSType = WS_IMPORT;
 				break;
 			default:
 				std::cout<<"save WinSwitcherType finds error!!!"<<std::endl;
@@ -6921,6 +6924,236 @@ void logic_XmlIO::fillProgram(std::map<int,logic_Program*> &prgMap,TiXmlElement*
 	}
 }
 
+
+void logic_XmlIO::fillProgram(logic_Program* prg, TiXmlElement* prgElement)
+{
+
+	logic_Controller* contrl = new logic_Controller();
+	allModuleMap = contrl->ctrlGetInitMap();
+
+	int prgId = prgElement->FirstAttribute()->IntValue();                          //program id
+	std::string name = prgElement->FirstAttribute()->Next()->Value();      //program name
+	
+	prg->setID(prgId);
+	prg->setProgramName(name);
+	std::map<whPort, whPort > fromToMap;     //连线map
+	std::map<whPort, whPort > toFromMap;     //连线map
+
+	//traverse all the tree to initial treeMap
+	if (prgElement->FirstChildElement())
+	{
+		for (auto treeRoot = prgElement->FirstChildElement(); treeRoot; treeRoot = treeRoot->NextSiblingElement())                       //TreeRoot层
+		{
+			std::string name = treeRoot->Value();
+
+			if (name == "TreeRoot")
+			{
+				int rootId = treeRoot->FirstAttribute()->IntValue();
+				logic_Tree* tree = new logic_Tree(rootId);
+				prg->add_Tree(tree);
+
+				//initial the tree node
+				//std::vector<logic_TreeNode*> nodeMap;
+
+				if (treeRoot->FirstChild())
+				{
+					std::vector<TreeNode*> allNode;
+					for (TiXmlElement* treeNode = treeRoot->FirstChild()->ToElement(); treeNode; treeNode = treeNode->NextSiblingElement())          //treenode层
+					{
+						auto nodeIdAttribute = treeNode->FirstAttribute();
+						auto fatherIdAttribute = nodeIdAttribute->Next();
+						auto moduleTypeAttribute = fatherIdAttribute->Next();
+						auto currentModeTypeAttribute = moduleTypeAttribute->Next();
+						TiXmlAttribute* forNameAttribute = new TiXmlAttribute();
+						TiXmlAttribute* forAllRootStringAttribute = new TiXmlAttribute();
+						std::string forName;
+						std::string forAllRootString;
+						if (currentModeTypeAttribute->Next())    //如果是for或者if模块
+						{
+							forNameAttribute = currentModeTypeAttribute->Next();
+							forAllRootStringAttribute = forNameAttribute->Next();
+							forName = forNameAttribute->Value();                     //for的名称
+							forAllRootString = forAllRootStringAttribute->Value();   //for中包含的所有的tree根节点key
+						}
+						else                                    //不是的话就析构
+						{
+							delete forNameAttribute;
+							delete forAllRootStringAttribute;
+						}
+
+
+
+						//模块信息
+						int nodeID = nodeIdAttribute->IntValue();                     //模块ID
+						int fatherID = fatherIdAttribute->IntValue();                 //父亲节点ID
+						int moduleType = moduleTypeAttribute->IntValue();			  //模块类型
+						int currentModeType = currentModeTypeAttribute->IntValue();	  //模块当前模式
+
+						//还原模块信息,注意要深拷贝
+						logic_BasicModule* moduleNode = new logic_BasicModule();
+						//深拷贝
+						moduleNode->mvi_CurModeID = allModuleMap[moduleType]->mvi_CurModeID;
+						moduleNode->mvs_ModuleType = allModuleMap[moduleType]->mvs_ModuleType;
+						moduleNode->mvvu_ModeMenu = allModuleMap[moduleType]->mvvu_ModeMenu;
+						deepCopyPara(allModuleMap[moduleType]->mvvu_ParaList, moduleNode->mvvu_ParaList);
+						moduleNode->mvvu_InitParaList = allModuleMap[moduleType]->mvvu_InitParaList;
+						moduleNode->mve_CurWinSwitcher = allModuleMap[moduleType]->mve_CurWinSwitcher;
+						//当前值
+						moduleNode->mvi_ModuleID = nodeID;
+						moduleNode->mvi_CurModeID = currentModeType;
+
+						//用来还原树
+						TreeNode* node = new TreeNode();
+						node->id = nodeID;
+						node->parentId = fatherID;
+						allNode.push_back(node);
+
+						//模块中当前模式下的参数列表与端口菊链
+						std::vector <logic_BasicPara*> paraList = moduleNode->mvvu_ParaList;
+						WinSwitcher* switcher = &(moduleNode->mve_CurWinSwitcher);
+
+						//遍历参数列表
+						if (treeNode->FirstChildElement())
+						{
+							auto paraInfo = treeNode->FirstChildElement();
+							if (paraInfo->FirstChild())                               //paraInfo        
+							{
+								//遍历para
+								for (auto paraNode = paraInfo->FirstChildElement(); paraNode; paraNode = paraNode->NextSiblingElement())                     //paraInfo层
+								{
+									std::string name = paraNode->Value();
+									if (name == "para")
+									{
+										if (paraNode->FirstAttribute())			             //para attribute
+										{
+											int id, isInPort;
+											std::string value;
+											for (auto paraNodeAttribute = paraNode->FirstAttribute(); paraNodeAttribute; paraNodeAttribute = paraNodeAttribute->Next())          //para层
+											{
+												std::string name = paraNodeAttribute->Name();
+												if (name == "ID")
+												{
+													id = paraNodeAttribute->IntValue();
+												}
+												else if (name == "value")
+												{
+													value = paraNodeAttribute->Value();
+												}
+												else if (name == "isInPort")
+												{
+													isInPort = paraNodeAttribute->IntValue();
+												}
+
+											}
+											paraList[id - 1]->mvs_Value = value;
+											paraList[id - 1]->mvb_IsInport = isInPort;
+										}
+									}
+									else if (name == "switcher")
+									{
+										if (paraNode->FirstAttribute())			             //switcher attribute
+										{
+											std::string value;
+											int chainLayer;
+											for (auto paraNodeAttribute = paraNode->FirstAttribute(); paraNodeAttribute; paraNodeAttribute = paraNodeAttribute->Next())          //para层
+											{
+												std::string name = paraNodeAttribute->Name();
+												if (name == "value")
+												{
+													value = paraNodeAttribute->Value();
+												}
+												else if (name == "chainLayer")
+												{
+													chainLayer = paraNodeAttribute->IntValue();
+												}
+											}
+											switcher->mvs_WSValue = value;
+											switcher->mvi_ChainLayer = chainLayer;
+										}
+									}
+
+								}																																														//paraInfo层结束
+								//list填充完毕，将list写入module
+								moduleNode->mvvu_ParaList = paraList;
+								moduleNode->mve_CurWinSwitcher = *switcher;
+								if (moduleType == 2003)  //还原for模块
+								{
+									std::map <int, logic_Tree *> tree_map = prg->getTreeMap();
+									std::map <int, logic_BasicModule *> module_map = prg->getModuleMap();
+									std::map <int, logic_Tree * > m_tree_map = prg->getModuleTreeMap();
+									std::map <logic_Tree *, int > tree_forif_map = prg->getForIfMap();
+									std::map<whPort, whPort > conn_fromto_map = prg->getFromMap();
+									std::map<whPort, whPort > conn_tofrom_map = prg->getToMap();
+
+
+									logic_ForModule* forModule = new logic_ForModule(nodeID,
+										tree_map,
+										module_map,
+										m_tree_map,
+										tree_forif_map,
+										conn_fromto_map,
+										conn_tofrom_map,
+										*moduleNode
+										);
+									forModule->forName = forName;
+
+								}
+								else if (moduleType == 2004)
+								{
+
+								}
+							}
+						}
+						//将还原的模块放入program
+						prg->add_Module(nodeID, moduleNode);
+					}																																								//Tree层结束
+					rebuildTree(tree, allNode);
+				}
+			}
+			else if (name == "From_To")
+			{
+				if (treeRoot->FirstAttribute())
+				{
+					int module1, paraId1, module2, paraId2;
+					for (auto From_To_Attribute = treeRoot->FirstAttribute(); From_To_Attribute; From_To_Attribute = From_To_Attribute->Next())
+					{
+						std::string name = From_To_Attribute->Name();
+						if (name == "moduleId1")
+						{
+							module1 = From_To_Attribute->IntValue();
+						}
+						else if (name == "paraId1")
+						{
+							paraId1 = From_To_Attribute->IntValue();
+						}
+						else if (name == "moduleId2")
+						{
+							module2 = From_To_Attribute->IntValue();
+						}
+						else if (name == "paraId2")
+						{
+							paraId2 = From_To_Attribute->IntValue();
+						}
+					}
+					whPort from, to;
+					from.moduleId = module1;
+					from.paraId = paraId1;
+					to.moduleId = module2;
+					to.paraId = paraId2;
+					fromToMap[from] = to;
+					toFromMap[to] = from;
+				}
+
+			}
+
+		}  //TreeRoot层结束
+		//将连线的两个表放入program
+		prg->setFromToMap(fromToMap);
+		prg->setToFromMap(toFromMap);
+	}
+}
+
+
 bool logic_XmlIO::saveProgram(std::map<int, logic_Program*> &programMap, TiXmlElement* ProgramList)
 {
 	for (auto index = programMap.begin(); index != programMap.end(); ++index){
@@ -7029,6 +7262,139 @@ bool logic_XmlIO::saveProgram(std::map<int, logic_Program*> &programMap, TiXmlEl
 	}
 	return true;
 }
+
+bool logic_XmlIO::saveProgram(logic_Program* prg, TiXmlDocument* parentElement)
+{
+	if (prg == NULL || parentElement == NULL)
+	{
+		assert(true);
+		return false;
+	}
+
+	//program id
+	TiXmlElement* program = new TiXmlElement("Program");
+
+	//set attribute
+	program->SetAttribute("id", intToString(prg->getID()).c_str());
+	program->SetAttribute("name", prg->getName().c_str());
+
+	//link them
+	parentElement->LinkEndChild(program);
+
+	//tree map
+	auto allTreeMap = prg->getTreeMap();
+	for (auto indexOfRoot = allTreeMap.begin(); indexOfRoot != allTreeMap.end(); ++indexOfRoot){               //TreeNode层
+
+		TiXmlElement* treeRoot = new TiXmlElement("TreeRoot");
+		program->LinkEndChild(treeRoot);
+		treeRoot->SetAttribute("id", indexOfRoot->first);
+
+		//遍历树，存每个节点信息---------ID和父节点ID
+		auto allNode = prg->getAllTreeNode(indexOfRoot->first);
+		for (auto index = allNode.begin(); index != allNode.end(); ++index){
+			TiXmlElement* node = new TiXmlElement("TreeNode");
+			treeRoot->LinkEndChild(node);
+			node->SetAttribute("ID", (*index)->getID());
+			node->SetAttribute("fatherID", (*index)->getParentID());
+			//模块信息
+			auto moduleID = (*index)->getID();
+			auto moduleMap = prg->getModuleMap();
+			auto module = moduleMap[moduleID];
+			//当前信息
+			auto type = module->getModuleType();
+			auto mode = module->getModeValue();
+			auto paraList = module->getCurParaList();
+			auto port = module->mve_CurWinSwitcher;        //当前端口选择器
+			if (2003 == type)        //如果是for模块
+			{
+				logic_ForModule* forModule = prg->getForModuleById(moduleID);
+				std::string allTreeRoot;
+				std::vector<int> allRootInt = forModule->findAllRoots();
+				parseRootToString(allRootInt, allTreeRoot);
+
+				node->SetAttribute("ModuleType", type);
+				node->SetAttribute("CurrentModeType", mode);
+				node->SetAttribute("ForName", forModule->forName.c_str());
+				node->SetAttribute("AllRoot", allTreeRoot.c_str());
+			}
+			else if (2004 == type)   //如果是if模块
+			{
+				logic_IfModule* ifModule = prg->getIfModuleById(moduleID);
+				node->SetAttribute("ModuleType", type);
+				node->SetAttribute("CurrentModeType", mode);
+				node->SetAttribute("IfName", ifModule->IfName.c_str());
+			}
+			else                    //如果是非for和if模块
+			{
+				node->SetAttribute("ModuleType", type);
+				node->SetAttribute("CurrentModeType", mode);
+			}
+
+
+
+			TiXmlElement* paraInfo = new TiXmlElement("paraInfo");
+			if (!paraList.empty())
+			{												//当前参数列表
+				for (auto paraIndex = paraList.begin(); paraIndex != paraList.end(); ++paraIndex)
+				{
+					TiXmlElement* para = new TiXmlElement("para");
+					para->SetAttribute("ID", (*paraIndex)->mvi_ParaID);
+					para->SetAttribute("value", (*paraIndex)->mvs_Value.c_str());
+					para->SetAttribute("isInPort", (*paraIndex)->mvb_IsInport);
+					paraInfo->LinkEndChild(para);
+				}
+			}
+			//当前端口
+			TiXmlElement* switcher = new TiXmlElement("switcher");
+			switcher->SetAttribute("value", port.mvs_WSValue.c_str());
+			switcher->SetAttribute("chainLayer", port.mvi_ChainLayer);
+			paraInfo->LinkEndChild(switcher);
+			node->LinkEndChild(paraInfo);
+
+		}
+	} //TreeNode层结束
+
+	//From_To层
+	auto Conn_From_ToMap = prg->getFromMap();
+	if (Conn_From_ToMap.size() != 0)
+	{
+		TiXmlElement* From_To = new TiXmlElement("From_To");
+		for (auto index = Conn_From_ToMap.begin(); index != Conn_From_ToMap.end(); index++)
+		{
+			auto from = index->first;
+			auto to = index->second;
+			From_To->SetAttribute("moduleId1", from.moduleId);
+			From_To->SetAttribute("paraId1", from.paraId);
+			From_To->SetAttribute("moduleId2", to.moduleId);
+			From_To->SetAttribute("paraId2", to.paraId);
+		}
+		program->LinkEndChild(From_To);
+	}
+
+	return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //
 //bool logic_XmlIO::IO_SaveProgram(const std::string fileName,TiXmlElement* rootElement)
@@ -7208,14 +7574,14 @@ bool logic_XmlIO::IO_Initial(std::map <int, logic_BasicModule *> &InitModuleMap)
 //项目属性中的导出文件
 bool logic_XmlIO::I0_ExportProgram(const std::string fileName, logic_Program program)
 {
-	if (isFileExist(fileName.c_str()))
-	{
+	TiXmlDocument docProgram;
+	TiXmlDeclaration* dec = new TiXmlDeclaration("1.0", "", "");
+	docProgram.LinkEndChild(dec);
+
+	if (saveProgram(&program, &docProgram) && docProgram.SaveFile(fileName.c_str()))
 		return true;
-	}
 	else
-	{
 		return false;
-	}
 }
 
 //文件中导入program
@@ -7223,6 +7589,17 @@ bool logic_XmlIO::IO_ImportProgram(const std::string fileName, logic_Project* pr
 {
 	if (isFileExist(fileName.c_str()))
 	{
+		//打开文件
+		const char* file = fileName.c_str();
+		TiXmlDocument* xmlFileName = new TiXmlDocument(file);
+		xmlFileName->LoadFile();
+		TiXmlElement* progElement = xmlFileName->RootElement();
+
+		logic_Program* importProgram = new logic_Program(1,"");
+		fillProgram(importProgram,progElement);
+
+		project->addProgram(importProgram);
+
 		return true;
 	}
 	else

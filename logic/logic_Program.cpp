@@ -99,14 +99,13 @@ void logic_Program::prog_Destroy()
 	cout<<"进入prog_Destroy"<<endl;
 
 
-	//清空森林
-	for (map<_IdDataType, logic_Tree *>::iterator it = mvmu_TreeMap.begin(); it != mvmu_TreeMap.end(); ++it)
+		//清空森林
+	for(map<_IdDataType , logic_Tree *>::iterator it = mvmu_TreeMap.begin();it != mvmu_TreeMap.end(); ++it)
 	{
 		logic_Tree *tmpT = it->second;
 		//tmpT->Destroy(tmpT->getRoot()); //这样会调用两次，堆错误
 		SAFE_DELETE(tmpT);
 	}
-
 
 	//清空mvmu_ModuleMap
 	for(map<_IdDataType , logic_BasicModule *>::iterator it = mvmu_ModuleMap.begin();it != mvmu_ModuleMap.end(); ++it)
@@ -311,6 +310,11 @@ std::string logic_Program::getName()
 int logic_Program::getID()
 {
 	return mvs_ProgId;
+}
+
+void logic_Program::setID(int id)
+{
+	mvs_ProgId = id;
 }
 
 int logic_Program::getMaxModuleId() {
@@ -583,7 +587,7 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 //带孩子后插move
 int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
-	if ( 0!=pre_m_id && 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
 		return -2; // 首先 cur_m_id 和 pre_m_id 都要有
 	}
 
@@ -2957,6 +2961,7 @@ void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
 	mvmu_TreeMap = treeMap;
 }
 
+
 //!!!!!!!!!!!!!!!!!!!!秦亮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 whPort logic_Program::getLinkstartwhport(whPort in)
 {
@@ -2970,5 +2975,4 @@ std::map<logic_Tree*, int> logic_Program::getIfforidmaptree()
 	return mvmi_TreeId_For_IfIdMap;
 }
 //!!!!!!!!!!!!!!!!!!!!秦亮!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
-
 

@@ -22,14 +22,17 @@
 class logic_Project
 {
 public:
-	explicit logic_Project(int id,std::string name);
-	explicit logic_Project(int id,std::string name,std::map <int, logic_BasicModule *> imap);
+	logic_Project(int id,std::string name);
+	logic_Project(int id,std::string name,std::map <int, logic_BasicModule *> imap);
 	~logic_Project();
 
 
 	//set and get
 	int getPrjId();//project id 生成就无法改变
 	void setPrjId(int id);
+
+	std::string getPrjFilePath();//项目的持久化文件的地址
+	void setPrjFilePath(std::string filePath);//设置项目持久化文件的地址
 
 	void setPrjName(const std::string name);
 	std::string getPrjName();
@@ -52,7 +55,7 @@ public:
 	logic_Program* getProgram(int id);
 	std::string copyProgram(const std::string progName);
 	bool deleteProgram(const std::string progName);//根据progName删除该program
-
+	void addProgram(logic_Program* prg);//import一个program文件
 
 	//获得最大 ProgID，方便累计
 	int getMaxProgId();
@@ -93,6 +96,8 @@ private:
 	std::string whIntToString(int i);
 	std::string genNewProgName(int id); //生成新 prj 的名字
 	int getProgId(std::string progName); //根据progname名得到programID
+
+	std::string projectFilePath;
 };
 
 #endif

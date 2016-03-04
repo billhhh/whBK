@@ -26,8 +26,8 @@ class logic_Program //等效于森林
 {
 public:
 
-	explicit logic_Program(int id, std::string prog_name);
-	explicit logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> imap);
+	logic_Program(int id, std::string prog_name);
+	logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> imap);
 	virtual ~logic_Program();
 
 	logic_Program* copyPrg(logic_Program* newProgram);//除了id,prgname,其他内容都拷贝
@@ -123,7 +123,8 @@ public:
 	/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	//set & get
-	int getID(); //ID不可修改
+	int getID(); 
+	void setID(int id);
 
 	void setProgramName(const std::string name);       //program name
 	std::string getName();
@@ -222,6 +223,8 @@ public:
 	std::vector<int > findRootsInContainer(int if_id,int branch_id);
 
 
+
+
 	//!!!!!!!!!!!!!!!!!!!!!!编译!!!!!!!!!!!!!!!!!!!!//
 public:
 	//根据输入模块id和参数ID获取其连线起始端对应的输出模块id和参数id
@@ -230,6 +233,7 @@ public:
 	std::map<logic_Tree *, int > getIfforidmaptree();
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+
 
 
 protected:
