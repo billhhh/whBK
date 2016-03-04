@@ -72,8 +72,8 @@ public:
 	bool mvb_IsRun; //是否在运行中
 	//bool mvb_IsConnectStart; //有没有跟开始模块相连
 
-	//模式选择器总表，初始化load进来
-	std::vector <logic_ParaPointer *> mvvu_ModeMenu;
+	//模式选择器init总表，初始化load进来
+	std::vector <logic_ParaPointer *> mvvu_ModeMenu; //包含init WinSwitcher 信息
 	std::vector <logic_BasicPara *> mvvu_ParaList; //参数列表
 	std::vector <std::string > mvvu_CodeBlocksList; //代码片列表
 
