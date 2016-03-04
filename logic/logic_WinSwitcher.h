@@ -29,7 +29,10 @@ class WinSwitcher
 public:
 	WinSwitcherType mve_WSType;
 	std::string mvs_WSValue;
-	int mvi_ChainLayer; //菊链层号
+	std::string mvs_WSValue2; //仅双端口用
+	int mvi_ChainLayer; //菊链层号（列表必定是1、2、3、4）
+
+	std::vector <std::string > WSList1;
 
 protected:
 private:
