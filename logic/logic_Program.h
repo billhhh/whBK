@@ -221,6 +221,17 @@ public:
 	std::vector<int > findRootsInContainer(int for_id);
 	std::vector<int > findRootsInContainer(int if_id,int branch_id);
 
+
+	//!!!!!!!!!!!!!!!!!!!!!!编译!!!!!!!!!!!!!!!!!!!!//
+public:
+	//根据输入模块id和参数ID获取其连线起始端对应的输出模块id和参数id
+	whPort getLinkstartwhport(whPort in);
+	//获取特殊树到特殊id的映射表
+	std::map<logic_Tree *, int > getIfforidmaptree();
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+
+
 protected:
 
 	///如果是 for if的activeTree，属于特殊的树，树根没有实体module

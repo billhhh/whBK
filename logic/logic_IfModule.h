@@ -80,6 +80,12 @@ public:
 	std::vector<int > findBranchAllRoots(int branch_id);
 	std::vector<int > findBranchAllRootsActive(int branch_id);
 
+	//!!!!!!!!!!!!!!!!!!!!!!编译!!!!!!!!!!!!!!!!!!!!//
+	//获取if模块的默认分支
+	int getDefaultBranch();
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 protected:
 
 

@@ -2956,3 +2956,19 @@ void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
 {
 	mvmu_TreeMap = treeMap;
 }
+
+//!!!!!!!!!!!!!!!!!!!!해좋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+whPort logic_Program::getLinkstartwhport(whPort in)
+{
+	assert(mvvu_Conn_To_FromMap.find(in) != mvvu_Conn_To_FromMap.end());
+	return mvvu_Conn_To_FromMap[in];
+	
+}
+
+std::map<logic_Tree*, int> logic_Program::getIfforidmaptree()
+{
+	return mvmi_TreeId_For_IfIdMap;
+}
+//!!!!!!!!!!!!!!!!!!!!해좋!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+
+

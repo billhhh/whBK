@@ -438,3 +438,12 @@ std::vector<int > logic_IfModule::findBranchAllRootsActive(int branch_id) {
 
 	return L;
 }
+
+//!!!!!!!!!!!!!!!!!!!!!!编译!!!!!!!!!!!!!!!!!!!!//
+//获取if模块的默认分支
+int logic_IfModule::getDefaultBranch()
+{
+	return mvi_DefaultBranch;
+}
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
