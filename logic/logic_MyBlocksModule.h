@@ -21,6 +21,7 @@ public:
 	int mvi_MyBlockProgID; //属于哪个program，是program的ID
 
 	logic_MyBlocksModule();
+	explicit logic_MyBlocksModule(int mbprog_id);
 	~logic_MyBlocksModule();
 
 protected:
