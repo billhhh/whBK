@@ -18,7 +18,7 @@ class logic_MyBlocksProgram
 	: public logic_Program
 {
 public:
-	//std::vector <logic_BasicPara *> mvvu_InputParaList; //我的模块输入参数列表
+	//std::vector <logic_BasicPara *> mvvu_ParaList; //我的模块参数列表（包括输入输出）
 	logic_BasicModule InputModule; //输入参数模块
 	logic_BasicModule OutputModule; //输出参数模块
 
