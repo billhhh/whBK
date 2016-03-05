@@ -11,6 +11,7 @@
 #define _LOGIC_MY_BLOCKS_MODULE_H_
 
 #include "logic_BasicModule.h"
+#include "logic_MyBlocksProgram.h"
 #include "logic_Global.h"
 #include <map>
 
@@ -19,9 +20,11 @@ class logic_MyBlocksModule
 {
 public:
 	int mvi_MyBlockProgID; //属于哪个program，是program的ID
+	logic_MyBlocksProgram *mvi_MyBlockProg;
 
 	logic_MyBlocksModule();
 	explicit logic_MyBlocksModule(int mbprog_id);
+	explicit logic_MyBlocksModule(logic_MyBlocksProgram *mbprog);
 	~logic_MyBlocksModule();
 
 protected:

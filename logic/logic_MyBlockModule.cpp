@@ -19,3 +19,9 @@ logic_MyBlocksModule::logic_MyBlocksModule(int mbprog_id)
 	:mvi_MyBlockProgID(mbprog_id) {
 
 }
+
+//¹¹Ôìº¯Êý
+logic_MyBlocksModule::logic_MyBlocksModule(logic_MyBlocksProgram *mbprog)
+	:mvi_MyBlockProg(mbprog) {
+
+}
