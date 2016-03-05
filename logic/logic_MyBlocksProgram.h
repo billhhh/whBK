@@ -11,13 +11,15 @@
 #define _LOGIC_MY_BLOCKS_PROGRAM_H_
 
 #include "logic_Program.h"
-#include "logic_BasicPara.h"
+#include "logic_BasicModule.h"
+//#include "logic_BasicPara.h"
 
 class logic_MyBlocksProgram
 	: public logic_Program
 {
 public:
-	std::vector <logic_BasicPara *> mvvu_InportParaList; //我的模块输入参数列表
+	//std::vector <logic_BasicPara *> mvvu_InputParaList; //我的模块输入参数列表
+	logic_BasicModule InputModule; //输入参数模块
 
 protected:
 
