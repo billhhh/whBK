@@ -20,6 +20,7 @@ class logic_MyBlocksProgram
 public:
 	//std::vector <logic_BasicPara *> mvvu_InputParaList; //我的模块输入参数列表
 	logic_BasicModule InputModule; //输入参数模块
+	logic_BasicModule OutputModule; //输出参数模块
 
 protected:
 

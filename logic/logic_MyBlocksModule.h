@@ -18,7 +18,7 @@ class logic_MyBlocksModule
 	: public logic_BasicModule
 {
 public:
-	int mvi_ProgID; //属于哪个program，是program的ID
+	int mvi_MyBlockProgID; //属于哪个program，是program的ID
 
 	logic_MyBlocksModule();
 	~logic_MyBlocksModule();
