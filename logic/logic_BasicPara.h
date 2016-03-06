@@ -29,6 +29,7 @@ class logic_BasicPara
 {
 public:
 	int mvi_ParaID;
+	std::string mvs_ParaName;
 	ParaIOType mve_IOType; //in或者是out
 	ParaType mve_ParaType;
 	std::string mvs_Value; //参数值
