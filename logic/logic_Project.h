@@ -88,6 +88,8 @@ private:
 
 	std::map<int, logic_Gragh *> graghMap;
 
+	std::map <int, logic_Program > ProgStepMap; //记录program每一步操作步骤
+
 //工具private函数
 private:
 	void Init();
