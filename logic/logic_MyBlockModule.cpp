@@ -10,7 +10,8 @@
 #include "logic_MyBlocksModule.h"
 
 //¹¹Ôìº¯Êý
-logic_MyBlocksModule::logic_MyBlocksModule() {
+logic_MyBlocksModule::logic_MyBlocksModule()
+	:mvi_MyBlockProgID(0),mvi_MyBlockProg(NULL) {
 
 }
 
