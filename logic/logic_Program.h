@@ -27,7 +27,7 @@ class logic_Program //等效于森林
 public:
 
 	logic_Program(int id, std::string prog_name);
-	logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> imap);
+	logic_Program(int id, std::string prog_name,std::map <int, logic_BasicModule *> init_map); //初始化参数
 	virtual ~logic_Program();
 
 	logic_Program* copyPrg(logic_Program* newProgram);//除了id,prgname,其他内容都拷贝
