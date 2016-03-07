@@ -20,12 +20,12 @@ class logic_MyBlocksModule
 	: public logic_BasicModule
 {
 public:
-	int mvi_MyBlockProgID; //属于哪个program，是program的ID
+	//属于哪个program
+	//int mvi_MyBlockProgID;
 	logic_MyBlocksProgram *mvi_MyBlockProg;
 	std::string MyBlockName;
 
 	logic_MyBlocksModule();
-	explicit logic_MyBlocksModule(int mbprog_id);
 	explicit logic_MyBlocksModule(logic_MyBlocksProgram *mbprog);
 	~logic_MyBlocksModule();
 

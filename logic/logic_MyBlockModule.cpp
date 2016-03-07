@@ -13,17 +13,12 @@
 /// \brief 构造函数+析构函数
 ///
 logic_MyBlocksModule::logic_MyBlocksModule()
-	:mvi_MyBlockProgID(0),mvi_MyBlockProg(NULL) {
-
-}
-
-logic_MyBlocksModule::logic_MyBlocksModule(int mbprog_id)
-	:mvi_MyBlockProgID(mbprog_id),mvi_MyBlockProg(NULL) {
+	:mvi_MyBlockProg(NULL) {
 
 }
 
 logic_MyBlocksModule::logic_MyBlocksModule(logic_MyBlocksProgram *mbprog)
-	:mvi_MyBlockProgID(mbprog->getID()),mvi_MyBlockProg(mbprog) {
+	:mvi_MyBlockProg(mbprog) {
 
 }
 
