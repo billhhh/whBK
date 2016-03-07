@@ -222,7 +222,13 @@ public:
 	std::vector<int > findRootsInContainer(int for_id);
 	std::vector<int > findRootsInContainer(int if_id,int branch_id);
 
+	///
+	/// \brief 创建我的模块
+	///
 
+	//session1：是否可以创建我的模块，前后端第一次会话
+	//接口传id列表，返回是否可创建
+	int canMyBlocks(std::vector<int > ids);
 
 
 	//!!!!!!!!!!!!!!!!!!!!!!编译!!!!!!!!!!!!!!!!!!!!//

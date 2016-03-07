@@ -2962,7 +2962,7 @@ void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
 }
 
 
-//!!!!!!!!!!!!!!!!!!!!«ÿ¡¡!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+//!!!!!!!!!!!!!!!!!!!!±‡“Î!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 whPort logic_Program::getLinkstartwhport(whPort in)
 {
 	assert(mvvu_Conn_To_FromMap.find(in) != mvvu_Conn_To_FromMap.end());
@@ -2974,5 +2974,5 @@ std::map<logic_Tree*, int> logic_Program::getIfforidmaptree()
 {
 	return mvmi_TreeId_For_IfIdMap;
 }
-//!!!!!!!!!!!!!!!!!!!!«ÿ¡¡!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+//!!!!!!!!!!!!!!!!!!!!±‡“Î!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
