@@ -14,6 +14,7 @@
 #include "logic_MyBlocksProgram.h"
 #include "logic_Global.h"
 #include <map>
+#include <string>
 
 class logic_MyBlocksModule
 	: public logic_BasicModule
@@ -21,6 +22,7 @@ class logic_MyBlocksModule
 public:
 	int mvi_MyBlockProgID; //属于哪个program，是program的ID
 	logic_MyBlocksProgram *mvi_MyBlockProg;
+	std::string MyBlockName;
 
 	logic_MyBlocksModule();
 	explicit logic_MyBlocksModule(int mbprog_id);
