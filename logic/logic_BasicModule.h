@@ -24,9 +24,9 @@ public:
 	/////构造函数和析构函数
 	explicit logic_BasicModule();//默认生成start
 	explicit logic_BasicModule(int id);//默认生成start
-	logic_BasicModule(int id,int moduleType); //根据信息，自动填充其他信息
+	explicit logic_BasicModule(int id,int moduleType); //根据信息，自动填充其他信息
 	////深拷贝构造函数
-	logic_BasicModule(int id,int moduleType,const logic_BasicModule &bm);
+	explicit logic_BasicModule(int id,int moduleType,const logic_BasicModule &bm);
 	virtual ~logic_BasicModule();
 
 	/////!!! useless !!!!!!!!!!!!

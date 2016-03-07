@@ -90,7 +90,7 @@ void logic_Test::testProject()
 
 void logic_Test::testLogger()
 {
-	initLogger("hahaha","warnlog.txt","errolog.txt",1);
+	initLogger("hahaha","warnlog.txt","errolog.txt");
 	//LOG(_INFO);
 	//LOG(_WARNING);
 	//LOG(_FATAL);
@@ -103,7 +103,7 @@ void logic_Test::testLogger()
 
 void logic_Test::testMutex()
 {
-	initLogger("infolog.txt","warnlog.txt","errolog.txt",1);
+	initLogger("infolog.txt","warnlog.txt","errolog.txt");
 	//Mutex loggerLock;
 	//MyMutex loggerLock;
 
