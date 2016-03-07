@@ -14,6 +14,7 @@
 #include <string>
 #include <list>
 #include "logic/logic_Controller.h"
+#include "logic/logic_BasicPara.h"
 
 enum GetPType{
 	MAX_VALUE = 0,//最大值
@@ -198,10 +199,6 @@ public:
 	///
 	std::vector<int> findRootsInContainer(int containerId);
 
-	/// \brief 创建我的模块
-
-
-
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	bool saveProject(const std::string fileName, int prjId);
 	bool loadProject(const std::string fileName);
@@ -209,6 +206,19 @@ public:
 	///For degug
 	//打印当前prj后台的所有Program的所有树
 	void debug_displayBackgroundTree();
+
+	///
+	/// \brief 创建我的模块
+	///
+
+	//session1：是否可以创建我的模块，前后端第一次会话
+	//接口传id列表，返回是否可创建
+	int canMyBlocks(std::vector<int > ids);
+
+	//session2：点击完成后，前后端第二次会话
+	//前端传给后台：参数vector、我的模块name、我的模块描述
+	//后台返回前端：我的模块id（底部id）
+	int buildMyBlocks(std::string mbname,std::string mbdes,std::vector<logic_BasicPara *> plist);
 
 protected:
 

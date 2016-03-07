@@ -197,10 +197,13 @@
     </ClCompile>
     <ClCompile Include="graphic.cpp" />
     <ClCompile Include="logger.cpp" />
+    <ClCompile Include="logic\logic_BasicModule.cpp" />
     <ClCompile Include="logic\logic_ForModule.cpp" />
+    <ClCompile Include="logic\logic_Gragh.cpp" />
     <ClCompile Include="logic\logic_Graph.cpp" />
     <ClCompile Include="logic\logic_IfModule.cpp" />
     <ClCompile Include="logic\logic_MyBlockModule.cpp" />
+    <ClCompile Include="logic\logic_MyBlocksProgram.cpp" />
     <ClCompile Include="logic\logic_Program.cpp" />
     <ClCompile Include="logic\logic_Project.cpp" />
     <ClCompile Include="logic\logic_Test.cpp" />
