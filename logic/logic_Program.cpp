@@ -2984,12 +2984,28 @@ std::map<logic_Tree* ,int> logic_Program::getIfforidmaptree()
 //接口传id列表，返回是否可创建
 int logic_Program::canMyBlocks(std::vector<int > ids) {
 
-	///Step1、判断所有模块必须都连通（如果不连通直接pass）
+	const int VSize = ids.size();
+	///建立邻接矩阵
+	int **M = new int *[VSize+2];
+	for( int i=0; i<VSize+2; i++)
+		M[i] = new int[VSize+2];  //分配第二维，每一行的空间。
+
+	//填充邻接矩阵 M
+	int fillMatrix(int **M,std::vector<int > ids); //函数声明
+	fillMatrix(M,ids); //函数调用
+
+	///1、判断所有模块必须都连通（如果不连通直接pass）
 	///错误信息：请确保所有模块都已连接，并且共享同一个开始模块
-
-
-	///Step2、DFS，如果发现有的分支没有覆盖到，则错误
+	///2、DFS，如果发现有的分支没有覆盖到，则错误
 	///错误信息：请在选定内容中包含所有并行模块。
 
+	delete M;
 
+	return 0; //可以创建
+}
+
+//根据树信息，填充邻接矩阵
+int fillMatrix(int **M,std::vector<int > ids) {
+
+	return 0;
 }
