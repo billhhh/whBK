@@ -2991,6 +2991,10 @@ std::map<logic_Tree* ,int> logic_Program::getIfforidmaptree()
 ///
 /// \return -1 代表包含开始模块
 ///         -2 表示不是一棵树
+///         -3 表示验证单分支出错
+///          0 表示可以正常创建
+///         -4 表示某节点并非所有孩子都被选中
+///         -5 表示有多个连通域
 ///
 int logic_Program::canMyBlocks(std::vector<int > ids) {
 
@@ -3023,12 +3027,25 @@ int logic_Program::canMyBlocks(std::vector<int > ids) {
 	if( NULL == n )
 		assert(false);
 
-	//计算分支数
-	int branchCnt = ;
+	//处理单分支情况
+	///
+	/// \return 0 表示处理完毕，>0 表示不止一个分支，<0 出错
+	///
+	int res = MyBlockS1_SingleBranchProc(n,idsMap);
+	if( res < 0 )
+		return -3;
+	else if( 0 == res )
+		return 0;
 
 	//对tree进行DFS
-	int res = 0;
+	res = 0;
 	MyBlockS1_DFSJudge(n,res,idsMap);
+	if( res < 0 )
+		return -4;
+
+	//此时连通域都已遍历完
+	if( idsMap.empty() == false )
+		return -5;
 
 	return 0; //可以创建
 }
@@ -3046,11 +3063,24 @@ void logic_Program::MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map 
 
 	int curId = some->getID();
 	if( idsMap.count(curId) > 0 ) {
-		
+		idsMap.erase(curId);
 	}
 
+	//搜寻自己的所有孩子是否都在IDSMap中
+	//已进行剪枝
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
-		MyBlockS1_DFSJudge(some->mvvu_Children[i],);
+
+		if( idsMap.count(some->mvvu_Children[i]->getID()) == 0 )
+			res = -1;
+		else
+			MyBlockS1_DFSJudge(some->mvvu_Children[i],res,idsMap);
+	}
+
+	//看自己的兄弟是否存在，如果存在可以继续
+	logic_TreeNode *pa = some->mvu_Parent;
+	for (int i=0;i<pa->mvvu_Children.size();i++) {
+		if( idsMap.count(pa->mvvu_Children[i]->getID()) == 0 )
+			MyBlockS1_DFSJudge(some->mvvu_Children[i],res,idsMap);
 	}
 
 }
@@ -3076,4 +3106,32 @@ void logic_Program::MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,s
 		q.push(node->mvvu_Children[i]);
 
 	MyBlockS1_bfsFindStartNode(q,idsMap,findNode);
+}
+
+///
+/// \brief 处理单分支情况
+/// \return 0 表示处理完毕，>0 表示不止一个分支，<0 出错
+///
+int logic_Program::MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map <int , int > idsMap) {
+
+	//直接作为单分支情况处理
+	while ( idsMap.empty() == false ) {
+
+		if( idsMap.count(curNode->getID()) > 0 ) {
+			idsMap.erase(curNode->getID());
+		} else {
+			//不空但是IDSMap并没有这个节点，证明不是单分支，且这个分支没包含完整，出错
+			return -1;
+		}
+
+		if ( curNode->mvvu_Children.size() == 0 && idsMap.empty() == false ) {
+			//已到叶子节点，但是此处idsMap并没有空
+			return 1; //不是一个分支
+		}
+
+		curNode = curNode->mvvu_Children[0];
+
+	}
+	
+	return 0;
 }

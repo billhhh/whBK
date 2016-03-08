@@ -276,12 +276,16 @@ protected:
 	//完全删除一棵树所有节点模块的所有信息（各种实体map和connection map）
 	void recurs_DelTreeNodeModule(logic_TreeNode *some);
 
+
+	///我的模块session1
+
 	///
 	/// \brief 深度优先搜索判断是否可以建立我的模块
 	/// \para res 表示结果 负数表示不可建立，idsMap 标识是否有id（将find时间缩减到O(1)）
 	///
 	void MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap );
 	void MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode); //用bfs找出判断起始节点
+	int MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map <int , int > idsMap); //处理单分支情况
 
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
