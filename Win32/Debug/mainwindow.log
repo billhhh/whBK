@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/3/7 15:55:34。
+﻿生成启动时间为 2016/3/8 11:26:11。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -16,7 +16,7 @@
          Moc'ing view.h...
          Rcc'ing image.qrc...
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_Gragh.cpp logic\logic_Graph.cpp logic\logic_IfModule.cpp logic\logic_MyBlockModule.cpp logic\logic_MyBlocksProgram.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp logic\tinyXML\tinystr.cpp logic\tinyXML\tinyxml.cpp logic\tinyXML\tinyxmlerror.cpp logic\tinyXML\tinyxmlparser.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_Gragh.cpp logic\logic_Graph.cpp logic\logic_IfModule.cpp logic\logic_MyBlockModule.cpp logic\logic_MyBlocksProgram.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp logic\tinyXML\tinystr.cpp logic\tinyXML\tinyxml.cpp logic\tinyXML\tinyxmlerror.cpp logic\tinyXML\tinyxmlparser.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
          bottom_label.cpp
      1>bottom_label.cpp(35): warning C4189: “dropAction”: 局部变量已初始化但不引用
          moc_bottom_label.cpp
@@ -64,6 +64,7 @@
      1>logic\logic_Program.cpp(1297): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
      1>logic\logic_Program.cpp(1427): warning C4100: “branch_id”: 未引用的形参
      1>logic\logic_Program.cpp(1446): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(3009): warning C4100: “M”: 未引用的形参
          logic_Project.cpp
      1>logic\logic_Project.cpp(159): warning C4189: “program”: 局部变量已初始化但不引用
      1>logic\logic_Project.cpp(204): warning C4189: “programID”: 局部变量已初始化但不引用
@@ -172,7 +173,7 @@
      1>e:\bill github\whbk\logic\logic_xmlio.cpp(7643): warning C4715: “logic_XmlIO::rebuildTree”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_controller.cpp(749): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_controller.cpp(786): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 GeneratedFiles\qrc_image.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 GeneratedFiles\qrc_image.cpp
          qrc_image.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\mainwindow.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib /LIBPATH:C:/qt/5.5/msvc2012/lib /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib qtmaind.lib shell32.lib Qt5Cored.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"debug\mainwindow.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" Win32\Debug\bottom_label.obj
@@ -217,6 +218,8 @@
          Win32\Debug\project.obj
          Win32\Debug\view.obj
          mainwindow.vcxproj -> E:\bill github\whBK\debug\mainwindow.exe
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\bscmake.exe /nologo /o"debug\mainwindow.bsc" /n Win32\Debug\bottom_label.sbr Win32\Debug\moc_bottom_label.sbr Win32\Debug\moc_graphic.sbr Win32\Debug\moc_mainwindow.sbr Win32\Debug\moc_menuitem.sbr Win32\Debug\moc_mode_select.sbr Win32\Debug\moc_module.sbr Win32\Debug\moc_ports.sbr Win32\Debug\moc_view.sbr Win32\Debug\qrc_image.sbr Win32\Debug\graphic.sbr Win32\Debug\logger.sbr Win32\Debug\logic_BasicModule.sbr Win32\Debug\logic_ForModule.sbr Win32\Debug\logic_Gragh.sbr Win32\Debug\logic_Graph.sbr Win32\Debug\logic_IfModule.sbr Win32\Debug\logic_MyBlockModule.sbr Win32\Debug\logic_MyBlocksProgram.sbr Win32\Debug\logic_Program.sbr Win32\Debug\logic_Project.sbr Win32\Debug\logic_Test.sbr Win32\Debug\logic_Tree.sbr Win32\Debug\logic_TreeNode.sbr Win32\Debug\logic_Controller.sbr Win32\Debug\logic_VarModule.sbr Win32\Debug\logic_XmlIO.sbr Win32\Debug\tinystr.sbr Win32\Debug\tinyxml.sbr Win32\Debug\tinyxmlerror.sbr Win32\Debug\tinyxmlparser.sbr Win32\Debug\main.sbr Win32\Debug\mainwindow.sbr Win32\Debug\menuitem.sbr Win32\Debug\mode_select.sbr Win32\Debug\module.sbr Win32\Debug\msgInterface.sbr Win32\Debug\ports.sbr Win32\Debug\program.sbr Win32\Debug\project.sbr Win32\Debug\view.sbr
        FinalizeBuildStatus:
          正在删除文件“Win32\Debug\mainwindow.unsuccessfulbuild”。
          正在对“Win32\Debug\mainwindow.lastbuildstate”执行 Touch 任务。
@@ -224,4 +227,4 @@
 
 生成成功。
 
-已用时间 00:00:30.86
+已用时间 00:00:41.34

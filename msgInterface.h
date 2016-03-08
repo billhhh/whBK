@@ -218,7 +218,7 @@ public:
 	//session2：点击完成后，前后端第二次会话
 	//前端传给后台：参数vector、我的模块name、我的模块描述
 	//后台返回前端：我的模块id（底部id）
-	int buildMyBlocks(std::string mbname,std::string mbdes,std::vector<logic_BasicPara *> plist);
+	int buildMyBlocks(std::string mbname,std::string mbdes,std::vector<logic_BasicPara > plist);
 
 protected:
 
