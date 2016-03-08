@@ -277,12 +277,12 @@ protected:
 	void recurs_DelTreeNodeModule(logic_TreeNode *some);
 
 	///
-	/// \brief 广度优先搜索判断是否可以建立我的模块
-	/// \para q 现有队列，idsMap 标识是否有id（将find时间缩减到O(1)）
-	///       branchCnt 表示分支次数，startFlag 表示是否找到第一个节点
-	/// \return 返回是否可行，负数表示错误
+	/// \brief 深度优先搜索判断是否可以建立我的模块
+	/// \para res 表示结果 负数表示不可建立，idsMap 标识是否有id（将find时间缩减到O(1)）
+	///       branchCnt 表示分支次数
 	///
-	int bfsMBJudge( std::queue<logic_TreeNode *> &q, std::map <int , int > &idsMap, int &branchCnt, int &startFlag ); //用广度优先判断是否可行
+	void recurs_MBJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap, int &branchCnt );
+	logic_TreeNode * bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap);
 
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
