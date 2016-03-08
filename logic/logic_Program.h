@@ -282,7 +282,7 @@ protected:
 	///       branchCnt 表示分支次数
 	///
 	void recurs_MBJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap, int &branchCnt );
-	logic_TreeNode * bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap);
+	void bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode); //用bfs找出判断起始节点
 
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集

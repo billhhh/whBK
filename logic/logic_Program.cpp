@@ -3014,12 +3014,19 @@ int logic_Program::canMyBlocks(std::vector<int > ids) {
 		idsMap[ids[i]] = 1; //插入该值
 	}
 
-	//先用BFS扫出第一个节点
+	//先用BFS扫出第一个节点，此节点一定是层数最低的节点（之一）
+	std::queue<logic_TreeNode *> q;
+	q.push(tree->getRoot());
+	logic_TreeNode * n = NULL;
+	bfsFindMBStartNode(q,idsMap,n);
+
+	if( NULL == n )
+		assert(false);
 
 	//对tree进行DFS
 	int branchCnt = 0;
 	int res = 0;
-	recurs_MBJudge(tree->getRoot(),res,idsMap,branchCnt);
+	recurs_MBJudge(n,res,idsMap,branchCnt);
 
 	return 0; //可以创建
 }
@@ -3045,4 +3052,27 @@ void logic_Program::recurs_MBJudge( logic_TreeNode *some, int res, std::map <int
 		recurs_GetId(some->mvvu_Children[i],);
 	}
 
+}
+
+//用bfs找出判断起始节点
+void logic_Program::bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode) {
+
+	if( findNode != NULL ) //找到了
+		return;
+
+	if ( q.empty() == true )
+		return;
+
+	logic_TreeNode *node = q.front();
+	q.pop;
+	if( idsMap.count(node->getID()) > 0 ) {
+		findNode = node;
+		return;
+	}
+
+	//否则加入子女
+	for(int i=0;i<node->mvvu_Children.size();++i)
+		q.push(node->mvvu_Children[i]);
+
+	bfsFindMBStartNode(q,idsMap,findNode);
 }
