@@ -2982,30 +2982,63 @@ std::map<logic_Tree* ,int> logic_Program::getIfforidmaptree()
 
 //session1：是否可以创建我的模块，前后端第一次会话
 //接口传id列表，返回是否可创建
+
+///1、判断所有模块必须都连通（如果不连通直接pass）
+///错误信息：请确保所有模块都已连接，并且共享同一个开始模块
+///2、DFS，如果发现有的分支没有覆盖到，则错误
+///错误信息：请在选定内容中包含所有并行模块。
+
+///
+/// \return -1 代表包含开始模块
+///         -2 表示不是一棵树
+///
 int logic_Program::canMyBlocks(std::vector<int > ids) {
 
-	const int VSize = ids.size();
-	///建立邻接矩阵
-	int **M = new int *[VSize+2];
-	for( int i=0; i<VSize+2; i++)
-		M[i] = new int[VSize+2];  //分配第二维，每一行的空间。
+	assert( mvmu_ModuleMap.count(ids[0])>0 ); //不含此模块
 
-	//填充邻接矩阵 M
-	int fillMatrix(int **M,std::vector<int > ids); //函数声明
-	fillMatrix(M,ids); //函数调用
+	int vsize = ids.size();
+	logic_Tree * tree = mvmu_ModuleId_TreeMap[ids[0]];
+	std::map <int , int > idsMap;
 
-	///1、判断所有模块必须都连通（如果不连通直接pass）
-	///错误信息：请确保所有模块都已连接，并且共享同一个开始模块
-	///2、DFS，如果发现有的分支没有覆盖到，则错误
-	///错误信息：请在选定内容中包含所有并行模块。
+	//填充flagMap
+	for (int i=0;i<vsize;i++) {
 
-	delete M;
+		assert( mvmu_ModuleMap.count(ids[i])>0 ); //不含此模块
+
+		if ( mvmu_ModuleMap[ids[0]]->getModuleType() )
+			return -1;
+
+		if ( mvmu_ModuleId_TreeMap[ids[0]]->mvi_TreeID != tree->mvi_TreeID )
+			return -2;
+
+		idsMap[ids[i]] = 1; //插入该值
+	}
+
+	//对tree进行BFS
+	std::queue<logic_TreeNode *> q;
+	q.push(tree->getRoot());
+	int branchCnt = 0;
+	int startFlag = 0;
+	int res = this->bfsMBJudge(q,idsMap,branchCnt,startFlag);
 
 	return 0; //可以创建
 }
 
-//根据树信息，填充邻接矩阵
-int fillMatrix(int **M,std::vector<int > ids) {
+///
+/// \brief 广度优先搜索判断是否可以建立我的模块
+/// \para q 现有队列，idsMap 标识是否有id（将find时间缩减到O(1)）
+///       branchCnt 表示分支次数，startFlag 表示是否找到第一个节点
+/// \return 返回是否可行，负数表示错误
+///
+int logic_Program::bfsMBJudge( std::queue<logic_TreeNode *> &q, std::map <int , int > &idsMap, int &branchCnt, int &startFlag  ) {
+
+	if ( q.empty() == true )
+		return 0;
+
+	logic_TreeNode *node = q.front();
+	if( idsMap.count(node->getID()) > 0 && startFlag == 0 ) {
+		startFlag = 1;
+	}
 
 	return 0;
 }
