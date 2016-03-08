@@ -2984,4 +2984,12 @@ std::map<logic_Tree* ,int> logic_Program::getIfforidmaptree()
 //接口传id列表，返回是否可创建
 int logic_Program::canMyBlocks(std::vector<int > ids) {
 
+	///Step1、判断所有模块必须都连通（如果不连通直接pass）
+	///错误信息：请确保所有模块都已连接，并且共享同一个开始模块
+
+
+	///Step2、DFS，如果发现有的分支没有覆盖到，则错误
+	///错误信息：请在选定内容中包含所有并行模块。
+
+
 }
