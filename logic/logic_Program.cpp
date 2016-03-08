@@ -2970,9 +2970,18 @@ whPort logic_Program::getLinkstartwhport(whPort in)
 	
 }
 
-std::map<logic_Tree*, int> logic_Program::getIfforidmaptree()
+std::map<logic_Tree* ,int> logic_Program::getIfforidmaptree()
 {
 	return mvmi_TreeId_For_IfIdMap;
 }
 //!!!!!!!!!!!!!!!!!!!!编译!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
+///
+/// \brief 创建我的模块
+///
+
+//session1：是否可以创建我的模块，前后端第一次会话
+//接口传id列表，返回是否可创建
+int logic_Program::canMyBlocks(std::vector<int > ids) {
+
+}

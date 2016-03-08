@@ -956,6 +956,5 @@ int logic_Controller::ctrlCanMyBlocks(std::vector<int > ids) {
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	//return tCurProg->;
-	return 0;
+	return tCurProg->;
 }
