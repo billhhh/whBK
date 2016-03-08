@@ -3018,25 +3018,26 @@ int logic_Program::canMyBlocks(std::vector<int > ids) {
 	std::queue<logic_TreeNode *> q;
 	q.push(tree->getRoot());
 	logic_TreeNode * n = NULL;
-	bfsFindMBStartNode(q,idsMap,n);
+	MyBlockS1_bfsFindStartNode(q,idsMap,n);
 
 	if( NULL == n )
 		assert(false);
 
+	//计算分支数
+	int branchCnt = ;
+
 	//对tree进行DFS
-	int branchCnt = 0;
 	int res = 0;
-	recurs_MBJudge(n,res,idsMap,branchCnt);
+	MyBlockS1_DFSJudge(n,res,idsMap);
 
 	return 0; //可以创建
 }
 
 ///
-/// \brief 深度优先搜索判断是否可以建立我的模块
+/// \brief 深度优先搜索判断是否可以建立我的模块，分支次数必然大于1
 /// \para res 表示结果 负数表示不可建立，idsMap 标识是否有id（将find时间缩减到O(1)）
-///       branchCnt 表示分支次数
 ///
-void logic_Program::recurs_MBJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap, int &branchCnt ) {
+void logic_Program::MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap ) {
 
 	//判断标准：当start后,branchCnt>1时，保证当前节点以下所有节点都在其中
 
@@ -3049,13 +3050,13 @@ void logic_Program::recurs_MBJudge( logic_TreeNode *some, int res, std::map <int
 	}
 
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
-		recurs_GetId(some->mvvu_Children[i],);
+		MyBlockS1_DFSJudge(some->mvvu_Children[i],);
 	}
 
 }
 
 //用bfs找出判断起始节点
-void logic_Program::bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode) {
+void logic_Program::MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode) {
 
 	if( findNode != NULL ) //找到了
 		return;
@@ -3074,5 +3075,5 @@ void logic_Program::bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map 
 	for(int i=0;i<node->mvvu_Children.size();++i)
 		q.push(node->mvvu_Children[i]);
 
-	bfsFindMBStartNode(q,idsMap,findNode);
+	MyBlockS1_bfsFindStartNode(q,idsMap,findNode);
 }

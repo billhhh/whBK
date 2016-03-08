@@ -279,10 +279,9 @@ protected:
 	///
 	/// \brief 深度优先搜索判断是否可以建立我的模块
 	/// \para res 表示结果 负数表示不可建立，idsMap 标识是否有id（将find时间缩减到O(1)）
-	///       branchCnt 表示分支次数
 	///
-	void recurs_MBJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap, int &branchCnt );
-	void bfsFindMBStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode); //用bfs找出判断起始节点
+	void MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap );
+	void MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode); //用bfs找出判断起始节点
 
 protected:
 	int mvs_ProgId; //一个program，一个森林，project是森林的合集
