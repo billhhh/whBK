@@ -19,6 +19,7 @@ E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_MYBLOCKSPROGRAM.SBR
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_PROGRAM.SBR
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_PROJECT.SBR
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_PROJECT.OBJ
+E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_PROGRAM.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_MYBLOCKSPROGRAM.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_MYBLOCKMODULE.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_IFMODULE.OBJ
@@ -73,7 +74,6 @@ E:\BILL GITHUB\WHBK\WIN32\DEBUG\TINYXML.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\TINYSTR.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_XMLIO.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_VARMODULE.OBJ
-E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_CONTROLLER.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_TREENODE.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_TREE.OBJ
 E:\BILL GITHUB\WHBK\WIN32\DEBUG\LOGIC_TEST.OBJ
@@ -92,13 +92,13 @@ E:\bill github\whBK\Win32\Debug\bottom_label.obj
 E:\bill github\whBK\Win32\Debug\graphic.obj
 E:\bill github\whBK\Win32\Debug\logger.obj
 E:\bill github\whBK\Win32\Debug\logic_BasicModule.obj
-E:\bill github\whBK\Win32\Debug\logic_Controller.obj
 E:\bill github\whBK\Win32\Debug\logic_ForModule.obj
 E:\bill github\whBK\Win32\Debug\logic_Gragh.obj
 E:\bill github\whBK\Win32\Debug\logic_Graph.obj
 E:\bill github\whBK\Win32\Debug\logic_IfModule.obj
 E:\bill github\whBK\Win32\Debug\logic_MyBlockModule.obj
 E:\bill github\whBK\Win32\Debug\logic_MyBlocksProgram.obj
+E:\bill github\whBK\Win32\Debug\logic_Program.obj
 E:\bill github\whBK\Win32\Debug\logic_Project.obj
 E:\bill github\whBK\Win32\Debug\logic_Test.obj
 E:\bill github\whBK\Win32\Debug\logic_Tree.obj

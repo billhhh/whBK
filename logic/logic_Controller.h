@@ -136,6 +136,10 @@ public:
 	bool ctrlLoadProject(const std::string fileName);
 
 
+	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!compiler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	logic_Program* ctrlGetCurProgram();
+
+
 
 	///µ÷ÊÔº¯Êý
 #pragma region debug
