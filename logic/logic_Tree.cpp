@@ -190,10 +190,15 @@ bool logic_Tree::add_node(_IdDataType parent_ID,logic_TreeNode *node)
 bool logic_Tree::append_node(_IdDataType parent_ID,_IdDataType ID)
 {
 	iterator *temPos = search(ID);
-	if ( NULL != temPos ) //如果已经存在，错误
+	if ( NULL != temPos ) //如果已经存在，进入树内调配
 	{
-		SAFE_DELETE(temPos);
-		return false;
+		if( this->innerTreeBackInsSingMove(parent_ID,ID) < 0 ) {
+			SAFE_DELETE(temPos);
+			return false;
+		}else {
+			SAFE_DELETE(temPos);
+			return true;
+		}
 	}
 
 	tree_node *tmp = new tree_node(ID);
@@ -483,7 +488,7 @@ bool logic_Tree::isAncestor(int nodeA_id,int nodeB_id) {
 }
 
 //本树自己 move后插
-int logic_Tree::innerTreeBackInsSingMove(int pre_id,_IdDataType cur_id) {
+int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 
 	iterator *curPos = search(cur_id);
 	iterator *prePos = search(pre_id);
