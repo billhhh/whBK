@@ -7267,7 +7267,7 @@ bool logic_XmlIO::saveProgram(logic_Program* prg, TiXmlDocument* parentElement)
 {
 	if (prg == NULL || parentElement == NULL)
 	{
-		assert(true);
+		assert(false);
 		return false;
 	}
 

@@ -825,7 +825,7 @@ bool logic_Controller::ctrlSaveCurProject()
 	if(fileName == "")
 	{
 		//调用错误，无法对空地址存储
-		assert(true);
+		assert(false);
 		return false;
 	}
 	logic_XmlIO IOControl ;
@@ -851,6 +851,21 @@ bool logic_Controller::ctrlLoadProject(const std::string fileName)
 
 	return IOControl->IO_FillPrj(fileName, *newPrj);
 }
+
+logic_Program* logic_Controller::ctrlGetCurProgram()
+{
+	if(curPrjId == 0 || curProgId == 0)
+	{
+		assert(true);
+	}
+
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg;
+}
+
 
 
 std::map <int, logic_BasicModule *> logic_Controller::ctrlGetInitMap() {

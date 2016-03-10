@@ -969,7 +969,7 @@ int logic_Program::getRootModuleId(int m_id)
 //查询两个module是否在同一颗树内
 bool logic_Program::IsInSameTree(int cur_m_id, int other_m_id)
 {
-	assert(mvmu_ModuleMap.count(cur_m_id) == 0 || mvmu_ModuleMap.count(other_m_id)); //不存在
+	assert(mvmu_ModuleMap.count(cur_m_id) != 0 && mvmu_ModuleMap.count(other_m_id)); //判定是否存在
 
 	logic_Tree* oneTree = getTreeFromId(cur_m_id);
 	logic_Tree* otherTree = getTreeFromId(other_m_id);
