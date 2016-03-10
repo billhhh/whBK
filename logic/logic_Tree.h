@@ -86,6 +86,9 @@ public:
 		}
 	}
 
+	//本树自己单模块 move后插
+	int innerTreeBackInsSingMove(int pre_id,_IdDataType cur_id);
+
 protected:
 
 private:

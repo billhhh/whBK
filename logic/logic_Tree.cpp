@@ -481,3 +481,37 @@ bool logic_Tree::isAncestor(int nodeA_id,int nodeB_id) {
 
 	return false;
 }
+
+//本树自己 move后插
+int logic_Tree::innerTreeBackInsSingMove(int pre_id,_IdDataType cur_id) {
+
+	iterator *curPos = search(cur_id);
+	iterator *prePos = search(pre_id);
+	if ( NULL == curPos || NULL == prePos ) //如果任意一个不存在，错误
+	{
+		SAFE_DELETE(curPos);
+		SAFE_DELETE(prePos);
+		return -1;
+	}
+
+	tree_node *curNode = curPos->_node;
+	tree_node *preNode = prePos->_node;
+
+	//将父节点的所有儿子给cur节点
+	for (int i=0;i<preNode->mvvu_Children.size();++i)
+	{
+		tree_node * tmpChild = preNode->mvvu_Children.at(i);
+		tmpChild->mvu_Parent = curNode;
+		curNode->mvvu_Children.push_back(tmpChild);
+		preNode->mvvu_Children.erase(preNode->mvvu_Children.begin()+i);
+		--i;
+	}
+
+	//父节点中添加cur节点
+	preNode->mvvu_Children.push_back(curNode);
+	curNode->mvu_Parent = preNode;
+
+	SAFE_DELETE(curPos); //delete position
+	SAFE_DELETE(prePos);
+	return 0;
+}
