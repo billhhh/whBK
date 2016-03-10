@@ -160,7 +160,7 @@ void msgInterface::setModeValue(int m_id,int mode_id) {
 /// \para 前驱或后继模块id，是前插（true）还是后插，是哪种类型的模块新加入
 bool msgInterface::insertModule(int m_id,bool isFI,int m_type) {
 
-	if ( false == isFI)
+	if ( false == isFI) //后插
 		return ctrl.ctrlAppendModule(m_id,m_type);
 
 	else
