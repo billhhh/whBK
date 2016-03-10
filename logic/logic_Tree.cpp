@@ -120,7 +120,7 @@ bool logic_Tree::setFirstChildAsRoot() {
 bool logic_Tree::exchangeRoot(int ID) {
 
 	iterator *temPos = search(ID);
-	if ( NULL != temPos ) //如果已经存在，错误
+	if ( NULL != temPos ) //如果已经存在，进入树内调配
 	{
 		SAFE_DELETE(temPos);
 		return false;
@@ -501,6 +501,16 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 
 	tree_node *curNode = curPos->_node;
 	tree_node *preNode = prePos->_node;
+
+	//将cur节点儿子（只会有一个）给cur的pre节点
+	tree_node *curPreNode = curNode->mvu_Parent;
+	for (int i=0;i<curNode->mvvu_Children.size();++i) {
+		tree_node * tmpChild = curNode->mvvu_Children[i];
+		tmpChild->mvu_Parent = curPreNode;
+		curPreNode->mvvu_Children.push_back(tmpChild);
+		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin()+i);
+		--i;
+	}
 
 	//将父节点的所有儿子给cur节点
 	for (int i=0;i<preNode->mvvu_Children.size();++i)
