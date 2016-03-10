@@ -1762,18 +1762,7 @@ int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 		/////如果已存在，直接找到待插入树
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
-		if( insTree->mvi_TreeID == oldTree->mvi_TreeID ) {
-
-			//如果是本内直接move
-			if ( insTree->innerTreeBackInsSingMove(pre_m_id,cur_m_id) < 0 )
-				return -6; //树内move出错
-			else
-				return 0; //已move可直接返回
-
-		}else {
-			//树间移动
-			insTree->append_node(pre_m_id,cur_m_id);
-		}
+		insTree->append_node(pre_m_id,cur_m_id);
 	}
 
 	///// step2、删除旧树节点（注：此处不可能有多个孩子）
