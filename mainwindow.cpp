@@ -45,27 +45,27 @@ void MainWindow::whWork() {
 	msginterface.newProg();
 
 	//新增一个module，后插
-	msginterface.insertModule(1,false,1002); //2
-	msginterface.insertModule(0,false,1003); //3
-	msginterface.insertModule(3,false,1004); //4
-
-	//前插
-	msginterface.insertModule(4,true,1005); //5
-	msginterface.insertModule(3,true,1006); //6
-
-	//删除module测试
-	msginterface.addLeafModule(5,1007); //7
-	msginterface.addLeafModule(5,1008); //8
-	msginterface.addLeafModule(7,1009); //9
-// 	msginterface.deleteModule(3);
-// 	msginterface.deleteModule(5);
-
-	msginterface.addLeafModule(6,1010); //10
-	msginterface.addLeafModule(6,1011); //11
-//	msginterface.deleteModule(6);
-
-	msginterface.insertModule(2,false,1012); //12
-	msginterface.insertModule(12,false,1013); //13
+// 	msginterface.insertModule(1,false,1002); //2
+// 	msginterface.insertModule(0,false,1003); //3
+// 	msginterface.insertModule(3,false,1004); //4
+// 
+// 	//前插
+// 	msginterface.insertModule(4,true,1005); //5
+// 	msginterface.insertModule(3,true,1006); //6
+// 
+// 	//删除module测试
+// 	msginterface.addLeafModule(5,1007); //7
+// 	msginterface.addLeafModule(5,1008); //8
+// 	msginterface.addLeafModule(7,1009); //9
+// // 	msginterface.deleteModule(3);
+// // 	msginterface.deleteModule(5);
+// 
+// 	msginterface.addLeafModule(6,1010); //10
+// 	msginterface.addLeafModule(6,1011); //11
+// //	msginterface.deleteModule(6);
+// 
+// 	msginterface.insertModule(2,false,1012); //12
+// 	msginterface.insertModule(12,false,1013); //13
 
 	//////////move test
 //	msginterface.moveModule(2,5,BACK_SINGLE); //单模块后插 OK
@@ -75,7 +75,13 @@ void MainWindow::whWork() {
 //	msginterface.moveModule(2,4,BACK_MULTI); //多模块后插 OK
 
 //	msginterface.moveModule(13,6,FRONT_MULTI); //多模块前插 OK
-	msginterface.moveModule(5,0,BACK_MULTI); //多模块后插 放空
+//	msginterface.moveModule(5,0,BACK_MULTI); //多模块后插 放空
+
+	msginterface.insertModule(0,false,1002);
+	msginterface.insertModule(1,false,1002);
+	msginterface.insertModule(2,false,1002);
+
+	msginterface.moveModule(3,1,BACK_SINGLE);
 
 }
 

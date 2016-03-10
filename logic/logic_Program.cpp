@@ -3095,7 +3095,7 @@ void logic_Program::MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,s
 		return;
 
 	logic_TreeNode *node = q.front();
-	q.pop;
+	q.pop();
 	if( idsMap.count(node->getID()) > 0 ) {
 		findNode = node;
 		return;
