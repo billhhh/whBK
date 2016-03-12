@@ -138,6 +138,7 @@ bool logic_Tree::exchangeRoot(int ID) {
 	this->mvu_root = tmp;
 	this->mvi_TreeID = ID;
 
+	SAFE_DELETE(temPos);
 	return true;
 }
 
@@ -548,5 +549,6 @@ int logic_Tree::innerTreeExchangeRoot(int id) {
 	this->mvu_root = tmp;
 	this->mvi_TreeID = id;
 
-	return true;
+	SAFE_DELETE(temPos);
+	return 0;
 }
