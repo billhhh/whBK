@@ -410,5 +410,5 @@ std::string msgInterface::getCurPrjName() {
 
 void msgInterface::setCurPrjName(std::string name) {
 
-	ctrl.setCurPrjName(name);
+	ctrl.ctrlSetCurPrjName(name);
 }
