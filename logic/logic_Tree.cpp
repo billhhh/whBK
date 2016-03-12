@@ -120,16 +120,9 @@ bool logic_Tree::setFirstChildAsRoot() {
 bool logic_Tree::exchangeRoot(int ID) {
 
 	iterator *temPos = search(ID);
-	if ( NULL != temPos ) //如果已经存在，进入树内调配
-	{
-		if( this->innerTreeExchangeRoot(ID) < 0 ) {
-			SAFE_DELETE(temPos);
-			return true;
-		}else {
-			SAFE_DELETE(temPos);
-			return false;
-		}
-
+	if ( NULL != temPos ) { //如果已经存在，exchange不成功
+		SAFE_DELETE(temPos);
+		return false;
 	}
 
 	tree_node *tmp = new tree_node(ID);
@@ -538,7 +531,7 @@ int logic_Tree::innerTreeExchangeRoot(int id) {
 
 	iterator *temPos = search(id);
 
-	if ( NULL == temPos ) { //如果不存在，错误
+	if ( NULL == temPos ) { //如果不存在，exchange不成功
 		SAFE_DELETE(temPos);
 		return -1;
 	}
