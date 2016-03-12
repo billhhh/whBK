@@ -122,8 +122,14 @@ bool logic_Tree::exchangeRoot(int ID) {
 	iterator *temPos = search(ID);
 	if ( NULL != temPos ) //如果已经存在，进入树内调配
 	{
-		SAFE_DELETE(temPos);
-		return false;
+		if( this->innerTreeExchangeRoot(ID) < 0 ) {
+			SAFE_DELETE(temPos);
+			return true;
+		}else {
+			SAFE_DELETE(temPos);
+			return false;
+		}
+
 	}
 
 	tree_node *tmp = new tree_node(ID);
@@ -524,4 +530,23 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 	SAFE_DELETE(curPos); //delete position
 	SAFE_DELETE(prePos);
 	return 0;
+}
+
+//此id已存在，树内调配
+int logic_Tree::innerTreeExchangeRoot(int id) {
+
+	iterator *temPos = search(id);
+
+	if ( NULL == temPos ) { //如果不存在，错误
+		SAFE_DELETE(temPos);
+		return -1;
+	}
+
+	tree_node *tmp = temPos->_node;
+	tmp->mvvu_Children.push_back(this->mvu_root);
+	this->mvu_root->mvu_Parent = tmp;
+	this->mvu_root = tmp;
+	this->mvi_TreeID = id;
+
+	return true;
 }
