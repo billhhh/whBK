@@ -390,3 +390,25 @@ void msgInterface::debug_displayBackgroundTree()
 	logic_Project* curPrj = prjMap[curId];
 	ctrl.debug_displayTree(curPrj);
 }
+
+// get\set当前program名称
+std::string msgInterface::getCurProgName() {
+
+	return ctrl.ctrlGetCurProgName();
+}
+
+void msgInterface::setCurProgName(std::string name) {
+
+	ctrl.ctrlSetCurProgName(name);
+}
+
+// get\set当前项目名称
+std::string msgInterface::getCurPrjName() {
+
+	return ctrl.ctrlGetCurPrjName();
+}
+
+void msgInterface::setCurPrjName(std::string name) {
+
+	ctrl.setCurPrjName(name);
+}

@@ -639,6 +639,9 @@ int logic_Controller::ctrlDelIfBranch(int if_id,int ui_branch_id) {
 /// \brief 模块参数连线
 int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
 
+	if( !curPrjId || !curProgId )
+		return -1;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -648,6 +651,9 @@ int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,i
 //取消连线，可通过 isOut 来用outModule或者inModule删除
 void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
 
+	if( !curPrjId || !curProgId )
+		return ;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -655,6 +661,9 @@ void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
 }
 
 void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
+
+	if( !curPrjId || !curProgId )
+		return ;
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -714,6 +723,9 @@ int logic_Controller::decryptBranchId(int ui_branch_id) {
 ///       case 3:带孩子前插 move（前有线，只能接在一棵树root处，原root不能为开始模块）
 int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id) {
 
+	if( !curPrjId || !curProgId )
+		return -1;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -749,6 +761,9 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 }
 
 int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id) {
+
+	if( !curPrjId || !curProgId )
+		return -1;
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -801,6 +816,9 @@ void logic_Controller::initModuleMapFunc() {
 ///
 std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 
+	if( !curPrjId || !curProgId )
+		return ;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -820,8 +838,12 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool logic_Controller::ctrlSaveCurProject()
 {
+	if( !curPrjId || !curProgId )
+		return false;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	auto fileName = tCurPrj->getPrjName();
+
 	if(fileName == "")
 	{
 		//调用错误，无法对空地址存储
@@ -836,6 +858,9 @@ bool logic_Controller::ctrlSaveCurProject()
 
 bool logic_Controller::ctrlSaveProject(const std::string fileName, int prjId)
 {
+	if( !curPrjId )
+		return false;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_XmlIO IOControl ;
 
@@ -854,11 +879,10 @@ bool logic_Controller::ctrlLoadProject(const std::string fileName)
 
 logic_Program* logic_Controller::ctrlGetCurProgram()
 {
-	if(curPrjId == 0 || curProgId == 0)
-	{
-		assert(true);
+	if(curPrjId == 0 || curProgId == 0) {
+		//assert(true);
+		return NULL;
 	}
-
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -968,8 +992,53 @@ int logic_Controller::ctrlCanMyBlocks(std::vector<int > ids) {
 
 	assert( ids.size() > 0 );
 
+	if( !curPrjId || !curProgId )
+		return -1;
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
 	return tCurProg->canMyBlocks(ids);
+}
+
+// get\set当前program名称
+std::string logic_Controller::ctrlGetCurProgName() {
+
+	if( !curPrjId || !curProgId )
+		return NULL;
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->getName();
+}
+
+void logic_Controller::ctrlSetCurProgName(std::string name) {
+
+	if( !curPrjId || !curProgId )
+		return;
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	tCurProg->setProgramName(name);
+}
+
+// get\set当前项目名称
+std::string logic_Controller::ctrlGetCurPrjName() {
+
+	if( !curPrjId || !curProgId )
+		return NULL;
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	return tCurPrj->getPrjName();
+}
+
+void logic_Controller::ctrlSetCurPrjName(std::string name) {
+
+	if( !curPrjId || !curProgId )
+		return;
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	tCurPrj->setPrjName(name);
 }

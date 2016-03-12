@@ -62,6 +62,14 @@ public:
 	/// \brief 得到当前的curPrjId
 	int getCurPrj();
 
+	// get\set当前program名称
+	std::string getCurProgName();
+	void setCurProgName(std::string name);
+
+	// get\set当前项目名称
+	std::string getCurPrjName();
+	void setCurPrjName(std::string name);
+
 	/// !!!!!!!!!!!!!!!!!!!!!!!!!!项目属性部分!!!!!!!!!!!!!!!!!!!!!!!!!
 	/// \brief get项目属性的信息
 	/// get程序名称

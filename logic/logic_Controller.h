@@ -139,6 +139,13 @@ public:
 	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!compiler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	logic_Program* ctrlGetCurProgram();
 
+	// get\set当前program名称
+	std::string ctrlGetCurProgName();
+	void ctrlSetCurProgName(std::string name);
+
+	// get\set当前项目名称
+	std::string ctrlGetCurPrjName();
+	void ctrlSetCurPrjName(std::string name);
 
 
 	///调试函数
