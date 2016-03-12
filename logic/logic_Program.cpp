@@ -422,12 +422,24 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 	if( post_m_id == oldRootId ) {
 		
 		//待插入节点要插在原树root之前
-		mvmu_TreeMap.erase(post_m_id);
-		//只有 post_m_id 是根的情况，才更新tree map
-		mvmu_TreeMap[cur_m_id] = insTree;
+		if ( insTree->exchangeRoot(cur_m_id) == true ) { //从其他树节点正常交换
 
-		if ( insTree->exchangeRoot(cur_m_id) == true ) { 
+			//只有 post_m_id 是根的情况，才更新tree map
+			mvmu_TreeMap.erase(post_m_id);
+			mvmu_TreeMap[cur_m_id] = insTree;
+		} else {
+			
+			//树内交换，不用删除旧树节点，提前终止
+			if( insTree->innerTreeExchangeRoot(cur_m_id) >= 0 ) {
+				
+				//只有 post_m_id 是根的情况，才更新tree map
+				mvmu_TreeMap.erase(post_m_id);
+				mvmu_TreeMap[cur_m_id] = insTree;
 
+				return 0;
+			} else {
+				return -4; //树内交换失败
+			}
 		}
 
 	}else {
