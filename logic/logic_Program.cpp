@@ -422,7 +422,10 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 	if( post_m_id == oldRootId ) {
 		
 		//待插入节点要插在原树root之前
-		if ( insTree->exchangeRoot(cur_m_id) == true ) { //从其他树节点正常交换
+		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //从其他树节点正常交换
+
+			if( insTree->exchangeRoot(cur_m_id) == false )
+				return -5;
 
 			//只有 post_m_id 是根的情况，才更新tree map
 			mvmu_TreeMap.erase(post_m_id);
@@ -443,7 +446,16 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 		}
 
 	}else {
+		
+		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //本树操作
 
+			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
+				
+				//树内正常操作，提前终止
+				return 0;
+			}
+
+		}
 		//正常插入地方
 		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
 	}
@@ -1874,7 +1886,10 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 	if( post_m_id == oldRootId ) {
 
 		//待插入节点要插在原树root之前
-		if ( insTree->exchangeRoot(cur_m_id) == true ) { //从其他树节点正常交换
+		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //从其他树节点正常交换
+
+			if( insTree->exchangeRoot(cur_m_id) == false )
+				return -5;
 
 			//只有 post_m_id 是根的情况，才更新tree map
 			mvmu_TreeMap.erase(post_m_id);
@@ -1896,6 +1911,15 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 	}else {
 
+		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //本树操作
+
+			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
+
+				//树内正常操作，提前终止
+				return 0;
+			}
+
+		}
 		//正常插入地方
 		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
 	}
@@ -2504,7 +2528,10 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 	if( post_m_id == oldRootId ) {
 
 		//待插入节点要插在原树root之前
-		if ( insTree->exchangeRoot(cur_m_id) == true ) { //从其他树节点正常交换
+		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //从其他树节点正常交换
+
+			if( insTree->exchangeRoot(cur_m_id) == false )
+				return -5;
 
 			//只有 post_m_id 是根的情况，才更新tree map
 			mvmu_TreeMap.erase(post_m_id);
@@ -2526,6 +2553,15 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 
 	}else {
 
+		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //本树操作
+
+			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
+
+				//树内正常操作，提前终止
+				return 0;
+			}
+
+		}
 		//正常插入地方
 		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
 	}

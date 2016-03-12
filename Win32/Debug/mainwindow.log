@@ -1,9 +1,9 @@
-﻿生成启动时间为 2016/3/10 14:57:12。
+﻿生成启动时间为 2016/3/12 10:47:21。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -54,18 +54,18 @@
          logic_MyBlocksProgram.cpp
      1>logic\logic_MyBlocksProgram.cpp(17): warning C4100: “tree”: 未引用的形参
          logic_Program.cpp
-     1>logic\logic_Program.cpp(768): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(826): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(921): warning C4100: “m_id”: 未引用的形参
-     1>logic\logic_Program.cpp(956): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1003): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1024): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1278): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1309): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1439): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1458): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(3117): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(3141): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(794): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(852): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(947): warning C4100: “m_id”: 未引用的形参
+     1>logic\logic_Program.cpp(982): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1029): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1050): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1304): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1335): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1465): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1484): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(3195): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(3219): warning C4018: “<”: 有符号/无符号不匹配
          logic_Project.cpp
      1>logic\logic_Project.cpp(159): warning C4189: “program”: 局部变量已初始化但不引用
      1>logic\logic_Project.cpp(204): warning C4189: “programID”: 局部变量已初始化但不引用
@@ -76,10 +76,11 @@
          logic_Tree.cpp
      1>logic\logic_Tree.cpp(210): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Tree.cpp(264): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(314): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(349): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(502): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(511): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(279): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(325): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(360): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(513): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(522): warning C4018: “<”: 有符号/无符号不匹配
          logic_TreeNode.cpp
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
@@ -230,4 +231,4 @@
 
 生成成功。
 
-已用时间 00:00:40.09
+已用时间 00:01:36.81

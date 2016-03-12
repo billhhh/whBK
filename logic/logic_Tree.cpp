@@ -272,6 +272,17 @@ int logic_Tree::isChild(iterator* p, iterator* c) const
 	return -1;
 }
 
+int logic_Tree::isChild(tree_node* p, tree_node* c) const {
+
+	int Search_ID = c->mvi_NodeID;
+
+	for (int i=0;i<p->mvvu_Children.size();++i)
+		if (Search_ID == p->mvvu_Children[i]->mvi_NodeID)
+			return i;
+
+	return -1;
+}
+
 bool logic_Tree::del_node(_IdDataType ID)
 {
 	iterator* position = search(ID);
@@ -526,7 +537,7 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 	return 0;
 }
 
-//此id已存在，树内调配
+//此id已存在，树内ExchangeRoot
 int logic_Tree::innerTreeExchangeRoot(int id) {
 
 	iterator *temPos = search(id);
@@ -543,5 +554,41 @@ int logic_Tree::innerTreeExchangeRoot(int id) {
 	this->mvi_TreeID = id;
 
 	SAFE_DELETE(temPos);
+	return 0;
+}
+
+int logic_Tree::innerTreeFrontInsSingMove(int cur_id,int post_id) {
+
+	//如果是插入在root前，错误
+	if (this->mvi_TreeID == cur_id) {
+
+		assert(false);
+	}
+
+	iterator* curPos = search(cur_id);
+	iterator* postPos = search(post_id);
+
+	if ( NULL == curPos || NULL == postPos)
+	{
+		//如果并不存在，错误退出
+		SAFE_DELETE(curPos);
+		SAFE_DELETE(postPos);
+		return -1;
+	}
+
+	tree_node *tmp = curPos->_node;
+	tree_node *preNode = postPos->_node->mvu_Parent;
+	tree_node *postNode = postPos->_node;
+	int index = isChild(preNode,postNode);
+
+	preNode->mvvu_Children.erase(preNode->mvvu_Children.begin()+index); //删除parent_ID节点中的suc_ID节点孩子
+	preNode->mvvu_Children.push_back(tmp);
+	tmp->mvvu_Children.push_back(postNode);
+	tmp->mvu_Parent = preNode;
+	postNode->mvu_Parent = tmp;
+
+	SAFE_DELETE(curPos);
+	SAFE_DELETE(postPos);
+
 	return 0;
 }

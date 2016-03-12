@@ -86,9 +86,10 @@ public:
 		}
 	}
 
-	//本树自己单模块 move后插
+	//本树自己模块move
 	int innerTreeBackInsSingMove(int pre_id,int cur_id);
 	int innerTreeExchangeRoot(int id); //此id已存在
+	int innerTreeFrontInsSingMove(int cur_id,int post_id);
 
 protected:
 
@@ -98,6 +99,7 @@ private:
 	void Init();
 	void Destroy(tree_node *some); /////销毁some节点及其所有后代，销毁整棵树
 	int isChild(iterator* p, iterator* c) const; //判断c是不是p的直接孩子，如果找到返回i，没找到-1
+	int isChild(tree_node* p, tree_node* c) const;
 	tree_node* recurs_render(tree_node* some,const _IdDataType ID); //递归DFS
 
 };
