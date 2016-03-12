@@ -68,6 +68,9 @@ std::string logic_Controller::whIntToString(int aa) {
 
 int logic_Controller::ctrlNewProg() {
 
+	if( !curPrjId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	curProgId = tCurPrj->newProgram();
 
@@ -95,6 +98,9 @@ void logic_Controller::ctrlSetCurPrj(int id) {
 
 void logic_Controller::ctrlSetCurProg(int id) {
 
+	if( !curPrjId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	assert( NULL != tCurPrj->getProgram(id) );
 
@@ -109,6 +115,9 @@ int  logic_Controller::ctrlGetCurPrj()
 //在当前 prj 和 prog 下，找最大 module id，并累加
 int logic_Controller::ctrlNewModuleAddId() {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	int res = tCurPrj->getProgMaxModuleId(curProgId);
 	res++;
@@ -119,6 +128,9 @@ int logic_Controller::ctrlNewModuleAddId() {
 //根据progName删除该program
 bool logic_Controller::ctrlDeleteProgram(const std::string progName)
 {
+	if( !curPrjId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	return tCurPrj->deleteProgram(progName);
 
@@ -127,6 +139,9 @@ bool logic_Controller::ctrlDeleteProgram(const std::string progName)
 //根据progPath导入program
 bool logic_Controller::ctrlImportProgram(const std::string progPath)
 {
+	if( !curPrjId )
+		assert(false);
+
 	logic_Project* tCurPrj = prjMap[curPrjId];
 
 	return tCurPrj->importProgram(progPath);
@@ -135,6 +150,9 @@ bool logic_Controller::ctrlImportProgram(const std::string progPath)
 //根据progPath,和programID导program文件
 bool logic_Controller::ctrlExportProgram(const std::string progPath, int progId)
 {
+	if( !curPrjId )
+		assert(false);
+
 	logic_Project* tCurPrj = prjMap[curPrjId];
 	auto prjMap = tCurPrj->getAllProgram();
 	if (prjMap.count(progId) < 0)
@@ -195,6 +213,9 @@ std::vector<VarProperty> logic_Controller::ctrlGetVariety(int prjID)
 //copy一个program，并且返回新的program name
 std::string logic_Controller::ctrlCopyProgram(const std::string progName)
 {
+	if( !curPrjId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	return tCurPrj->copyProgram(progName);
 }
@@ -202,6 +223,9 @@ std::string logic_Controller::ctrlCopyProgram(const std::string progName)
 
 //后接模块，传入前驱id，如果前驱为0，代表新建树
 bool logic_Controller::ctrlAppendModule(int pre_id,int m_type) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -216,6 +240,9 @@ bool logic_Controller::ctrlAppendModule(int pre_id,int m_type) {
 
 //前插模块，不允许新建树时调用
 bool logic_Controller::ctrlFrontInsModule(int post_id,int m_type) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	assert(post_id); //post_id 不能为 0
 
@@ -232,6 +259,9 @@ bool logic_Controller::ctrlFrontInsModule(int post_id,int m_type) {
 
 bool logic_Controller::ctrlAddLeafModule(int pre_id,int m_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	assert(pre_id); //pre_id 不能为 0
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
@@ -245,6 +275,7 @@ bool logic_Controller::ctrlAddLeafModule(int pre_id,int m_id) {
 
 // get 所有prj map【方便xml持久化】
 std::map <int ,logic_Project* > logic_Controller::getAllPrj() {
+
 	return prjMap;
 }
 
@@ -259,6 +290,9 @@ int logic_Controller::getCurPrjId()
 //删除模块
 bool logic_Controller::ctrlDelModule(int m_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -268,6 +302,9 @@ bool logic_Controller::ctrlDelModule(int m_id) {
 //查询模块前驱id
 int logic_Controller::ctrlGetPreId(int m_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -276,6 +313,9 @@ int logic_Controller::ctrlGetPreId(int m_id) {
 
 //查询模块后继id表
 std::vector<int > logic_Controller::ctrlGetPostId(int m_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -287,6 +327,9 @@ std::vector<int > logic_Controller::ctrlGetPostId(int m_id) {
 //查询m_id的所在树的根节点的模块id
 int logic_Controller::ctrlGetRootModuleId(int m_id)
 {
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -295,6 +338,10 @@ int logic_Controller::ctrlGetRootModuleId(int m_id)
 
 //查询两个module是否在同一颗树内
 bool logic_Controller::ctrlIsInSameTree(int cur_m_id, int other_m_id){
+
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -304,6 +351,9 @@ bool logic_Controller::ctrlIsInSameTree(int cur_m_id, int other_m_id){
 //查询for模块内部的后继模块
 std::vector<int > logic_Controller::ctrlGetForPostId(int for_m_id)
 {
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -313,6 +363,9 @@ std::vector<int > logic_Controller::ctrlGetForPostId(int for_m_id)
 //查询if模块的某个branch的所有后继节点
 std::vector<int > logic_Controller::ctrlGetIfBranchPostId(int if_id, int global_branch_id)
 {
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -324,6 +377,9 @@ std::vector<int > logic_Controller::ctrlGetIfBranchPostId(int if_id, int global_
 
 int logic_Controller::ctrlGetForEndPreId(int for_id)
 {
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -333,6 +389,9 @@ int logic_Controller::ctrlGetForEndPreId(int for_id)
 //查询if模块的ui_branch_id的-2节点前驱
 int	logic_Controller::ctrlGetIfEndPreId(int if_id, int ui_branch_id)
 {
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -345,6 +404,9 @@ int	logic_Controller::ctrlGetIfEndPreId(int if_id, int ui_branch_id)
 
 std::string logic_Controller::ctrlGetParameter(int type,int m_id,int p_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -352,6 +414,9 @@ std::string logic_Controller::ctrlGetParameter(int type,int m_id,int p_id) {
 }
 
 void logic_Controller::ctrlSetParameter(int m_id,int p_id,std::string p_value) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -361,6 +426,9 @@ void logic_Controller::ctrlSetParameter(int m_id,int p_id,std::string p_value) {
 
 WinSwitcherType logic_Controller::ctrlGetWinSwType(int m_id,int m_modeValue) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -368,6 +436,9 @@ WinSwitcherType logic_Controller::ctrlGetWinSwType(int m_id,int m_modeValue) {
 }
 
 std::string logic_Controller::ctrlGetWinSwValue(int m_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -377,6 +448,9 @@ std::string logic_Controller::ctrlGetWinSwValue(int m_id) {
 
 void logic_Controller::ctrlSetWinSwValue(int m_id,std::string ws_value) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -384,6 +458,9 @@ void logic_Controller::ctrlSetWinSwValue(int m_id,std::string ws_value) {
 }
 
 int logic_Controller::ctrlGetDaisyChainValue(int m_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -393,6 +470,9 @@ int logic_Controller::ctrlGetDaisyChainValue(int m_id) {
 
 void logic_Controller::ctrlSetDaisyChainValue(int m_id,int chain_value) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -400,6 +480,9 @@ void logic_Controller::ctrlSetDaisyChainValue(int m_id,int chain_value) {
 }
 
 std::vector<int > logic_Controller::ctrlGetParamsIds(int m_id,int mode_value) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -409,6 +492,9 @@ std::vector<int > logic_Controller::ctrlGetParamsIds(int m_id,int mode_value) {
 
 int logic_Controller::ctrlGetModeValue(int m_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -417,6 +503,9 @@ int logic_Controller::ctrlGetModeValue(int m_id) {
 
 void logic_Controller::ctrlSetModeValue(int m_id,int mode_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -424,6 +513,9 @@ void logic_Controller::ctrlSetModeValue(int m_id,int mode_id) {
 }
 
 int logic_Controller::ctrlFrontInsSingMove(int cur_m_id,int post_m_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	if ( post_m_id <= 0 ) {
 		return -1; //插入点 id 错误
@@ -438,6 +530,9 @@ int logic_Controller::ctrlFrontInsSingMove(int cur_m_id,int post_m_id) {
 
 int logic_Controller::ctrlBackInsSingMove(int cur_m_id,int pre_m_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	//后插 move 类append
 	//////!!!!! pre_m_id 可能为0，即移到一棵新树上
 
@@ -449,6 +544,9 @@ int logic_Controller::ctrlBackInsSingMove(int cur_m_id,int pre_m_id) {
 
 //带祖先前插 move
 int logic_Controller::ctrlFrontInsMultiMove(int cur_m_id,int post_m_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	if ( post_m_id <= 0 ) {
 		return -1; //插入点 id 错误
@@ -464,6 +562,9 @@ int logic_Controller::ctrlFrontInsMultiMove(int cur_m_id,int post_m_id) {
 //带孩子后插 move
 int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	//后插 move 类append
 	//////!!!!! pre_m_id 可能为0，即（带孩子）移到一棵新树上
 
@@ -475,6 +576,9 @@ int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 
 //新增孩子move
 int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -491,6 +595,9 @@ int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
 
 //insert into for
 bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int for_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
 	if ( pre_id > 0 ) {
@@ -518,6 +625,9 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 //insert into if
 bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int if_id,int ui_branch_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	///调用此函数的参数中传过来的 m_id 即前驱id，且必然为0
 	if ( 0 != pre_id )
 		return false;
@@ -540,6 +650,9 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 // get for 当前激活树
 int logic_Controller::ctrlGetForActiveTree(int for_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -548,6 +661,9 @@ int logic_Controller::ctrlGetForActiveTree(int for_id) {
 
 //if
 int logic_Controller::ctrlGetIfActiveTree(int if_id,int ui_branch_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -559,6 +675,9 @@ int logic_Controller::ctrlGetIfActiveTree(int if_id,int ui_branch_id) {
 // set for 当前激活树
 void logic_Controller::ctrlSetForActiveTree(int for_id,int tree_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -567,6 +686,9 @@ void logic_Controller::ctrlSetForActiveTree(int for_id,int tree_id) {
 
 //if
 void logic_Controller::ctrlSetIfActiveTree(int if_id,int ui_branch_id,int tree_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -578,6 +700,9 @@ void logic_Controller::ctrlSetIfActiveTree(int if_id,int ui_branch_id,int tree_i
 //get 指定 branch的int content
 int logic_Controller::ctrlGetIfBranchContentInt(int if_id,int ui_branch_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -588,6 +713,9 @@ int logic_Controller::ctrlGetIfBranchContentInt(int if_id,int ui_branch_id) {
 //string
 std::string logic_Controller::ctrlGetIfBranchContentStr(int if_id,int ui_branch_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -596,6 +724,9 @@ std::string logic_Controller::ctrlGetIfBranchContentStr(int if_id,int ui_branch_
 }
 
 int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,int con_int) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -607,6 +738,9 @@ int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,int con_
 //重载 string
 int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::string con_str) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -616,6 +750,9 @@ int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::str
 
 //增删 if 分支
 int logic_Controller::ctrlAddIfBranch(int if_id) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -629,6 +766,9 @@ int logic_Controller::ctrlAddIfBranch(int if_id) {
 //难点，需要删除分支中所有树
 int logic_Controller::ctrlDelIfBranch(int if_id,int ui_branch_id) {
 
+	if( !curPrjId || !curProgId )
+		assert(false);
+
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -640,7 +780,7 @@ int logic_Controller::ctrlDelIfBranch(int if_id,int ui_branch_id) {
 int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
 
 	if( !curPrjId || !curProgId )
-		return -1;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -652,7 +792,7 @@ int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,i
 void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
 
 	if( !curPrjId || !curProgId )
-		return ;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -663,7 +803,7 @@ void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
 void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
 
 	if( !curPrjId || !curProgId )
-		return ;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -724,7 +864,7 @@ int logic_Controller::decryptBranchId(int ui_branch_id) {
 int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id) {
 
 	if( !curPrjId || !curProgId )
-		return -1;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -763,7 +903,7 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type,int if_id,int ui_branch_id) {
 
 	if( !curPrjId || !curProgId )
-		return -1;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -817,7 +957,7 @@ void logic_Controller::initModuleMapFunc() {
 std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 
 	if( !curPrjId || !curProgId )
-		return ;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -839,7 +979,7 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 bool logic_Controller::ctrlSaveCurProject()
 {
 	if( !curPrjId || !curProgId )
-		return false;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	auto fileName = tCurPrj->getPrjName();
@@ -858,8 +998,8 @@ bool logic_Controller::ctrlSaveCurProject()
 
 bool logic_Controller::ctrlSaveProject(const std::string fileName, int prjId)
 {
-	if( !curPrjId )
-		return false;
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_XmlIO IOControl ;
@@ -879,10 +1019,8 @@ bool logic_Controller::ctrlLoadProject(const std::string fileName)
 
 logic_Program* logic_Controller::ctrlGetCurProgram()
 {
-	if(curPrjId == 0 || curProgId == 0) {
-		//assert(true);
-		return NULL;
-	}
+	if( !curPrjId || !curProgId )
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -990,10 +1128,10 @@ void logic_Controller::debug_displayTreeUtility(logic_TreeNode* node)
 //接口传id列表，返回是否可创建
 int logic_Controller::ctrlCanMyBlocks(std::vector<int > ids) {
 
-	assert( ids.size() > 0 );
-
 	if( !curPrjId || !curProgId )
-		return -1;
+		assert(false);
+
+	assert( ids.size() > 0 );
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -1005,7 +1143,7 @@ int logic_Controller::ctrlCanMyBlocks(std::vector<int > ids) {
 std::string logic_Controller::ctrlGetCurProgName() {
 
 	if( !curPrjId || !curProgId )
-		return NULL;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -1016,7 +1154,7 @@ std::string logic_Controller::ctrlGetCurProgName() {
 void logic_Controller::ctrlSetCurProgName(std::string name) {
 
 	if( !curPrjId || !curProgId )
-		return;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -1028,7 +1166,7 @@ void logic_Controller::ctrlSetCurProgName(std::string name) {
 std::string logic_Controller::ctrlGetCurPrjName() {
 
 	if( !curPrjId || !curProgId )
-		return NULL;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	return tCurPrj->getPrjName();
@@ -1037,7 +1175,7 @@ std::string logic_Controller::ctrlGetCurPrjName() {
 void logic_Controller::ctrlSetCurPrjName(std::string name) {
 
 	if( !curPrjId || !curProgId )
-		return;
+		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	tCurPrj->setPrjName(name);
