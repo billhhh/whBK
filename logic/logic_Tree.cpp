@@ -522,7 +522,7 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 	for (int i=0;i<preNode->mvvu_Children.size();++i)
 	{
 		tree_node * tmpChild = preNode->mvvu_Children.at(i);
-		tmpChild->mvu_Parent = curNode;
+		tmpChild->mvu_Parent = preNode;
 		curNode->mvvu_Children.push_back(tmpChild);
 		preNode->mvvu_Children.erase(preNode->mvvu_Children.begin()+i);
 		--i;

@@ -211,6 +211,16 @@ public:
 	bool saveProject(const std::string fileName, int prjId);
 	bool loadProject(const std::string fileName);
 
+
+
+	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!compile!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	///将controller控制权交给编译部分
+	logic_Controller& getController();
+
+	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 	///For degug
 	//打印当前prj后台的所有Program的所有树
 	void debug_displayBackgroundTree();

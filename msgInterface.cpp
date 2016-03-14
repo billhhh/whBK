@@ -381,6 +381,15 @@ bool msgInterface::loadProject(const std::string fileName)
 	return ctrl.ctrlLoadProject(fileName);
 }
 
+///将controller控制权交给编译部分
+logic_Controller& msgInterface::getController()
+{
+	return ctrl;
+}
+
+
+
+
 ///for debug
 //打印后太所有的树
 void msgInterface::debug_displayBackgroundTree()
