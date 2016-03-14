@@ -510,19 +510,27 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 
 	//将cur节点儿子（只会有一个）给cur的pre节点
 	tree_node *curPreNode = curNode->mvu_Parent;
-	for (int i=0;i<curNode->mvvu_Children.size();++i) {
-		tree_node * tmpChild = curNode->mvvu_Children[i];
+	if( curNode->mvvu_Children.size() == 1 ) {
+
+		//只有一个孩子
+		tree_node * tmpChild = curNode->mvvu_Children[0];
 		tmpChild->mvu_Parent = curPreNode;
 		curPreNode->mvvu_Children.push_back(tmpChild);
-		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin()+i);
-		--i;
+		curPreNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+	}else if( curNode->mvvu_Children.size() == 0 ) {
+
+		//cur节点是叶子节点
+		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin());
+	}else {
+		assert(false);
 	}
 
 	//将父节点的所有儿子给cur节点
 	for (int i=0;i<preNode->mvvu_Children.size();++i)
 	{
 		tree_node * tmpChild = preNode->mvvu_Children.at(i);
-		tmpChild->mvu_Parent = preNode;
+		tmpChild->mvu_Parent = curNode;
 		curNode->mvvu_Children.push_back(tmpChild);
 		preNode->mvvu_Children.erase(preNode->mvvu_Children.begin()+i);
 		--i;
