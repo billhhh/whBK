@@ -518,8 +518,8 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 		//只有一个孩子
 		tree_node * tmpChild = curNode->mvvu_Children[0];
 		tmpChild->mvu_Parent = curPreNode;
+		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin()); //应先删除cur节点
 		curPreNode->mvvu_Children.push_back(tmpChild);
-		curPreNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 	}else if( curNode->mvvu_Children.size() == 0 ) {
 
@@ -569,8 +569,8 @@ int logic_Tree::innerTreeExchangeRoot(int id) {
 		//只有一个孩子
 		tree_node * tmpChild = curNode->mvvu_Children[0];
 		tmpChild->mvu_Parent = curPreNode;
+		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin()); //应先删除cur节点
 		curPreNode->mvvu_Children.push_back(tmpChild);
-		curPreNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 	}else if( curNode->mvvu_Children.size() == 0 ) {
 
@@ -621,8 +621,8 @@ int logic_Tree::innerTreeFrontInsSingMove(int cur_id,int post_id) {
 		//只有一个孩子
 		tree_node * tmpChild = curNode->mvvu_Children[0];
 		tmpChild->mvu_Parent = curPreNode;
+		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin()); //应先删除cur节点
 		curPreNode->mvvu_Children.push_back(tmpChild);
-		curPreNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 	}else if( curNode->mvvu_Children.size() == 0 ) {
 
