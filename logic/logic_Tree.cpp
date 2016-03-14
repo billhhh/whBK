@@ -510,6 +510,9 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 
 	//将cur节点儿子（只会有一个）给cur的pre节点
 	tree_node *curPreNode = curNode->mvu_Parent;
+	if( curPreNode->mvvu_Children.size() > 1 ) //不可能多个节点
+		assert(false);
+
 	if( curNode->mvvu_Children.size() == 1 ) {
 
 		//只有一个孩子
@@ -555,7 +558,30 @@ int logic_Tree::innerTreeExchangeRoot(int id) {
 		return -1;
 	}
 
-	tree_node *tmp = temPos->_node;
+	tree_node *curNode = temPos->_node;
+	tree_node *curPreNode = temPos->_node->mvu_Parent;
+	//将cur节点的孩子赋给 pre节点（pre节点有且仅有这一个孩子）
+	if( curPreNode->mvvu_Children.size() > 1 )
+		assert(false);
+
+	if( curNode->mvvu_Children.size() == 1 ) {
+
+		//只有一个孩子
+		tree_node * tmpChild = curNode->mvvu_Children[0];
+		tmpChild->mvu_Parent = curPreNode;
+		curPreNode->mvvu_Children.push_back(tmpChild);
+		curPreNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+	}else if( curNode->mvvu_Children.size() == 0 ) {
+
+		//cur节点是叶子节点
+		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin());
+	}else {
+		assert(false);
+	}
+
+	tree_node *tmp = curNode;
+
 	tmp->mvvu_Children.push_back(this->mvu_root);
 	this->mvu_root->mvu_Parent = tmp;
 	this->mvu_root = tmp;
@@ -584,7 +610,29 @@ int logic_Tree::innerTreeFrontInsSingMove(int cur_id,int post_id) {
 		return -1;
 	}
 
-	tree_node *tmp = curPos->_node;
+	tree_node *curNode = curPos->_node;
+	tree_node *curPreNode = curPos->_node->mvu_Parent;
+	//将cur节点的孩子赋给 pre节点（pre节点有且仅有这一个孩子）
+	if( curPreNode->mvvu_Children.size() > 1 )
+		assert(false);
+
+	if( curNode->mvvu_Children.size() == 1 ) {
+
+		//只有一个孩子
+		tree_node * tmpChild = curNode->mvvu_Children[0];
+		tmpChild->mvu_Parent = curPreNode;
+		curPreNode->mvvu_Children.push_back(tmpChild);
+		curPreNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+	}else if( curNode->mvvu_Children.size() == 0 ) {
+
+		//cur节点是叶子节点
+		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin());
+	}else {
+		assert(false);
+	}
+
+	tree_node *tmp = curNode;
 	tree_node *preNode = postPos->_node->mvu_Parent;
 	tree_node *postNode = postPos->_node;
 	int index = isChild(preNode,postNode);

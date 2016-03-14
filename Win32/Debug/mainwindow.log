@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/3/14 17:31:44。
+﻿生成启动时间为 2016/3/14 18:06:57。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
@@ -12,8 +12,7 @@
      1>logic\logic_Tree.cpp(279): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Tree.cpp(325): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Tree.cpp(360): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(513): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(522): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(530): warning C4018: “<”: 有符号/无符号不匹配
          所有输出均为最新。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\mainwindow.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib /LIBPATH:C:/qt/5.5/msvc2012/lib /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib qtmaind.lib shell32.lib Qt5Cored.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"debug\mainwindow.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" Win32\Debug\bottom_label.obj
@@ -67,4 +66,4 @@
 
 生成成功。
 
-已用时间 00:00:07.99
+已用时间 00:00:07.96
