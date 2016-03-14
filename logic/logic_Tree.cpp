@@ -365,6 +365,7 @@ bool logic_Tree::del_node_notConn(int ID) {
 		}
 	}
 
+	cur_node->mvu_Parent = NULL;
 	//SAFE_DELETE(cur_node);  //并不适合在此处删除，要删除应该在调用处删除，否则应该保留节点内存
 	SAFE_DELETE(position);
 
