@@ -508,6 +508,12 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 	tree_node *curNode = curPos->_node;
 	tree_node *preNode = prePos->_node;
 
+	if ( curNode->getParentID() == preNode->getID() ) {
+		SAFE_DELETE(curPos);
+		SAFE_DELETE(prePos);
+		return 0; //又移回来了
+	}
+
 	//将cur节点儿子（只会有一个）给cur的pre节点
 	tree_node *curPreNode = curNode->mvu_Parent;
 	if( curPreNode->mvvu_Children.size() > 1 ) //不可能多个节点
@@ -612,6 +618,13 @@ int logic_Tree::innerTreeFrontInsSingMove(int cur_id,int post_id) {
 
 	tree_node *curNode = curPos->_node;
 	tree_node *curPreNode = curPos->_node->mvu_Parent;
+
+	if ( curNode->getParentID() == postPos->_node->getID() ) {
+		SAFE_DELETE(curPos);
+		SAFE_DELETE(postPos);
+		return 0; //又移回来了
+	}
+
 	//将cur节点的孩子赋给 pre节点（pre节点有且仅有这一个孩子）
 	if( curPreNode->mvvu_Children.size() > 1 )
 		assert(false);
