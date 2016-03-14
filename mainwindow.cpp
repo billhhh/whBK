@@ -81,7 +81,7 @@ void MainWindow::whWork() {
 	msginterface.insertModule(1,false,1002);
 	msginterface.insertModule(2,false,1002);
 
-	msginterface.moveModule(3,1,BACK_SINGLE);
+	msginterface.moveModule(2,3,BACK_SINGLE);
 
 }
 
