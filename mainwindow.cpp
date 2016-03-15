@@ -78,10 +78,12 @@ void MainWindow::whWork() {
 //	msginterface.moveModule(5,0,BACK_MULTI); //多模块后插 放空
 
 	msginterface.insertModule(0,false,1002);
-	msginterface.insertModule(1,false,1002);
-	msginterface.insertModule(2,false,1002);
+	msginterface.insertModule(0,false,1002);
+	msginterface.insertModule(0,false,1002);
 
-	msginterface.moveModule(3,1,BACK_SINGLE);
+	msginterface.moveModule(3,2,ADD_LEAF);
+	msginterface.moveModule(2,1,BACK_MULTI);
+	msginterface.moveModule(2,0,BACK_MULTI);
 
 }
 

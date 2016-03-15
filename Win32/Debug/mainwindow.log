@@ -1,14 +1,24 @@
-﻿生成启动时间为 2016/3/14 18:42:19。
+﻿生成启动时间为 2016/3/15 16:21:03。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          所有输出均为最新。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 mainwindow.cpp
-         mainwindow.cpp
-     1>mainwindow.cpp(95): warning C4189: “a”: 局部变量已初始化但不引用
-     1>mainwindow.cpp(106): warning C4189: “layout”: 局部变量已初始化但不引用
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 logic\logic_Program.cpp
+         logic_Program.cpp
+     1>logic\logic_Program.cpp(794): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(852): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(947): warning C4100: “m_id”: 未引用的形参
+     1>logic\logic_Program.cpp(982): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1029): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1050): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(1304): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1335): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>logic\logic_Program.cpp(1465): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(1484): warning C4100: “branch_id”: 未引用的形参
+     1>logic\logic_Program.cpp(3195): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(3219): warning C4018: “<”: 有符号/无符号不匹配
          所有输出均为最新。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\mainwindow.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib /LIBPATH:C:/qt/5.5/msvc2012/lib /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib qtmaind.lib shell32.lib Qt5Cored.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"debug\mainwindow.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" Win32\Debug\bottom_label.obj
@@ -62,4 +72,4 @@
 
 生成成功。
 
-已用时间 00:00:10.78
+已用时间 00:00:10.85
