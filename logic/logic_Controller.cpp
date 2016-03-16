@@ -548,8 +548,8 @@ int logic_Controller::ctrlFrontInsMultiMove(int cur_m_id,int post_m_id) {
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	if ( post_m_id <= 0 ) {
-		return -1; //插入点 id 错误
+	if ( post_m_id < 0 ) { //可以为0
+		assert(false); //插入点 id 错误
 	}
 
 	//前插 move
