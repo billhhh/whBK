@@ -2062,7 +2062,7 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 	///// step2、插入新节点
 	logic_Tree *insTree = NULL;
 	if( 0 == pre_m_id ) { 
-		//如果前插一棵空树
+		//如果前插一棵空树，不可能在外面
 
 		insTree = new logic_Tree(insNode); //新建一棵树
 
