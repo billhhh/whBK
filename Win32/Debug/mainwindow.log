@@ -1,9 +1,9 @@
-﻿生成启动时间为 2016/3/16 18:26:13。
+﻿生成启动时间为 2016/3/16 19:11:40。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
        InitializeBuildStatus:
-         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
          Moc'ing mainwindow.h...
          Uic'ing mainwindow.ui...
@@ -64,8 +64,8 @@
      1>logic\logic_Program.cpp(1372): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
      1>logic\logic_Program.cpp(1502): warning C4100: “branch_id”: 未引用的形参
      1>logic\logic_Program.cpp(1521): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(3236): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(3260): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(3320): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Program.cpp(3344): warning C4018: “<”: 有符号/无符号不匹配
          logic_Project.cpp
      1>logic\logic_Project.cpp(159): warning C4189: “program”: 局部变量已初始化但不引用
      1>logic\logic_Project.cpp(204): warning C4189: “programID”: 局部变量已初始化但不引用
@@ -230,4 +230,4 @@
 
 生成成功。
 
-已用时间 00:00:39.40
+已用时间 00:00:45.60
