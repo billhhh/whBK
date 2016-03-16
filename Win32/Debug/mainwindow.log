@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/3/16 10:31:41。
+﻿生成启动时间为 2016/3/16 16:01:02。
      1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
@@ -79,7 +79,7 @@
      1>logic\logic_Tree.cpp(279): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Tree.cpp(325): warning C4018: “<”: 有符号/无符号不匹配
      1>logic\logic_Tree.cpp(360): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(540): warning C4018: “<”: 有符号/无符号不匹配
+     1>logic\logic_Tree.cpp(555): warning C4018: “<”: 有符号/无符号不匹配
          logic_TreeNode.cpp
      1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
          logic_Controller.cpp
@@ -157,8 +157,8 @@
          tinyxmlparser.cpp
          main.cpp
          mainwindow.cpp
-     1>mainwindow.cpp(97): warning C4189: “a”: 局部变量已初始化但不引用
-     1>mainwindow.cpp(108): warning C4189: “layout”: 局部变量已初始化但不引用
+     1>mainwindow.cpp(61): warning C4189: “a”: 局部变量已初始化但不引用
+     1>mainwindow.cpp(72): warning C4189: “layout”: 局部变量已初始化但不引用
          menuitem.cpp
          mode_select.cpp
          module.cpp
@@ -174,8 +174,8 @@
          正在生成代码...
      1>e:\bill github\whbk\msginterface.cpp(208): warning C4715: “msgInterface::moveModule”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_xmlio.cpp(7643): warning C4715: “logic_XmlIO::rebuildTree”: 不是所有的控件路径都返回值
-     1>e:\bill github\whbk\logic\logic_controller.cpp(901): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
      1>e:\bill github\whbk\logic\logic_controller.cpp(941): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
+     1>e:\bill github\whbk\logic\logic_controller.cpp(901): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 GeneratedFiles\qrc_image.cpp
          qrc_image.cpp
        Link:
@@ -230,4 +230,4 @@
 
 生成成功。
 
-已用时间 00:00:46.08
+已用时间 00:00:48.43
