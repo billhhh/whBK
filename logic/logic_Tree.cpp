@@ -93,7 +93,7 @@ tree_node* logic_Tree::getRoot()
 
 //有安全隐患，不建议使用
 void logic_Tree::setRoot(tree_node *some) {
-	
+
 	this->mvu_root = some;
 	if( NULL != some )
 		this->mvi_TreeID = some->getID();
@@ -517,23 +517,38 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 
 	//将cur节点儿子（只会有一个）给cur的pre节点
 	tree_node *curPreNode = curNode->mvu_Parent;
-	if( curPreNode->mvvu_Children.size() > 1 ) //不可能多个节点
-		assert(false);
+	if( NULL != curPreNode ) { //如果cur节点不是root节点
 
-	if( curNode->mvvu_Children.size() == 1 ) {
+		if( curPreNode->mvvu_Children.size() > 1 ) //不可能多个节点
+			assert(false);
 
-		//只有一个孩子
-		tree_node * tmpChild = curNode->mvvu_Children[0];
-		tmpChild->mvu_Parent = curPreNode;
-		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin()); //应先删除cur节点
-		curPreNode->mvvu_Children.push_back(tmpChild);
-		curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
-	}else if( curNode->mvvu_Children.size() == 0 ) {
+		if( curNode->mvvu_Children.size() == 1 ) {
 
-		//cur节点是叶子节点
-		curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin());
-	}else {
-		assert(false);
+			//只有一个孩子
+			tree_node * tmpChild = curNode->mvvu_Children[0];
+			tmpChild->mvu_Parent = curPreNode;
+			curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin()); //应先删除cur节点
+			curPreNode->mvvu_Children.push_back(tmpChild);
+			curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
+		}else if( curNode->mvvu_Children.size() == 0 ) {
+
+			//cur节点是叶子节点
+			curPreNode->mvvu_Children.erase(curPreNode->mvvu_Children.begin());
+		}else {
+			assert(false);
+		}
+	} else {
+
+		//如果cur节点是root节点
+		//将cur孩子设置为root
+		if( curNode->mvvu_Children.size() == 1 ) {
+
+			this->setRoot(curNode->mvvu_Children[0]);
+			curNode->mvvu_Children[0]->mvu_Parent = NULL;
+		}else {
+			assert(false);
+		}
+
 	}
 
 	//将父节点的所有儿子给cur节点

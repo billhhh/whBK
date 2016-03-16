@@ -655,7 +655,7 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 
 	///// 上一层已判断 post_m_id 是否为 0
 
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
+	if ( post_m_id != 0 && 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
 		return -2; //没找到插入点
 	}
 
