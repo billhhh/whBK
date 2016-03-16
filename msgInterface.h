@@ -232,6 +232,8 @@ public:
 	//session1：是否可以创建我的模块，前后端第一次会话
 	//接口传id列表，返回是否可创建
 	int canMyBlocks(std::vector<int > ids);
+	//得到创建我的模块外接参数列表
+	std::vector<logic_BasicPara > getMyBlocksPara(std::vector<int > ids);
 
 	//session2：点击完成后，前后端第二次会话
 	//前端传给后台：参数vector、我的模块name、我的模块描述
