@@ -551,6 +551,8 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 
 				//树内正常操作，提前终止
 				return 0;
+			}else {
+				return -6;
 			}
 
 		}
@@ -1917,6 +1919,8 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 				//树内正常操作，提前终止
 				return 0;
+			}else {
+				return -6;
 			}
 
 		}
@@ -2559,6 +2563,8 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 
 				//树内正常操作，提前终止
 				return 0;
+			}else {
+				return -6;
 			}
 
 		}

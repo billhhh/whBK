@@ -609,6 +609,14 @@ int logic_Tree::innerTreeFrontInsSingMove(int cur_id,int post_id) {
 	iterator* curPos = search(cur_id);
 	iterator* postPos = search(post_id);
 
+	if( curPos->_node->getID() == postPos->_node->getParentID() ) {
+
+		//又插入到原位
+		SAFE_DELETE(curPos);
+		SAFE_DELETE(postPos);
+		return 0;
+	}
+
 	if ( NULL == curPos || NULL == postPos)
 	{
 		//如果并不存在，错误退出
