@@ -545,6 +545,7 @@ int logic_Tree::innerTreeBackInsSingMove(int pre_id,int cur_id) {
 
 			this->setRoot(curNode->mvvu_Children[0]);
 			curNode->mvvu_Children[0]->mvu_Parent = NULL;
+			curNode->mvvu_Children.erase(curNode->mvvu_Children.begin());
 		}else {
 			assert(false);
 		}
