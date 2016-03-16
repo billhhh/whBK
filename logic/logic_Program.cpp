@@ -396,89 +396,6 @@ bool logic_Program::frontInsModule(int m_id,int post_id,int m_type) {
 	return true;
 }
 
-//前插move
-//cur_m_id 是待move节点
-//post_m_id 是节点后继
-int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
-
-	///// 上一层已判断 post_m_id 是否为 0
-
-	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
-		return -2; //没找到插入点
-	}
-
-	//如果 post_m_id 模块是开始
-	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-			return -3; //模块类型错误
-	}
-
-	//注：不用新建module，只用处理树节点即可
-
-	///// step1、插入新树节点
-	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //待插入树
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];  //待删除树
-
-	int oldRootId = insTree->mvi_TreeID;
-	if( post_m_id == oldRootId ) {
-		
-		//待插入节点要插在原树root之前
-		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //从其他树节点正常交换
-
-			if( insTree->exchangeRoot(cur_m_id) == false )
-				return -5;
-
-			//只有 post_m_id 是根的情况，才更新tree map
-			mvmu_TreeMap.erase(post_m_id);
-			mvmu_TreeMap[cur_m_id] = insTree;
-		} else {
-			
-			//树内交换，不用删除旧树节点，提前终止
-			if( insTree->innerTreeExchangeRoot(cur_m_id) >= 0 ) {
-				
-				//只有 post_m_id 是根的情况，才更新tree map
-				mvmu_TreeMap.erase(post_m_id);
-				mvmu_TreeMap[cur_m_id] = insTree;
-
-				return 0;
-			} else {
-				return -4; //树内交换失败
-			}
-		}
-
-	}else {
-		
-		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //本树操作
-
-			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
-				
-				//树内正常操作，提前终止
-				return 0;
-			}
-
-		}
-		//正常插入地方
-		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
-	}
-
-	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
-
-	///// step2、删除旧树节点（注：此处不可能有多个孩子）
-	if( cur_m_id != oldTree->mvi_TreeID ) {
-
-		//并非树根
-		oldTree->del_node(cur_m_id);
-	}else if(cur_m_id == oldTree->mvi_TreeID 
-		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
-
-			//树中唯一模块，删除树
-			SAFE_DELETE(oldTree);
-			mvmu_TreeMap.erase(cur_m_id);
-	}
-
-	return 0; //正常返回
-
-}
-
 //单模块后插move
 int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 
@@ -577,9 +494,10 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 	return 0; //正常返回
 }
 
-//带祖先前插move
-////////////////注：必然是插在一棵树的最前面/////////////////
-int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
+//前插move
+//cur_m_id 是待move节点
+//post_m_id 是节点后继
+int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 
 	///// 上一层已判断 post_m_id 是否为 0
 
@@ -589,37 +507,74 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 
 	//如果 post_m_id 模块是开始
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-			return -3; //模块类型错误
+		return -3; //模块类型错误
 	}
 
 	//注：不用新建module，只用处理树节点即可
 
 	///// step1、插入新树节点
-	/////!!!!!!!!!!!!特别注意这里，这里的 insTree 和 oldtree 调换，可以转换为后插!!!!!!!!!!!!!!
-	logic_Tree *insTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待插入树
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[post_m_id]; //待删除树
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //待插入树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];  //待删除树
 
-	//如果 post_m_id 不是根节点，错误返回
-	if( post_m_id!=oldTree->mvi_TreeID ) {
-		return -4;
+	int oldRootId = insTree->mvi_TreeID;
+	if( post_m_id == oldRootId ) {
+
+		//待插入节点要插在原树root之前
+		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //从其他树节点正常交换
+
+			if( insTree->exchangeRoot(cur_m_id) == false )
+				return -5;
+
+			//只有 post_m_id 是根的情况，才更新tree map
+			mvmu_TreeMap.erase(post_m_id);
+			mvmu_TreeMap[cur_m_id] = insTree;
+		} else {
+
+			//树内交换，不用删除旧树节点，提前终止
+			if( insTree->innerTreeExchangeRoot(cur_m_id) >= 0 ) {
+
+				//只有 post_m_id 是根的情况，才更新tree map
+				mvmu_TreeMap.erase(post_m_id);
+				mvmu_TreeMap[cur_m_id] = insTree;
+
+				return 0;
+			} else {
+				return -4; //树内交换失败
+			}
+		}
+
+	}else {
+
+		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //本树操作
+
+			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
+
+				//树内正常操作，提前终止
+				return 0;
+			}
+
+		}
+		//正常插入地方
+		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
 	}
 
-	///////////////////////////////////////
-	logic_TreeNode * insNode = oldTree->getRoot(); //待插入节点
-	insTree->add_node(cur_m_id,insNode);
+	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-	///// step2、删除旧树节点
+	///// step2、删除旧树节点（注：此处不可能有多个孩子）
+	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-	//必然是ROOT，直接删除树
-	oldTree->del_node_notConn(post_m_id); //断开 oldTree 此节点后的所有连接
-	SAFE_DELETE(oldTree); //放心删除树
-	mvmu_TreeMap.erase(post_m_id);
+		//并非树根
+		oldTree->del_node(cur_m_id);
+	}else if(cur_m_id == oldTree->mvi_TreeID 
+		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-	///// step3、更新 module tree映射
-
-	recurs_update(insTree,insNode);
+			//树中唯一模块，删除树
+			SAFE_DELETE(oldTree);
+			mvmu_TreeMap.erase(cur_m_id);
+	}
 
 	return 0; //正常返回
+
 }
 
 //带孩子后插move
@@ -631,13 +586,13 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
 	//如果 cur_id 模块是开始
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-			return -3; //模块类型错误
+		return -3; //模块类型错误
 	}
 
 	//注：不用新建module，只用处理树节点即可
 
 	/////////////开始/////////////
-	
+
 	///// step1、删除旧树节点
 	///// 注：删除必须是第一步，不然 del_node_notConn 方法会删掉错误 parent 的孩子
 
@@ -687,6 +642,51 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 	}
 
 	///// step3、更新 module tree映射
+	recurs_update(insTree,insNode);
+
+	return 0; //正常返回
+}
+
+//带祖先前插move
+////////////////注：必然是插在一棵树的最前面/////////////////
+int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
+
+	///// 上一层已判断 post_m_id 是否为 0
+
+	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
+		return -2; //没找到插入点
+	}
+
+	//如果 post_m_id 模块是开始
+	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
+			return -3; //模块类型错误
+	}
+
+	//注：不用新建module，只用处理树节点即可
+
+	///// step1、插入新树节点
+	/////!!!!!!!!!!!!特别注意这里，这里的 insTree 和 oldtree 调换，可以转换为后插!!!!!!!!!!!!!!
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[cur_m_id]; //待插入树
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[post_m_id]; //待删除树
+
+	//如果 post_m_id 不是根节点，错误返回
+	if( post_m_id!=oldTree->mvi_TreeID ) {
+		return -4;
+	}
+
+	///////////////////////////////////////
+	logic_TreeNode * insNode = oldTree->getRoot(); //待插入节点
+	insTree->add_node(cur_m_id,insNode);
+
+	///// step2、删除旧树节点
+
+	//必然是ROOT，直接删除树
+	oldTree->del_node_notConn(post_m_id); //断开 oldTree 此节点后的所有连接
+	SAFE_DELETE(oldTree); //放心删除树
+	mvmu_TreeMap.erase(post_m_id);
+
+	///// step3、更新 module tree映射
+
 	recurs_update(insTree,insNode);
 
 	return 0; //正常返回
