@@ -3378,5 +3378,8 @@ int logic_Program::MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map
 //得到创建我的模块外接参数列表
 std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > ids) {
 
+	//此处一定是可以构建我的模块
 
+	//构建Module map
+	std::map <int , logic_BasicModule>;
 }
