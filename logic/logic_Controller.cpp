@@ -1189,4 +1189,6 @@ std::vector<logic_BasicPara > logic_Controller::ctrlGetMyBlocksPara(std::vector<
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+
+	return tCurProg->getMyBlocksPara(ids);
 }
