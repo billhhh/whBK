@@ -1180,3 +1180,13 @@ void logic_Controller::ctrlSetCurPrjName(std::string name) {
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	tCurPrj->setPrjName(name);
 }
+
+//得到创建我的模块外接参数列表
+std::vector<logic_BasicPara > logic_Controller::ctrlGetMyBlocksPara(std::vector<int > ids) {
+
+	if( !curPrjId || !curProgId )
+		assert(false);
+
+	logic_Project * tCurPrj = prjMap[curPrjId];
+	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
+}

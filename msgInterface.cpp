@@ -433,6 +433,12 @@ int msgInterface::canMyBlocks(std::vector<int > ids) {
 	return ctrl.ctrlCanMyBlocks(ids);
 }
 
+//得到创建我的模块外接参数列表
+std::vector<logic_BasicPara > msgInterface::getMyBlocksPara(std::vector<int > ids) {
+
+
+}
+
 //session2：点击完成后，前后端第二次会话
 //前端传给后台：参数vector、我的模块name、我的模块描述
 //后台返回前端：我的模块id（底部id）

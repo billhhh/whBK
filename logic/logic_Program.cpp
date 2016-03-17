@@ -3374,3 +3374,9 @@ int logic_Program::MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map
 	
 	return 0;
 }
+
+//得到创建我的模块外接参数列表
+std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > ids) {
+
+
+}
