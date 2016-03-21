@@ -19,6 +19,7 @@
 #include "logic_ForModule.h"
 #include "logic_IfModule.h"
 #include "logic_WhData.h"
+#include <queue>
 
 using namespace std;
 
@@ -3380,6 +3381,15 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 
 	//此处一定是可以构建我的模块
 
-	//构建Module map
-	std::map <int , logic_BasicModule>;
+	//构建Module map，将所有出现的ids放入（包括for中的所有）
+	std::map <int , logic_BasicModule> idsMap;
+	std::queue <int > for_if_q; //队列保存for和if id
+
+	for (int i=0;i<ids.size();++i) {
+
+		assert(mvmu_ModuleMap.count(ids[i]));
+		
+		if ( mvmu_ModuleMap ) {
+		}
+	}
 }
