@@ -3382,14 +3382,64 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 	//此处一定是可以构建我的模块
 
 	//构建Module map，将所有出现的ids放入（包括for中的所有）
-	std::map <int , logic_BasicModule> idsMap;
-	std::queue <int > for_if_q; //队列保存for和if id
+	std::map <int , logic_BasicModule* > idsMap;
+	std::queue <int > que; //队列保存for和if id
 
-	for (int i=0;i<ids.size();++i) {
+	for (int i=0;i<ids.size();++i) { //基本id入队
+		que.push(ids[i]);
+	}
 
-		assert(mvmu_ModuleMap.count(ids[i]));
-		
-		if ( mvmu_ModuleMap ) {
+	//遍历队列，形成总map
+	while ( !que.empty() ) {
+		int frontId = que.front();
+		que.pop();
+
+		assert(mvmu_ModuleMap.count(frontId));
+		logic_BasicModule *module = mvmu_ModuleMap[frontId];
+		idsMap[frontId] = module;
+
+		if ( module->getModuleType() == 2003 ) { //for
+			//将for中所有模块id（所有树中id）推入队列
+			vector<int > v = ((logic_ForModule *)module)->getAllModuleId();
+			for (int i=0;i<v.size();++i) {
+				que.push(v[i]);
+			}
 		}
+
+		else if ( module->getModuleType() == 2004 ) { //if
+			//将if中所有模块id（所有树中id）推入队列
+			vector<int > v = ((logic_IfModule *)module)->getAllModuleId();
+			for (int i=0;i<v.size();++i) {
+				que.push(v[i]);
+			}
+		}
+	}
+
+	//遍历map，判断有没有外接参数
+	for (map<int , logic_BasicModule* >::iterator it=idsMap.begin();it!=idsMap.end();++it) {
+
+		int module_id = it->first;
+		logic_BasicModule *module = it->second;
+		int paraSize = module->getParaSize();
+
+		//from -- to
+		whPort from_to; //此模块此参数是发出端（不存在0端口情况）
+		from_to.moduleId = module_id;
+		for (int i=1;i<=paraSize;++i) {
+			from_to.paraId = i;
+
+			if(!mvvu_Conn_From_ToMap.count(from_to)) //没有连线
+				continue;
+			else { //有连线
+
+				int otherModuleId = mvvu_Conn_From_ToMap[from_to].moduleId;
+				//另一端也是选中的模块，continue
+				if(idsMap.count(otherModuleId))
+					continue;
+
+			}
+		}
+
+
 	}
 }

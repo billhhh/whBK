@@ -447,3 +447,28 @@ int logic_IfModule::getDefaultBranch()
 }
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//获得（本层，不包括进一层的for或if中的模块id）所有模块id
+std::vector<int > logic_IfModule::getAllModuleId() {
+
+	vector<int > v;
+
+	//处理activeTree
+	for (map<int , whBranch >::iterator it=mvmu_BranchMap.begin();it!=mvmu_BranchMap.end();++it) {
+
+		recurs_GetId(it->second.curActiveTree->getRoot(),v);
+	}
+
+	//去掉-1 -2
+	for (int i=0;i<v.size();++i) {
+		if( -1 == v[i] || -2 == v[i] )
+			v.erase(v.begin()+i);
+	}
+
+	for (map<logic_Tree * , int >::iterator it=mvmis_Tree_BranchMap.begin();it!=mvmis_Tree_BranchMap.end();++it) {
+		logic_Tree *tree = it->first;
+		recurs_GetId(tree->getRoot(),v);
+	}
+
+	return v;
+}

@@ -64,6 +64,8 @@ public:
 	/////合成代码
 	bool generateCodeBlocks();
 
+	int getParaSize(); //get一共有多少个参数
+
 //protected:
 	int mvi_CurModeID; //当前模式
 	int mvs_ModuleType; //模块类型 方便去xml load

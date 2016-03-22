@@ -201,3 +201,9 @@ void logic_BasicModule::setCurParaList(std::vector <logic_BasicPara*> paraList)
 		mvvu_ParaList.at(p_id) = paraList.at(i);
 	}
 }
+
+//get一共有多少个参数
+int logic_BasicModule::getParaSize() {
+
+	return mvvu_ParaList.size();
+}

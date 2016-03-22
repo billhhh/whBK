@@ -235,3 +235,20 @@ std::vector<int > logic_ForModule::findAllRootsActive() {
 	return L;
 }
 
+//获得（本层，不包括进一层的for或if中的模块id）所有模块id
+std::vector<int > logic_ForModule::getAllModuleId() {
+
+	vector<int > v;
+
+	//处理activeTree
+	recurs_GetId(mvi_CurActiveTree->getRoot(),v);
+	v.erase(v.begin()); //删掉-1和-2节点
+	v.erase(v.end());
+
+	for (int i=0;i<mvvu_treeList.size();++i) {
+		logic_Tree *tree = mvvu_treeList[i];
+		recurs_GetId(tree->getRoot(),v);
+	}
+
+	return v;
+}

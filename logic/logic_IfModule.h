@@ -85,6 +85,7 @@ public:
 	int getDefaultBranch();
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+	std::vector<int > getAllModuleId(); //获得（本层，不包括进一层的for或if中的模块id）所有模块id
 
 protected:
 
