@@ -3380,6 +3380,7 @@ int logic_Program::MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map
 std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > ids) {
 
 	//此处一定是可以构建我的模块
+	std::vector<logic_BasicPara > resV;
 
 	//构建Module map，将所有出现的ids放入（包括for中的所有）
 	std::map <int , logic_BasicModule* > idsMap;
@@ -3437,9 +3438,36 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 				if(idsMap.count(otherModuleId))
 					continue;
 
+				//此para有效，记录para
+				resV.push_back(*(module->getPara(i)));
+			}
+		}
+
+		//to -- from
+		whPort to_from; //此模块此参数是收入端（存在0端口情况，即WS端口输入）
+		to_from.moduleId = module_id;
+		for (int i=0;i<=paraSize;++i) {
+			to_from.paraId = i;
+
+			if(!mvvu_Conn_To_FromMap.count(to_from)) //没有连线
+				continue;
+			else { //有连线
+
+				int otherModuleId = mvvu_Conn_To_FromMap[to_from].moduleId;
+				//另一端也是选中的模块，continue
+				if(idsMap.count(otherModuleId))
+					continue;
+
+				//此para有效，记录para
+				if( 0 == i) {
+
+				}else
+					resV.push_back(*(module->getPara(i)));
 			}
 		}
 
 
 	}
+
+	return resV;
 }
