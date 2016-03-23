@@ -3460,7 +3460,13 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 
 				//此para有效，记录para
 				if( 0 == i) {
-
+					//端口连接
+					logic_BasicModule *otherModule = mvmu_ModuleMap[otherModuleId];
+					//生造一个para
+					int otherModuleParaId = mvvu_Conn_To_FromMap[to_from].paraId;
+					logic_BasicPara para = *(otherModule->getPara(otherModuleParaId));
+					para.mve_IOType = PARA_IN;
+					resV.push_back(para);
 				}else
 					resV.push_back(*(module->getPara(i)));
 			}
