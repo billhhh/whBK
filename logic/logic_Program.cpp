@@ -544,6 +544,7 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 		childNode->mvu_Parent = curParentNode->_node;
 
 		//current node 清楚子节点，清楚父亲关系
+		curNode->mvu_Parent = nullptr;
 		std::vector<logic_TreeNode *> &curChildren = curNode->mvvu_Children;
 		curChildren.clear();
 	}
