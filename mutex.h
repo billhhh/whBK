@@ -23,8 +23,8 @@ using namespace std;
 
 class Mutex {
 public:
-    explicit Mutex(){
-	init();
+    Mutex(){
+		init();
 	}
 	
     ~Mutex() {
