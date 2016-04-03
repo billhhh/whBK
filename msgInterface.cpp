@@ -361,14 +361,12 @@ int msgInterface::moveModuleForIf(int cur_m_id,int other_m_id,
 /// \return 根节点集合
 ///
 std::vector<int > msgInterface::findRootsInContainer(int containerId) {
+
 	return ctrl.ctrlFindRootsInContainer(containerId);
 }
 
 
-
 /// \brief 创建我的模块
-
-
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!持久化部分!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool msgInterface::saveProject(const std::string fileName, int prjId)

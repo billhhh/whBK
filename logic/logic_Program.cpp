@@ -453,8 +453,12 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 			//如果是本内直接move
 			if ( insTree->innerTreeBackInsSingMove(pre_m_id,cur_m_id) < 0 )
 				return -6; //树内move出错
-			else
-				return 0; //已move可直接返回
+			else {
+				//成功树内move
+				mvmu_TreeMap.erase(cur_m_id);
+				mvmu_TreeMap[pre_m_id]=insTree;
+				return 0;
+			}
 
 		}else {
 			//树间移动

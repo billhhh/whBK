@@ -1,189 +1,15 @@
-﻿生成启动时间为 2016/4/3 14:19:06。
-     1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Rebuild 个目标)。
-     1>_PrepareForClean:
-         正在删除文件“Win32\Debug\mainwindow.lastbuildstate”。
-       InitializeBuildStatus:
-         正在对“Win32\Debug\mainwindow.unsuccessfulbuild”执行 Touch 任务。
+﻿生成启动时间为 2016/4/3 15:05:10。
+     1>项目“E:\bill github\whBK\mainwindow.vcxproj”在节点 2 上(Build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Win32\Debug\mainwindow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
-         Moc'ing mainwindow.h...
-         Uic'ing mainwindow.ui...
-         Moc'ing bottom_label.h...
-         Moc'ing menuitem.h...
-         Moc'ing ports.h...
-         Moc'ing mode_select.h...
-         Moc'ing module.h...
-         Moc'ing graphic.h...
-         Moc'ing view.h...
-         Rcc'ing image.qrc...
+         所有输出均为最新。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 bottom_label.cpp GeneratedFiles\Debug\moc_bottom_label.cpp GeneratedFiles\Debug\moc_graphic.cpp GeneratedFiles\Debug\moc_mainwindow.cpp GeneratedFiles\Debug\moc_menuitem.cpp GeneratedFiles\Debug\moc_mode_select.cpp GeneratedFiles\Debug\moc_module.cpp GeneratedFiles\Debug\moc_ports.cpp GeneratedFiles\Debug\moc_view.cpp graphic.cpp logger.cpp logic\logic_BasicModule.cpp logic\logic_ForModule.cpp logic\logic_Gragh.cpp logic\logic_Graph.cpp logic\logic_IfModule.cpp logic\logic_MyBlockModule.cpp logic\logic_MyBlocksProgram.cpp logic\logic_Program.cpp logic\logic_Project.cpp logic\logic_Test.cpp logic\logic_Tree.cpp logic\logic_TreeNode.cpp logic\logic_Controller.cpp logic\logic_VarModule.cpp logic\logic_XmlIO.cpp logic\tinyXML\tinystr.cpp logic\tinyXML\tinyxml.cpp logic\tinyXML\tinyxmlerror.cpp logic\tinyXML\tinyxmlparser.cpp main.cpp mainwindow.cpp menuitem.cpp mode_select.cpp module.cpp msgInterface.cpp ports.cpp program.cpp project.cpp view.cpp
-         bottom_label.cpp
-     1>bottom_label.cpp(35): warning C4189: “dropAction”: 局部变量已初始化但不引用
-         moc_bottom_label.cpp
-         moc_graphic.cpp
-         moc_mainwindow.cpp
-         moc_menuitem.cpp
-         moc_mode_select.cpp
-         moc_module.cpp
-         moc_ports.cpp
-         moc_view.cpp
-         graphic.cpp
-         logger.cpp
-     1>logger.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-     1>e:\bill github\whbk\logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-         logic_BasicModule.cpp
-     1>logic\logic_BasicModule.cpp(32): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(38): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(75): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(80): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(92): warning C4100: “ParaReturnList”: 未引用的形参
-     1>logic\logic_BasicModule.cpp(92): warning C4100: “modeID”: 未引用的形参
-     1>logic\logic_BasicModule.cpp(97): warning C4100: “paraID”: 未引用的形参
-     1>logic\logic_BasicModule.cpp(109): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(118): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(186): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_BasicModule.cpp(199): warning C4018: “<”: 有符号/无符号不匹配
-         logic_ForModule.cpp
-     1>logic\logic_ForModule.cpp(134): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_ForModule.cpp(248): warning C4018: “<”: 有符号/无符号不匹配
-         logic_Gragh.cpp
-         logic_Graph.cpp
-         logic_IfModule.cpp
-     1>logic\logic_IfModule.cpp(326): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_IfModule.cpp(410): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_IfModule.cpp(463): warning C4018: “<”: 有符号/无符号不匹配
-         logic_MyBlockModule.cpp
-         logic_MyBlocksProgram.cpp
-     1>logic\logic_MyBlocksProgram.cpp(17): warning C4100: “tree”: 未引用的形参
-         logic_Program.cpp
-     1>logic\logic_Program.cpp(883): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(941): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1036): warning C4100: “m_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1072): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1119): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1140): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(1394): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1425): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_Program.cpp(1555): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(1574): warning C4100: “branch_id”: 未引用的形参
-     1>logic\logic_Program.cpp(3382): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(3406): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(3450): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(3466): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Program.cpp(3474): warning C4018: “<”: 有符号/无符号不匹配
-         logic_Project.cpp
-     1>logic\logic_Project.cpp(159): warning C4189: “program”: 局部变量已初始化但不引用
-     1>logic\logic_Project.cpp(204): warning C4189: “programID”: 局部变量已初始化但不引用
-         正在生成代码...
-     1>e:\bill github\whbk\logic\logic_program.cpp(1617): warning C4715: “logic_Program::addBranch”: 不是所有的控件路径都返回值
-         正在编译...
-         logic_Test.cpp
-     1>e:\bill github\whbk\logic\../logger.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-         logic_Tree.cpp
-     1>logic\logic_Tree.cpp(210): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(264): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(279): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(325): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(360): warning C4018: “<”: 有符号/无符号不匹配
-     1>logic\logic_Tree.cpp(556): warning C4018: “<”: 有符号/无符号不匹配
-         logic_TreeNode.cpp
-     1>logic\logic_TreeNode.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
-         logic_Controller.cpp
-     1>logic\logic_Controller.cpp(1019): warning C4100: “prjId”: 未引用的形参
-         logic_VarModule.cpp
-         logic_XmlIO.cpp
-     1>logic\logic_XmlIO.cpp(259): warning C4101: “e”: 未引用的局部变量
-     1>logic\logic_XmlIO.cpp(298): warning C4189: “isPrgSaveRight”: 局部变量已初始化但不引用
-     1>logic\logic_XmlIO.cpp(430): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(454): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(561): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(585): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(701): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(725): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(842): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(866): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1939): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1955): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1971): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(1995): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2380): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2388): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2412): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2428): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2802): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(2826): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3166): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3323): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3484): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3662): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3670): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3678): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3801): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3929): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(3937): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4176): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4397): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4406): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4415): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4424): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4433): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4577): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4720): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4744): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(4847): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5078): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5086): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5094): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5102): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5110): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5205): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5213): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5221): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5323): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5331): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5416): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5424): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5432): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5605): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5613): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5621): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5629): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5731): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(5877): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6084): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6146): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6154): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6216): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
-     1>logic\logic_XmlIO.cpp(6419): warning C4101: “e”: 未引用的局部变量
-     1>logic\logic_XmlIO.cpp(6817): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-     1>logic\logic_XmlIO.cpp(7049): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
-         tinystr.cpp
-         tinyxml.cpp
-         tinyxmlerror.cpp
-         tinyxmlparser.cpp
-         main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 mainwindow.cpp
          mainwindow.cpp
-     1>mainwindow.cpp(64): warning C4189: “a”: 局部变量已初始化但不引用
-     1>mainwindow.cpp(75): warning C4189: “layout”: 局部变量已初始化但不引用
-         menuitem.cpp
-         mode_select.cpp
-         module.cpp
-     1>module.cpp(298): warning C4100: “action”: 未引用的形参
-         msgInterface.cpp
-     1>msgInterface.cpp(135): warning C4100: “m_id”: 未引用的形参
-         ports.cpp
-         program.cpp
-         project.cpp
-         view.cpp
-     1>view.cpp(220): warning C4100: “event”: 未引用的形参
-     1>view.cpp(246): warning C4100: “event”: 未引用的形参
-         正在生成代码...
-     1>e:\bill github\whbk\msginterface.cpp(208): warning C4715: “msgInterface::moveModule”: 不是所有的控件路径都返回值
-     1>e:\bill github\whbk\logic\logic_xmlio.cpp(7643): warning C4715: “logic_XmlIO::rebuildTree”: 不是所有的控件路径都返回值
-     1>e:\bill github\whbk\logic\logic_controller.cpp(921): warning C4715: “logic_Controller::ctrlMoveModuleFor”: 不是所有的控件路径都返回值
-     1>e:\bill github\whbk\logic\logic_controller.cpp(961): warning C4715: “logic_Controller::ctrlMoveModuleIf”: 不是所有的控件路径都返回值
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I. /ID:\Qt\Qt5.5.0\5.5\msvc2012\include /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtWidgets /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtGui /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtANGLE /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtCore /Idebug /I. /I"D:\Qt\Qt5.5.0\5.5\msvc2012\mkspecs\win32-msvc2012" /I.\GeneratedFiles /ID:\Qt\Qt5.5.0\5.5\msvc2012\include\QtXml /Zi /nologo /W3 /WX- /Od /Oy- /D _WINDOWS /D UNICODE /D WIN32 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /D QT_XML_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Win32\Debug\\" /Fd"Win32\Debug\vc110.pdb" /FR"Win32\Debug\\" /Gd /TP /analyze- /errorReport:prompt -w34100 -w34189 -w44996 GeneratedFiles\qrc_image.cpp
-         qrc_image.cpp
+     1>mainwindow.cpp(62): warning C4189: “a”: 局部变量已初始化但不引用
+     1>mainwindow.cpp(73): warning C4189: “layout”: 局部变量已初始化但不引用
+         所有输出均为最新。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"debug\\mainwindow.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib /LIBPATH:C:/qt/5.5/msvc2012/lib /LIBPATH:D:\Qt\Qt5.5.0\5.5\msvc2012\lib qtmaind.lib shell32.lib Qt5Cored.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"debug\mainwindow.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SAFESEH "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" Win32\Debug\bottom_label.obj
          Win32\Debug\moc_bottom_label.obj
@@ -232,8 +58,8 @@
        FinalizeBuildStatus:
          正在删除文件“Win32\Debug\mainwindow.unsuccessfulbuild”。
          正在对“Win32\Debug\mainwindow.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Rebuild 个目标)的操作。
+     1>已完成生成项目“E:\bill github\whBK\mainwindow.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:48.54
+已用时间 00:00:11.99
