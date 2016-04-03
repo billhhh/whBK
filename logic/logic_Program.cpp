@@ -438,8 +438,14 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 
 		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //深拷贝构造到堆
 		insTree = new logic_Tree(tmpPassNode); //新建一棵树，此node也必须新建，否则被下面的delnode了
-		oldTree->setFirstChildAsRoot();
-		mvmu_TreeMap[oldTree->mvi_TreeID] = oldTree;
+		
+		if( oldTree->getRoot()->getID() == cur_m_id ) {
+			oldTree->setFirstChildAsRoot();
+			mvmu_TreeMap[oldTree->mvi_TreeID] = oldTree;
+			mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
+			
+			return 0;
+		}
 		
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 
