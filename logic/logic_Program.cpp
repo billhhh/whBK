@@ -571,7 +571,7 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 		curChildren.clear();
 	}
 
-	///没父亲，没孩子,该节点是treeRoot,标记要插入新树时，讲原树根节点变为新树根节点 
+	///没父亲，没孩子,该节点是treeRoot,标记要插入新树时，讲原树根节点变为新树根节点
 	bool flag = false;
 	if (!curParentNode&&curChildren.size() == 0)
 	{
@@ -633,6 +633,10 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 	//如果 cur_id 模块是开始
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 		return -3; //模块类型错误
+	}
+
+	if( mvmu_ModuleId_TreeMap[pre_m_id]->getRoot()->getID() == cur_m_id ) {
+		return -5; //树根后插到自己尾巴
 	}
 
 	//注：不用新建module，只用处理树节点即可
@@ -704,6 +708,10 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 	//如果 post_m_id 模块是开始
 	if ( post_m_id != 0 && mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
 			return -3; //模块类型错误
+	}
+
+	if( mvmu_ModuleId_TreeMap[cur_m_id]->getRoot()->getID() == post_m_id ) {
+		return -5; //前插到自己树根
 	}
 
 	//注：不用新建module，只用处理树节点即可
@@ -1043,7 +1051,8 @@ int logic_Program::getModulePreId(int m_id) {
 	if (mvmu_ModuleMap.count(m_id)==0) //不存在，错误
 		return 0;
 
-	int resid = mvmu_ModuleId_TreeMap[m_id]->getPreId(m_id);
+	int resid = mvmu_ModuleId_TreeMap[m_id]->getRoot()->getID() == m_id?
+		0:mvmu_ModuleId_TreeMap[m_id]->getPreId(m_id);
 
 	return resid;
 }
