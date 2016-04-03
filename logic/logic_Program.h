@@ -162,7 +162,7 @@ public:
 	int setIfBranchContent(int if_id,int branch_id,std::string con_str); //重载 string
 
 	//增删 if 分支
-	int addIfBranch(int if_id);
+	int addBranch(int if_id);
 	int delIfBranch(int if_id,int branch_id); //难点，需要删除分支中所有树
 
 	int delTreeThroughId(int id); //通过一棵树id，删除树

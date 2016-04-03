@@ -1,6 +1,6 @@
-/* 
+ï»¿/* 
 * 
-* function: logic²ã¹¤×÷¿ØÖÆÀàÊµÏÖ£¬Íê³É´ó²¿·ÖÂß¼­¹¤×÷£¬ÔÚprojectÉÏÒ»²ã
+* function: logicå±‚å·¥ä½œæ§åˆ¶ç±»å®ç°ï¼Œå®Œæˆå¤§éƒ¨åˆ†é€»è¾‘å·¥ä½œï¼Œåœ¨projectä¸Šä¸€å±‚
 * 
 * Date:2015-10-21
 * 
@@ -21,22 +21,22 @@ logic_Controller::logic_Controller() {
 }
 
 void logic_Controller::Init() {
-	//³õÊ¼»¯ Global
+	//åˆå§‹åŒ– Global
 	prjMap.clear();
 	//prjMap[0] = NULL;
 
  	curPrjId=0;
  	curProgId=0;
 
-	//³õÊ¼»¯ init Module map
+	//åˆå§‹åŒ– init Module map
 	this->initModuleMapFunc();
 
 }
 
 int logic_Controller::ctrlNewPrj() {
 
-	int max_prj_id = this->getMaxPrjId(); //»ñµÃµ±Ç°×î´ó prj µÄ ID
-	max_prj_id++; //ĞÂ prj ID
+	int max_prj_id = this->getMaxPrjId(); //è·å¾—å½“å‰æœ€å¤§ prj çš„ ID
+	max_prj_id++; //æ–° prj ID
 
 	//logic_Project * tprj = new logic_Project(max_prj_id,genNewPrjName(max_prj_id));
 	logic_Project * tprj = new logic_Project(max_prj_id,genNewPrjName(max_prj_id),this->mvmu_InitModuleMap);
@@ -45,12 +45,12 @@ int logic_Controller::ctrlNewPrj() {
 	curPrjId = max_prj_id;
 	curProgId = 1;
 
-	return curPrjId; //ĞÂ½¨prjÊó±ê½¹µã»áÔÚµ±Ç°prj
+	return curPrjId; //æ–°å»ºprjé¼ æ ‡ç„¦ç‚¹ä¼šåœ¨å½“å‰prj
 }
 
 std::string logic_Controller::genNewPrjName(int id) {
 	std::string idStr = whIntToString(id);
-	std::string res = "ÏîÄ¿";
+	std::string res = "é¡¹ç›®";
 	res.append(idStr);
 	return res;
 }
@@ -89,7 +89,7 @@ int logic_Controller::getMaxPrjId() {
 
 void logic_Controller::ctrlSetCurPrj(int id) {
 	
-	//Èç¹ûÃ»ÓĞÕâ¸ö id µÄ prj Ö±½Ó±¨´í
+	//å¦‚æœæ²¡æœ‰è¿™ä¸ª id çš„ prj ç›´æ¥æŠ¥é”™
 	assert( prjMap.count(id)>0 );
 
 	curPrjId = id;
@@ -107,12 +107,12 @@ void logic_Controller::ctrlSetCurProg(int id) {
 	curProgId = id;
 }
 
-//µÃµ½µ±Ç°µÄprjId
+//å¾—åˆ°å½“å‰çš„prjId
 int  logic_Controller::ctrlGetCurPrj()
 {
 	return curPrjId;
 }
-//ÔÚµ±Ç° prj ºÍ prog ÏÂ£¬ÕÒ×î´ó module id£¬²¢ÀÛ¼Ó
+//åœ¨å½“å‰ prj å’Œ prog ä¸‹ï¼Œæ‰¾æœ€å¤§ module idï¼Œå¹¶ç´¯åŠ 
 int logic_Controller::ctrlNewModuleAddId() {
 
 	if( !curPrjId || !curProgId )
@@ -125,7 +125,7 @@ int logic_Controller::ctrlNewModuleAddId() {
 	return res;
 }
 
-//¸ù¾İprogNameÉ¾³ı¸Ãprogram
+//æ ¹æ®progNameåˆ é™¤è¯¥program
 bool logic_Controller::ctrlDeleteProgram(const std::string progName)
 {
 	if( !curPrjId )
@@ -136,7 +136,7 @@ bool logic_Controller::ctrlDeleteProgram(const std::string progName)
 
 }
 
-//¸ù¾İprogPathµ¼Èëprogram
+//æ ¹æ®progPathå¯¼å…¥program
 bool logic_Controller::ctrlImportProgram(const std::string progPath)
 {
 	if( !curPrjId )
@@ -147,7 +147,7 @@ bool logic_Controller::ctrlImportProgram(const std::string progPath)
 	return tCurPrj->importProgram(progPath);
 }
 
-//¸ù¾İprogPath,ºÍprogramIDµ¼programÎÄ¼ş
+//æ ¹æ®progPath,å’ŒprogramIDå¯¼programæ–‡ä»¶
 bool logic_Controller::ctrlExportProgram(const std::string progPath, int progId)
 {
 	if( !curPrjId )
@@ -167,12 +167,12 @@ bool logic_Controller::ctrlExportProgram(const std::string progPath, int progId)
 
 }
 
-//·µ»ØÏîÄ¿µÄËùÓĞprogramÃû³Æ
+//è¿”å›é¡¹ç›®çš„æ‰€æœ‰programåç§°
 std::vector<std::string> logic_Controller::ctrlGetProgName(int prjID)
 {
 	std::vector<std::string> allProgName;
 
-	if (prjMap.count(prjID) <= 0)  //Èç¹ûprjID²»´æÔÚ
+	if (prjMap.count(prjID) <= 0)  //å¦‚æœprjIDä¸å­˜åœ¨
 		return allProgName;
 	else
 	{
@@ -188,12 +188,12 @@ std::vector<std::string> logic_Controller::ctrlGetProgName(int prjID)
 	}
 }
 
-//·µ»ØÏîÄ¿µÄËùÓĞ±äÁ¿£¨×Ô¶¨ÒåµÄ±äÁ¿½á¹¹£©
+//è¿”å›é¡¹ç›®çš„æ‰€æœ‰å˜é‡ï¼ˆè‡ªå®šä¹‰çš„å˜é‡ç»“æ„ï¼‰
 std::vector<VarProperty> logic_Controller::ctrlGetVariety(int prjID)
 {
 	std::vector<VarProperty> allVariety;
 
-	if (prjMap.count(prjID) <= 0)  //Èç¹ûprjID²»´æÔÚ
+	if (prjMap.count(prjID) <= 0)  //å¦‚æœprjIDä¸å­˜åœ¨
 		return allVariety;
 	else
 	{
@@ -210,7 +210,7 @@ std::vector<VarProperty> logic_Controller::ctrlGetVariety(int prjID)
 	}
 }
 
-//copyÒ»¸öprogram£¬²¢ÇÒ·µ»ØĞÂµÄprogram name
+//copyä¸€ä¸ªprogramï¼Œå¹¶ä¸”è¿”å›æ–°çš„program name
 std::string logic_Controller::ctrlCopyProgram(const std::string progName)
 {
 	if( !curPrjId )
@@ -221,7 +221,7 @@ std::string logic_Controller::ctrlCopyProgram(const std::string progName)
 }
 
 
-//ºó½ÓÄ£¿é£¬´«ÈëÇ°Çıid£¬Èç¹ûÇ°ÇıÎª0£¬´ú±íĞÂ½¨Ê÷
+//åæ¥æ¨¡å—ï¼Œä¼ å…¥å‰é©±idï¼Œå¦‚æœå‰é©±ä¸º0ï¼Œä»£è¡¨æ–°å»ºæ ‘
 bool logic_Controller::ctrlAppendModule(int pre_id,int m_type) {
 
 	if( !curPrjId || !curProgId )
@@ -238,13 +238,13 @@ bool logic_Controller::ctrlAppendModule(int pre_id,int m_type) {
 	return flag;
 }
 
-//Ç°²åÄ£¿é£¬²»ÔÊĞíĞÂ½¨Ê÷Ê±µ÷ÓÃ
+//å‰æ’æ¨¡å—ï¼Œä¸å…è®¸æ–°å»ºæ ‘æ—¶è°ƒç”¨
 bool logic_Controller::ctrlFrontInsModule(int post_id,int m_type) {
 
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	assert(post_id); //post_id ²»ÄÜÎª 0
+	assert(post_id); //post_id ä¸èƒ½ä¸º 0
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -262,7 +262,7 @@ bool logic_Controller::ctrlAddLeafModule(int pre_id,int m_id) {
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	assert(pre_id); //pre_id ²»ÄÜÎª 0
+	assert(pre_id); //pre_id ä¸èƒ½ä¸º 0
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -273,13 +273,13 @@ bool logic_Controller::ctrlAddLeafModule(int pre_id,int m_id) {
 
 }
 
-// get ËùÓĞprj map¡¾·½±ãxml³Ö¾Ã»¯¡¿
+// get æ‰€æœ‰prj mapã€æ–¹ä¾¿xmlæŒä¹…åŒ–ã€‘
 std::map <int ,logic_Project* > logic_Controller::getAllPrj() {
 
 	return prjMap;
 }
 
-//get µ±Ç°prj
+//get å½“å‰prj
 int logic_Controller::getCurPrjId()
 {
 	return curPrjId;
@@ -287,7 +287,7 @@ int logic_Controller::getCurPrjId()
 
 
 
-//É¾³ıÄ£¿é
+//åˆ é™¤æ¨¡å—
 bool logic_Controller::ctrlDelModule(int m_id) {
 
 	if( !curPrjId || !curProgId )
@@ -299,7 +299,7 @@ bool logic_Controller::ctrlDelModule(int m_id) {
 	return tCurProg->delModule(m_id);
 }
 
-//²éÑ¯Ä£¿éÇ°Çıid
+//æŸ¥è¯¢æ¨¡å—å‰é©±id
 int logic_Controller::ctrlGetPreId(int m_id) {
 
 	if( !curPrjId || !curProgId )
@@ -311,7 +311,7 @@ int logic_Controller::ctrlGetPreId(int m_id) {
 	return tCurProg->getModulePreId(m_id);
 }
 
-//²éÑ¯Ä£¿éºó¼Ìid±í
+//æŸ¥è¯¢æ¨¡å—åç»§idè¡¨
 std::vector<int > logic_Controller::ctrlGetPostId(int m_id) {
 
 	if( !curPrjId || !curProgId )
@@ -324,7 +324,7 @@ std::vector<int > logic_Controller::ctrlGetPostId(int m_id) {
 
 }
 
-//²éÑ¯m_idµÄËùÔÚÊ÷µÄ¸ù½ÚµãµÄÄ£¿éid
+//æŸ¥è¯¢m_idçš„æ‰€åœ¨æ ‘çš„æ ¹èŠ‚ç‚¹çš„æ¨¡å—id
 int logic_Controller::ctrlGetRootModuleId(int m_id)
 {
 	if( !curPrjId || !curProgId )
@@ -336,7 +336,7 @@ int logic_Controller::ctrlGetRootModuleId(int m_id)
 	return tCurProg->getRootModuleId(m_id);
 }
 
-//²éÑ¯Á½¸ömoduleÊÇ·ñÔÚÍ¬Ò»¿ÅÊ÷ÄÚ
+//æŸ¥è¯¢ä¸¤ä¸ªmoduleæ˜¯å¦åœ¨åŒä¸€é¢—æ ‘å†…
 bool logic_Controller::ctrlIsInSameTree(int cur_m_id, int other_m_id){
 
 	if( !curPrjId || !curProgId )
@@ -348,7 +348,7 @@ bool logic_Controller::ctrlIsInSameTree(int cur_m_id, int other_m_id){
 	return tCurProg->IsInSameTree(cur_m_id, other_m_id);
 }
 
-//²éÑ¯forÄ£¿éÄÚ²¿µÄºó¼ÌÄ£¿é
+//æŸ¥è¯¢foræ¨¡å—å†…éƒ¨çš„åç»§æ¨¡å—
 std::vector<int > logic_Controller::ctrlGetForPostId(int for_m_id)
 {
 	if( !curPrjId || !curProgId )
@@ -360,7 +360,7 @@ std::vector<int > logic_Controller::ctrlGetForPostId(int for_m_id)
 	return tCurProg->getForModuleRootPostId(for_m_id);
 }
 
-//²éÑ¯ifÄ£¿éµÄÄ³¸öbranchµÄËùÓĞºó¼Ì½Úµã
+//æŸ¥è¯¢ifæ¨¡å—çš„æŸä¸ªbranchçš„æ‰€æœ‰åç»§èŠ‚ç‚¹
 std::vector<int > logic_Controller::ctrlGetIfBranchPostId(int if_id, int global_branch_id)
 {
 	if( !curPrjId || !curProgId )
@@ -386,7 +386,7 @@ int logic_Controller::ctrlGetForEndPreId(int for_id)
 	return tCurProg->getForModuleEndPreId(for_id);
 }
 
-//²éÑ¯ifÄ£¿éµÄui_branch_idµÄ-2½ÚµãÇ°Çı
+//æŸ¥è¯¢ifæ¨¡å—çš„ui_branch_idçš„-2èŠ‚ç‚¹å‰é©±
 int	logic_Controller::ctrlGetIfEndPreId(int if_id, int ui_branch_id)
 {
 	if( !curPrjId || !curProgId )
@@ -518,10 +518,10 @@ int logic_Controller::ctrlFrontInsSingMove(int cur_m_id,int post_m_id) {
 		assert(false);
 
 	if ( post_m_id <= 0 ) {
-		return -1; //²åÈëµã id ´íÎó
+		return -1; //æ’å…¥ç‚¹ id é”™è¯¯
 	}
 
-	//Ç°²å move
+	//å‰æ’ move
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
@@ -533,8 +533,8 @@ int logic_Controller::ctrlBackInsSingMove(int cur_m_id,int pre_m_id) {
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	//ºó²å move Ààappend
-	//////!!!!! pre_m_id ¿ÉÄÜÎª0£¬¼´ÒÆµ½Ò»¿ÃĞÂÊ÷ÉÏ
+	//åæ’ move ç±»append
+	//////!!!!! pre_m_id å¯èƒ½ä¸º0ï¼Œå³ç§»åˆ°ä¸€æ£µæ–°æ ‘ä¸Š
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -542,31 +542,31 @@ int logic_Controller::ctrlBackInsSingMove(int cur_m_id,int pre_m_id) {
 	return tCurProg->backInsSingMove(cur_m_id,pre_m_id);
 }
 
-//´ø×æÏÈÇ°²å move
+//å¸¦ç¥–å…ˆå‰æ’ move
 int logic_Controller::ctrlFrontInsMultiMove(int cur_m_id,int post_m_id) {
 
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	if ( post_m_id < 0 ) { //¿ÉÒÔÎª0
-		assert(false); //²åÈëµã id ´íÎó
+	if ( post_m_id < 0 ) { //å¯ä»¥ä¸º0
+		assert(false); //æ’å…¥ç‚¹ id é”™è¯¯
 	}
 
-	//Ç°²å move
+	//å‰æ’ move
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
 	return tCurProg->frontInsMultiMove(cur_m_id,post_m_id);
 }
 
-//´øº¢×Óºó²å move
+//å¸¦å­©å­åæ’ move
 int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	//ºó²å move Ààappend
-	//////!!!!! pre_m_id ¿ÉÄÜÎª0£¬¼´£¨´øº¢×Ó£©ÒÆµ½Ò»¿ÃĞÂÊ÷ÉÏ
+	//åæ’ move ç±»append
+	//////!!!!! pre_m_id å¯èƒ½ä¸º0ï¼Œå³ï¼ˆå¸¦å­©å­ï¼‰ç§»åˆ°ä¸€æ£µæ–°æ ‘ä¸Š
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
@@ -574,7 +574,7 @@ int logic_Controller::ctrlBackInsMultiMove(int cur_m_id,int pre_m_id) {
 	return tCurProg->backInsMultiMove(cur_m_id,pre_m_id);
 }
 
-//ĞÂÔöº¢×Ómove
+//æ–°å¢å­©å­move
 int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
 
 	if( !curPrjId || !curProgId )
@@ -588,9 +588,9 @@ int logic_Controller::ctrlAddLeafMove(int cur_m_id,int pre_m_id) {
 
 
 ///
-/// \brief forºÍif´¦Àí
-///        ×¢Òâ£ºui_branch_idĞèÒªÔÚÂß¼­²ãºÏ³ÉºÍ·Ö¿ª
-/// \para ´«Èë¶¼ÊÇui_branch_id£¬µ«ÊÇÊäÈë¸øÏÂÒ»¼¶º¯ÊıµÄÊÇÕıÈ·µÄbranch_id
+/// \brief forå’Œifå¤„ç†
+///        æ³¨æ„ï¼šui_branch_idéœ€è¦åœ¨é€»è¾‘å±‚åˆæˆå’Œåˆ†å¼€
+/// \para ä¼ å…¥éƒ½æ˜¯ui_branch_idï¼Œä½†æ˜¯è¾“å…¥ç»™ä¸‹ä¸€çº§å‡½æ•°çš„æ˜¯æ­£ç¡®çš„branch_id
 ///
 
 //insert into for
@@ -599,16 +599,16 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	///µ÷ÓÃ´Ëº¯ÊıµÄ²ÎÊıÖĞ´«¹ıÀ´µÄ m_id ¼´Ç°Çıid£¬ÇÒ±ØÈ»Îª0
+	///è°ƒç”¨æ­¤å‡½æ•°çš„å‚æ•°ä¸­ä¼ è¿‡æ¥çš„ m_id å³å‰é©±idï¼Œä¸”å¿…ç„¶ä¸º0
 	if ( pre_id > 0 ) {
 
-		//Îª0£ºĞÂ·ÅÈëfor
-		//Îª-1£ºĞÂ²åÈëactiveTree
+		//ä¸º0ï¼šæ–°æ”¾å…¥for
+		//ä¸º-1ï¼šæ–°æ’å…¥activeTree
 		assert(false);
 		return false;
 	}
 
-	if ( false != isFI) //±ØĞë²»ÊÇÇ°²å£¨±ØÊÇºó²å£©£¬·ñÔò´íÎó
+	if ( false != isFI) //å¿…é¡»ä¸æ˜¯å‰æ’ï¼ˆå¿…æ˜¯åæ’ï¼‰ï¼Œå¦åˆ™é”™è¯¯
 		return false;
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
@@ -617,9 +617,9 @@ bool logic_Controller::ctrlInsertModule_For(int pre_id,bool isFI,int m_type,int 
 	int max_module_id = tCurProg->getMaxModuleId();
 	max_module_id++;
 
-	bool flag = tCurProg->insertModuleIntoFor(max_module_id,pre_id,m_type,for_id); //¾ßÌåÔÚÏÂÒ»²ã½«Ê÷id·ÅÈëfor
+	bool flag = tCurProg->insertModuleIntoFor(max_module_id,pre_id,m_type,for_id); //å…·ä½“åœ¨ä¸‹ä¸€å±‚å°†æ ‘idæ”¾å…¥for
 
-	return flag; //·µ»Ø³É¹¦Óë·ñ±êÖ¾
+	return flag; //è¿”å›æˆåŠŸä¸å¦æ ‡å¿—
 }
 
 //insert into if
@@ -628,11 +628,11 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 	if( !curPrjId || !curProgId )
 		assert(false);
 
-	///µ÷ÓÃ´Ëº¯ÊıµÄ²ÎÊıÖĞ´«¹ıÀ´µÄ m_id ¼´Ç°Çıid£¬ÇÒ±ØÈ»Îª0
+	///è°ƒç”¨æ­¤å‡½æ•°çš„å‚æ•°ä¸­ä¼ è¿‡æ¥çš„ m_id å³å‰é©±idï¼Œä¸”å¿…ç„¶ä¸º0
 	if ( 0 != pre_id )
 		return false;
 
-	if ( false != isFI) //±ØĞë²»ÊÇÇ°²å£¬·ñÔò´íÎó
+	if ( false != isFI) //å¿…é¡»ä¸æ˜¯å‰æ’ï¼Œå¦åˆ™é”™è¯¯
 		return false;
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
@@ -642,12 +642,12 @@ bool logic_Controller::ctrlInsertModule_If(int pre_id,bool isFI,int m_type,int i
 	max_module_id++;
 
 	int branch_id = this->decryptBranchId(ui_branch_id);
-	bool flag = tCurProg->insertModuleIntoIf(max_module_id,pre_id,m_type,if_id,branch_id); //¾ßÌåÔÚÏÂÒ»²ã½«Ê÷id·ÅÈëif
+	bool flag = tCurProg->insertModuleIntoIf(max_module_id,pre_id,m_type,if_id,branch_id); //å…·ä½“åœ¨ä¸‹ä¸€å±‚å°†æ ‘idæ”¾å…¥if
 
-	return flag; //·µ»Ø³É¹¦Óë·ñ±êÖ¾
+	return flag; //è¿”å›æˆåŠŸä¸å¦æ ‡å¿—
 }
 
-// get for µ±Ç°¼¤»îÊ÷
+// get for å½“å‰æ¿€æ´»æ ‘
 int logic_Controller::ctrlGetForActiveTree(int for_id) {
 
 	if( !curPrjId || !curProgId )
@@ -672,7 +672,7 @@ int logic_Controller::ctrlGetIfActiveTree(int if_id,int ui_branch_id) {
 	return tCurProg->getIfActiveTree(if_id,branch_id);
 }
 
-// set for µ±Ç°¼¤»îÊ÷
+// set for å½“å‰æ¿€æ´»æ ‘
 void logic_Controller::ctrlSetForActiveTree(int for_id,int tree_id) {
 
 	if( !curPrjId || !curProgId )
@@ -697,7 +697,7 @@ void logic_Controller::ctrlSetIfActiveTree(int if_id,int ui_branch_id,int tree_i
 	tCurProg->setIfActiveTree(if_id,branch_id,tree_id);
 }
 
-//get Ö¸¶¨ branchµÄint content
+//get æŒ‡å®š branchçš„int content
 int logic_Controller::ctrlGetIfBranchContentInt(int if_id,int ui_branch_id) {
 
 	if( !curPrjId || !curProgId )
@@ -735,7 +735,7 @@ int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,int con_
 	return tCurProg->setIfBranchContent(if_id,branch_id,con_int);
 }
 
-//ÖØÔØ string
+//é‡è½½ string
 int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::string con_str) {
 
 	if( !curPrjId || !curProgId )
@@ -748,22 +748,42 @@ int logic_Controller::ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::str
 	return tCurProg->setIfBranchContent(if_id,branch_id,con_str);
 }
 
-//ÔöÉ¾ if ·ÖÖ§
-int logic_Controller::ctrlAddIfBranch(int if_id) {
+//å¢åˆ  if åˆ†æ”¯
+int logic_Controller::ctrlAddBranch(int module_id) {
 
-	if( !curPrjId || !curProgId )
+	if (!curPrjId || !curProgId)
 		assert(false);
 
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	int newBranchId = tCurProg->addIfBranch(if_id);
-	int ui_branch_id = encryptBranchId(if_id,newBranchId);
-
-	return ui_branch_id;
+	//Ã…ÃÂ¶ÃÃŠÃ‡forÂ»Â¹ÃŠÃ‡if
+	auto mouduleMap = tCurProg->getModuleMap();
+	auto module = mouduleMap[module_id];
+	assert(module != NULL);
+	auto type = module->getModuleType();
+	if (2003 == type)
+	{
+		return module_id;
+	}
+	else
+	{
+		int newBranchId = tCurProg->addBranch(module_id);
+		int ui_branch_id;
+		if (newBranchId <= 0)  //Ã‰ÃºÂ³Ã‰ÃŠÂ§Â°Ãœ
+		{
+			assert(false);
+			return newBranchId;
+		}
+		else
+		{
+			ui_branch_id = encryptBranchId(module_id, newBranchId);
+		}
+		return ui_branch_id;
+	}
 }
 
-//ÄÑµã£¬ĞèÒªÉ¾³ı·ÖÖ§ÖĞËùÓĞÊ÷
+//éš¾ç‚¹ï¼Œéœ€è¦åˆ é™¤åˆ†æ”¯ä¸­æ‰€æœ‰æ ‘
 int logic_Controller::ctrlDelIfBranch(int if_id,int ui_branch_id) {
 
 	if( !curPrjId || !curProgId )
@@ -776,7 +796,7 @@ int logic_Controller::ctrlDelIfBranch(int if_id,int ui_branch_id) {
 	return tCurProg->delIfBranch(if_id,branch_id);
 }
 
-/// \brief Ä£¿é²ÎÊıÁ¬Ïß
+/// \brief æ¨¡å—å‚æ•°è¿çº¿
 int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
 
 	if( !curPrjId || !curProgId )
@@ -788,7 +808,7 @@ int logic_Controller::ctrlParaConnect(int out_m_id,int out_para_id,int in_m_id,i
 	return tCurProg->paraConnect(out_m_id,out_para_id,in_m_id,in_para_id);
 }
 
-//È¡ÏûÁ¬Ïß£¬¿ÉÍ¨¹ı isOut À´ÓÃoutModule»òÕßinModuleÉ¾³ı
+//å–æ¶ˆè¿çº¿ï¼Œå¯é€šè¿‡ isOut æ¥ç”¨outModuleæˆ–è€…inModuleåˆ é™¤
 void logic_Controller::ctrlOutParaDisconnect(int out_m_id,int out_para_id) {
 
 	if( !curPrjId || !curProgId )
@@ -812,14 +832,14 @@ void logic_Controller::ctrlInParaDisconnect(int in_m_id,int in_para_id) {
 }
 
 ///
-/// \brief ¼Ó½âÃÜ ui_branch_id
+/// \brief åŠ è§£å¯† ui_branch_id
 ///
 
-//¼ÓÃÜ ·µ»Ø¼ÓÃÜºóid
+//åŠ å¯† è¿”å›åŠ å¯†åid
 int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 
-	//°ÑÒ»¸ö32Î» unsigned ÕûÊı·Ö³É£º
-	///¸ß16Î»×ömoduleId£¬µÍ15Î»×öbranchId£¬·ûºÅÎ»±£Áô£¨²»ÔÊĞíÎª¸º£©
+	//æŠŠä¸€ä¸ª32ä½ unsigned æ•´æ•°åˆ†æˆï¼š
+	///é«˜16ä½åšmoduleIdï¼Œä½15ä½åšbranchIdï¼Œç¬¦å·ä½ä¿ç•™ï¼ˆä¸å…è®¸ä¸ºè´Ÿï¼‰
 	int ui_branch_id = if_id<<15;
 	ui_branch_id += branch_id;
 
@@ -828,39 +848,39 @@ int logic_Controller::encryptBranchId(int if_id,int branch_id) {
 	return ui_branch_id;
 }
 
-//½âÃÜ
+//è§£å¯†
 void logic_Controller::decryptBranchId(int ui_branch_id,int &if_id,int &branch_id) {
 
 	assert( ui_branch_id > 0 );
 
 	if( ui_branch_id < 0x7FFF )
-		return ; //Èç¹û²¢Ã»ÓĞ¸ßÎ»
+		return ; //å¦‚æœå¹¶æ²¡æœ‰é«˜ä½
 
-	//¸ß16Î»ÏÈ·Ö³öÀ´
+	//é«˜16ä½å…ˆåˆ†å‡ºæ¥
 	if_id = ui_branch_id >> 15;
-	branch_id = ui_branch_id & 0x7FFF; //Ä¨È¥¸ßÎ»
+	branch_id = ui_branch_id & 0x7FFF; //æŠ¹å»é«˜ä½
 }
 
-//½âÃÜ
+//è§£å¯†
 int logic_Controller::decryptBranchId(int ui_branch_id) {
 
 	assert( ui_branch_id > 0 );
 
 	if( ui_branch_id < 0x7FFF )
-		return ui_branch_id; //Èç¹û²¢Ã»ÓĞ¸ßÎ»
+		return ui_branch_id; //å¦‚æœå¹¶æ²¡æœ‰é«˜ä½
 
-	int branch_id = ui_branch_id & 0x7FFF; //Ä¨È¥¸ßÎ»
+	int branch_id = ui_branch_id & 0x7FFF; //æŠ¹å»é«˜ä½
 	return branch_id;
 }
 
 ///
-/// \brief forÓëifµÄmove²Ù×÷
+/// \brief forä¸ifçš„moveæ“ä½œ
 ///
 /// \para move_type
-///       case 0:µ¥Ä£¿éÖ±½Óºó²å move£¨¼´Ò»¸öÄ£¿é´ÓÒ»¿ÃÊ÷ÒÆ¶¯µ½ÁíÒ»¿ÃÊ÷£©
-///       case 1:µ¥Ä£¿éÖ±½ÓÇ°²å
-///       case 2:´øº¢×Óºó²å move£¨ºóÓĞÏß£¬Ö»ÄÜ½ÓÔÚÊ÷µÄÄ³¸öÒ¶×Ó½Úµã£©
-///       case 3:´øº¢×ÓÇ°²å move£¨Ç°ÓĞÏß£¬Ö»ÄÜ½ÓÔÚÒ»¿ÃÊ÷root´¦£¬Ô­root²»ÄÜÎª¿ªÊ¼Ä£¿é£©
+///       case 0:å•æ¨¡å—ç›´æ¥åæ’ moveï¼ˆå³ä¸€ä¸ªæ¨¡å—ä»ä¸€æ£µæ ‘ç§»åŠ¨åˆ°å¦ä¸€æ£µæ ‘ï¼‰
+///       case 1:å•æ¨¡å—ç›´æ¥å‰æ’
+///       case 2:å¸¦å­©å­åæ’ moveï¼ˆåæœ‰çº¿ï¼Œåªèƒ½æ¥åœ¨æ ‘çš„æŸä¸ªå¶å­èŠ‚ç‚¹ï¼‰
+///       case 3:å¸¦å­©å­å‰æ’ moveï¼ˆå‰æœ‰çº¿ï¼Œåªèƒ½æ¥åœ¨ä¸€æ£µæ ‘rootå¤„ï¼ŒåŸrootä¸èƒ½ä¸ºå¼€å§‹æ¨¡å—ï¼‰
 int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_type,int for_id) {
 
 	if( !curPrjId || !curProgId )
@@ -871,31 +891,31 @@ int logic_Controller::ctrlMoveModuleFor(int cur_m_id,int other_m_id,int move_typ
 
 	if( -1 == other_m_id ) {
 
-		//Èç¹ûÊÇ½Óµ½activeTreeµÄºóÃæ
-		assert( 0 == move_type || 4 == move_type ); //±ØĞëÎª0
+		//å¦‚æœæ˜¯æ¥åˆ°activeTreeçš„åé¢
+		assert( 0 == move_type || 4 == move_type ); //å¿…é¡»ä¸º0
 
 		if( 0 == move_type )
 			return tCurProg->appendActiveTreeMoveFor(cur_m_id,for_id);
 
-		else if( 4 == move_type ) //Ö±½ÓÌíÒ»¸öÒ¶×Ó
+		else if( 4 == move_type ) //ç›´æ¥æ·»ä¸€ä¸ªå¶å­
 			return tCurProg->addLeafActiveTreeMoveFor(cur_m_id,for_id);
 
 	}else {
 
-		//Èç¹ûÊÇÆÕÍ¨move
-		if ( 0 == move_type) //µ¥Ä£¿éºó²å move
+		//å¦‚æœæ˜¯æ™®é€šmove
+		if ( 0 == move_type) //å•æ¨¡å—åæ’ move
 			return tCurProg->backInsSingMoveFor(cur_m_id,other_m_id,for_id);
 
-		else if( 1 == move_type) //µ¥Ä£¿éÇ°²å move
+		else if( 1 == move_type) //å•æ¨¡å—å‰æ’ move
 			return tCurProg->frontInsSingMoveFor(cur_m_id,other_m_id,for_id);
 
-		else if( 2 == move_type) //´øº¢×Óºó²å move
+		else if( 2 == move_type) //å¸¦å­©å­åæ’ move
 			return tCurProg->backInsMultiMoveFor(cur_m_id,other_m_id,for_id);
 
-		else if( 3 == move_type) //´ø×æÏÈÇ°²å move
+		else if( 3 == move_type) //å¸¦ç¥–å…ˆå‰æ’ move
 			return tCurProg->frontInsMultiMoveFor(cur_m_id,other_m_id,for_id);
 
-		else if( 4 == move_type ) //ĞÂÔöÒ¶×Ó move£¨Ö±½ÓÁ¬Ïß£©
+		else if( 4 == move_type ) //æ–°å¢å¶å­ moveï¼ˆç›´æ¥è¿çº¿ï¼‰
 			return tCurProg->addLeafMoveFor(cur_m_id,other_m_id,for_id);
 	}
 }
@@ -911,48 +931,48 @@ int logic_Controller::ctrlMoveModuleIf(int cur_m_id,int other_m_id,int move_type
 	int branch_id = this->decryptBranchId(ui_branch_id);
 	if( -1 == other_m_id ) {
 
-		//Èç¹ûÊÇ½Óµ½activeTreeµÄºóÃæ
-		assert( 0 == move_type || 4 == move_type ); //±ØĞëÎª0
+		//å¦‚æœæ˜¯æ¥åˆ°activeTreeçš„åé¢
+		assert( 0 == move_type || 4 == move_type ); //å¿…é¡»ä¸º0
 
 		if( 0 == move_type )
 			return tCurProg->appendActiveTreeMoveIf(cur_m_id,if_id,branch_id);
 
-		else if( 4 == move_type ) //Ö±½ÓÌíÒ»¸öÒ¶×Ó
+		else if( 4 == move_type ) //ç›´æ¥æ·»ä¸€ä¸ªå¶å­
 			return tCurProg->addLeafActiveTreeMoveIf(cur_m_id,if_id,branch_id);
 
 	}else {
 
-		//Èç¹ûÊÇÆÕÍ¨move
-		if ( 0 == move_type) //µ¥Ä£¿éºó²å move
+		//å¦‚æœæ˜¯æ™®é€šmove
+		if ( 0 == move_type) //å•æ¨¡å—åæ’ move
 			return tCurProg->backInsSingMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
-		else if( 1 == move_type) //µ¥Ä£¿éÇ°²å move
+		else if( 1 == move_type) //å•æ¨¡å—å‰æ’ move
 			return tCurProg->frontInsSingMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
-		else if( 2 == move_type) //´øº¢×Óºó²å move
+		else if( 2 == move_type) //å¸¦å­©å­åæ’ move
 			return tCurProg->backInsMultiMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
-		else if( 3 == move_type) //´ø×æÏÈÇ°²å move
+		else if( 3 == move_type) //å¸¦ç¥–å…ˆå‰æ’ move
 			return tCurProg->frontInsMultiMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 
-		else if( 4 == move_type ) //ĞÂÔöÒ¶×Ó move£¨Ö±½ÓÁ¬Ïß£©
+		else if( 4 == move_type ) //æ–°å¢å¶å­ moveï¼ˆç›´æ¥è¿çº¿ï¼‰
 			return tCurProg->addLeafMoveIf(cur_m_id,other_m_id,if_id,branch_id);
 	}
 }
 
-///init module mapº¯Êı
+///init module mapå‡½æ•°
 void logic_Controller::initModuleMapFunc() {
 
-	//´Ë´¦Ó¦¶Á³Ö¾Ã»¯xml£¬ÌîÂúÕû¸ö×îÔ­Ê¼µÄ mvmu_InitModuleMap
+	//æ­¤å¤„åº”è¯»æŒä¹…åŒ–xmlï¼Œå¡«æ»¡æ•´ä¸ªæœ€åŸå§‹çš„ mvmu_InitModuleMap
 
 	logic_XmlIO io;
 	io.IO_Initial(this->mvmu_InitModuleMap);
 }
 
 ///
-/// \brief »ñÈ¡¸ù½Úµã
-/// \para ÈİÆ÷±àºÅ£¬Èç¹ûÊÇ0£¬»ñÈ¡×îÍâ²ãroot¼¯ºÏ
-/// \return ¸ù½Úµã¼¯ºÏ
+/// \brief è·å–æ ¹èŠ‚ç‚¹
+/// \para å®¹å™¨ç¼–å·ï¼Œå¦‚æœæ˜¯0ï¼Œè·å–æœ€å¤–å±‚rooté›†åˆ
+/// \return æ ¹èŠ‚ç‚¹é›†åˆ
 ///
 std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 
@@ -962,7 +982,7 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 	logic_Project * tCurPrj = prjMap[curPrjId];
 	logic_Program * tCurProg = tCurPrj->getProgram(curProgId);
 
-	if( 0 == containerId ) //´ó»­²¼
+	if( 0 == containerId ) //å¤§ç”»å¸ƒ
 		return tCurProg->findRootsInContainer();
 	else if( containerId < 0x7FFF ) //for
 		return tCurProg->findRootsInContainer(containerId);
@@ -975,7 +995,7 @@ std::vector<int > logic_Controller::ctrlFindRootsInContainer(int containerId) {
 	}
 }
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!³Ö¾Ã»¯²¿·Ö!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!æŒä¹…åŒ–éƒ¨åˆ†!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool logic_Controller::ctrlSaveCurProject()
 {
 	if( !curPrjId || !curProgId )
@@ -986,7 +1006,7 @@ bool logic_Controller::ctrlSaveCurProject()
 
 	if(fileName == "")
 	{
-		//µ÷ÓÃ´íÎó£¬ÎŞ·¨¶Ô¿ÕµØÖ·´æ´¢
+		//è°ƒç”¨é”™è¯¯ï¼Œæ— æ³•å¯¹ç©ºåœ°å€å­˜å‚¨
 		assert(false);
 		return false;
 	}
@@ -1067,7 +1087,7 @@ void logic_Controller::debug_displayTreeUtility(logic_TreeNode* node)
 		while (!nodeQueue1.empty())
 		{
 			node = nodeQueue1.front();
-			std::cout << node->getID() << "£¨";
+			std::cout << node->getID() << "ï¼ˆ";
 			nodeQueue1.pop();
 			auto children = node->mvvu_Children;
 			if (!children.empty())
@@ -1087,14 +1107,14 @@ void logic_Controller::debug_displayTreeUtility(logic_TreeNode* node)
 				}
 				
 			}
-			std::cout << "£©   ";
+			std::cout << "ï¼‰   ";
 		}
 		if(nodeQueue1.empty())
 			std::cout << std::endl;
 		while(!nodeQueue2.empty())
 		{
 			node = nodeQueue2.front();
-			std::cout << node->getID() << "£¨";
+			std::cout << node->getID() << "ï¼ˆ";
 			nodeQueue2.pop();
 			auto children = node->mvvu_Children;
 			if (!children.empty())
@@ -1114,7 +1134,7 @@ void logic_Controller::debug_displayTreeUtility(logic_TreeNode* node)
 				}
 
 			}
-			std::cout << "£©   ";
+			std::cout << "ï¼‰   ";
 		}
 		if(nodeQueue2.empty())
 			std::cout << std::endl;
@@ -1122,10 +1142,10 @@ void logic_Controller::debug_displayTreeUtility(logic_TreeNode* node)
 }
 
 ///
-/// \brief ÎÒµÄÄ£¿é
+/// \brief æˆ‘çš„æ¨¡å—
 ///
-//session1£ºÊÇ·ñ¿ÉÒÔ´´½¨ÎÒµÄÄ£¿é£¬Ç°ºó¶ËµÚÒ»´Î»á»°
-//½Ó¿Ú´«idÁĞ±í£¬·µ»ØÊÇ·ñ¿É´´½¨
+//session1ï¼šæ˜¯å¦å¯ä»¥åˆ›å»ºæˆ‘çš„æ¨¡å—ï¼Œå‰åç«¯ç¬¬ä¸€æ¬¡ä¼šè¯
+//æ¥å£ä¼ idåˆ—è¡¨ï¼Œè¿”å›æ˜¯å¦å¯åˆ›å»º
 int logic_Controller::ctrlCanMyBlocks(std::vector<int > ids) {
 
 	if( !curPrjId || !curProgId )
@@ -1139,7 +1159,7 @@ int logic_Controller::ctrlCanMyBlocks(std::vector<int > ids) {
 	return tCurProg->canMyBlocks(ids);
 }
 
-// get\setµ±Ç°programÃû³Æ
+// get\setå½“å‰programåç§°
 std::string logic_Controller::ctrlGetCurProgName() {
 
 	if( !curPrjId || !curProgId )
@@ -1162,7 +1182,7 @@ void logic_Controller::ctrlSetCurProgName(std::string name) {
 	tCurProg->setProgramName(name);
 }
 
-// get\setµ±Ç°ÏîÄ¿Ãû³Æ
+// get\setå½“å‰é¡¹ç›®åç§°
 std::string logic_Controller::ctrlGetCurPrjName() {
 
 	if( !curPrjId || !curProgId )
@@ -1181,7 +1201,7 @@ void logic_Controller::ctrlSetCurPrjName(std::string name) {
 	tCurPrj->setPrjName(name);
 }
 
-//µÃµ½´´½¨ÎÒµÄÄ£¿éÍâ½Ó²ÎÊıÁĞ±í
+//å¾—åˆ°åˆ›å»ºæˆ‘çš„æ¨¡å—å¤–æ¥å‚æ•°åˆ—è¡¨
 std::vector<logic_BasicPara > logic_Controller::ctrlGetMyBlocksPara(std::vector<int > ids) {
 
 	if( !curPrjId || !curProgId )

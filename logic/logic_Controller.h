@@ -105,7 +105,7 @@ public:
 	int ctrlSetIfBranchContent(int if_id,int ui_branch_id,std::string con_str); //重载 string
 
 	//增删 if 分支
-	int ctrlAddIfBranch(int if_id);
+	int ctrlAddBranch(int module_id);
 	int ctrlDelIfBranch(int if_id,int ui_branch_id); //难点，需要删除分支中所有树
 
 	/// \brief 模块参数连线

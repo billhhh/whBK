@@ -1,6 +1,6 @@
-/* 
+ï»¿/* 
 * 
-* function: Âß¼­²ãÉ­ÁÖ×éÖ¯½á¹¹
+* function: é€»è¾‘å±‚æ£®æ—ç»„ç»‡ç»“æ„
 * 
 * Date:2015-09-02
 * 
@@ -29,7 +29,7 @@ using namespace std;
 logic_Program::logic_Program(int id,std::string prog_name)
 	:mvs_ProgId(id),mvs_ProgName(prog_name)
 {
-	Init(); //³õÊ¼»¯program
+	Init(); //åˆå§‹åŒ–program
 
 }
 
@@ -44,7 +44,7 @@ logic_Program::~logic_Program()
 	prog_Destroy();
 }
 
-//³ıÁËid,prgname,ÆäËûÄÚÈİ¶¼¿½±´
+//é™¤äº†id,prgname,å…¶ä»–å†…å®¹éƒ½æ‹·è´
 logic_Program* logic_Program::copyPrg(logic_Program* newProgram)
 {
 	auto treeMap = getTreeMap();
@@ -69,13 +69,13 @@ logic_Program* logic_Program::copyPrg(logic_Program* newProgram)
 
 }
 
-//ÆÕÍ¨³õÊ¼»¯£¨¸É¾»µÄprogram£©
+//æ™®é€šåˆå§‹åŒ–ï¼ˆå¹²å‡€çš„programï¼‰
 void logic_Program::Init()
 {
 	mvmu_TreeMap.clear();
 	//mvmu_TreeMap[0] = NULL;
 	mvmu_ModuleMap.clear();
-	//mvmu_ModuleMap[0] = NULL;  //Module ĞèÒª getMax
+	//mvmu_ModuleMap[0] = NULL;  //Module éœ€è¦ getMax
 	mvmu_ModuleId_TreeMap.clear();
 	//mvmu_ModuleId_TreeMap[0] = NULL;
 
@@ -85,10 +85,10 @@ void logic_Program::Init()
 	mvmi_TreeId_For_IfIdMap.clear();
 	//mvmi_TreeId_For_IfIdMap[0] = NULL;
 
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ºóÌ¨²»Òª×Ô¼ºÉú³É2001£¬ÓÉÇ°¶ËÇı¶¯
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!åå°ä¸è¦è‡ªå·±ç”Ÿæˆ2001ï¼Œç”±å‰ç«¯é©±åŠ¨
 	//add_Tree(1);
 
-	////½¨Á¢module±íÏî£¬½öÒ»¸ö¿ªÊ¼Ä£¿é
+	////å»ºç«‹moduleè¡¨é¡¹ï¼Œä»…ä¸€ä¸ªå¼€å§‹æ¨¡å—
 	//logic_BasicModule *bm = new logic_BasicModule();
 	//mvmu_ModuleMap.insert(pair<_IdDataType , logic_BasicModule *>(bm->mvi_ModuleID,bm));
 
@@ -97,35 +97,35 @@ void logic_Program::Init()
 
 void logic_Program::prog_Destroy()
 {
-	cout<<"½øÈëprog_Destroy"<<endl;
+	cout<<"è¿›å…¥prog_Destroy"<<endl;
 
 
-		//Çå¿ÕÉ­ÁÖ
+		//æ¸…ç©ºæ£®æ—
 	for(map<_IdDataType , logic_Tree *>::iterator it = mvmu_TreeMap.begin();it != mvmu_TreeMap.end(); ++it)
 	{
 		logic_Tree *tmpT = it->second;
-		//tmpT->Destroy(tmpT->getRoot()); //ÕâÑù»áµ÷ÓÃÁ½´Î£¬¶Ñ´íÎó
+		//tmpT->Destroy(tmpT->getRoot()); //è¿™æ ·ä¼šè°ƒç”¨ä¸¤æ¬¡ï¼Œå †é”™è¯¯
 		SAFE_DELETE(tmpT);
 	}
 
-	//Çå¿Õmvmu_ModuleMap
+	//æ¸…ç©ºmvmu_ModuleMap
 	for(map<_IdDataType , logic_BasicModule *>::iterator it = mvmu_ModuleMap.begin();it != mvmu_ModuleMap.end(); ++it)
 		SAFE_DELETE(it->second);
 
 
 
-	//Çå¿ÕÓ³Éä±í
+	//æ¸…ç©ºæ˜ å°„è¡¨
 // 	for(map<int , logic_Tree *>::iterator it = mvmu_ModuleId_TreeMap.begin();it != mvmu_ModuleId_TreeMap.end(); ++it)
 // 	{
 // 		logic_Tree *tmpT = it->second;
-// 		//tmpT->Destroy(tmpT->getRoot()); //ÕâÑù»áµ÷ÓÃÁ½´Î£¬¶Ñ´íÎó
+// 		//tmpT->Destroy(tmpT->getRoot()); //è¿™æ ·ä¼šè°ƒç”¨ä¸¤æ¬¡ï¼Œå †é”™è¯¯
 // 		SAFE_DELETE(tmpT);
 // 	}
 }
 
 bool logic_Program::add_Tree(_IdDataType rootId)
 {
-	if (mvmu_TreeMap.count(rootId)>0) //ÒÑ´æÔÚ£¬´íÎó·µ»Ø
+	if (mvmu_TreeMap.count(rootId)>0) //å·²å­˜åœ¨ï¼Œé”™è¯¯è¿”å›
 		return false;
 
 	logic_Tree* t = new logic_Tree(rootId);
@@ -136,7 +136,7 @@ bool logic_Program::add_Tree(_IdDataType rootId)
 
 bool logic_Program::add_Tree(logic_Tree * t)
 {
-	if (mvmu_TreeMap.count(t->mvi_TreeID)>0) //ÒÑ´æÔÚ£¬´íÎó·µ»Ø
+	if (mvmu_TreeMap.count(t->mvi_TreeID)>0) //å·²å­˜åœ¨ï¼Œé”™è¯¯è¿”å›
 		return false;
 
 	//logic_Tree *tmpTree = new logic_Tree(*t);
@@ -147,7 +147,7 @@ bool logic_Program::add_Tree(logic_Tree * t)
 
 bool logic_Program::del_Tree(_IdDataType rootId)
 {
-	if (mvmu_TreeMap.count(rootId)==0) //²»´æÔÚ£¬É¾³ı´íÎó
+	if (mvmu_TreeMap.count(rootId)==0) //ä¸å­˜åœ¨ï¼Œåˆ é™¤é”™è¯¯
 		return false;
 
 	logic_Tree *tmpT = mvmu_TreeMap[rootId];
@@ -167,7 +167,7 @@ logic_Tree* logic_Program::search_Tree(_IdDataType rootId)
 	throw NULL;
 }
 
-//¸ù¾İÊ÷Ö¸ÕëÕÒID£¬ÕÒµ½·µ»ØID£¬ÕÒ²»µ½·µ»Ø-1
+//æ ¹æ®æ ‘æŒ‡é’ˆæ‰¾IDï¼Œæ‰¾åˆ°è¿”å›IDï¼Œæ‰¾ä¸åˆ°è¿”å›-1
 _IdDataType logic_Program::search_Tree(logic_Tree* treePtr)
 {
 	if (mvmu_TreeMap.count(treePtr->mvi_TreeID)>0)
@@ -177,10 +177,10 @@ _IdDataType logic_Program::search_Tree(logic_Tree* treePtr)
 	return -1;
 }
 
-//²»¸ºÔğÊÍ·Å modulePtr ¿Õ¼ä
+//ä¸è´Ÿè´£é‡Šæ”¾ modulePtr ç©ºé—´
 bool logic_Program::add_Module(_IdDataType moduleId , logic_BasicModule* modulePtr)
 {
-	if (mvmu_ModuleMap.count(moduleId)>0) //ÒÑ´æÔÚ£¬´íÎó·µ»Ø
+	if (mvmu_ModuleMap.count(moduleId)>0) //å·²å­˜åœ¨ï¼Œé”™è¯¯è¿”å›
 		return false;
 
 	mvmu_ModuleMap[modulePtr->mvi_ModuleID] = modulePtr;
@@ -190,7 +190,7 @@ bool logic_Program::add_Module(_IdDataType moduleId , logic_BasicModule* moduleP
 
 bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 {
-	if (mvmu_ModuleMap.count(moduleId)>0) //ÒÑ´æÔÚ£¬´íÎó·µ»Ø
+	if (mvmu_ModuleMap.count(moduleId)>0) //å·²å­˜åœ¨ï¼Œé”™è¯¯è¿”å›
 		return false;
 
 	logic_BasicModule *bm = NULL;
@@ -202,8 +202,8 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 			*(this->initModuleMap[2003]));
 		bm = tmpForModule;
 
-		/// activeTree ²Ù×÷·ÅÈëforÄ£¿é
-		//µÃµ½Ä¬ÈÏactiveTree£¬Î¬»¤map
+		/// activeTree æ“ä½œæ”¾å…¥foræ¨¡å—
+		//å¾—åˆ°é»˜è®¤activeTreeï¼Œç»´æŠ¤map
 // 		logic_Tree * tmpActiveTree = tmpForModule->getCurActiveTree();
 // 		mvmu_TreeMap[this->composeTreeId(moduleId)] = tmpActiveTree;
 
@@ -215,14 +215,14 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 			*(this->initModuleMap[2004]));
 		bm = tmpIfModule;
 
-		/// activeTree ²Ù×÷·ÅÈëifÄ£¿é
-		//µÃµ½Ä¬ÈÏµÄÁ½¸öbranch activeTree£¬Î¬»¤map
+		/// activeTree æ“ä½œæ”¾å…¥ifæ¨¡å—
+		//å¾—åˆ°é»˜è®¤çš„ä¸¤ä¸ªbranch activeTreeï¼Œç»´æŠ¤map
 // 		logic_Tree * tmpActiveTree = tmpIfModule->getCurActiveTree(1);
 // 		mvmu_TreeMap[this->composeTreeId(moduleId,1)] = tmpActiveTree;
 // 		tmpActiveTree = tmpIfModule->getCurActiveTree(2);
 // 		mvmu_TreeMap[this->composeTreeId(moduleId,2)] = tmpActiveTree;
 
-	}else //ÆÕÍ¨Ä£¿é
+	}else //æ™®é€šæ¨¡å—
 	{
 		//bm = new logic_BasicModule(moduleId,m_Type);
 		bm = new logic_BasicModule(moduleId,m_Type,*(this->initModuleMap[m_Type]));
@@ -236,33 +236,33 @@ bool logic_Program::add_Module(_IdDataType moduleId , int m_Type)
 bool logic_Program::del_Module(_IdDataType moduleId)
 {
 	if (mvmu_ModuleMap.count(moduleId)==0) {
-		//²»´æÔÚ£¬É¾³ı´íÎó
+		//ä¸å­˜åœ¨ï¼Œåˆ é™¤é”™è¯¯
 		assert(false);
 		return false;
 	}
 
-	//É¾³ımoduleÊµÌå
+	//åˆ é™¤moduleå®ä½“
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[moduleId];
 	mvmu_ModuleMap.erase(moduleId);
 
-	//¸¸ÀàvirtualÎö¹¹º¯Êı£¬¿ÉÒÔ×Ô¶¯Îö¹¹ forºÍif
+	//çˆ¶ç±»virtualææ„å‡½æ•°ï¼Œå¯ä»¥è‡ªåŠ¨ææ„ forå’Œif
 	SAFE_DELETE(tmpModule);
 
-	//É¾³ıËùÓĞÁ¬Ïß
+	//åˆ é™¤æ‰€æœ‰è¿çº¿
 	this->DelAllParaConnect(moduleId);
 
 	return true;
 }
 
-//É¾³ı¹ØÓÚÄ³Ò»Ä£¿éµÄËùÓĞÁ¬Ïß
+//åˆ é™¤å…³äºæŸä¸€æ¨¡å—çš„æ‰€æœ‰è¿çº¿
 void logic_Program::DelAllParaConnect(int id) {
 
-	//´¦ÀíÁ¬Ïß
+	//å¤„ç†è¿çº¿
 	for( map<whPort ,whPort >::iterator it = mvvu_Conn_From_ToMap.begin(); it != mvvu_Conn_From_ToMap.end(); ++it ) {
 
 		if( id == it->first.moduleId ) {
 
-			//Èç¹û from ÊÇ¸ÃÄ£¿é£¬ËùÓĞÕâ¸ö outModule Ïà¹Ø¾ÍĞèÒªÉ¾³ı
+			//å¦‚æœ from æ˜¯è¯¥æ¨¡å—ï¼Œæ‰€æœ‰è¿™ä¸ª outModule ç›¸å…³å°±éœ€è¦åˆ é™¤
 			whPort outPort = it->first;
 			whPort inPort = mvvu_Conn_From_ToMap[outPort];
 			mvvu_Conn_From_ToMap.erase(outPort);
@@ -270,8 +270,8 @@ void logic_Program::DelAllParaConnect(int id) {
 
 		}else if(id == it->second.moduleId) {
 
-			//Èç¹û to ÊÇ¸ÃÄ£¿é
-			whPort outPort = it->first;   // Ïàµ±ÓÚ whPort inPort = it->second;
+			//å¦‚æœ to æ˜¯è¯¥æ¨¡å—
+			whPort outPort = it->first;   // ç›¸å½“äº whPort inPort = it->second;
 			whPort inPort = mvvu_Conn_From_ToMap[outPort];
 			mvvu_Conn_From_ToMap.erase(outPort);
 			mvvu_Conn_To_FromMap.erase(inPort);
@@ -328,14 +328,14 @@ int logic_Program::getMaxModuleId() {
 	return it->first;
 }
 
-//ÕæÕıÔÚÉ­ÁÖÖĞÌí¼Óid£¬²¢ÊµÀı»¯´Ë module
+//çœŸæ­£åœ¨æ£®æ—ä¸­æ·»åŠ idï¼Œå¹¶å®ä¾‹åŒ–æ­¤ module
 bool logic_Program::appendModule(int m_id,int pre_id,int m_type) {
 
 	assert( mvmu_ModuleMap.count(pre_id)>=0 );
 
-	// step1¡¢ÔÚÉ­ÁÖÖĞ¼ÓÈëÕâ¸öid
+	// step1ã€åœ¨æ£®æ—ä¸­åŠ å…¥è¿™ä¸ªid
 
-	if ( 0 == pre_id ) {   //Èç¹û pre_id Îª 0 £¬´ú±íÒªĞÂ½¨Ò»¿ÃÊ÷
+	if ( 0 == pre_id ) {   //å¦‚æœ pre_id ä¸º 0 ï¼Œä»£è¡¨è¦æ–°å»ºä¸€æ£µæ ‘
 
 		logic_Tree *tree = new logic_Tree(m_id);
 		this->add_Tree(tree);
@@ -343,7 +343,7 @@ bool logic_Program::appendModule(int m_id,int pre_id,int m_type) {
 		mvmu_ModuleId_TreeMap[m_id] = tree;
 
 	}else {
-		//Èç¹û pre_id ²»Îª 0 £¬²åÔÚ pre_id ºóÃæ
+		//å¦‚æœ pre_id ä¸ä¸º 0 ï¼Œæ’åœ¨ pre_id åé¢
 		if ( m_type == 2001 ) {
 			return false;
 		}
@@ -354,7 +354,7 @@ bool logic_Program::appendModule(int m_id,int pre_id,int m_type) {
 		mvmu_ModuleId_TreeMap[m_id] = tree;
 	}
 
-	// step2¡¢ÕæÕıÉú³ÉÕâ¸ömoduleÊµÌå
+	// step2ã€çœŸæ­£ç”Ÿæˆè¿™ä¸ªmoduleå®ä½“
 	this->add_Module(m_id,m_type);
 
 	return true;
@@ -368,16 +368,16 @@ bool logic_Program::frontInsModule(int m_id,int post_id,int m_type) {
 		return false;
 	}
 
-	// step1¡¢ÔÚÉ­ÁÖÖĞ¼ÓÈëÕâ¸öid
+	// step1ã€åœ¨æ£®æ—ä¸­åŠ å…¥è¿™ä¸ªid
 
-	//postÄ£¿éÊÇ¿ªÊ¼Ä£¿é£¬²»ÔÊĞí²åÈë
+	//postæ¨¡å—æ˜¯å¼€å§‹æ¨¡å—ï¼Œä¸å…è®¸æ’å…¥
 	if ( mvmu_ModuleMap[post_id]->getModuleType() == 2001 ) {
 		return false;
 	}
 
 	logic_Tree *tree = mvmu_ModuleId_TreeMap[post_id];
 
-	if ( post_id == tree->mvi_TreeID ) { //·¢ÏÖºó¼Ì½ÚµãÊÇroot£¬ĞèÒª»»¸ù
+	if ( post_id == tree->mvi_TreeID ) { //å‘ç°åç»§èŠ‚ç‚¹æ˜¯rootï¼Œéœ€è¦æ¢æ ¹
 		tree->exchangeRoot(m_id);
 		mvmu_ModuleId_TreeMap[m_id] = tree;
 
@@ -385,146 +385,146 @@ bool logic_Program::frontInsModule(int m_id,int post_id,int m_type) {
 		mvmu_TreeMap.erase(post_id);
 		mvmu_TreeMap[m_id] = tree;
 
-	}else{ //Èç¹ûºó¼Ì²»ÊÇroot£¬²åÈëµ½Á½¸öµãÖĞ¼ä
+	}else{ //å¦‚æœåç»§ä¸æ˜¯rootï¼Œæ’å…¥åˆ°ä¸¤ä¸ªç‚¹ä¸­é—´
 
 		tree->insert_node(tree->getPreId(post_id),post_id,m_id);
 		mvmu_ModuleId_TreeMap[m_id] = tree;
 	}
 
-	// step2¡¢ÕæÕıÉú³ÉÕâ¸ömoduleÊµÌå
+	// step2ã€çœŸæ­£ç”Ÿæˆè¿™ä¸ªmoduleå®ä½“
 	this->add_Module(m_id,m_type);
 
 	return true;
 }
 
-//µ¥Ä£¿éºó²åmove
+//å•æ¨¡å—åæ’move
 int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 
 	if ( pre_m_id != 0 && 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
-		return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-			return -3; //Ä£¿éÀàĞÍ´íÎó
+			return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	///// step1¡¢²åÈëĞÂÊ÷½Úµã
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷£¬ÔçµãÕÒµ½»á¸ü¿¿Æ×
+	///// step1ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘ï¼Œæ—©ç‚¹æ‰¾åˆ°ä¼šæ›´é è°±
 	logic_Tree *insTree = NULL;
-	if( 0 == pre_m_id ) {  ////////////±ØĞëÓÃÉî¿½±´£¬Ç³¿½±´¿ÉÄÜÓĞÎ£ÏÕ
+	if( 0 == pre_m_id ) {  ////////////å¿…é¡»ç”¨æ·±æ‹·è´ï¼Œæµ…æ‹·è´å¯èƒ½æœ‰å±é™©
 
-		//Èç¹ûÇ°²åÒ»¿Ã¿ÕÊ÷
+		//å¦‚æœå‰æ’ä¸€æ£µç©ºæ ‘
 
 		if ( cur_m_id == oldTree->mvi_TreeID 
 			&& oldTree->getRoot()->mvvu_Children.size()==0 
 			) {
 
-			///Èç¹ûÊÇÇ°²å¿ÕÊ÷£¬Í¬Ê±ÓÖÊÇ Î¨Ò»Ä£¿é ´íÎó
+			///å¦‚æœæ˜¯å‰æ’ç©ºæ ‘ï¼ŒåŒæ—¶åˆæ˜¯ å”¯ä¸€æ¨¡å— é”™è¯¯
 			return -5;
 		}
 
-		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //Éî¿½±´¹¹Ôìµ½Õ»
+		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //æ·±æ‹·è´æ„é€ åˆ°æ ˆ
 
 		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
-			//Èç¹ûº¢×Ó²»ÊÇÒ»¸ö£¬´íÎó
+			//å¦‚æœå­©å­ä¸æ˜¯ä¸€ä¸ªï¼Œé”™è¯¯
 			return -4;
 		}
 
 		tmpCurNode.mvu_Parent = 0;
 		tmpCurNode.mvvu_Children.clear();
 
-		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //Éî¿½±´¹¹Ôìµ½¶Ñ
-		insTree = new logic_Tree(tmpPassNode); //ĞÂ½¨Ò»¿ÃÊ÷£¬´ËnodeÒ²±ØĞëĞÂ½¨£¬·ñÔò±»ÏÂÃæµÄdelnodeÁË
+		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //æ·±æ‹·è´æ„é€ åˆ°å †
+		insTree = new logic_Tree(tmpPassNode); //æ–°å»ºä¸€æ£µæ ‘ï¼Œæ­¤nodeä¹Ÿå¿…é¡»æ–°å»ºï¼Œå¦åˆ™è¢«ä¸‹é¢çš„delnodeäº†
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 
 	}else {
 
-		////// pre_m_id ²»Îª0
+		////// pre_m_id ä¸ä¸º0
 
-		/////Èç¹ûÒÑ´æÔÚ£¬Ö±½ÓÕÒµ½´ı²åÈëÊ÷
+		/////å¦‚æœå·²å­˜åœ¨ï¼Œç›´æ¥æ‰¾åˆ°å¾…æ’å…¥æ ‘
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
 		if( insTree->mvi_TreeID == oldTree->mvi_TreeID ) {
 
-			//Èç¹ûÊÇ±¾ÄÚÖ±½Ómove
+			//å¦‚æœæ˜¯æœ¬å†…ç›´æ¥move
 			if ( insTree->innerTreeBackInsSingMove(pre_m_id,cur_m_id) < 0 )
-				return -6; //Ê÷ÄÚmove³ö´í
+				return -6; //æ ‘å†…moveå‡ºé”™
 			else
-				return 0; //ÒÑmove¿ÉÖ±½Ó·µ»Ø
+				return 0; //å·²moveå¯ç›´æ¥è¿”å›
 
 		}else {
-			//Ê÷¼äÒÆ¶¯
+			//æ ‘é—´ç§»åŠ¨
 			insTree->append_node(pre_m_id,cur_m_id);
 		}
 	}
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
 		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷£¨ ½øÈëÕâ¸ö·ÖÖ§ pre_m_id ±ØÈ»²»»áÊÇ0£¬ÉÏÃæÒÑÅĞ¶Ï£¬Ïê¼û´íÎó-5 £©
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘ï¼ˆ è¿›å…¥è¿™ä¸ªåˆ†æ”¯ pre_m_id å¿…ç„¶ä¸ä¼šæ˜¯0ï¼Œä¸Šé¢å·²åˆ¤æ–­ï¼Œè¯¦è§é”™è¯¯-5 ï¼‰
 
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 
-			// Step3¡¢£¨±ØĞëÔÚ´Ë´¦£¬²»È»¾ÍreturnÁË£©¸üĞÂ
+			// Step3ã€ï¼ˆå¿…é¡»åœ¨æ­¤å¤„ï¼Œä¸ç„¶å°±returnäº†ï¼‰æ›´æ–°
 			mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-			return 0; //Õı³£·µ»Ø
+			return 0; //æ­£å¸¸è¿”å›
 		}else {
-			//²»ÊÇÎ¨Ò»Ä£¿é
+			//ä¸æ˜¯å”¯ä¸€æ¨¡å—
 
 			oldTree->setFirstChildAsRoot();
 		}
 
 	}
 
-	// Step3¡¢¸üĞÂ
+	// Step3ã€æ›´æ–°
 	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
-//Ç°²åmove
-//cur_m_id ÊÇ´ımove½Úµã
-//post_m_id ÊÇ½Úµãºó¼Ì
+//å‰æ’move
+//cur_m_id æ˜¯å¾…moveèŠ‚ç‚¹
+//post_m_id æ˜¯èŠ‚ç‚¹åç»§
 int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 
-	///// ÉÏÒ»²ãÒÑÅĞ¶Ï post_m_id ÊÇ·ñÎª 0
+	///// ä¸Šä¸€å±‚å·²åˆ¤æ–­ post_m_id æ˜¯å¦ä¸º 0
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id)) ) {
-		return -2; //Ã»ÕÒµ½²åÈëµã
+		return -2; //æ²¡æ‰¾åˆ°æ’å…¥ç‚¹
 	}
 
-	//Èç¹û post_m_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ post_m_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	///Step1.¶Ï¿ªcur½Úµã£¬curÄÇ¿ÅÊ÷ÖØĞÂÁ¬½Ó
+	///Step1.æ–­å¼€curèŠ‚ç‚¹ï¼Œcuré‚£é¢—æ ‘é‡æ–°è¿æ¥
 	auto &curTree = mvmu_ModuleId_TreeMap[cur_m_id];
 	auto curNode = curTree->node_search(cur_m_id);  //current node
 	auto curParentNodeId = curNode->getParentID();  //current parent node id
 	auto curParentNode = curTree->search(curParentNodeId);//current parent node
 	auto curChildren = curNode->mvvu_Children;//current node's child
 
-	///ÓĞ¸¸Ç×£¬ÓĞº¢×Ó,µ«ÊÇº¢×ÓÖ»ÄÜÓĞÒ»¸ö£¨ÓÉÇ°¶ËÅĞ¶Ï£©
+	///æœ‰çˆ¶äº²ï¼Œæœ‰å­©å­,ä½†æ˜¯å­©å­åªèƒ½æœ‰ä¸€ä¸ªï¼ˆç”±å‰ç«¯åˆ¤æ–­ï¼‰
 	if (curParentNode&&curChildren.size() > 0)
 	{
 		assert(curChildren.size() == 1);
-		//current½Úµã¸¸Ç×¸üĞÂº¢×Ó¹ØÏµ
+		//currentèŠ‚ç‚¹çˆ¶äº²æ›´æ–°å­©å­å…³ç³»
 		std::vector<logic_TreeNode *> &parentChilden = curParentNode->_node->mvvu_Children;
 		for (auto index = parentChilden.begin(); index != parentChilden.end();++index)
 		{
@@ -534,19 +534,19 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 				break;
 			}
 		}
-		//current½Úµãº¢×Ó¸üĞÂ¸¸Ç×¹ØÏµ
+		//currentèŠ‚ç‚¹å­©å­æ›´æ–°çˆ¶äº²å…³ç³»
 		auto childNode = *(curChildren.begin());
 		parentChilden.push_back(childNode);
 		childNode->mvu_Parent = curParentNode->_node;
 
-		//current node Çå³ş×Ó½Úµã£¬Çå³ş¸¸Ç×¹ØÏµ
+		//current node æ¸…æ¥šå­èŠ‚ç‚¹ï¼Œæ¸…æ¥šçˆ¶äº²å…³ç³»
 		std::vector<logic_TreeNode *> &curChildren = curNode->mvvu_Children;
 		curChildren.clear();
 	}
-	///ÓĞ¸¸Ç×£¬Ã»º¢×Ó
+	///æœ‰çˆ¶äº²ï¼Œæ²¡å­©å­
 	if (curParentNode&&curChildren.size() == 0)
 	{
-		//current¸¸Ç×½Úµã¸üĞÂ×Ó½Úµã¹ØÏµ
+		//currentçˆ¶äº²èŠ‚ç‚¹æ›´æ–°å­èŠ‚ç‚¹å…³ç³»
 		std::vector<logic_TreeNode *> &parentChilden = curParentNode->_node->mvvu_Children;
 		for (auto index = parentChilden.begin(); index != parentChilden.end(); ++index)
 		{
@@ -556,14 +556,14 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 				break;
 			}
 		}
-		//current½Úµã¶Ï¿ª¸¸Ç×½Úµã¹ØÏµ
+		//currentèŠ‚ç‚¹æ–­å¼€çˆ¶äº²èŠ‚ç‚¹å…³ç³»
 		curNode->mvu_Parent = nullptr;
 	}
-	///Ã»¸¸Ç×£¬ÓĞº¢×Ó,µ«ÊÇº¢×ÓÖ»ÄÜÓĞÒ»¸ö£¨ÓÉÇ°¶ËÅĞ¶Ï£©,¸Ã½ÚµãÊÇtreeRoot
+	///æ²¡çˆ¶äº²ï¼Œæœ‰å­©å­,ä½†æ˜¯å­©å­åªèƒ½æœ‰ä¸€ä¸ªï¼ˆç”±å‰ç«¯åˆ¤æ–­ï¼‰,è¯¥èŠ‚ç‚¹æ˜¯treeRoot
 	if (!curParentNode&&curChildren.size() > 0)
 	{
 		assert(curChildren.size() == 1);
-		//current½Úµãº¢×Ó¸úcurrent½Úµã¶Ï¿ª¸¸×Ó¹ØÏµ
+		//currentèŠ‚ç‚¹å­©å­è·ŸcurrentèŠ‚ç‚¹æ–­å¼€çˆ¶å­å…³ç³»
 		std::vector<logic_TreeNode *> &curChildren = curNode->mvvu_Children;
 		logic_TreeNode* childNode = *curChildren.begin();
 		curTree->setRoot(childNode);
@@ -571,21 +571,21 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 		curChildren.clear();
 	}
 
-	///Ã»¸¸Ç×£¬Ã»º¢×Ó,¸Ã½ÚµãÊÇtreeRoot,±ê¼ÇÒª²åÈëĞÂÊ÷Ê±£¬½²Ô­Ê÷¸ù½Úµã±äÎªĞÂÊ÷¸ù½Úµã 
+	///æ²¡çˆ¶äº²ï¼Œæ²¡å­©å­,è¯¥èŠ‚ç‚¹æ˜¯treeRoot,æ ‡è®°è¦æ’å…¥æ–°æ ‘æ—¶ï¼Œè®²åŸæ ‘æ ¹èŠ‚ç‚¹å˜ä¸ºæ–°æ ‘æ ¹èŠ‚ç‚¹ 
 	bool flag = false;
 	if (!curParentNode&&curChildren.size() == 0)
 	{
 		flag = true;
 	}
 
-	///Step2.²åÈë½Úµã
+	///Step2.æ’å…¥èŠ‚ç‚¹
 	auto insTree = mvmu_ModuleId_TreeMap[post_m_id];
 	auto postNode = insTree->node_search(post_m_id);
 	auto postParentNode = postNode->mvu_Parent;
-	//post½ÚµãÓĞ¸¸Ç×
+	//postèŠ‚ç‚¹æœ‰çˆ¶äº²
 	if (postParentNode != nullptr)
 	{
-		///¸üĞÂ¸¸Ç×½ÚµãµÄ×Ó½Úµã¹ØÏµ£¬cur½ÚµãµÄ¸¸Ç×¡¢×Ó½Úµã¹ØÏµ£¬post½ÚµãµÄ¸¸Ç×½Úµã¹ØÏµ
+		///æ›´æ–°çˆ¶äº²èŠ‚ç‚¹çš„å­èŠ‚ç‚¹å…³ç³»ï¼ŒcurèŠ‚ç‚¹çš„çˆ¶äº²ã€å­èŠ‚ç‚¹å…³ç³»ï¼ŒpostèŠ‚ç‚¹çš„çˆ¶äº²èŠ‚ç‚¹å…³ç³»
 		auto &postParentChildren = postParentNode->mvvu_Children;
 		for (auto index = postParentChildren.begin(); index != postParentChildren.end(); ++index)
 		{
@@ -607,7 +607,7 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 			curTree->setRoot(postTree->getRoot());
 		}
 	}
-	//post½ÚµãÎŞ¸¸Ç×
+	//postèŠ‚ç‚¹æ— çˆ¶äº²
 	else
 	{
 		curNode->mvvu_Children.push_back(postNode);
@@ -616,69 +616,69 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 		postTree->setRoot(curNode);
 	}
 
-	///Step3.¸üĞÂÊ÷ºÍid¶ÔÓ¦Ê÷µÄÁ½¸ömapµÄ±í
+	///Step3.æ›´æ–°æ ‘å’Œidå¯¹åº”æ ‘çš„ä¸¤ä¸ªmapçš„è¡¨
 	updateTreeMap();
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 
 }
 
-//´øº¢×Óºó²åmove
+//å¸¦å­©å­åæ’move
 int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
 	if ( 0 != pre_m_id && 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
-		return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	/////////////¿ªÊ¼/////////////
+	/////////////å¼€å§‹/////////////
 
-	///// step1¡¢É¾³ı¾ÉÊ÷½Úµã
-	///// ×¢£ºÉ¾³ı±ØĞëÊÇµÚÒ»²½£¬²»È» del_node_notConn ·½·¨»áÉ¾µô´íÎó parent µÄº¢×Ó
+	///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹
+	///// æ³¨ï¼šåˆ é™¤å¿…é¡»æ˜¯ç¬¬ä¸€æ­¥ï¼Œä¸ç„¶ del_node_notConn æ–¹æ³•ä¼šåˆ æ‰é”™è¯¯ parent çš„å­©å­
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //´ı²åÈë½Úµã£¨±ØĞëÔÚ´Ë´¦Ñ°ÕÒ£©
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //å¾…æ’å…¥èŠ‚ç‚¹ï¼ˆå¿…é¡»åœ¨æ­¤å¤„å¯»æ‰¾ï¼‰
 
 	if ( insNode->mvvu_Children.size() == 0 ) {
-		//¿ÉÄÜÖ»ÓĞÒ»¸öº¢×Ó
+		//å¯èƒ½åªæœ‰ä¸€ä¸ªå­©å­
 		return -4;
 	}
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
-		oldTree->del_node_notConn(cur_m_id); //¶Ï¿ª oldTree Óë´Ë½ÚµãµÄÁ¬½Ó
+		//å¹¶éæ ‘æ ¹
+		oldTree->del_node_notConn(cur_m_id); //æ–­å¼€ oldTree ä¸æ­¤èŠ‚ç‚¹çš„è¿æ¥
 
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
-		//ROOT£¬É¾³ıÊ÷
-		oldTree->del_node_notConn(cur_m_id); //Èç¹ûÊÇÊ÷¸ù£¬Ö±½Ó½«¸ÃÊ÷rootÖÃ¿Õ
-		SAFE_DELETE(oldTree); //·ÅĞÄÉ¾³ıÊ÷
+		//ROOTï¼Œåˆ é™¤æ ‘
+		oldTree->del_node_notConn(cur_m_id); //å¦‚æœæ˜¯æ ‘æ ¹ï¼Œç›´æ¥å°†è¯¥æ ‘rootç½®ç©º
+		SAFE_DELETE(oldTree); //æ”¾å¿ƒåˆ é™¤æ ‘
 		mvmu_TreeMap.erase(cur_m_id);
 	}
 
-	///// step2¡¢²åÈëĞÂ½Úµã
+	///// step2ã€æ’å…¥æ–°èŠ‚ç‚¹
 	logic_Tree *insTree = NULL;
 	if( 0 == pre_m_id ) { 
-		//Èç¹ûÇ°²åÒ»¿Ã¿ÕÊ÷
+		//å¦‚æœå‰æ’ä¸€æ£µç©ºæ ‘
 
-		insTree = new logic_Tree(insNode); //ĞÂ½¨Ò»¿ÃÊ÷
+		insTree = new logic_Tree(insNode); //æ–°å»ºä¸€æ£µæ ‘
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 		mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
 	}else {
-		/////Èç¹ûÒÑ´æÔÚ£¬Ö±½ÓÕÒµ½´ı²åÈëÊ÷
+		/////å¦‚æœå·²å­˜åœ¨ï¼Œç›´æ¥æ‰¾åˆ°å¾…æ’å…¥æ ‘
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
-		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_id½Úµã
-		//Èç¹û pre_m_id ²»ÊÇÒ¶×Ó½Úµã£¬´íÎó·µ»Ø
+		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_idèŠ‚ç‚¹
+		//å¦‚æœ pre_m_id ä¸æ˜¯å¶å­èŠ‚ç‚¹ï¼Œé”™è¯¯è¿”å›
 		if(preNode->mvvu_Children.size()>0) {
 			return -4;
 		}
@@ -687,35 +687,35 @@ int logic_Program::backInsMultiMove(int cur_m_id,int pre_m_id) {
 
 	}
 
-	///// step3¡¢¸üĞÂ module treeÓ³Éä
+	///// step3ã€æ›´æ–° module treeæ˜ å°„
 	recurs_update(insTree,insNode);
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
-//´ø×æÏÈÇ°²åmove
-////////////////×¢£º±ØÈ»ÊÇ²åÔÚÒ»¿ÃÊ÷µÄ×îÇ°Ãæ/////////////////
+//å¸¦ç¥–å…ˆå‰æ’move
+////////////////æ³¨ï¼šå¿…ç„¶æ˜¯æ’åœ¨ä¸€æ£µæ ‘çš„æœ€å‰é¢/////////////////
 int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id)) ) {
-		return -2; //Ã»ÕÒµ½²åÈëµã
+		return -2; //æ²¡æ‰¾åˆ°æ’å…¥ç‚¹
 	}
 
-	//Èç¹û post_m_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ post_m_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( post_m_id != 0 && mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-			return -3; //Ä£¿éÀàĞÍ´íÎó
+			return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
 	if( 0 == post_m_id ) {
 
-		//¿Õ²å
-		//Ïàµ±ÓÚ backInsMultiMove µ½±³¾°
+		//ç©ºæ’
+		//ç›¸å½“äº backInsMultiMove åˆ°èƒŒæ™¯
 
 		logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-		///// step1¡¢É¾³ı¾ÉÊ÷½Úµã£¬Í¬Ê±½«¶Ï¿ª²¿·ÖÉú³ÉĞÂÊ÷
+		///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ŒåŒæ—¶å°†æ–­å¼€éƒ¨åˆ†ç”Ÿæˆæ–°æ ‘
 		logic_TreeNode * curNode = oldTree->node_search(cur_m_id);
 		if( curNode->mvvu_Children.size() == 1 ) {
 
@@ -724,7 +724,7 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 			logic_Tree * newTree = new logic_Tree(breakNode);
 
 			mvmu_TreeMap[newTree->getRoot()->getID()] = newTree;
-			///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+			///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 			recurs_update(newTree,newTree->getRoot());
 		}else if( curNode->mvvu_Children.size() > 1 ) {
 			assert(false);
@@ -732,15 +732,15 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 
 	} else {
 
-		logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //ĞÂ²åÈëÊ÷
+		logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //æ–°æ’å…¥æ ‘
 		logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-		//Èç¹û post_m_id ²»ÊÇ¸ù½Úµã£¬´íÎó·µ»Ø
+		//å¦‚æœ post_m_id ä¸æ˜¯æ ¹èŠ‚ç‚¹ï¼Œé”™è¯¯è¿”å›
 		if( post_m_id!=insTree->mvi_TreeID ) {
 			return -4;
 		}
 
-		///// step1¡¢É¾³ı¾ÉÊ÷½Úµã£¬Í¬Ê±½«¶Ï¿ª²¿·ÖÉú³ÉĞÂÊ÷
+		///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ŒåŒæ—¶å°†æ–­å¼€éƒ¨åˆ†ç”Ÿæˆæ–°æ ‘
 		logic_TreeNode * curNode = oldTree->node_search(cur_m_id);
 		if( curNode->mvvu_Children.size() == 1 ) {
 
@@ -749,72 +749,72 @@ int logic_Program::frontInsMultiMove(int cur_m_id,int post_m_id) {
 			logic_Tree * newTree = new logic_Tree(breakNode);
 
 			mvmu_TreeMap[newTree->getRoot()->getID()] = newTree;
-			///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+			///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 			recurs_update(newTree,newTree->getRoot());
 		}else if( curNode->mvvu_Children.size() > 1 ) {
 			assert(false);
 		}
 		
-		///// step2¡¢²åÈëĞÂÊ÷½Úµã
+		///// step2ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
 
-		logic_TreeNode * insNode = insTree->getRoot(); //´ı²åÈë½Úµã
-		oldTree->add_node(cur_m_id,insNode); //insTree½Óµ½oldTreeÉÏ
+		logic_TreeNode * insNode = insTree->getRoot(); //å¾…æ’å…¥èŠ‚ç‚¹
+		oldTree->add_node(cur_m_id,insNode); //insTreeæ¥åˆ°oldTreeä¸Š
 
-		//±ØÈ»ÊÇROOT£¬Ö±½ÓÉ¾³ıÔ­insTree
-		insTree->del_node_notConn(post_m_id); //ÊÇroot£¬Ö±½ÓÖÃ¿Õ
-		SAFE_DELETE(insTree); //·ÅĞÄÉ¾³ıÊ÷
+		//å¿…ç„¶æ˜¯ROOTï¼Œç›´æ¥åˆ é™¤åŸinsTree
+		insTree->del_node_notConn(post_m_id); //æ˜¯rootï¼Œç›´æ¥ç½®ç©º
+		SAFE_DELETE(insTree); //æ”¾å¿ƒåˆ é™¤æ ‘
 		mvmu_TreeMap.erase(post_m_id);
 
-		///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+		///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 		recurs_update(oldTree,insNode);
 
 	}
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
-//ĞÂÔöº¢×Ómove
+//æ–°å¢å­©å­move
 int logic_Program::addLeafMove(int cur_m_id,int pre_m_id) {
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) ) {
-		return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-			return -3; //Ä£¿éÀàĞÍ´íÎó
+			return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
 	if ( addLeafCheckPre(cur_m_id,pre_m_id) < 0 ) {
 		return -4;
 	}
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	//¸Ã½Úµã±ØĞëÊÇ¸ÃÊ÷µÄ¸ù½Úµã
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	//è¯¥èŠ‚ç‚¹å¿…é¡»æ˜¯è¯¥æ ‘çš„æ ¹èŠ‚ç‚¹
 	if( oldTree->mvi_TreeID != cur_m_id )
 		assert(false);
 
 	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
-	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //´ı²åÈë½Úµã
-	logic_TreeNode * curNode = oldTree->getRoot(); //µ±Ç°½Úµã
+	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //å¾…æ’å…¥èŠ‚ç‚¹
+	logic_TreeNode * curNode = oldTree->getRoot(); //å½“å‰èŠ‚ç‚¹
 
 	curNode->mvu_Parent = insNode;
 
-	/// Step1¡¢½ÓÈëĞÂ½Úµã
+	/// Step1ã€æ¥å…¥æ–°èŠ‚ç‚¹
 	insNode->mvvu_Children.push_back(curNode);
 
-	/// Step2¡¢É¾³ı¾ÉÊ÷mapĞÅÏ¢
+	/// Step2ã€åˆ é™¤æ—§æ ‘mapä¿¡æ¯
 	mvmu_TreeMap.erase(cur_m_id);
 	oldTree->setRoot(NULL);
 	SAFE_DELETE(oldTree);
 
-	/// Step3¡¢¸üĞÂÄ£¿éÊ÷mapĞÅÏ¢
+	/// Step3ã€æ›´æ–°æ¨¡å—æ ‘mapä¿¡æ¯
 	recurs_update(insTree,curNode);
 
 	return 0;
 }
 
-//Í¨¹ıÒ»¸öÄ£¿éid£¬ÕÒµ½ËùÔÚÊ÷
+//é€šè¿‡ä¸€ä¸ªæ¨¡å—idï¼Œæ‰¾åˆ°æ‰€åœ¨æ ‘
 logic_Tree* logic_Program::getTreeFromId(int m_id) {
 
 	return mvmu_ModuleId_TreeMap[m_id];
@@ -850,46 +850,46 @@ void logic_Program::setForIfMap(std::map <logic_Tree *, int > forIfMap)
 
 bool logic_Program::delModule(int m_id) {
 
-	if (mvmu_ModuleMap.count(m_id)==0) //²»´æÔÚ£¬É¾³ı´íÎó
+	if (mvmu_ModuleMap.count(m_id)==0) //ä¸å­˜åœ¨ï¼Œåˆ é™¤é”™è¯¯
 		return false;
 
-	// step1¡¢ÔÚÉ­ÁÖÖĞÉ¾µôÕâ¸öid
-	logic_Tree *tree = mvmu_ModuleId_TreeMap[m_id]; //µÃµ½ËùÔÚµÄÊ÷
+	// step1ã€åœ¨æ£®æ—ä¸­åˆ æ‰è¿™ä¸ªid
+	logic_Tree *tree = mvmu_ModuleId_TreeMap[m_id]; //å¾—åˆ°æ‰€åœ¨çš„æ ‘
 
 	if (m_id != tree->mvi_TreeID ) {
-		///!!!!!!!!!!!!!!!!!!!!²»ÊÇROOT!!!!!!!!!!!!!!!!!!!!!!!!
+		///!!!!!!!!!!!!!!!!!!!!ä¸æ˜¯ROOT!!!!!!!!!!!!!!!!!!!!!!!!
 
 		logic_TreeNode *delNode = tree->node_search(m_id);
 
 		if(delNode->mvvu_Children.size() == 1) {
 
-			//1¡¢·ÇROOT£¬ÇÒÖ»ÓĞÒ»¸öº¢×Ó£¬Õı³£É¾³ı
+			//1ã€éROOTï¼Œä¸”åªæœ‰ä¸€ä¸ªå­©å­ï¼Œæ­£å¸¸åˆ é™¤
 			tree->del_node(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
 		}else if(delNode->mvvu_Children.size() > 1) {
 
-			//2¡¢·Çroot£¬ÓĞ¶à¸öº¢×Ó£¬²ğ³É¶à¿ÃÊ÷
+			//2ã€érootï¼Œæœ‰å¤šä¸ªå­©å­ï¼Œæ‹†æˆå¤šæ£µæ ‘
 
-			//ºóÃæµÄº¢×ÓĞèÒª½¨Á¢n¿ÅÊ÷
+			//åé¢çš„å­©å­éœ€è¦å»ºç«‹né¢—æ ‘
 			for (int i=0; i<delNode->mvvu_Children.size() ; ++i ) {
 
 				delNode->mvvu_Children.at(i)->mvu_Parent = NULL;
-				logic_Tree * tmpTree = new logic_Tree(delNode->mvvu_Children.at(i)); //ĞÂ½¨Ê÷
-				mvmu_TreeMap[tmpTree->mvi_TreeID] = tmpTree; //Ê÷map ĞÂÔö
-				updateMId_TreeMap(tmpTree); //¸üĞÂÓ³Éä±í
+				logic_Tree * tmpTree = new logic_Tree(delNode->mvvu_Children.at(i)); //æ–°å»ºæ ‘
+				mvmu_TreeMap[tmpTree->mvi_TreeID] = tmpTree; //æ ‘map æ–°å¢
+				updateMId_TreeMap(tmpTree); //æ›´æ–°æ˜ å°„è¡¨
 
-				//Èç¹û´ËÊ÷£¨root£©ÔÚ for »ò if ÖĞ£¬ĞèÒªÌØÊâ´¦Àí
+				//å¦‚æœæ­¤æ ‘ï¼ˆrootï¼‰åœ¨ for æˆ– if ä¸­ï¼Œéœ€è¦ç‰¹æ®Šå¤„ç†
 				if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
-					//µÃµ½ÈİÆ÷Module
+					//å¾—åˆ°å®¹å™¨Module
 					logic_BasicModule * tmpModule = mvmu_ModuleMap[mvmi_TreeId_For_IfIdMap[tree]];
 
 					if( tmpModule->getModuleType() == 2003 ) {
 
 						//for
 						logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
-						//²»ÓÃÉ¾³ıÔ­Ê÷£¬Ö±½Ó¼ÓÈëĞÂÊ÷
+						//ä¸ç”¨åˆ é™¤åŸæ ‘ï¼Œç›´æ¥åŠ å…¥æ–°æ ‘
 						tmpForModule->addTree(tmpTree);
 
 					}else if( tmpModule->getModuleType() == 2004 ) {
@@ -906,9 +906,9 @@ bool logic_Program::delModule(int m_id) {
 				}
 			}
 
-			//Ô­Ê÷²»¶¯£¬Ö»Ğë½«µ±Ç°½Úµã¸¸½ÚµãÕâµãÒÆ³ı
+			//åŸæ ‘ä¸åŠ¨ï¼Œåªé¡»å°†å½“å‰èŠ‚ç‚¹çˆ¶èŠ‚ç‚¹è¿™ç‚¹ç§»é™¤
 			tree->del_node_notConn(m_id);
-			SAFE_DELETE(delNode);  //ÕıÊ½É¾³ı´Ë½Úµã
+			SAFE_DELETE(delNode);  //æ­£å¼åˆ é™¤æ­¤èŠ‚ç‚¹
 			mvmu_ModuleId_TreeMap.erase(m_id);
 		}
 
@@ -919,26 +919,26 @@ bool logic_Program::delModule(int m_id) {
 		logic_TreeNode *oldRoot = tree->getRoot();
 
 		if(oldRoot->mvvu_Children.size() == 1) {
-			//1¡¢ÇÒÖ»ÓĞÒ»¸öº¢×Ó£¬Õı³£É¾³ı£¨treeÃ»ÓĞ¸Ä±ä£¬²»±Ø¸üĞÂÓ³Éä±í£©
+			//1ã€ä¸”åªæœ‰ä¸€ä¸ªå­©å­ï¼Œæ­£å¸¸åˆ é™¤ï¼ˆtreeæ²¡æœ‰æ”¹å˜ï¼Œä¸å¿…æ›´æ–°æ˜ å°„è¡¨ï¼‰
 			tree->del_node(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
-			/////// tree²»±ä£¬²»ÓÃ¸üĞÂ mvmi_TreeId_For_IfIdMap
+			/////// treeä¸å˜ï¼Œä¸ç”¨æ›´æ–° mvmi_TreeId_For_IfIdMap
 
 		}else if(oldRoot->mvvu_Children.size() > 1) {
 
-			//2¡¢rootÓĞn¸öº¢×Ó£¬²ğ³Én¿ÃÊ÷£¬Ã¿¿ÃÊ÷ÊÇÊ÷¸ù
+			//2ã€rootæœ‰nä¸ªå­©å­ï¼Œæ‹†æˆnæ£µæ ‘ï¼Œæ¯æ£µæ ‘æ˜¯æ ‘æ ¹
 
-			//ºóÃæĞèÒª½¨Á¢n-1¿ÅÊ÷
+			//åé¢éœ€è¦å»ºç«‹n-1é¢—æ ‘
 			for (int i=1; i<oldRoot->mvvu_Children.size() ; ++i ) {
 
 				oldRoot->mvvu_Children.at(i)->mvu_Parent = NULL;
-				logic_Tree * tmpTree = new logic_Tree(oldRoot->mvvu_Children.at(i)); //ĞÂ½¨Ê÷
-				mvmu_TreeMap[tmpTree->mvi_TreeID] = tmpTree; //Ê÷map ĞÂÔö
-				updateMId_TreeMap(tmpTree); //¸üĞÂÓ³Éä±í
+				logic_Tree * tmpTree = new logic_Tree(oldRoot->mvvu_Children.at(i)); //æ–°å»ºæ ‘
+				mvmu_TreeMap[tmpTree->mvi_TreeID] = tmpTree; //æ ‘map æ–°å¢
+				updateMId_TreeMap(tmpTree); //æ›´æ–°æ˜ å°„è¡¨
 
 
-				//Èç¹û´ËÊ÷£¨root£©ÔÚ for »ò if ÖĞ£¬ĞèÒªÌØÊâ´¦Àí
+				//å¦‚æœæ­¤æ ‘ï¼ˆrootï¼‰åœ¨ for æˆ– if ä¸­ï¼Œéœ€è¦ç‰¹æ®Šå¤„ç†
 				if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
 					logic_BasicModule * tmpModule = mvmu_ModuleMap[mvmi_TreeId_For_IfIdMap[tree]];
@@ -947,7 +947,7 @@ bool logic_Program::delModule(int m_id) {
 
 						//for
 						logic_ForModule * tmpForModule = (logic_ForModule *) tmpModule;
-						//²»ÓÃÉ¾³ıÔ­Ê÷£¬Ö±½Ó¼ÓÈëĞÂÊ÷
+						//ä¸ç”¨åˆ é™¤åŸæ ‘ï¼Œç›´æ¥åŠ å…¥æ–°æ ‘
 						tmpForModule->addTree(tmpTree);
 
 					}else if( tmpModule->getModuleType() == 2004 ) {
@@ -965,19 +965,19 @@ bool logic_Program::delModule(int m_id) {
 
 			}
 
-			//Ô­Ê÷Ö±½ÓÉèÖÃº¢×ÓÎªroot£¨treeÃ»ÓĞ¸Ä±ä£¬²»±Ø¸üĞÂÓ³Éä±í£©
-			tree->setFirstChildAsRoot(); //½«rootµÄÎ¨Ò»º¢×ÓÉèÖÃÎªroot£¬Í¬Ê±É¾³ıoldRoot
+			//åŸæ ‘ç›´æ¥è®¾ç½®å­©å­ä¸ºrootï¼ˆtreeæ²¡æœ‰æ”¹å˜ï¼Œä¸å¿…æ›´æ–°æ˜ å°„è¡¨ï¼‰
+			tree->setFirstChildAsRoot(); //å°†rootçš„å”¯ä¸€å­©å­è®¾ç½®ä¸ºrootï¼ŒåŒæ—¶åˆ é™¤oldRoot
 			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
 		}else if(oldRoot->mvvu_Children.size() == 0) {
 
-			//Ê÷ÖĞÎ¨Ò»µÄÄ£¿é£¬É¾³ıÊ÷
+			//æ ‘ä¸­å”¯ä¸€çš„æ¨¡å—ï¼Œåˆ é™¤æ ‘
 			SAFE_DELETE(mvmu_ModuleId_TreeMap[m_id]);
 			mvmu_TreeMap.erase(m_id);
 			mvmu_ModuleId_TreeMap.erase(m_id);
 
-			//µ«Èç¹û´ËÊ÷£¨root£©ÔÚ for »ò if ÖĞ£¬ĞèÒªÌØÊâ´¦Àí
+			//ä½†å¦‚æœæ­¤æ ‘ï¼ˆrootï¼‰åœ¨ for æˆ– if ä¸­ï¼Œéœ€è¦ç‰¹æ®Šå¤„ç†
 			if( mvmi_TreeId_For_IfIdMap.count(tree) > 0 ) {
 
 				logic_BasicModule * tmpModule = mvmu_ModuleMap[mvmi_TreeId_For_IfIdMap[tree]];
@@ -996,7 +996,7 @@ bool logic_Program::delModule(int m_id) {
 
 				}
 
-				mvmi_TreeId_For_IfIdMap.erase(tree); //ÍêÈ«É¾³ı
+				mvmi_TreeId_For_IfIdMap.erase(tree); //å®Œå…¨åˆ é™¤
 
 			}
 		}
@@ -1004,14 +1004,14 @@ bool logic_Program::delModule(int m_id) {
 	}
 
 
-	// step2¡¢ÔÚmapÖĞÉ¾µôÕâ¸ömoduleÊµÌå
+	// step2ã€åœ¨mapä¸­åˆ æ‰è¿™ä¸ªmoduleå®ä½“
 	this->del_Module(m_id);
 
 	return true;
 }
 
 void logic_Program::updateMId_TreeMap(logic_Tree *tree) {
-	//½«Ò»¿ÃÊ÷ÖĞËùÓĞmodule treeÓ³Éä¸ÄÎªµ±Ç°tree
+	//å°†ä¸€æ£µæ ‘ä¸­æ‰€æœ‰module treeæ˜ å°„æ”¹ä¸ºå½“å‰tree
 	this->recurs_update(tree,tree->getRoot());
 }
 
@@ -1019,7 +1019,7 @@ void logic_Program::recurs_update(logic_Tree *tree,logic_TreeNode *some) {
 
 	mvmu_ModuleId_TreeMap[some->getID()] = tree;
 
-	//ºÍ updateMId_TreeMap() Á¬ÓÃ£¬µİ¹é¸üĞÂ
+	//å’Œ updateMId_TreeMap() è¿ç”¨ï¼Œé€’å½’æ›´æ–°
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
 		recurs_update(tree,some->mvvu_Children[i]);
 	}
@@ -1031,7 +1031,7 @@ bool logic_Program::addLeafModule(int pre_id,int m_id) {
 		return false;
 	}
 
-	assert(mvmu_ModuleMap.count(pre_id)!=0); //²»´æÔÚpre£¬´íÎó
+	assert(mvmu_ModuleMap.count(pre_id)!=0); //ä¸å­˜åœ¨preï¼Œé”™è¯¯
 
 	
 
@@ -1040,7 +1040,7 @@ bool logic_Program::addLeafModule(int pre_id,int m_id) {
 
 int logic_Program::getModulePreId(int m_id) {
 
-	if (mvmu_ModuleMap.count(m_id)==0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(m_id)==0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return 0;
 
 	int resid = mvmu_ModuleId_TreeMap[m_id]->getPreId(m_id);
@@ -1052,7 +1052,7 @@ std::vector<int > logic_Program::getModulePostId(int m_id) {
 
 	std::vector<int > L;
 
-	if (mvmu_ModuleMap.count(m_id) == 0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(m_id) == 0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return L;
 
 	logic_TreeNode *tNode = mvmu_ModuleId_TreeMap[m_id]->node_search(m_id);
@@ -1068,12 +1068,12 @@ std::vector<int > logic_Program::getModulePostId(int m_id) {
 
 }
 
-//µÃµ½¸ÃÄ£¿éËùÔÚÊ÷µÄ¸ù½ÚµãµÄÄ£¿éid
+//å¾—åˆ°è¯¥æ¨¡å—æ‰€åœ¨æ ‘çš„æ ¹èŠ‚ç‚¹çš„æ¨¡å—id
 int logic_Program::getRootModuleId(int m_id)
 {
 	int rootModuleId = 0;
 
-	if (mvmu_ModuleMap.count(m_id) == 0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(m_id) == 0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return rootModuleId;
 
 	logic_Tree* theTree = getTreeFromId(m_id);
@@ -1083,10 +1083,10 @@ int logic_Program::getRootModuleId(int m_id)
 	return rootModuleId;
 }
 
-//²éÑ¯Á½¸ömoduleÊÇ·ñÔÚÍ¬Ò»¿ÅÊ÷ÄÚ
+//æŸ¥è¯¢ä¸¤ä¸ªmoduleæ˜¯å¦åœ¨åŒä¸€é¢—æ ‘å†…
 bool logic_Program::IsInSameTree(int cur_m_id, int other_m_id)
 {
-	assert(mvmu_ModuleMap.count(cur_m_id) != 0 && mvmu_ModuleMap.count(other_m_id)); //ÅĞ¶¨ÊÇ·ñ´æÔÚ
+	assert(mvmu_ModuleMap.count(cur_m_id) != 0 && mvmu_ModuleMap.count(other_m_id)); //åˆ¤å®šæ˜¯å¦å­˜åœ¨
 
 	logic_Tree* oneTree = getTreeFromId(cur_m_id);
 	logic_Tree* otherTree = getTreeFromId(other_m_id);
@@ -1101,7 +1101,7 @@ bool logic_Program::IsInSameTree(int cur_m_id, int other_m_id)
 std::vector<int > logic_Program::getForModuleRootPostId(int for_Id){
 	std::vector<int > L;
 
-	if (mvmu_ModuleMap.count(for_Id) == 0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(for_Id) == 0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return L;
 
 	auto forModule = (logic_ForModule*)mvmu_ModuleMap[for_Id];
@@ -1119,7 +1119,7 @@ std::vector<int > logic_Program::getIfModuleBranchPostId(int if_id, int local_br
 {
 	std::vector<int > L;
 
-	if (mvmu_ModuleMap.count(if_id) == 0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(if_id) == 0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return L;
 
 	auto IfModule = (logic_IfModule*)mvmu_ModuleMap[if_id];
@@ -1137,7 +1137,7 @@ std::vector<int > logic_Program::getIfModuleBranchPostId(int if_id, int local_br
 
 int logic_Program::getForModuleEndPreId(int for_id)
 {
-	if (mvmu_ModuleMap.count(for_id) == 0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(for_id) == 0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return 0;
 
 	auto forModule = (logic_ForModule*)mvmu_ModuleMap[for_id];
@@ -1149,7 +1149,7 @@ int logic_Program::getForModuleEndPreId(int for_id)
 
 int	logic_Program::getIfModuleEndPreId(int if_id, int local_branch_id)
 {
-	if (mvmu_ModuleMap.count(if_id) == 0) //²»´æÔÚ£¬´íÎó
+	if (mvmu_ModuleMap.count(if_id) == 0) //ä¸å­˜åœ¨ï¼Œé”™è¯¯
 		return 0;
 
 	auto IfModule = (logic_IfModule*)mvmu_ModuleMap[if_id];
@@ -1167,7 +1167,7 @@ std::vector<int> logic_Program::getAllTreeNodeId(int tree_id) {
 	std::vector<int > L;
 
 	if( mvmu_TreeMap.count(tree_id) <=0 ) {
-		//´íÎó£¬·µ»Ø¿Õ¼¯
+		//é”™è¯¯ï¼Œè¿”å›ç©ºé›†
 		return L;
 	}
 
@@ -1181,7 +1181,7 @@ void logic_Program::recurs_GetId(logic_TreeNode *some,std::vector<int> & L) {
 
 	L.push_back(some->getID());
 
-	//ºÍ getAllTreeNodeId() Á¬ÓÃ£¬µİ¹éget id
+	//å’Œ getAllTreeNodeId() è¿ç”¨ï¼Œé€’å½’get id
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
 		recurs_GetId(some->mvvu_Children[i],L);
 	}
@@ -1189,13 +1189,13 @@ void logic_Program::recurs_GetId(logic_TreeNode *some,std::vector<int> & L) {
 
 std::string logic_Program::getModulePara(int type,int m_id,int p_id) {
 
-	//MAX_VALUE = 0,//×î´óÖµ
-	//MIN_VALUE, //×îĞ¡Öµ
-	//INIT, //³õÊ¼Öµ
-	//CUR //µ±Ç°Öµ
+	//MAX_VALUE = 0,//æœ€å¤§å€¼
+	//MIN_VALUE, //æœ€å°å€¼
+	//INIT, //åˆå§‹å€¼
+	//CUR //å½“å‰å€¼
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return NULL; //´íÎó
+		return NULL; //é”™è¯¯
 	}
 
 	logic_BasicPara *tPara = mvmu_ModuleMap[m_id]->getPara(p_id);
@@ -1233,7 +1233,7 @@ std::string logic_Program::getModulePara(int type,int m_id,int p_id) {
 void logic_Program::setModulePara(int m_id,int p_id,std::string p_value) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return ; //´íÎó
+		return ; //é”™è¯¯
 	}
 
 	logic_BasicPara *tPara = mvmu_ModuleMap[m_id]->getPara(p_id);
@@ -1243,7 +1243,7 @@ void logic_Program::setModulePara(int m_id,int p_id,std::string p_value) {
 WinSwitcherType logic_Program::getModuleWinSwType(int m_id,int m_modeValue) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		//return ; //´íÎó
+		//return ; //é”™è¯¯
 		assert(false);
 	}
 
@@ -1254,7 +1254,7 @@ WinSwitcherType logic_Program::getModuleWinSwType(int m_id,int m_modeValue) {
 std::string logic_Program::getModuleWinSwValue(int m_id) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return NULL; //´íÎó
+		return NULL; //é”™è¯¯
 	}
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
@@ -1265,7 +1265,7 @@ std::string logic_Program::getModuleWinSwValue(int m_id) {
 void logic_Program::setModuleWinSwValue(int m_id,std::string ws_value) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return ; //´íÎó
+		return ; //é”™è¯¯
 	}
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
@@ -1275,7 +1275,7 @@ void logic_Program::setModuleWinSwValue(int m_id,std::string ws_value) {
 int logic_Program::getModuleDaisyChainValue(int m_id) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return -1; //´íÎó
+		return -1; //é”™è¯¯
 	}
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
@@ -1285,7 +1285,7 @@ int logic_Program::getModuleDaisyChainValue(int m_id) {
 void logic_Program::setModuleDaisyChainValue(int m_id,int chain_value) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return ; //´íÎó
+		return ; //é”™è¯¯
 	}
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
@@ -1295,7 +1295,7 @@ void logic_Program::setModuleDaisyChainValue(int m_id,int chain_value) {
 std::vector<int > logic_Program::getModuleParamsIds(int m_id,int mode_value) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		//return ; //´íÎó
+		//return ; //é”™è¯¯
 		assert(false);
 	}
 
@@ -1306,7 +1306,7 @@ std::vector<int > logic_Program::getModuleParamsIds(int m_id,int mode_value) {
 int logic_Program::getModuleModeValue(int m_id) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return -1; //´íÎó
+		return -1; //é”™è¯¯
 	}
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
@@ -1316,20 +1316,20 @@ int logic_Program::getModuleModeValue(int m_id) {
 void logic_Program::setModuleModeValue(int m_id,int mode_id) {
 
 	if ( 0 == mvmu_ModuleMap.count(m_id) ) {
-		return ; //´íÎó
+		return ; //é”™è¯¯
 	}
 
 	logic_BasicModule *tModule = mvmu_ModuleMap[m_id];
 	tModule->setModeValue(mode_id);
 }
 
-//µÃµ½ËùÓĞtreenode
+//å¾—åˆ°æ‰€æœ‰treenode
 std::vector<logic_TreeNode *> logic_Program::getAllTreeNode(int rootID) {
 
 	std::vector<logic_TreeNode *> L;
 
 	if ( 0 == mvmu_ModuleMap.count(rootID) ) {
-		return L; //´íÎó
+		return L; //é”™è¯¯
 	}
 
 	logic_Tree *tree = mvmu_TreeMap[rootID];
@@ -1365,7 +1365,7 @@ void logic_Program::recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNo
 
 	L.push_back(some);
 
-	//ºÍ getAllTreeNodeId() Á¬ÓÃ£¬µİ¹éget id
+	//å’Œ getAllTreeNodeId() è¿ç”¨ï¼Œé€’å½’get id
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
 		recurs_GetNode(some->mvvu_Children[i],L);
 	}
@@ -1376,25 +1376,25 @@ void logic_Program::recurs_GetNode(logic_TreeNode *some,std::vector<logic_TreeNo
 //insert into for
 bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_id) {
 
-	/////´Ë´¦ÒÑ±ØÈ»ÊÇ append ÁË£¬ÇÒ pre_id ±ØÈ»ÊÇ0
+	/////æ­¤å¤„å·²å¿…ç„¶æ˜¯ append äº†ï¼Œä¸” pre_id å¿…ç„¶æ˜¯0
 
 	if( mvmu_ModuleMap.count(for_id) == 0 )
 		return false;
 
-	if( -1 == pre_id ) //ÏòactiveTreeºóÃæÖ±½Ó²åÈëÒ»¸öÄ£¿é
+	if( -1 == pre_id ) //å‘activeTreeåé¢ç›´æ¥æ’å…¥ä¸€ä¸ªæ¨¡å—
 		return this->appendActiveTreeInsertFor(m_id,m_type,for_id);
 
-	///// Step1¡¢µ÷ÓÃÒÑ¾­Ğ´ºÃµÄ appendModule() ·½·¨£¬pre_id ±ØÈ»ÊÇ0
+	///// Step1ã€è°ƒç”¨å·²ç»å†™å¥½çš„ appendModule() æ–¹æ³•ï¼Œpre_id å¿…ç„¶æ˜¯0
 	this->appendModule(m_id,0,m_type);
 
-	///// Step2¡¢Íù for Ä£¿éÖĞ¼ÓÊ÷
+	///// Step2ã€å¾€ for æ¨¡å—ä¸­åŠ æ ‘
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[for_id];
 
-	if( 2003 != tmpModule->getModuleType() ) //²»ÊÇforÄ£¿é£¬´íÎó
+	if( 2003 != tmpModule->getModuleType() ) //ä¸æ˜¯foræ¨¡å—ï¼Œé”™è¯¯
 		return false;
 
-	/// type Ò»¶¨ÊÇ2003
-	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éfor module
+	/// type ä¸€å®šæ˜¯2003
+	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆfor module
 	
 	if( tmpForModule->addTree(mvmu_ModuleId_TreeMap[m_id]) < 0 )
 		return false;
@@ -1407,25 +1407,25 @@ bool logic_Program::insertModuleIntoFor(int m_id,int pre_id,int m_type,int for_i
 //insert into if
 bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,int branch_id) {
 
-	/////´Ë´¦ÒÑ±ØÈ»ÊÇ append ÁË£¬ÇÒ pre_id ±ØÈ»ÊÇ0
+	/////æ­¤å¤„å·²å¿…ç„¶æ˜¯ append äº†ï¼Œä¸” pre_id å¿…ç„¶æ˜¯0
 
 	if( mvmu_ModuleMap.count(if_id) == 0 )
 		return false;
 
-	if( -1 == pre_id ) //ÏòactiveTreeºóÃæÖ±½Ó²åÈëÒ»¸öÄ£¿é
+	if( -1 == pre_id ) //å‘activeTreeåé¢ç›´æ¥æ’å…¥ä¸€ä¸ªæ¨¡å—
 		return this->appendActiveTreeInsertIf(m_id,m_type,if_id,branch_id);
 
-	///// Step1¡¢µ÷ÓÃÒÑ¾­Ğ´ºÃµÄ appendModule() ·½·¨
+	///// Step1ã€è°ƒç”¨å·²ç»å†™å¥½çš„ appendModule() æ–¹æ³•
 	this->appendModule(m_id,pre_id,m_type);
 
-	///// Step2¡¢Íù for Ä£¿éÖĞ¼ÓÊ÷
+	///// Step2ã€å¾€ for æ¨¡å—ä¸­åŠ æ ‘
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return false;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 	
 	if( tmpIfModule->addTree( branch_id,mvmu_ModuleId_TreeMap[m_id] ) < 0 )
 		return false;
@@ -1435,7 +1435,7 @@ bool logic_Program::insertModuleIntoIf(int m_id,int pre_id,int m_type,int if_id,
 	return true;
 }
 
-// get for µ±Ç°activeÊ÷
+// get for å½“å‰activeæ ‘
 int logic_Program::getForActiveTree(int for_id) {
 
 	if( mvmu_ModuleMap.count(for_id) == 0 )
@@ -1443,18 +1443,18 @@ int logic_Program::getForActiveTree(int for_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[for_id];
 
-	if( 2003 != tmpModule->getModuleType() ) //²»ÊÇforÄ£¿é£¬´íÎó
+	if( 2003 != tmpModule->getModuleType() ) //ä¸æ˜¯foræ¨¡å—ï¼Œé”™è¯¯
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2003
-	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éfor module
+	/// type ä¸€å®šæ˜¯2003
+	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆfor module
 
-	logic_Tree * tree = tmpForModule->getCurActiveTree(); //¿ÉÄÜĞ¡ÓÚ0
+	logic_Tree * tree = tmpForModule->getCurActiveTree(); //å¯èƒ½å°äº0
 
 	return tree->mvi_TreeID;
 }
 
-//if µ±Ç°activeÊ÷
+//if å½“å‰activeæ ‘
 int logic_Program::getIfActiveTree(int if_id,int branch_id) {
 
 	if( mvmu_ModuleMap.count(if_id) == 0 )
@@ -1462,13 +1462,13 @@ int logic_Program::getIfActiveTree(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 
-	logic_Tree * tree = tmpIfModule->getCurActiveTree(branch_id); //¿ÉÄÜĞ¡ÓÚ0
+	logic_Tree * tree = tmpIfModule->getCurActiveTree(branch_id); //å¯èƒ½å°äº0
 
 	return tree->mvi_TreeID;
 }
@@ -1476,14 +1476,14 @@ int logic_Program::getIfActiveTree(int if_id,int branch_id) {
 // set for
 void logic_Program::setForActiveTree(int for_id,int tree_id) {
 
-	assert( mvmu_ModuleMap.count(for_id) > 0 ); //¼Ù¶¨ count ´óÓÚ0
+	assert( mvmu_ModuleMap.count(for_id) > 0 ); //å‡å®š count å¤§äº0
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[for_id];
 
-	assert( 2003 == tmpModule->getModuleType() ); //²»ÊÇforÄ£¿é£¬´íÎó
+	assert( 2003 == tmpModule->getModuleType() ); //ä¸æ˜¯foræ¨¡å—ï¼Œé”™è¯¯
 
-	/// type Ò»¶¨ÊÇ2003
-	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éfor module
+	/// type ä¸€å®šæ˜¯2003
+	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆfor module
 	tmpForModule->setCurActiveTree( mvmu_ModuleId_TreeMap[tree_id] );
 
 	return;
@@ -1492,20 +1492,20 @@ void logic_Program::setForActiveTree(int for_id,int tree_id) {
 //if
 void logic_Program::setIfActiveTree(int if_id,int branch_id,int tree_id) {
 
-	assert( mvmu_ModuleMap.count(if_id) > 0 ); //¼Ù¶¨ count ´óÓÚ0
+	assert( mvmu_ModuleMap.count(if_id) > 0 ); //å‡å®š count å¤§äº0
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	assert( 2004 == tmpModule->getModuleType() ); //²»ÊÇifÄ£¿é£¬´íÎó
+	assert( 2004 == tmpModule->getModuleType() ); //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
-	tmpIfModule->setCurActiveTree( branch_id,mvmu_ModuleId_TreeMap[tree_id] ); //¿ÉÄÜĞ¡ÓÚ0
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
+	tmpIfModule->setCurActiveTree( branch_id,mvmu_ModuleId_TreeMap[tree_id] ); //å¯èƒ½å°äº0
 
 	return;
 }
 
-//get Ö¸¶¨ branchµÄint content
+//get æŒ‡å®š branchçš„int content
 int logic_Program::getIfBranchContentInt(int if_id,int branch_id) {
 
 	if( mvmu_ModuleMap.count(if_id) == 0 )
@@ -1513,13 +1513,13 @@ int logic_Program::getIfBranchContentInt(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 
-	int content = tmpIfModule->getBranchContentInt(branch_id); //¿ÉÄÜĞ¡ÓÚ0
+	int content = tmpIfModule->getBranchContentInt(branch_id); //å¯èƒ½å°äº0
 
 	return content;
 }
@@ -1532,11 +1532,11 @@ std::string logic_Program::getIfBranchContentStr(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return NULL;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 
 	std::string content = tmpIfModule->getBranchContentStr(branch_id);
 
@@ -1550,18 +1550,18 @@ int logic_Program::setIfBranchContent(int if_id,int branch_id,int con_int) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 
 	int flag = tmpIfModule->setBranchContent(if_id,con_int);
 
 	return flag;
 }
 
-//ÖØÔØ string
+//é‡è½½ string
 int logic_Program::setIfBranchContent(int if_id,int branch_id,std::string con_str) {
 
 	if( mvmu_ModuleMap.count(if_id) == 0 )
@@ -1569,36 +1569,45 @@ int logic_Program::setIfBranchContent(int if_id,int branch_id,std::string con_st
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 
 	int flag = tmpIfModule->setBranchContent(if_id,con_str);
 
 	return flag;
 }
 
-//ÔöÉ¾ if ·ÖÖ§
-int logic_Program::addIfBranch(int if_id) {
+//å¢åˆ  if åˆ†æ”¯
+int logic_Program::addBranch(int module_id) {
 
-	if( mvmu_ModuleMap.count(if_id) == 0 )
+	if (mvmu_ModuleMap.count(module_id) == 0)
 		return -3;
 
-	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
+	logic_BasicModule * tmpModule = mvmu_ModuleMap[module_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇforÄ£¿é£¬´íÎó
+	if (2004 != tmpModule->getModuleType() && 2003 != tmpModule->getModuleType()) //Â²Â»ÃŠÃ‡forÂ»Ã²Ã•ÃŸifÃ„Â£Â¿Ã©Â£Â¬Â´Ã­ÃÃ³
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type 2003 for Ã„Â£Â¿Ã©
+	if (2003 == tmpModule->getModuleType())
+	{
+		return 1;
+	}
 
-	int newBranchId = tmpIfModule->addBranch();
-	return newBranchId; //·µ»ØĞÂÔöbranch_id
+	/// type 2004 if Ã„Â£Â¿Ã©
+	if (2004 == tmpModule->getModuleType())
+	{
+		logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ã‡Â¿Ã–Ã†Ã—ÂªÂ»Â»Â³Ã‰if module
+
+		int newBranchId = tmpIfModule->addBranch();
+		return newBranchId; //Â·ÂµÂ»Ã˜ÃÃ‚Ã”Ã¶branch_id
+	}
 }
 
-//ÄÑµã£¬ĞèÒªÉ¾³ı·ÖÖ§ÖĞËùÓĞÊ÷
+//éš¾ç‚¹ï¼Œéœ€è¦åˆ é™¤åˆ†æ”¯ä¸­æ‰€æœ‰æ ‘
 int logic_Program::delIfBranch(int if_id,int branch_id) {
 
 	if( mvmu_ModuleMap.count(if_id) == 0 )
@@ -1606,18 +1615,18 @@ int logic_Program::delIfBranch(int if_id,int branch_id) {
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[if_id];
 
-	if( 2004 != tmpModule->getModuleType() ) //²»ÊÇifÄ£¿é£¬´íÎó
+	if( 2004 != tmpModule->getModuleType() ) //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 		return -4;
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 	if( tmpIfModule->whDelBranch(branch_id) < 0 )
-		return -1; //É¾³ıÊ§°Ü
+		return -1; //åˆ é™¤å¤±è´¥
 
-	//½«ÈçÏÂ²Ù×÷·ÅÔÚifÄÚ²¿Íê³É
+	//å°†å¦‚ä¸‹æ“ä½œæ”¾åœ¨ifå†…éƒ¨å®Œæˆ
 // 	std::vector<int > L = tmpIfModule->delBranch(branch_id);
 // 
-// 	//ÒÑ»ñµÃ´ıÉ¾³ıÄ£¿éÊ÷id£¬ÔÚÍâ²¿É¾³ıÊ÷ÒÔ¼°Ê÷ÖĞµÄÄ£¿é
+// 	//å·²è·å¾—å¾…åˆ é™¤æ¨¡å—æ ‘idï¼Œåœ¨å¤–éƒ¨åˆ é™¤æ ‘ä»¥åŠæ ‘ä¸­çš„æ¨¡å—
 // 	for (int i=0;i < L.size();++i) {
 // 		
 // 		if( this->delTreeThroughId(L[i]) < 0 )
@@ -1627,25 +1636,25 @@ int logic_Program::delIfBranch(int if_id,int branch_id) {
 	return 0;
 }
 
-//Í¨¹ıÒ»¿ÃÊ÷id£¬É¾³ıÊ÷£¨°üÀ¨É¾³ıÊ÷ÖĞ³öÏÖµÄÄ£¿é£¬ĞèÒªÉ¾³ıÁ¬Ïß£©
+//é€šè¿‡ä¸€æ£µæ ‘idï¼Œåˆ é™¤æ ‘ï¼ˆåŒ…æ‹¬åˆ é™¤æ ‘ä¸­å‡ºç°çš„æ¨¡å—ï¼Œéœ€è¦åˆ é™¤è¿çº¿ï¼‰
 int logic_Program::delTreeThroughId(int id) {
 
-	//´Ë id ±ØĞëÊÇÊ÷¸ù
+	//æ­¤ id å¿…é¡»æ˜¯æ ‘æ ¹
 	if( mvmu_TreeMap.count(id) == 0 )
 		return -1;
 
 	logic_TreeNode * root = mvmu_TreeMap[id]->getRoot();
-	recurs_DelTreeNodeModule(root); //Ïú»ÙÄ£¿éÊµÌå
+	recurs_DelTreeNodeModule(root); //é”€æ¯æ¨¡å—å®ä½“
 
 	mvmi_TreeId_For_IfIdMap.erase(mvmu_TreeMap[id]);
-	SAFE_DELETE(mvmu_TreeMap[id]); //Ïú»ÙÊ÷
-	//Ä¨³ıÊ÷ºÛ¼£
+	SAFE_DELETE(mvmu_TreeMap[id]); //é”€æ¯æ ‘
+	//æŠ¹é™¤æ ‘ç—•è¿¹
 	mvmu_TreeMap.erase(id);
 
 	return 0;
 }
 
-//ÍêÈ«É¾³ıÒ»¿ÃÊ÷ËùÓĞ½ÚµãµÄËùÓĞĞÅÏ¢£¨¸÷ÖÖÊµÌåmapºÍconnection map£©
+//å®Œå…¨åˆ é™¤ä¸€æ£µæ ‘æ‰€æœ‰èŠ‚ç‚¹çš„æ‰€æœ‰ä¿¡æ¯ï¼ˆå„ç§å®ä½“mapå’Œconnection mapï¼‰
 void logic_Program::recurs_DelTreeNodeModule(logic_TreeNode *some) {
 
 	///// do sth here
@@ -1658,12 +1667,12 @@ void logic_Program::recurs_DelTreeNodeModule(logic_TreeNode *some) {
 	mvmu_ModuleId_TreeMap.erase(tmpId);
 	SAFE_DELETE(tmpModule);
 
-	//´¦ÀíÁ¬Ïß
+	//å¤„ç†è¿çº¿
 	for( map<whPort ,whPort >::iterator it = mvvu_Conn_From_ToMap.begin(); it != mvvu_Conn_From_ToMap.end(); ++it ) {
 
 		if( tmpId == it->first.moduleId ) {
 
-			//Èç¹û from ÊÇ¸ÃÄ£¿é£¬ËùÓĞÕâ¸ö outModule Ïà¹Ø¾ÍĞèÒªÉ¾³ı
+			//å¦‚æœ from æ˜¯è¯¥æ¨¡å—ï¼Œæ‰€æœ‰è¿™ä¸ª outModule ç›¸å…³å°±éœ€è¦åˆ é™¤
 			whPort outPort = it->first;
 			whPort inPort = mvvu_Conn_From_ToMap[outPort];
 			mvvu_Conn_From_ToMap.erase(outPort);
@@ -1671,38 +1680,38 @@ void logic_Program::recurs_DelTreeNodeModule(logic_TreeNode *some) {
 
 		}else if(tmpId == it->second.moduleId) {
 
-			//Èç¹û to ÊÇ¸ÃÄ£¿é
-			whPort outPort = it->first;   // Ïàµ±ÓÚ whPort inPort = it->second;
+			//å¦‚æœ to æ˜¯è¯¥æ¨¡å—
+			whPort outPort = it->first;   // ç›¸å½“äº whPort inPort = it->second;
 			whPort inPort = mvvu_Conn_From_ToMap[outPort];
 			mvvu_Conn_From_ToMap.erase(outPort);
 			mvvu_Conn_To_FromMap.erase(inPort);
 		}
 	}
 
-	//ºÍ getAllTreeNodeId() Á¬ÓÃ£¬µİ¹éget id
+	//å’Œ getAllTreeNodeId() è¿ç”¨ï¼Œé€’å½’get id
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
 		recurs_DelTreeNodeModule(some->mvvu_Children[i]);
 	}
 }
 
-/// \brief Ä£¿é²ÎÊıÁ¬Ïß
+/// \brief æ¨¡å—å‚æ•°è¿çº¿
 int logic_Program::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_para_id) {
 
 	assert( out_m_id != in_m_id );
 
-	assert( mvmu_ModuleMap.count(out_m_id) * mvmu_ModuleMap.count(in_m_id) != 0 ); //Èç¹ûÕÒ²»µ½±¨´í
+	assert( mvmu_ModuleMap.count(out_m_id) * mvmu_ModuleMap.count(in_m_id) != 0 ); //å¦‚æœæ‰¾ä¸åˆ°æŠ¥é”™
 
 	logic_BasicPara * outPara = mvmu_ModuleMap[out_m_id]->getPara(out_m_id);
 	logic_BasicPara * inPara = mvmu_ModuleMap[in_m_id]->getPara(in_m_id);
 
 	if( NULL == outPara || NULL == inPara ) {
 
-		//Ã»ÓĞÄÇÃ´¶à²ÎÊı£¬Ö±½Ó´í
+		//æ²¡æœ‰é‚£ä¹ˆå¤šå‚æ•°ï¼Œç›´æ¥é”™
 		//assert(false);
 		return -1;
 	}
 
-	//¼ì²éÊÇ·ñÊÇ in »ò out
+	//æ£€æŸ¥æ˜¯å¦æ˜¯ in æˆ– out
 	if( outPara->getParaIOType() != PARA_OUT
 		|| inPara->getParaIOType() != PARA_IN
 		) {
@@ -1710,7 +1719,7 @@ int logic_Program::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_p
 		return -2;
 	}
 
-	//Ìî³äÁ¬Ïß map
+	//å¡«å……è¿çº¿ map
 	whPort outPort;
 	outPort.moduleId = out_m_id;
 	outPort.paraId = out_para_id;
@@ -1722,44 +1731,44 @@ int logic_Program::paraConnect(int out_m_id,int out_para_id,int in_m_id,int in_p
 	if( mvvu_Conn_From_ToMap.count(outPort)
 		* mvvu_Conn_To_FromMap.count(inPort) >0
 		)
-		return -3; //Èç¹ûÒÑ¾­´æÔÚ
+		return -3; //å¦‚æœå·²ç»å­˜åœ¨
 
-	//¼ì²â inModule ÊÇ·ñÊÇ outModule ×æÏÈ£¬Èç¹ûÊÇ×æÏÈÔò²»¿ÉÄÜÁ¬Ïß
+	//æ£€æµ‹ inModule æ˜¯å¦æ˜¯ outModule ç¥–å…ˆï¼Œå¦‚æœæ˜¯ç¥–å…ˆåˆ™ä¸å¯èƒ½è¿çº¿
 	logic_Tree * out_m_tree = mvmu_ModuleId_TreeMap[out_m_id];
 	bool flag = out_m_tree->isAncestor(out_m_id,in_m_id);
 
-	//Èç¹û flag ÊÇ false£¬´ú±í¿ÉÒÔ
+	//å¦‚æœ flag æ˜¯ falseï¼Œä»£è¡¨å¯ä»¥
 	if( NULL == flag ) {
 
 		mvvu_Conn_From_ToMap[outPort] = inPort;
 		mvvu_Conn_To_FromMap[inPort] = outPort;
 		return 0;
 	}else {
-		return -4; //´ú±í inModule ÊÇ outModule ×æÏÈ£¬²»ÄÜ¹¹³ÉÁ¬Ïß
+		return -4; //ä»£è¡¨ inModule æ˜¯ outModule ç¥–å…ˆï¼Œä¸èƒ½æ„æˆè¿çº¿
 	}
 }
 
-//È¡ÏûÁ¬Ïß
-//¿ÉÍ¨¹ı isOut À´ÓÃoutModule»òÕßinModuleÉ¾³ı
+//å–æ¶ˆè¿çº¿
+//å¯é€šè¿‡ isOut æ¥ç”¨outModuleæˆ–è€…inModuleåˆ é™¤
 void logic_Program::outParaDisconnect(int out_m_id,int out_para_id) {
 
-	assert( mvmu_ModuleMap.count(out_m_id) != 0 ); //Èç¹ûÕÒ²»µ½±¨´í
+	assert( mvmu_ModuleMap.count(out_m_id) != 0 ); //å¦‚æœæ‰¾ä¸åˆ°æŠ¥é”™
 
 	logic_BasicPara * outPara = mvmu_ModuleMap[out_m_id]->getPara(out_m_id);
 
 	if( NULL == outPara ) {
 
-		//Ã»ÓĞÄÇÃ´¶à²ÎÊı£¬Ö±½Ó´í
+		//æ²¡æœ‰é‚£ä¹ˆå¤šå‚æ•°ï¼Œç›´æ¥é”™
 		assert(false);
 	}
 
-	//¼ì²éÊÇ·ñÊÇ out
+	//æ£€æŸ¥æ˜¯å¦æ˜¯ out
 	if( outPara->getParaIOType() != PARA_OUT ) {
 
 		assert(false);
 	}
 
-	//Ìî³ä Port
+	//å¡«å…… Port
 	whPort outPort;
 	outPort.moduleId = out_m_id;
 	outPort.paraId = out_para_id;
@@ -1769,7 +1778,7 @@ void logic_Program::outParaDisconnect(int out_m_id,int out_para_id) {
 
 	whPort inPort = mvvu_Conn_From_ToMap[outPort];
 
-	//É¾³ımap ³ÉÔ±
+	//åˆ é™¤map æˆå‘˜
 	mvvu_Conn_From_ToMap.erase(outPort);
 	mvvu_Conn_To_FromMap.erase(inPort);
 
@@ -1778,22 +1787,22 @@ void logic_Program::outParaDisconnect(int out_m_id,int out_para_id) {
 
 void logic_Program::inParaDisconnect(int in_m_id,int in_para_id) {
 
-	assert( mvmu_ModuleMap.count(in_m_id) != 0 ); //Èç¹ûÕÒ²»µ½±¨´í
+	assert( mvmu_ModuleMap.count(in_m_id) != 0 ); //å¦‚æœæ‰¾ä¸åˆ°æŠ¥é”™
 
 	logic_BasicPara * inPara = mvmu_ModuleMap[in_m_id]->getPara(in_m_id);
 
 	if( NULL == inPara ) {
 
-		//Ã»ÓĞÄÇÃ´¶à²ÎÊı£¬Ö±½Ó´í
+		//æ²¡æœ‰é‚£ä¹ˆå¤šå‚æ•°ï¼Œç›´æ¥é”™
 		assert(false);
 	}
 
-	//¼ì²éÊÇ·ñÊÇ in
+	//æ£€æŸ¥æ˜¯å¦æ˜¯ in
 	if( inPara->getParaIOType() != PARA_IN ) {
 			assert(false);
 	}
 
-	//Ìî³äÁ¬Ïß map
+	//å¡«å……è¿çº¿ map
 	whPort inPort;
 	inPort.moduleId = in_m_id;
 	inPort.paraId = in_para_id;
@@ -1803,112 +1812,112 @@ void logic_Program::inParaDisconnect(int in_m_id,int in_para_id) {
 
 	whPort outPort = mvvu_Conn_To_FromMap[inPort];
 
-	//É¾³ımap ³ÉÔ±
+	//åˆ é™¤map æˆå‘˜
 	mvvu_Conn_From_ToMap.erase(outPort);
 	mvvu_Conn_To_FromMap.erase(inPort);
 
 	return;
 }
 
-//for moveÆÕÍ¨²Ù×÷
+//for moveæ™®é€šæ“ä½œ
 int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
 	assert( pre_m_id >= 0 );
 
 	if (pre_m_id > 0)
 	{
-		//////Èç¹ûpre_m_id != 0 Ôòpre_m_id±ØĞëÔÚforÖĞ
+		//////å¦‚æœpre_m_id != 0 åˆ™pre_m_idå¿…é¡»åœ¨forä¸­
 		assert(mvmi_TreeId_For_IfIdMap.count(mvmu_ModuleId_TreeMap[pre_m_id]));
 
 		if (0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
 			*(mvmu_ModuleMap.count(for_id))) {
-			return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id ¶¼ÒªÓĞ
+			return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id éƒ½è¦æœ‰
 		}
 
-		// cur_id ²»ÄÜÊÇ¿ªÊ¼Ä£¿é
+		// cur_id ä¸èƒ½æ˜¯å¼€å§‹æ¨¡å—
 		if (mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001) {
 			assert(false);
-			return -3; //Ä£¿éÀàĞÍ´íÎó
+			return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 		}
 	}
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	///// step1¡¢²åÈëĞÂÊ÷½Úµã
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷£¬ÔçµãÕÒµ½»á¸ü¿¿Æ×
+	///// step1ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘ï¼Œæ—©ç‚¹æ‰¾åˆ°ä¼šæ›´é è°±
 	logic_Tree *insTree = NULL;
-	if( 0 == pre_m_id ) {  ////////////±ØĞëÓÃÉî¿½±´£¬Ç³¿½±´¿ÉÄÜÓĞÎ£ÏÕ
+	if( 0 == pre_m_id ) {  ////////////å¿…é¡»ç”¨æ·±æ‹·è´ï¼Œæµ…æ‹·è´å¯èƒ½æœ‰å±é™©
 
-		//Èç¹ûÇ°²åÒ»¿Ã¿ÕÊ÷
+		//å¦‚æœå‰æ’ä¸€æ£µç©ºæ ‘
 
-		///Èç¹ûÊÇÇ°²å¿ÕÊ÷£¬Í¬Ê±ÓÖÊÇ¡¾Î¨Ò»Ä£¿é¡¿ÊÇ¿ÉÒÔµÄ£¬´Óif»òÕßforÒÆ¹ıÀ´
+		///å¦‚æœæ˜¯å‰æ’ç©ºæ ‘ï¼ŒåŒæ—¶åˆæ˜¯ã€å”¯ä¸€æ¨¡å—ã€‘æ˜¯å¯ä»¥çš„ï¼Œä»ifæˆ–è€…forç§»è¿‡æ¥
 
-		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //Éî¿½±´¹¹Ôìµ½Õ»
+		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //æ·±æ‹·è´æ„é€ åˆ°æ ˆ
 
 		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
-			//Èç¹ûº¢×Ó²»ÊÇÒ»¸ö£¬´íÎó
+			//å¦‚æœå­©å­ä¸æ˜¯ä¸€ä¸ªï¼Œé”™è¯¯
 			return -4;
 		}
 
 		tmpCurNode.mvu_Parent = 0;
 		tmpCurNode.mvvu_Children.clear();
 
-		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //Éî¿½±´¹¹Ôìµ½¶Ñ
-		insTree = new logic_Tree(tmpPassNode); //ĞÂ½¨Ò»¿ÃÊ÷£¬´ËnodeÒ²±ØĞëĞÂ½¨£¬·ñÔò±»ÏÂÃæµÄdelnodeÁË
+		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //æ·±æ‹·è´æ„é€ åˆ°å †
+		insTree = new logic_Tree(tmpPassNode); //æ–°å»ºä¸€æ£µæ ‘ï¼Œæ­¤nodeä¹Ÿå¿…é¡»æ–°å»ºï¼Œå¦åˆ™è¢«ä¸‹é¢çš„delnodeäº†
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 
-		///////////////////////////////ÌØÊâ´¦ÀíforµÄµØ·½///////////////////////////////
+		///////////////////////////////ç‰¹æ®Šå¤„ç†forçš„åœ°æ–¹///////////////////////////////
 
 		///
-		/// \brief rootÍÏÈëfor
+		/// \brief rootæ‹–å…¥for
 		///
-		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = for_id; //½¨Á¢forÄ£¿éÓ³Éä
+		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = for_id; //å»ºç«‹foræ¨¡å—æ˜ å°„
 		tmpForModule->addTree(mvmu_TreeMap[cur_m_id]); //add tree
 
 		////////////////////////////////////////////////////////////////////////////////
 
 	}else {
 
-		////// pre_m_id ²»Îª0
+		////// pre_m_id ä¸ä¸º0
 
-		//////pre_m_id±ØĞëÔÚforÖĞ
+		//////pre_m_idå¿…é¡»åœ¨forä¸­
 		assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-		/////Èç¹ûÒÑ´æÔÚ£¬Ö±½ÓÕÒµ½´ı²åÈëÊ÷
+		/////å¦‚æœå·²å­˜åœ¨ï¼Œç›´æ¥æ‰¾åˆ°å¾…æ’å…¥æ ‘
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
 		if( insTree->mvi_TreeID == oldTree->mvi_TreeID ) {
 
-			//Èç¹ûÊÇ±¾ÄÚÖ±½Ómove
+			//å¦‚æœæ˜¯æœ¬å†…ç›´æ¥move
 			if ( insTree->innerTreeBackInsSingMove(pre_m_id,cur_m_id) < 0 )
-				return -6; //Ê÷ÄÚmove³ö´í
+				return -6; //æ ‘å†…moveå‡ºé”™
 			else
-				return 0; //ÒÑmove¿ÉÖ±½Ó·µ»Ø
+				return 0; //å·²moveå¯ç›´æ¥è¿”å›
 
 		}else {
-			//Ê÷¼äÒÆ¶¯
+			//æ ‘é—´ç§»åŠ¨
 			insTree->append_node(pre_m_id,cur_m_id);
 		}
 	}
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
 		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷£¨ ½øÈëÕâ¸ö·ÖÖ§ pre_m_id Ò²¿ÉÄÜÎª0 £©
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘ï¼ˆ è¿›å…¥è¿™ä¸ªåˆ†æ”¯ pre_m_id ä¹Ÿå¯èƒ½ä¸º0 ï¼‰
 
-			///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+			///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 			///
-			/// \brief rootÒÆ³öifºÍfor
+			/// \brief rootç§»å‡ºifå’Œfor
 			///
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
 
@@ -1921,22 +1930,22 @@ int logic_Program::backInsSingMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 
-			// Step3¡¢£¨±ØĞëÔÚ´Ë´¦£¬²»È»¾ÍreturnÁË£©¸üĞÂ
+			// Step3ã€ï¼ˆå¿…é¡»åœ¨æ­¤å¤„ï¼Œä¸ç„¶å°±returnäº†ï¼‰æ›´æ–°
 			mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-			return 0; //Õı³£·µ»Ø
+			return 0; //æ­£å¸¸è¿”å›
 		}else {
-			//²»ÊÇÎ¨Ò»Ä£¿é
+			//ä¸æ˜¯å”¯ä¸€æ¨¡å—
 
 			oldTree->setFirstChildAsRoot();
 		}
 
 	}
 
-	// Step3¡¢¸üĞÂ
+	// Step3ã€æ›´æ–°
 	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 
 }
 
@@ -1944,83 +1953,83 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 	assert(post_m_id>0);
 
-	//////post_m_id±ØĞëÔÚforÖĞ
+	//////post_m_idå¿…é¡»åœ¨forä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
 		*(mvmu_ModuleMap.count(for_id)) ) {
-		return -2; //Ã»ÕÒµ½²åÈëµã
+		return -2; //æ²¡æ‰¾åˆ°æ’å…¥ç‚¹
 	}
 
-	//Èç¹û post_m_id ÊÇ¿ªÊ¼
+	//å¦‚æœ post_m_id æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-			return -3; //Ä£¿éÀàĞÍ´íÎó
+			return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	///// step1¡¢²åÈëĞÂÊ÷½Úµã
-	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //´ı²åÈëÊ÷
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
+	///// step1ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //å¾…æ’å…¥æ ‘
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
 
 	int oldRootId = insTree->mvi_TreeID;
 	if( post_m_id == oldRootId ) {
 
-		//´ı²åÈë½ÚµãÒª²åÔÚÔ­Ê÷rootÖ®Ç°
-		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //´ÓÆäËûÊ÷½ÚµãÕı³£½»»»
+		//å¾…æ’å…¥èŠ‚ç‚¹è¦æ’åœ¨åŸæ ‘rootä¹‹å‰
+		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //ä»å…¶ä»–æ ‘èŠ‚ç‚¹æ­£å¸¸äº¤æ¢
 
 			if( insTree->exchangeRoot(cur_m_id) == false )
 				return -5;
 
-			//Ö»ÓĞ post_m_id ÊÇ¸ùµÄÇé¿ö£¬²Å¸üĞÂtree map
+			//åªæœ‰ post_m_id æ˜¯æ ¹çš„æƒ…å†µï¼Œæ‰æ›´æ–°tree map
 			mvmu_TreeMap.erase(post_m_id);
 			mvmu_TreeMap[cur_m_id] = insTree;
 		} else {
 
-			//Ê÷ÄÚ½»»»£¬²»ÓÃÉ¾³ı¾ÉÊ÷½Úµã£¬ÌáÇ°ÖÕÖ¹
+			//æ ‘å†…äº¤æ¢ï¼Œä¸ç”¨åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼Œæå‰ç»ˆæ­¢
 			if( insTree->innerTreeExchangeRoot(cur_m_id) >= 0 ) {
 
-				//Ö»ÓĞ post_m_id ÊÇ¸ùµÄÇé¿ö£¬²Å¸üĞÂtree map
+				//åªæœ‰ post_m_id æ˜¯æ ¹çš„æƒ…å†µï¼Œæ‰æ›´æ–°tree map
 				mvmu_TreeMap.erase(post_m_id);
 				mvmu_TreeMap[cur_m_id] = insTree;
 
 				return 0;
 			} else {
-				return -4; //Ê÷ÄÚ½»»»Ê§°Ü
+				return -4; //æ ‘å†…äº¤æ¢å¤±è´¥
 			}
 		}
 
 	}else {
 
-		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //±¾Ê÷²Ù×÷
+		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //æœ¬æ ‘æ“ä½œ
 
 			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
 
-				//Ê÷ÄÚÕı³£²Ù×÷£¬ÌáÇ°ÖÕÖ¹
+				//æ ‘å†…æ­£å¸¸æ“ä½œï¼Œæå‰ç»ˆæ­¢
 				return 0;
 			}else {
 				return -6;
 			}
 
 		}
-		//Õı³£²åÈëµØ·½
+		//æ­£å¸¸æ’å…¥åœ°æ–¹
 		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
 	}
 
 	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID 
 		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+			///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 			///
-			/// \brief rootÒÆ³öifºÍfor
+			/// \brief rootç§»å‡ºifå’Œfor
 			///
 			logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
@@ -2031,71 +2040,71 @@ int logic_Program::frontInsSingMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 			///////////////////////////////////////////////////////////////////////////////////
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 	}
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
 int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
-	//////pre_m_id±ØĞëÔÚforÖĞ
+	//////pre_m_idå¿…é¡»åœ¨forä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	//////cur_m_id ºÍ pre_m_id ±ØĞëÔÚÒ»¸öforÖĞ
+	//////cur_m_id å’Œ pre_m_id å¿…é¡»åœ¨ä¸€ä¸ªforä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
-	/// ÖØ¸´ backInsMultiMove ·½·¨
-	/// ÖØ¸´ addLeafMove ·½·¨
+	/// é‡å¤ backInsMultiMove æ–¹æ³•
+	/// é‡å¤ addLeafMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
 		*(mvmu_ModuleMap.count(for_id)) ) {
-		return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id for_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id for_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 		assert(false);
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	/////////////¿ªÊ¼/////////////
+	/////////////å¼€å§‹/////////////
 
-	///// step1¡¢É¾³ı¾ÉÊ÷½Úµã
-	///// ×¢£ºÉ¾³ı±ØĞëÊÇµÚÒ»²½£¬²»È» del_node_notConn ·½·¨»áÉ¾µô´íÎó parent µÄº¢×Ó
+	///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹
+	///// æ³¨ï¼šåˆ é™¤å¿…é¡»æ˜¯ç¬¬ä¸€æ­¥ï¼Œä¸ç„¶ del_node_notConn æ–¹æ³•ä¼šåˆ æ‰é”™è¯¯ parent çš„å­©å­
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //´ı²åÈë½Úµã£¨±ØĞëÔÚ´Ë´¦Ñ°ÕÒ£©
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //å¾…æ’å…¥èŠ‚ç‚¹ï¼ˆå¿…é¡»åœ¨æ­¤å¤„å¯»æ‰¾ï¼‰
 
 	if ( insNode->mvvu_Children.size() == 0 ) {
-		//¿ÉÄÜÖ»ÓĞÒ»¸öº¢×Ó
+		//å¯èƒ½åªæœ‰ä¸€ä¸ªå­©å­
 		return -4;
 	}
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
-		oldTree->del_node_notConn(cur_m_id); //¶Ï¿ª oldTree Óë´Ë½ÚµãµÄÁ¬½Ó
+		//å¹¶éæ ‘æ ¹
+		oldTree->del_node_notConn(cur_m_id); //æ–­å¼€ oldTree ä¸æ­¤èŠ‚ç‚¹çš„è¿æ¥
 
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
-		//ROOT£¬É¾³ıÊ÷
-		oldTree->del_node_notConn(cur_m_id); //Èç¹ûÊÇÊ÷¸ù£¬Ö±½Ó½«¸ÃÊ÷rootÖÃ¿Õ
-		SAFE_DELETE(oldTree); //·ÅĞÄÉ¾³ıÊ÷
+		//ROOTï¼Œåˆ é™¤æ ‘
+		oldTree->del_node_notConn(cur_m_id); //å¦‚æœæ˜¯æ ‘æ ¹ï¼Œç›´æ¥å°†è¯¥æ ‘rootç½®ç©º
+		SAFE_DELETE(oldTree); //æ”¾å¿ƒåˆ é™¤æ ‘
 		mvmu_TreeMap.erase(cur_m_id);
 
-		///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+		///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 		///
-		/// \brief rootÒÆ³öifºÍfor
+		/// \brief rootç§»å‡ºifå’Œfor
 		///
 		logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-		assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //±ØÈ»ÔÚÍ¬Ò»¸öforÖĞ
+		assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //å¿…ç„¶åœ¨åŒä¸€ä¸ªforä¸­
 
 		tmpForModule->delTree(oldTree);
 		mvmi_TreeId_For_IfIdMap.erase(oldTree);
@@ -2103,22 +2112,22 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 		///////////////////////////////////////////////////////////////////////////////////
 	}
 
-	///// step2¡¢²åÈëĞÂ½Úµã
+	///// step2ã€æ’å…¥æ–°èŠ‚ç‚¹
 	logic_Tree *insTree = NULL;
 	if( 0 == pre_m_id ) { 
-		//Èç¹ûÇ°²åÒ»¿Ã¿ÕÊ÷£¬²»¿ÉÄÜÔÚÍâÃæ
+		//å¦‚æœå‰æ’ä¸€æ£µç©ºæ ‘ï¼Œä¸å¯èƒ½åœ¨å¤–é¢
 
-		insTree = new logic_Tree(insNode); //ĞÂ½¨Ò»¿ÃÊ÷
+		insTree = new logic_Tree(insNode); //æ–°å»ºä¸€æ£µæ ‘
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 		mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
 	}else {
-		/////Èç¹ûÒÑ´æÔÚ£¬Ö±½ÓÕÒµ½´ı²åÈëÊ÷
+		/////å¦‚æœå·²å­˜åœ¨ï¼Œç›´æ¥æ‰¾åˆ°å¾…æ’å…¥æ ‘
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
-		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_id½Úµã
-		//Èç¹û pre_m_id ²»ÊÇÒ¶×Ó½Úµã£¬´íÎó·µ»Ø
+		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_idèŠ‚ç‚¹
+		//å¦‚æœ pre_m_id ä¸æ˜¯å¶å­èŠ‚ç‚¹ï¼Œé”™è¯¯è¿”å›
 		if(preNode->mvvu_Children.size()>0) {
 			return -4;
 		}
@@ -2127,33 +2136,33 @@ int logic_Program::backInsMultiMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
 	}
 
-	///// step3¡¢¸üĞÂ module treeÓ³Éä
+	///// step3ã€æ›´æ–° module treeæ˜ å°„
 	recurs_update(insTree,insNode);
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
 int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
-	//////post_m_id±ØĞëÔÚforÖĞ
+	//////post_m_idå¿…é¡»åœ¨forä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
-	//////cur_m_id ºÍ post_m_id ±ØĞëÔÚÒ»¸öforÖĞ
+	//////cur_m_id å’Œ post_m_id å¿…é¡»åœ¨ä¸€ä¸ªforä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[post_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 
-	/// ÖØ¸´ frontInsMultiMove ·½·¨
+	/// é‡å¤ frontInsMultiMove æ–¹æ³•
 	if( 0 == post_m_id ) {
 
-		//¿Õ²å
-		//Ïàµ±ÓÚ backInsMultiMove µ½±³¾°
+		//ç©ºæ’
+		//ç›¸å½“äº backInsMultiMove åˆ°èƒŒæ™¯
 
 		logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-		///// step1¡¢É¾³ı¾ÉÊ÷½Úµã£¬Í¬Ê±½«¶Ï¿ª²¿·ÖÉú³ÉĞÂÊ÷
+		///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ŒåŒæ—¶å°†æ–­å¼€éƒ¨åˆ†ç”Ÿæˆæ–°æ ‘
 		logic_TreeNode * curNode = oldTree->node_search(cur_m_id);
 		if( curNode->mvvu_Children.size() == 1 ) {
 
@@ -2163,11 +2172,11 @@ int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 			mvmu_TreeMap[newTree->getRoot()->getID()] = newTree;
 
-			/////////////ÔÚforÖĞ¼ÓÈëÊ÷///////////
+			/////////////åœ¨forä¸­åŠ å…¥æ ‘///////////
 			mvmi_TreeId_For_IfIdMap[newTree] = for_id;
 			tmpForModule->addTree(newTree);
 
-			///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+			///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 			recurs_update(newTree,newTree->getRoot());
 		}else if( curNode->mvvu_Children.size() > 1 ) {
 			assert(false);
@@ -2175,15 +2184,15 @@ int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 	} else {
 
-		logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //ĞÂ²åÈëÊ÷
+		logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //æ–°æ’å…¥æ ‘
 		logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-		//Èç¹û post_m_id ²»ÊÇ¸ù½Úµã£¬´íÎó·µ»Ø
+		//å¦‚æœ post_m_id ä¸æ˜¯æ ¹èŠ‚ç‚¹ï¼Œé”™è¯¯è¿”å›
 		if( post_m_id!=insTree->mvi_TreeID ) {
 			return -4;
 		}
 
-		///// step1¡¢É¾³ı¾ÉÊ÷½Úµã£¬Í¬Ê±½«¶Ï¿ª²¿·ÖÉú³ÉĞÂÊ÷
+		///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ŒåŒæ—¶å°†æ–­å¼€éƒ¨åˆ†ç”Ÿæˆæ–°æ ‘
 		logic_TreeNode * curNode = oldTree->node_search(cur_m_id);
 		if( curNode->mvvu_Children.size() == 1 ) {
 
@@ -2193,140 +2202,140 @@ int logic_Program::frontInsMultiMoveFor(int cur_m_id,int post_m_id,int for_id) {
 
 			mvmu_TreeMap[newTree->getRoot()->getID()] = newTree;
 
-			/////////////ÔÚforÖĞ¼ÓÈëÊ÷///////////
+			/////////////åœ¨forä¸­åŠ å…¥æ ‘///////////
 			mvmi_TreeId_For_IfIdMap[newTree] = for_id;
 			tmpForModule->addTree(newTree);
 
-			///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+			///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 			recurs_update(newTree,newTree->getRoot());
 		}else if( curNode->mvvu_Children.size() > 1 ) {
 			assert(false);
 		}
 
-		///// step2¡¢²åÈëĞÂÊ÷½Úµã
+		///// step2ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
 
-		logic_TreeNode * insNode = insTree->getRoot(); //´ı²åÈë½Úµã
-		oldTree->add_node(cur_m_id,insNode); //insTree½Óµ½oldTreeÉÏ
+		logic_TreeNode * insNode = insTree->getRoot(); //å¾…æ’å…¥èŠ‚ç‚¹
+		oldTree->add_node(cur_m_id,insNode); //insTreeæ¥åˆ°oldTreeä¸Š
 
-		//±ØÈ»ÊÇROOT£¬Ö±½ÓÉ¾³ıÔ­insTree
-		insTree->del_node_notConn(post_m_id); //ÊÇroot£¬Ö±½ÓÖÃ¿Õ
-		SAFE_DELETE(insTree); //·ÅĞÄÉ¾³ıÊ÷
+		//å¿…ç„¶æ˜¯ROOTï¼Œç›´æ¥åˆ é™¤åŸinsTree
+		insTree->del_node_notConn(post_m_id); //æ˜¯rootï¼Œç›´æ¥ç½®ç©º
+		SAFE_DELETE(insTree); //æ”¾å¿ƒåˆ é™¤æ ‘
 		mvmu_TreeMap.erase(post_m_id);
 
-		///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+		///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 		///
-		/// \brief ÔÚforÖĞÉ¾³ıÊ÷
+		/// \brief åœ¨forä¸­åˆ é™¤æ ‘
 		///
-		assert( mvmi_TreeId_For_IfIdMap.count(insTree) >0 ); //±ØÈ»ÔÚÍ¬Ò»¸öforÖĞ
+		assert( mvmi_TreeId_For_IfIdMap.count(insTree) >0 ); //å¿…ç„¶åœ¨åŒä¸€ä¸ªforä¸­
 
 		tmpForModule->delTree(insTree);
 		mvmi_TreeId_For_IfIdMap.erase(insTree);
 
 		///////////////////////////////////////////////////////////////////////////////////
 
-		///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+		///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 		recurs_update(oldTree,insNode);
 
 	}
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
 int logic_Program::addLeafMoveFor(int cur_m_id,int pre_m_id,int for_id) {
 
-	//////pre_m_id±ØĞëÔÚforÖĞ
+	//////pre_m_idå¿…é¡»åœ¨forä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	//////cur_m_id ºÍ pre_m_id ±ØĞëÔÚÒ»¸öforÖĞ
+	//////cur_m_id å’Œ pre_m_id å¿…é¡»åœ¨ä¸€ä¸ªforä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
-	/// ÖØ¸´ addLeafMove ·½·¨
+	/// é‡å¤ addLeafMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
 		*(mvmu_ModuleMap.count(for_id)) ) {
-		return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id for_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id for_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
 	if ( addLeafCheckPre(cur_m_id,pre_m_id) < 0 ) {
 		return -4;
 	}
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	//¸Ã½Úµã±ØĞëÊÇ¸ÃÊ÷µÄ¸ù½Úµã
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	//è¯¥èŠ‚ç‚¹å¿…é¡»æ˜¯è¯¥æ ‘çš„æ ¹èŠ‚ç‚¹
 	if( oldTree->mvi_TreeID != cur_m_id )
 		assert(false);
 
 	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
-	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //´ı²åÈë½Úµã
-	logic_TreeNode * curNode = oldTree->getRoot(); //µ±Ç°½Úµã
+	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //å¾…æ’å…¥èŠ‚ç‚¹
+	logic_TreeNode * curNode = oldTree->getRoot(); //å½“å‰èŠ‚ç‚¹
 
 	curNode->mvu_Parent = insNode;
 
-	/// Step1¡¢½ÓÈëĞÂ½Úµã
+	/// Step1ã€æ¥å…¥æ–°èŠ‚ç‚¹
 	insNode->mvvu_Children.push_back(curNode);
 
-	/// Step2¡¢É¾³ı¾ÉÊ÷mapĞÅÏ¢
+	/// Step2ã€åˆ é™¤æ—§æ ‘mapä¿¡æ¯
 	mvmu_TreeMap.erase(cur_m_id);
 	oldTree->setRoot(NULL);
 	SAFE_DELETE(oldTree);
 
-	///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+	///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 	///
-	/// \brief rootÒÆ³öifºÍfor
+	/// \brief rootç§»å‡ºifå’Œfor
 	///
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
-	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //±ØÈ»ÔÚÒ»¸öforÖĞ
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //å¿…ç„¶åœ¨ä¸€ä¸ªforä¸­
 
 	tmpForModule->delTree(oldTree);
 	mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	/// Step3¡¢¸üĞÂÄ£¿éÊ÷mapĞÅÏ¢
+	/// Step3ã€æ›´æ–°æ¨¡å—æ ‘mapä¿¡æ¯
 	recurs_update(insTree,curNode);
 
 	return 0;
 
 }
 
-//Í¨¹ıidµÃµ½Ä£¿é
+//é€šè¿‡idå¾—åˆ°æ¨¡å—
 logic_ForModule* logic_Program::getForModuleById(int id) {
 
-	assert( mvmu_ModuleMap.count(id) > 0 ); //¼Ù¶¨ count ´óÓÚ0
+	assert( mvmu_ModuleMap.count(id) > 0 ); //å‡å®š count å¤§äº0
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[id];
-	assert( 2003 == tmpModule->getModuleType() ); //²»ÊÇforÄ£¿é£¬´íÎó
+	assert( 2003 == tmpModule->getModuleType() ); //ä¸æ˜¯foræ¨¡å—ï¼Œé”™è¯¯
 
-	/// type Ò»¶¨ÊÇ2003
-	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éfor module
+	/// type ä¸€å®šæ˜¯2003
+	logic_ForModule *tmpForModule = (logic_ForModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆfor module
 
 	return tmpForModule;
 }
 
 logic_IfModule* logic_Program::getIfModuleById(int id) {
 
-	assert( mvmu_ModuleMap.count(id) > 0 ); //¼Ù¶¨ count ´óÓÚ0
+	assert( mvmu_ModuleMap.count(id) > 0 ); //å‡å®š count å¤§äº0
 
 	logic_BasicModule * tmpModule = mvmu_ModuleMap[id];
 
-	assert( 2004 == tmpModule->getModuleType() ); //²»ÊÇifÄ£¿é£¬´íÎó
+	assert( 2004 == tmpModule->getModuleType() ); //ä¸æ˜¯ifæ¨¡å—ï¼Œé”™è¯¯
 
-	/// type Ò»¶¨ÊÇ2004
-	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //Ç¿ÖÆ×ª»»³Éif module
+	/// type ä¸€å®šæ˜¯2004
+	logic_IfModule *tmpIfModule = (logic_IfModule *)tmpModule; //å¼ºåˆ¶è½¬æ¢æˆif module
 
 	return tmpIfModule;
 }
 
 //rootId = moduleId*100000
-//ºÏ³ÉforºÍif·ÅÈëtree mapÖĞµÄid
+//åˆæˆforå’Œifæ”¾å…¥tree mapä¸­çš„id
 inline int logic_Program::composeTreeId(int for_id) {
 
 	return for_id * ACTIVE_TREE_MAP_FACTOR;
@@ -2338,45 +2347,45 @@ inline int logic_Program::composeTreeId(int if_id,int branch_id) {
 	return if_id * ACTIVE_TREE_MAP_FACTOR + branch_id;
 }
 
-//Ö»ÔÚ½Óµ½activeTree¸ù½ÚµãµÄÊ±ºòµ÷ÓÃ
+//åªåœ¨æ¥åˆ°activeTreeæ ¹èŠ‚ç‚¹çš„æ—¶å€™è°ƒç”¨
 int logic_Program::appendActiveTreeMoveFor(int cur_m_id,int for_id) {
 
-	//½«Ä³Ò»Ä£¿é½Óµ½ for_id activeTreeºóÃæ
+	//å°†æŸä¸€æ¨¡å—æ¥åˆ° for_id activeTreeåé¢
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(for_id)) ) {
 		assert(false);
-		return -2; // Ê×ÏÈ cur_m_id ºÍ for_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ for_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 		assert(false);
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//µÃµ½ activeTree
+	//å¾—åˆ° activeTree
 	logic_Tree * curActiveTree = this->getForModuleById(for_id)->getCurActiveTree();
 	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-	///// Step1¡¢²åÈë½Úµã
+	///// Step1ã€æ’å…¥èŠ‚ç‚¹
 	curActiveTree->append_node(-1,cur_m_id);
 
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
 		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷£¨ ½øÈëÕâ¸ö·ÖÖ§ pre_m_id Ò²¿ÉÄÜÎª0 £©
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘ï¼ˆ è¿›å…¥è¿™ä¸ªåˆ†æ”¯ pre_m_id ä¹Ÿå¯èƒ½ä¸º0 ï¼‰
 
-			///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+			///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 			///
-			/// \brief rootÒÆ³öifºÍfor
+			/// \brief rootç§»å‡ºifå’Œfor
 			///
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
 				logic_ForModule * tmpForModule = this->getForModuleById(for_id);
@@ -2389,86 +2398,86 @@ int logic_Program::appendActiveTreeMoveFor(int cur_m_id,int for_id) {
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 
-			// Step3¡¢£¨±ØĞëÔÚ´Ë´¦£¬²»È»¾ÍreturnÁË£©¸üĞÂ
+			// Step3ã€ï¼ˆå¿…é¡»åœ¨æ­¤å¤„ï¼Œä¸ç„¶å°±returnäº†ï¼‰æ›´æ–°
 			mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
 
-			return 0; //Õı³£·µ»Ø
+			return 0; //æ­£å¸¸è¿”å›
 		}else {
-			//²»ÊÇÎ¨Ò»Ä£¿é
+			//ä¸æ˜¯å”¯ä¸€æ¨¡å—
 
 			oldTree->setFirstChildAsRoot();
 		}
 
 	}
 
-	// Step3¡¢¸üĞÂ
+	// Step3ã€æ›´æ–°
 	mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
 
 	return 0;
 }
 
-//activeTreeÖ±½ÓÌí¼ÓÒ¶×Ó
+//activeTreeç›´æ¥æ·»åŠ å¶å­
 int logic_Program::addLeafActiveTreeMoveFor(int cur_m_id,int for_id) {
 
-	//////cur_m_id ºÍ activeTree ±ØĞëÔÚÍ¬Ò»¸öforÖĞ
+	//////cur_m_id å’Œ activeTree å¿…é¡»åœ¨åŒä¸€ä¸ªforä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == for_id );
 
-	/// ÖØ¸´ addLeafMove ·½·¨
+	/// é‡å¤ addLeafMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(for_id)) ) {
-			return -2; // Ê×ÏÈ cur_m_id ºÍ for_id ¶¼ÒªÓĞ
+			return -2; // é¦–å…ˆ cur_m_id å’Œ for_id éƒ½è¦æœ‰
 	}
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	//¸Ã½Úµã±ØĞëÊÇ¸ÃÊ÷µÄ¸ù½Úµã
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	//è¯¥èŠ‚ç‚¹å¿…é¡»æ˜¯è¯¥æ ‘çš„æ ¹èŠ‚ç‚¹
 	if( oldTree->mvi_TreeID != cur_m_id )
 		assert(false);
 
 	logic_ForModule * tmpForModule = this->getForModuleById(for_id);
 
 	logic_Tree *insTree = tmpForModule->getCurActiveTree();
-	logic_TreeNode * insNode = insTree->getRoot(); //´ı²åÈë½Úµã
-	logic_TreeNode * curNode = oldTree->getRoot(); //µ±Ç°½Úµã
+	logic_TreeNode * insNode = insTree->getRoot(); //å¾…æ’å…¥èŠ‚ç‚¹
+	logic_TreeNode * curNode = oldTree->getRoot(); //å½“å‰èŠ‚ç‚¹
 
 	curNode->mvu_Parent = insNode;
 
-	/// Step1¡¢½ÓÈëĞÂ½Úµã
+	/// Step1ã€æ¥å…¥æ–°èŠ‚ç‚¹
 	insNode->mvvu_Children.push_back(curNode);
 
-	/// Step2¡¢É¾³ı¾ÉÊ÷mapĞÅÏ¢
+	/// Step2ã€åˆ é™¤æ—§æ ‘mapä¿¡æ¯
 	mvmu_TreeMap.erase(cur_m_id);
 	oldTree->setRoot(NULL);
 	SAFE_DELETE(oldTree);
 
-	///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+	///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 	///
-	/// \brief rootÒÆ³öifºÍfor
+	/// \brief rootç§»å‡ºifå’Œfor
 	///
-	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //±ØÈ»ÔÚÒ»¸öforÖĞ
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //å¿…ç„¶åœ¨ä¸€ä¸ªforä¸­
 
 	tmpForModule->delTree(oldTree);
 	mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	/// Step3¡¢¸üĞÂÄ£¿éÊ÷mapĞÅÏ¢
+	/// Step3ã€æ›´æ–°æ¨¡å—æ ‘mapä¿¡æ¯
 	recurs_update(insTree,curNode);
 
 	return 0;
 }
 
-//µ¥Ä£¿éĞÂ²åÈëactiveTree
+//å•æ¨¡å—æ–°æ’å…¥activeTree
 int logic_Program::appendActiveTreeInsertFor(int m_id,int m_type,int for_id) {
 
 	assert( mvmu_ModuleMap.count(for_id)>0 );
 
-	// step1¡¢ÔÚÉ­ÁÖÖĞ¼ÓÈëÕâ¸öid
+	// step1ã€åœ¨æ£®æ—ä¸­åŠ å…¥è¿™ä¸ªid
 
 	if ( m_type == 2001 ) {
 		return false;
@@ -2479,113 +2488,113 @@ int logic_Program::appendActiveTreeInsertFor(int m_id,int m_type,int for_id) {
 	tree->append_node(-1,m_id);
 
 
-	// step2¡¢ÕæÕıÉú³ÉÕâ¸ömoduleÊµÌå
+	// step2ã€çœŸæ­£ç”Ÿæˆè¿™ä¸ªmoduleå®ä½“
 	this->add_Module(m_id,m_type);
 
 	return 0;
 }
 
 ///
-/// \brief ÌØÊâ´¦ÀíifµÄmove²Ù×÷
+/// \brief ç‰¹æ®Šå¤„ç†ifçš„moveæ“ä½œ
 ///
 int logic_Program::backInsSingMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id) {
 
 
 	assert( pre_m_id >= 0 );
 
-	//////pre_m_id±ØĞëÔÚifÖĞ
+	//////pre_m_idå¿…é¡»åœ¨ifä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id)) 
 		*(mvmu_ModuleMap.count(if_id)) ) {
-			return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id ¶¼ÒªÓĞ
+			return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id éƒ½è¦æœ‰
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	// cur_id ²»ÄÜÊÇ¿ªÊ¼Ä£¿é
+	// cur_id ä¸èƒ½æ˜¯å¼€å§‹æ¨¡å—
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 		assert(false);
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	///// step1¡¢²åÈëĞÂÊ÷½Úµã
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷£¬ÔçµãÕÒµ½»á¸ü¿¿Æ×
+	///// step1ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘ï¼Œæ—©ç‚¹æ‰¾åˆ°ä¼šæ›´é è°±
 	logic_Tree *insTree = NULL;
-	if( 0 == pre_m_id ) {  ////////////±ØĞëÓÃÉî¿½±´£¬Ç³¿½±´¿ÉÄÜÓĞÎ£ÏÕ
+	if( 0 == pre_m_id ) {  ////////////å¿…é¡»ç”¨æ·±æ‹·è´ï¼Œæµ…æ‹·è´å¯èƒ½æœ‰å±é™©
 
-		//Èç¹ûÇ°²åÒ»¿Ã¿ÕÊ÷
+		//å¦‚æœå‰æ’ä¸€æ£µç©ºæ ‘
 
-		///Èç¹ûÊÇÇ°²å¿ÕÊ÷£¬Í¬Ê±ÓÖÊÇ¡¾Î¨Ò»Ä£¿é¡¿ÊÇ¿ÉÒÔµÄ£¬´Óif»òÕßforÒÆ¹ıÀ´
+		///å¦‚æœæ˜¯å‰æ’ç©ºæ ‘ï¼ŒåŒæ—¶åˆæ˜¯ã€å”¯ä¸€æ¨¡å—ã€‘æ˜¯å¯ä»¥çš„ï¼Œä»ifæˆ–è€…forç§»è¿‡æ¥
 
-		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //Éî¿½±´¹¹Ôìµ½Õ»
+		logic_TreeNode tmpCurNode( *(oldTree->node_search(cur_m_id)) ) ; //æ·±æ‹·è´æ„é€ åˆ°æ ˆ
 
 		if ( tmpCurNode.mvvu_Children.size() > 1 ) {
-			//Èç¹ûº¢×Ó²»ÊÇÒ»¸ö£¬´íÎó
+			//å¦‚æœå­©å­ä¸æ˜¯ä¸€ä¸ªï¼Œé”™è¯¯
 			return -4;
 		}
 
 		tmpCurNode.mvu_Parent = 0;
 		tmpCurNode.mvvu_Children.clear();
 
-		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //Éî¿½±´¹¹Ôìµ½¶Ñ
-		insTree = new logic_Tree(tmpPassNode); //ĞÂ½¨Ò»¿ÃÊ÷£¬´ËnodeÒ²±ØĞëĞÂ½¨£¬·ñÔò±»ÏÂÃæµÄdelnodeÁË
+		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //æ·±æ‹·è´æ„é€ åˆ°å †
+		insTree = new logic_Tree(tmpPassNode); //æ–°å»ºä¸€æ£µæ ‘ï¼Œæ­¤nodeä¹Ÿå¿…é¡»æ–°å»ºï¼Œå¦åˆ™è¢«ä¸‹é¢çš„delnodeäº†
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 
-		///////////////////////////////ÌØÊâ´¦ÀíifµÄµØ·½///////////////////////////////
+		///////////////////////////////ç‰¹æ®Šå¤„ç†ifçš„åœ°æ–¹///////////////////////////////
 
 		///
-		/// \brief rootÍÏÈëif
+		/// \brief rootæ‹–å…¥if
 		///
-		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = if_id; //½¨Á¢Ä£¿éÓ³Éä
+		this->mvmi_TreeId_For_IfIdMap[mvmu_TreeMap[cur_m_id]] = if_id; //å»ºç«‹æ¨¡å—æ˜ å°„
 		tmpIfModule->addTree(branch_id,mvmu_TreeMap[cur_m_id]); //add tree
 
 		////////////////////////////////////////////////////////////////////////////////
 
 	}else {
 
-		////// pre_m_id ²»Îª0
+		////// pre_m_id ä¸ä¸º0
 
-		//////pre_m_id±ØĞëÔÚifÖĞ
+		//////pre_m_idå¿…é¡»åœ¨ifä¸­
 		assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-		/////Èç¹ûÒÑ´æÔÚ£¬Ö±½ÓÕÒµ½´ı²åÈëÊ÷
+		/////å¦‚æœå·²å­˜åœ¨ï¼Œç›´æ¥æ‰¾åˆ°å¾…æ’å…¥æ ‘
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
 		if( insTree->mvi_TreeID == oldTree->mvi_TreeID ) {
 
-			//Èç¹ûÊÇ±¾ÄÚÖ±½Ómove
+			//å¦‚æœæ˜¯æœ¬å†…ç›´æ¥move
 			if ( insTree->innerTreeBackInsSingMove(pre_m_id,cur_m_id) < 0 )
-				return -6; //Ê÷ÄÚmove³ö´í
+				return -6; //æ ‘å†…moveå‡ºé”™
 			else
-				return 0; //ÒÑmove¿ÉÖ±½Ó·µ»Ø
+				return 0; //å·²moveå¯ç›´æ¥è¿”å›
 
 		}else {
-			//Ê÷¼äÒÆ¶¯
+			//æ ‘é—´ç§»åŠ¨
 			insTree->append_node(pre_m_id,cur_m_id);
 		}
 	}
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
 		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷£¨ ½øÈëÕâ¸ö·ÖÖ§ pre_m_id Ò²¿ÉÄÜÎª0 £©
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘ï¼ˆ è¿›å…¥è¿™ä¸ªåˆ†æ”¯ pre_m_id ä¹Ÿå¯èƒ½ä¸º0 ï¼‰
 
-			///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+			///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 			///
-			/// \brief rootÒÆ³öifºÍfor
+			/// \brief rootç§»å‡ºifå’Œfor
 			///
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
 
@@ -2598,22 +2607,22 @@ int logic_Program::backInsSingMoveIf(int cur_m_id,int pre_m_id,int if_id,int bra
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 
-			// Step3¡¢£¨±ØĞëÔÚ´Ë´¦£¬²»È»¾ÍreturnÁË£©¸üĞÂ
+			// Step3ã€ï¼ˆå¿…é¡»åœ¨æ­¤å¤„ï¼Œä¸ç„¶å°±returnäº†ï¼‰æ›´æ–°
 			mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-			return 0; //Õı³£·µ»Ø
+			return 0; //æ­£å¸¸è¿”å›
 		}else {
-			//²»ÊÇÎ¨Ò»Ä£¿é
+			//ä¸æ˜¯å”¯ä¸€æ¨¡å—
 
 			oldTree->setFirstChildAsRoot();
 		}
 
 	}
 
-	// Step3¡¢¸üĞÂ
+	// Step3ã€æ›´æ–°
 	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 
 }
 
@@ -2621,86 +2630,86 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 
 	assert(post_m_id>0);
 
-	//////post_m_id±ØĞëÔÚifÖĞ
+	//////post_m_idå¿…é¡»åœ¨ifä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
 		*(mvmu_ModuleMap.count(if_id)) ) {
-			return -2; //Ã»ÕÒµ½²åÈëµã
+			return -2; //æ²¡æ‰¾åˆ°æ’å…¥ç‚¹
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//Èç¹û post_m_id ÊÇ¿ªÊ¼
+	//å¦‚æœ post_m_id æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	///// step1¡¢²åÈëĞÂÊ÷½Úµã
-	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //´ı²åÈëÊ÷
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
+	///// step1ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
+	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //å¾…æ’å…¥æ ‘
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
 
 	int oldRootId = insTree->mvi_TreeID;
 	if( post_m_id == oldRootId ) {
 
-		//´ı²åÈë½ÚµãÒª²åÔÚÔ­Ê÷rootÖ®Ç°
-		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //´ÓÆäËûÊ÷½ÚµãÕı³£½»»»
+		//å¾…æ’å…¥èŠ‚ç‚¹è¦æ’åœ¨åŸæ ‘rootä¹‹å‰
+		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //ä»å…¶ä»–æ ‘èŠ‚ç‚¹æ­£å¸¸äº¤æ¢
 
 			if( insTree->exchangeRoot(cur_m_id) == false )
 				return -5;
 
-			//Ö»ÓĞ post_m_id ÊÇ¸ùµÄÇé¿ö£¬²Å¸üĞÂtree map
+			//åªæœ‰ post_m_id æ˜¯æ ¹çš„æƒ…å†µï¼Œæ‰æ›´æ–°tree map
 			mvmu_TreeMap.erase(post_m_id);
 			mvmu_TreeMap[cur_m_id] = insTree;
 		} else {
 
-			//Ê÷ÄÚ½»»»£¬²»ÓÃÉ¾³ı¾ÉÊ÷½Úµã£¬ÌáÇ°ÖÕÖ¹
+			//æ ‘å†…äº¤æ¢ï¼Œä¸ç”¨åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼Œæå‰ç»ˆæ­¢
 			if( insTree->innerTreeExchangeRoot(cur_m_id) >= 0 ) {
 
-				//Ö»ÓĞ post_m_id ÊÇ¸ùµÄÇé¿ö£¬²Å¸üĞÂtree map
+				//åªæœ‰ post_m_id æ˜¯æ ¹çš„æƒ…å†µï¼Œæ‰æ›´æ–°tree map
 				mvmu_TreeMap.erase(post_m_id);
 				mvmu_TreeMap[cur_m_id] = insTree;
 
 				return 0;
 			} else {
-				return -4; //Ê÷ÄÚ½»»»Ê§°Ü
+				return -4; //æ ‘å†…äº¤æ¢å¤±è´¥
 			}
 		}
 
 	}else {
 
-		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //±¾Ê÷²Ù×÷
+		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //æœ¬æ ‘æ“ä½œ
 
 			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
 
-				//Ê÷ÄÚÕı³£²Ù×÷£¬ÌáÇ°ÖÕÖ¹
+				//æ ‘å†…æ­£å¸¸æ“ä½œï¼Œæå‰ç»ˆæ­¢
 				return 0;
 			}else {
 				return -6;
 			}
 
 		}
-		//Õı³£²åÈëµØ·½
+		//æ­£å¸¸æ’å…¥åœ°æ–¹
 		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
 	}
 
 	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID 
 		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+			///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 			///
-			/// \brief rootÒÆ³öifºÍfor
+			/// \brief rootç§»å‡ºifå’Œfor
 			///
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
 
@@ -2710,73 +2719,73 @@ int logic_Program::frontInsSingMoveIf(int cur_m_id,int post_m_id,int if_id,int b
 
 			///////////////////////////////////////////////////////////////////////////////////
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 	}
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
 int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id) {
 
-	//////pre_m_id±ØĞëÔÚifÖĞ
+	//////pre_m_idå¿…é¡»åœ¨ifä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	//////cur_m_id ºÍ pre_m_id ±ØĞëÔÚÒ»¸öifÖĞ
+	//////cur_m_id å’Œ pre_m_id å¿…é¡»åœ¨ä¸€ä¸ªifä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
-	/// ÖØ¸´ backInsMultiMove ·½·¨
-	/// ÖØ¸´ addLeafMove ·½·¨
+	/// é‡å¤ backInsMultiMove æ–¹æ³•
+	/// é‡å¤ addLeafMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
 		*(mvmu_ModuleMap.count(if_id)) ) {
-			return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id for_id ¶¼ÒªÓĞ
+			return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id for_id éƒ½è¦æœ‰
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 		assert(false);
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	/////////////¿ªÊ¼/////////////
+	/////////////å¼€å§‹/////////////
 
-	///// step1¡¢É¾³ı¾ÉÊ÷½Úµã
-	///// ×¢£ºÉ¾³ı±ØĞëÊÇµÚÒ»²½£¬²»È» del_node_notConn ·½·¨»áÉ¾µô´íÎó parent µÄº¢×Ó
+	///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹
+	///// æ³¨ï¼šåˆ é™¤å¿…é¡»æ˜¯ç¬¬ä¸€æ­¥ï¼Œä¸ç„¶ del_node_notConn æ–¹æ³•ä¼šåˆ æ‰é”™è¯¯ parent çš„å­©å­
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //´ı²åÈë½Úµã£¨±ØĞëÔÚ´Ë´¦Ñ°ÕÒ£©
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	logic_TreeNode * insNode = oldTree->node_search(cur_m_id); //å¾…æ’å…¥èŠ‚ç‚¹ï¼ˆå¿…é¡»åœ¨æ­¤å¤„å¯»æ‰¾ï¼‰
 
 	if ( insNode->mvvu_Children.size() == 0 ) {
-		//¿ÉÄÜÖ»ÓĞÒ»¸öº¢×Ó
+		//å¯èƒ½åªæœ‰ä¸€ä¸ªå­©å­
 		return -4;
 	}
 
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
-		oldTree->del_node_notConn(cur_m_id); //¶Ï¿ª oldTree Óë´Ë½ÚµãµÄÁ¬½Ó
+		//å¹¶éæ ‘æ ¹
+		oldTree->del_node_notConn(cur_m_id); //æ–­å¼€ oldTree ä¸æ­¤èŠ‚ç‚¹çš„è¿æ¥
 
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
-		//ROOT£¬É¾³ıÊ÷
-		oldTree->del_node_notConn(cur_m_id); //Èç¹ûÊÇÊ÷¸ù£¬Ö±½Ó½«¸ÃÊ÷rootÖÃ¿Õ
-		SAFE_DELETE(oldTree); //·ÅĞÄÉ¾³ıÊ÷
+		//ROOTï¼Œåˆ é™¤æ ‘
+		oldTree->del_node_notConn(cur_m_id); //å¦‚æœæ˜¯æ ‘æ ¹ï¼Œç›´æ¥å°†è¯¥æ ‘rootç½®ç©º
+		SAFE_DELETE(oldTree); //æ”¾å¿ƒåˆ é™¤æ ‘
 		mvmu_TreeMap.erase(cur_m_id);
 
-		///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+		///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 		///
-		/// \brief rootÒÆ³öifºÍfor
+		/// \brief rootç§»å‡ºifå’Œfor
 		///
-		assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //±ØÈ»ÔÚÍ¬Ò»¸öforÖĞ
+		assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //å¿…ç„¶åœ¨åŒä¸€ä¸ªforä¸­
 
 		tmpIfModule->delTree(oldTree);
 		mvmi_TreeId_For_IfIdMap.erase(oldTree);
@@ -2784,22 +2793,22 @@ int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int br
 		///////////////////////////////////////////////////////////////////////////////////
 	}
 
-	///// step2¡¢²åÈëĞÂ½Úµã
+	///// step2ã€æ’å…¥æ–°èŠ‚ç‚¹
 	logic_Tree *insTree = NULL;
 	if( 0 == pre_m_id ) { 
-		//Èç¹ûÇ°²åÒ»¿Ã¿ÕÊ÷
+		//å¦‚æœå‰æ’ä¸€æ£µç©ºæ ‘
 
-		insTree = new logic_Tree(insNode); //ĞÂ½¨Ò»¿ÃÊ÷
+		insTree = new logic_Tree(insNode); //æ–°å»ºä¸€æ£µæ ‘
 
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 		mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
 
 	}else {
-		/////Èç¹ûÒÑ´æÔÚ£¬Ö±½ÓÕÒµ½´ı²åÈëÊ÷
+		/////å¦‚æœå·²å­˜åœ¨ï¼Œç›´æ¥æ‰¾åˆ°å¾…æ’å…¥æ ‘
 		insTree = mvmu_ModuleId_TreeMap[pre_m_id];
 
-		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_id½Úµã
-		//Èç¹û pre_m_id ²»ÊÇÒ¶×Ó½Úµã£¬´íÎó·µ»Ø
+		logic_TreeNode * preNode = insTree->node_search(pre_m_id); //pre_m_idèŠ‚ç‚¹
+		//å¦‚æœ pre_m_id ä¸æ˜¯å¶å­èŠ‚ç‚¹ï¼Œé”™è¯¯è¿”å›
 		if(preNode->mvvu_Children.size()>0) {
 			return -4;
 		}
@@ -2808,47 +2817,47 @@ int logic_Program::backInsMultiMoveIf(int cur_m_id,int pre_m_id,int if_id,int br
 
 	}
 
-	///// step3¡¢¸üĞÂ module treeÓ³Éä
+	///// step3ã€æ›´æ–° module treeæ˜ å°„
 	recurs_update(insTree,insNode);
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
 int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int branch_id) {
 
-	//////post_m_id±ØĞëÔÚifÖĞ
+	//////post_m_idå¿…é¡»åœ¨ifä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[post_m_id] ) );
 
-	//////cur_m_id ºÍ post_m_id ±ØĞëÔÚÒ»¸öifÖĞ
+	//////cur_m_id å’Œ post_m_id å¿…é¡»åœ¨ä¸€ä¸ªifä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[post_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
-	/// ÖØ¸´ frontInsMultiMove ·½·¨
+	/// é‡å¤ frontInsMultiMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(post_m_id))
 		*(mvmu_ModuleMap.count(if_id)) ) {
-			return -2; //Ã»ÕÒµ½²åÈëµã
+			return -2; //æ²¡æ‰¾åˆ°æ’å…¥ç‚¹
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//Èç¹û post_m_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ post_m_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[post_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//×¢£º²»ÓÃĞÂ½¨module£¬Ö»ÓÃ´¦ÀíÊ÷½Úµã¼´¿É
+	//æ³¨ï¼šä¸ç”¨æ–°å»ºmoduleï¼Œåªç”¨å¤„ç†æ ‘èŠ‚ç‚¹å³å¯
 
-	/// ÖØ¸´ frontInsMultiMove ·½·¨
+	/// é‡å¤ frontInsMultiMove æ–¹æ³•
 	if( 0 == post_m_id ) {
 
-		//¿Õ²å
-		//Ïàµ±ÓÚ backInsMultiMove µ½±³¾°
+		//ç©ºæ’
+		//ç›¸å½“äº backInsMultiMove åˆ°èƒŒæ™¯
 
 		logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-		///// step1¡¢É¾³ı¾ÉÊ÷½Úµã£¬Í¬Ê±½«¶Ï¿ª²¿·ÖÉú³ÉĞÂÊ÷
+		///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ŒåŒæ—¶å°†æ–­å¼€éƒ¨åˆ†ç”Ÿæˆæ–°æ ‘
 		logic_TreeNode * curNode = oldTree->node_search(cur_m_id);
 		if( curNode->mvvu_Children.size() == 1 ) {
 
@@ -2858,11 +2867,11 @@ int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int 
 
 			mvmu_TreeMap[newTree->getRoot()->getID()] = newTree;
 
-			/////////////ÔÚifÖĞ¼ÓÈëÊ÷///////////
+			/////////////åœ¨ifä¸­åŠ å…¥æ ‘///////////
 			mvmi_TreeId_For_IfIdMap[newTree] = if_id;
 			tmpIfModule->addTree(branch_id,newTree);
 
-			///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+			///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 			recurs_update(newTree,newTree->getRoot());
 		}else if( curNode->mvvu_Children.size() > 1 ) {
 			assert(false);
@@ -2870,15 +2879,15 @@ int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int 
 
 	} else {
 
-		logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //ĞÂ²åÈëÊ÷
+		logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //æ–°æ’å…¥æ ‘
 		logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-		//Èç¹û post_m_id ²»ÊÇ¸ù½Úµã£¬´íÎó·µ»Ø
+		//å¦‚æœ post_m_id ä¸æ˜¯æ ¹èŠ‚ç‚¹ï¼Œé”™è¯¯è¿”å›
 		if( post_m_id!=insTree->mvi_TreeID ) {
 			return -4;
 		}
 
-		///// step1¡¢É¾³ı¾ÉÊ÷½Úµã£¬Í¬Ê±½«¶Ï¿ª²¿·ÖÉú³ÉĞÂÊ÷
+		///// step1ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ŒåŒæ—¶å°†æ–­å¼€éƒ¨åˆ†ç”Ÿæˆæ–°æ ‘
 		logic_TreeNode * curNode = oldTree->node_search(cur_m_id);
 		if( curNode->mvvu_Children.size() == 1 ) {
 
@@ -2888,155 +2897,155 @@ int logic_Program::frontInsMultiMoveIf(int cur_m_id,int post_m_id,int if_id,int 
 
 			mvmu_TreeMap[newTree->getRoot()->getID()] = newTree;
 
-			/////////////ÔÚforÖĞ¼ÓÈëÊ÷///////////
+			/////////////åœ¨forä¸­åŠ å…¥æ ‘///////////
 			mvmi_TreeId_For_IfIdMap[newTree] = if_id;
 			tmpIfModule->addTree(branch_id,newTree);
 
-			///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+			///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 			recurs_update(newTree,newTree->getRoot());
 		}else if( curNode->mvvu_Children.size() > 1 ) {
 			assert(false);
 		}
 
-		///// step2¡¢²åÈëĞÂÊ÷½Úµã
+		///// step2ã€æ’å…¥æ–°æ ‘èŠ‚ç‚¹
 
-		logic_TreeNode * insNode = insTree->getRoot(); //´ı²åÈë½Úµã
-		oldTree->add_node(cur_m_id,insNode); //insTree½Óµ½oldTreeÉÏ
+		logic_TreeNode * insNode = insTree->getRoot(); //å¾…æ’å…¥èŠ‚ç‚¹
+		oldTree->add_node(cur_m_id,insNode); //insTreeæ¥åˆ°oldTreeä¸Š
 
-		//±ØÈ»ÊÇROOT£¬Ö±½ÓÉ¾³ıÔ­insTree
-		insTree->del_node_notConn(post_m_id); //ÊÇroot£¬Ö±½ÓÖÃ¿Õ
-		SAFE_DELETE(insTree); //·ÅĞÄÉ¾³ıÊ÷
+		//å¿…ç„¶æ˜¯ROOTï¼Œç›´æ¥åˆ é™¤åŸinsTree
+		insTree->del_node_notConn(post_m_id); //æ˜¯rootï¼Œç›´æ¥ç½®ç©º
+		SAFE_DELETE(insTree); //æ”¾å¿ƒåˆ é™¤æ ‘
 		mvmu_TreeMap.erase(post_m_id);
 
-		///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+		///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 		///
-		/// \brief ÔÚifÖĞÉ¾³ıÊ÷
+		/// \brief åœ¨ifä¸­åˆ é™¤æ ‘
 		///
-		assert( mvmi_TreeId_For_IfIdMap.count(insTree) >0 ); //±ØÈ»ÔÚÍ¬Ò»¸öforÖĞ
+		assert( mvmi_TreeId_For_IfIdMap.count(insTree) >0 ); //å¿…ç„¶åœ¨åŒä¸€ä¸ªforä¸­
 
 		tmpIfModule->delTree(insTree);
 		mvmi_TreeId_For_IfIdMap.erase(insTree);
 
 		///////////////////////////////////////////////////////////////////////////////////
 
-		///// ¸üĞÂ module treeÓ³Éä insNode·ÖÖ§
+		///// æ›´æ–° module treeæ˜ å°„ insNodeåˆ†æ”¯
 		recurs_update(oldTree,insNode);
 
 	}
 
-	return 0; //Õı³£·µ»Ø
+	return 0; //æ­£å¸¸è¿”å›
 }
 
 int logic_Program::addLeafMoveIf(int cur_m_id,int pre_m_id,int if_id,int branch_id) {
 
-	//////pre_m_id±ØĞëÔÚifÖĞ
+	//////pre_m_idå¿…é¡»åœ¨ifä¸­
 	assert( mvmi_TreeId_For_IfIdMap.count( mvmu_ModuleId_TreeMap[pre_m_id] ) );
 
-	//////cur_m_id ºÍ pre_m_id ±ØĞëÔÚÒ»¸öifÖĞ
+	//////cur_m_id å’Œ pre_m_id å¿…é¡»åœ¨ä¸€ä¸ªifä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	logic_Tree* pre_m_tree = mvmu_ModuleId_TreeMap[pre_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == mvmi_TreeId_For_IfIdMap[pre_m_tree] );
 
-	/// ÖØ¸´ addLeafMove ·½·¨
+	/// é‡å¤ addLeafMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(pre_m_id))
 		*(mvmu_ModuleMap.count(if_id)) ) {
-			return -2; // Ê×ÏÈ cur_m_id ºÍ pre_m_id if_id ¶¼ÒªÓĞ
+			return -2; // é¦–å…ˆ cur_m_id å’Œ pre_m_id if_id éƒ½è¦æœ‰
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
 	if ( addLeafCheckPre(cur_m_id,pre_m_id) < 0 ) {
 		return -4;
 	}
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	//¸Ã½Úµã±ØĞëÊÇ¸ÃÊ÷µÄ¸ù½Úµã
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	//è¯¥èŠ‚ç‚¹å¿…é¡»æ˜¯è¯¥æ ‘çš„æ ¹èŠ‚ç‚¹
 	if( oldTree->mvi_TreeID != cur_m_id )
 		assert(false);
 
 	logic_Tree *insTree = mvmu_ModuleId_TreeMap[pre_m_id];
-	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //´ı²åÈë½Úµã
-	logic_TreeNode * curNode = oldTree->getRoot(); //µ±Ç°½Úµã
+	logic_TreeNode * insNode = insTree->node_search(pre_m_id); //å¾…æ’å…¥èŠ‚ç‚¹
+	logic_TreeNode * curNode = oldTree->getRoot(); //å½“å‰èŠ‚ç‚¹
 
 	curNode->mvu_Parent = insNode;
 
-	/// Step1¡¢½ÓÈëĞÂ½Úµã
+	/// Step1ã€æ¥å…¥æ–°èŠ‚ç‚¹
 	insNode->mvvu_Children.push_back(curNode);
 
-	/// Step2¡¢É¾³ı¾ÉÊ÷mapĞÅÏ¢
+	/// Step2ã€åˆ é™¤æ—§æ ‘mapä¿¡æ¯
 	mvmu_TreeMap.erase(cur_m_id);
 	oldTree->setRoot(NULL);
 	SAFE_DELETE(oldTree);
 
-	///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+	///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 	///
-	/// \brief rootÒÆ³öifºÍfor
+	/// \brief rootç§»å‡ºifå’Œfor
 	///
-	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //±ØÈ»ÔÚÒ»¸öforÖĞ
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //å¿…ç„¶åœ¨ä¸€ä¸ªforä¸­
 
 	tmpIfModule->delTree(oldTree);
 	mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	/// Step3¡¢¸üĞÂÄ£¿éÊ÷mapĞÅÏ¢
+	/// Step3ã€æ›´æ–°æ¨¡å—æ ‘mapä¿¡æ¯
 	recurs_update(insTree,curNode);
 
 	return 0;
 }
 
-//Ö»ÔÚ½Óµ½activeTree¸ù½ÚµãµÄÊ±ºòµ÷ÓÃ
+//åªåœ¨æ¥åˆ°activeTreeæ ¹èŠ‚ç‚¹çš„æ—¶å€™è°ƒç”¨
 
-//µ¥Ä£¿é½ÓÈëactiveTree
+//å•æ¨¡å—æ¥å…¥activeTree
 int logic_Program::appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id) {
 
-	//½«Ä³Ò»Ä£¿é½Óµ½ branch activeTreeºóÃæ
+	//å°†æŸä¸€æ¨¡å—æ¥åˆ° branch activeTreeåé¢
 
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(if_id)) ) {
 		assert(false);
-		return -2; // Ê×ÏÈ cur_m_id ºÍ if_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ if_id éƒ½è¦æœ‰
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
 		assert(false);
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	//µÃµ½ activeTree
+	//å¾—åˆ° activeTree
 	logic_Tree * curActiveTree = tmpIfModule->getCurActiveTree(branch_id);
 	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];
 
-	///// Step1¡¢²åÈë½Úµã
+	///// Step1ã€æ’å…¥èŠ‚ç‚¹
 	curActiveTree->append_node(-1,cur_m_id);
 
 
-	///// step2¡¢É¾³ı¾ÉÊ÷½Úµã£¨×¢£º´Ë´¦²»¿ÉÄÜÓĞ¶à¸öº¢×Ó£©
+	///// step2ã€åˆ é™¤æ—§æ ‘èŠ‚ç‚¹ï¼ˆæ³¨ï¼šæ­¤å¤„ä¸å¯èƒ½æœ‰å¤šä¸ªå­©å­ï¼‰
 	if( cur_m_id != oldTree->mvi_TreeID ) {
 
-		//²¢·ÇÊ÷¸ù
+		//å¹¶éæ ‘æ ¹
 		oldTree->del_node(cur_m_id);
 	}else if(cur_m_id == oldTree->mvi_TreeID ) {
 
 		if ( oldTree->getRoot()->mvvu_Children.size()==0 ) {
 
-			//Ê÷ÖĞÎ¨Ò»Ä£¿é£¬É¾³ıÊ÷£¨ ½øÈëÕâ¸ö·ÖÖ§ pre_m_id Ò²¿ÉÄÜÎª0 £©
+			//æ ‘ä¸­å”¯ä¸€æ¨¡å—ï¼Œåˆ é™¤æ ‘ï¼ˆ è¿›å…¥è¿™ä¸ªåˆ†æ”¯ pre_m_id ä¹Ÿå¯èƒ½ä¸º0 ï¼‰
 
-			///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+			///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 			///
-			/// \brief rootÒÆ³öifºÍfor
+			/// \brief rootç§»å‡ºifå’Œfor
 			///
 			if( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ) {
 				tmpIfModule->delTree(oldTree);
@@ -3048,90 +3057,90 @@ int logic_Program::appendActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id) 
 			SAFE_DELETE(oldTree);
 			mvmu_TreeMap.erase(cur_m_id);
 
-			// Step3¡¢£¨±ØĞëÔÚ´Ë´¦£¬²»È»¾ÍreturnÁË£©¸üĞÂ
+			// Step3ã€ï¼ˆå¿…é¡»åœ¨æ­¤å¤„ï¼Œä¸ç„¶å°±returnäº†ï¼‰æ›´æ–°
 			mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
 
-			return 0; //Õı³£·µ»Ø
+			return 0; //æ­£å¸¸è¿”å›
 		}else {
-			//²»ÊÇÎ¨Ò»Ä£¿é
+			//ä¸æ˜¯å”¯ä¸€æ¨¡å—
 
 			oldTree->setFirstChildAsRoot();
 		}
 
 	}
 
-	// Step3¡¢¸üĞÂ
+	// Step3ã€æ›´æ–°
 	mvmu_ModuleId_TreeMap[cur_m_id] = curActiveTree;
 
 	return 0;
 }
 
-//activeTreeÖ±½ÓÌí¼ÓÒ¶×Ó
+//activeTreeç›´æ¥æ·»åŠ å¶å­
 int logic_Program::addLeafActiveTreeMoveIf(int cur_m_id,int if_id,int branch_id) {
 
-	//////cur_m_id ºÍ activeTree ±ØĞëÔÚÍ¬Ò»¸öifÖĞ
+	//////cur_m_id å’Œ activeTree å¿…é¡»åœ¨åŒä¸€ä¸ªifä¸­
 	logic_Tree* cur_m_tree = mvmu_ModuleId_TreeMap[cur_m_id];
 	assert( mvmi_TreeId_For_IfIdMap[cur_m_tree] == if_id );
 
-	/// ÖØ¸´ addLeafMove ·½·¨
+	/// é‡å¤ addLeafMove æ–¹æ³•
 	if ( 0 >= (mvmu_ModuleMap.count(cur_m_id))*(mvmu_ModuleMap.count(if_id)) ) {
-		return -2; // Ê×ÏÈ cur_m_id ºÍ for_id ¶¼ÒªÓĞ
+		return -2; // é¦–å…ˆ cur_m_id å’Œ for_id éƒ½è¦æœ‰
 	}
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	//Èç¹û cur_id Ä£¿éÊÇ¿ªÊ¼
+	//å¦‚æœ cur_id æ¨¡å—æ˜¯å¼€å§‹
 	if ( mvmu_ModuleMap[cur_m_id]->getModuleType() == 2001 ) {
-		return -3; //Ä£¿éÀàĞÍ´íÎó
+		return -3; //æ¨¡å—ç±»å‹é”™è¯¯
 	}
 
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //´ıÉ¾³ıÊ÷
-	//¸Ã½Úµã±ØĞëÊÇ¸ÃÊ÷µÄ¸ù½Úµã
+	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id]; //å¾…åˆ é™¤æ ‘
+	//è¯¥èŠ‚ç‚¹å¿…é¡»æ˜¯è¯¥æ ‘çš„æ ¹èŠ‚ç‚¹
 	if( oldTree->mvi_TreeID != cur_m_id )
 		assert(false);
 
 	logic_Tree *insTree = tmpIfModule->getCurActiveTree(branch_id);
-	logic_TreeNode * insNode = insTree->getRoot(); //´ı²åÈë½Úµã
-	logic_TreeNode * curNode = oldTree->getRoot(); //µ±Ç°½Úµã
+	logic_TreeNode * insNode = insTree->getRoot(); //å¾…æ’å…¥èŠ‚ç‚¹
+	logic_TreeNode * curNode = oldTree->getRoot(); //å½“å‰èŠ‚ç‚¹
 
 	curNode->mvu_Parent = insNode;
 
-	/// Step1¡¢½ÓÈëĞÂ½Úµã
+	/// Step1ã€æ¥å…¥æ–°èŠ‚ç‚¹
 	insNode->mvvu_Children.push_back(curNode);
 
-	/// Step2¡¢É¾³ı¾ÉÊ÷mapĞÅÏ¢
+	/// Step2ã€åˆ é™¤æ—§æ ‘mapä¿¡æ¯
 	mvmu_TreeMap.erase(cur_m_id);
 	oldTree->setRoot(NULL);
 	SAFE_DELETE(oldTree);
 
-	///////////////////////////////ÌØÊâ´¦ÀíifºÍforµÄµØ·½///////////////////////////////
+	///////////////////////////////ç‰¹æ®Šå¤„ç†ifå’Œforçš„åœ°æ–¹///////////////////////////////
 
 	///
-	/// \brief rootÒÆ³öifºÍfor
+	/// \brief rootç§»å‡ºifå’Œfor
 	///
-	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //±ØÈ»ÔÚÒ»¸öforÖĞ
+	assert( mvmi_TreeId_For_IfIdMap.count(oldTree) >0 ); //å¿…ç„¶åœ¨ä¸€ä¸ªforä¸­
 
 	tmpIfModule->delTree(oldTree);
 	mvmi_TreeId_For_IfIdMap.erase(oldTree);
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	/// Step3¡¢¸üĞÂÄ£¿éÊ÷mapĞÅÏ¢
+	/// Step3ã€æ›´æ–°æ¨¡å—æ ‘mapä¿¡æ¯
 	recurs_update(insTree,curNode);
 
 	return 0;
 }
 
-//µ¥Ä£¿éĞÂ²åÈëactiveTree
+//å•æ¨¡å—æ–°æ’å…¥activeTree
 int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int branch_id) {
 
 	assert( mvmu_ModuleMap.count(if_id)>0 );
 
-	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //ÅĞ¶Ïbranch·ÖÖ§ÊÇ·ñ´æÔÚ
+	logic_IfModule * tmpIfModule = this->getIfModuleById(if_id); //åˆ¤æ–­branchåˆ†æ”¯æ˜¯å¦å­˜åœ¨
 	assert( tmpIfModule->isBranchExist(branch_id) == true );
 
-	// step1¡¢ÔÚÉ­ÁÖÖĞ¼ÓÈëÕâ¸öid
+	// step1ã€åœ¨æ£®æ—ä¸­åŠ å…¥è¿™ä¸ªid
 
 	if ( m_type == 2001 ) {
 		return false;
@@ -3141,17 +3150,17 @@ int logic_Program::appendActiveTreeInsertIf(int m_id,int m_type,int if_id,int br
 	tree->append_node(-1,m_id);
 
 
-	// step2¡¢ÕæÕıÉú³ÉÕâ¸ömoduleÊµÌå
+	// step2ã€çœŸæ­£ç”Ÿæˆè¿™ä¸ªmoduleå®ä½“
 	this->add_Module(m_id,m_type);
 
 	return 0;
 }
 
-//´Óprj³õÊ¼»¯prog
-//³õÊ¼»¯ ¡°±äÁ¿¡±map£¬v_mapÊÇÒıÓÃ
+//ä»prjåˆå§‹åŒ–prog
+//åˆå§‹åŒ– â€œå˜é‡â€mapï¼Œv_mapæ˜¯å¼•ç”¨
 void logic_Program::setInitVarMap(std::map<int  ,logic_VarModule*> &v_map) {
 
-	this->prjVariety = &v_map; //³õÊ¼»¯prj ±äÁ¿ map
+	this->prjVariety = &v_map; //åˆå§‹åŒ–prj å˜é‡ map
 }
 
 
@@ -3161,10 +3170,10 @@ std::map<int, logic_VarModule*>* logic_Program::getVarMap()
 }
 
 
-//³õÊ¼»¯ initModule£¬init_m_mapÊÇ¸±±¾
+//åˆå§‹åŒ– initModuleï¼Œinit_m_mapæ˜¯å‰¯æœ¬
 void logic_Program::setInitModuleMap(std::map <int, logic_BasicModule *> init_m_map) {
 
-	this->initModuleMap = init_m_map; //³õÊ¼»¯ ËùÓĞinit module¸±±¾
+	this->initModuleMap = init_m_map; //åˆå§‹åŒ– æ‰€æœ‰init moduleå‰¯æœ¬
 }
 
 std::map <int, logic_BasicModule *> logic_Program::getInit_m_map()
@@ -3173,18 +3182,18 @@ std::map <int, logic_BasicModule *> logic_Program::getInit_m_map()
 }
 
 ///
-/// \brief »ñÈ¡¸ù½Úµã
-/// \para ÈİÆ÷±àºÅ£¬Èç¹ûÊÇ0£¬»ñÈ¡×îÍâ²ãroot¼¯ºÏ
-/// \return ¸ù½Úµã¼¯ºÏ
+/// \brief è·å–æ ¹èŠ‚ç‚¹
+/// \para å®¹å™¨ç¼–å·ï¼Œå¦‚æœæ˜¯0ï¼Œè·å–æœ€å¤–å±‚rooté›†åˆ
+/// \return æ ¹èŠ‚ç‚¹é›†åˆ
 ///
 
-//»ñÈ¡program´ó»­²¼rootsId
+//è·å–programå¤§ç”»å¸ƒrootsId
 std::vector<int > logic_Program::findRootsInContainer() {
 
 	vector<int > L;
 	map<int , logic_Tree * > map = mvmu_TreeMap;
 
-	//ÌŞ³ıËùÓĞ²»ÓÃµÄroot
+	//å‰”é™¤æ‰€æœ‰ä¸ç”¨çš„root
 	for( std::map<logic_Tree * ,int >::iterator it = mvmi_TreeId_For_IfIdMap.begin();it != mvmi_TreeId_For_IfIdMap.end() ; ++it) {
 
 		map.erase(it->first->mvi_TreeID);
@@ -3201,7 +3210,7 @@ std::vector<int > logic_Program::findRootsInContainer() {
 	return L;
 }
 
-//ÖØÔØ£º»ñÈ¡Ö¸¶¨ for ÖĞ rootsId
+//é‡è½½ï¼šè·å–æŒ‡å®š for ä¸­ rootsId
 std::vector<int > logic_Program::findRootsInContainer(int for_id) {
 
 	assert( mvmu_ModuleMap.count(for_id)>0 );
@@ -3210,7 +3219,7 @@ std::vector<int > logic_Program::findRootsInContainer(int for_id) {
 	return tmpForModule->findAllRoots();
 }
 
-//ÖØÔØ£º»ñÈ¡Ö¸¶¨ if ÖĞ rootsId
+//é‡è½½ï¼šè·å–æŒ‡å®š if ä¸­ rootsId
 std::vector<int > logic_Program::findRootsInContainer(int if_id,int branch_id) {
 
 	assert( mvmu_ModuleMap.count(if_id)>0 );
@@ -3219,9 +3228,9 @@ std::vector<int > logic_Program::findRootsInContainer(int if_id,int branch_id) {
 	return tmpIfModule->findBranchAllRoots(branch_id);
 }
 
-//Á¬ÏßÊ±¼ì²â£ºÖ»ÓĞÒ»ÖÖÇé¿öÓĞÎÊÌâ£¬¼´Á¬½Ó×Ô¼ºµÄ×æÏÈ
-//£¨ÆäÊµÅĞ¶ÏÕâÁ½¸öÄ£¿éÈç¹ûÔÚÒ»¿ÃÊ÷¾ÍÓĞÎÊÌâ£©
-//para£º cur_idÊÇÁ¬Ïß³ö¿ÚÄ£¿é£¬another_idÊÇ±»Á¬½ÓÄ£¿é
+//è¿çº¿æ—¶æ£€æµ‹ï¼šåªæœ‰ä¸€ç§æƒ…å†µæœ‰é—®é¢˜ï¼Œå³è¿æ¥è‡ªå·±çš„ç¥–å…ˆ
+//ï¼ˆå…¶å®åˆ¤æ–­è¿™ä¸¤ä¸ªæ¨¡å—å¦‚æœåœ¨ä¸€æ£µæ ‘å°±æœ‰é—®é¢˜ï¼‰
+//paraï¼š cur_idæ˜¯è¿çº¿å‡ºå£æ¨¡å—ï¼Œanother_idæ˜¯è¢«è¿æ¥æ¨¡å—
 //
 int logic_Program::addLeafCheckPre(int cur_id,int another_id) {
 
@@ -3245,7 +3254,7 @@ void logic_Program::setTreeMap(std::map<int,logic_Tree*> treeMap)
 }
 
 
-//!!!!!!!!!!!!!!!!!!!!±àÒë!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+//!!!!!!!!!!!!!!!!!!!!ç¼–è¯‘!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 whPort logic_Program::getLinkstartwhport(whPort in)
 {
 	assert(mvvu_Conn_To_FromMap.find(in) != mvvu_Conn_To_FromMap.end());
@@ -3257,40 +3266,40 @@ std::map<logic_Tree* ,int> logic_Program::getIfforidmaptree()
 {
 	return mvmi_TreeId_For_IfIdMap;
 }
-//!!!!!!!!!!!!!!!!!!!!±àÒë!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+//!!!!!!!!!!!!!!!!!!!!ç¼–è¯‘!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
 ///
-/// \brief ´´½¨ÎÒµÄÄ£¿é
+/// \brief åˆ›å»ºæˆ‘çš„æ¨¡å—
 ///
 
-//session1£ºÊÇ·ñ¿ÉÒÔ´´½¨ÎÒµÄÄ£¿é£¬Ç°ºó¶ËµÚÒ»´Î»á»°
-//½Ó¿Ú´«idÁĞ±í£¬·µ»ØÊÇ·ñ¿É´´½¨
+//session1ï¼šæ˜¯å¦å¯ä»¥åˆ›å»ºæˆ‘çš„æ¨¡å—ï¼Œå‰åç«¯ç¬¬ä¸€æ¬¡ä¼šè¯
+//æ¥å£ä¼ idåˆ—è¡¨ï¼Œè¿”å›æ˜¯å¦å¯åˆ›å»º
 
-///1¡¢ÅĞ¶ÏËùÓĞÄ£¿é±ØĞë¶¼Á¬Í¨£¨Èç¹û²»Á¬Í¨Ö±½Ópass£©
-///´íÎóĞÅÏ¢£ºÇëÈ·±£ËùÓĞÄ£¿é¶¼ÒÑÁ¬½Ó£¬²¢ÇÒ¹²ÏíÍ¬Ò»¸ö¿ªÊ¼Ä£¿é
-///2¡¢DFS£¬Èç¹û·¢ÏÖÓĞµÄ·ÖÖ§Ã»ÓĞ¸²¸Çµ½£¬Ôò´íÎó
-///´íÎóĞÅÏ¢£ºÇëÔÚÑ¡¶¨ÄÚÈİÖĞ°üº¬ËùÓĞ²¢ĞĞÄ£¿é¡£
+///1ã€åˆ¤æ–­æ‰€æœ‰æ¨¡å—å¿…é¡»éƒ½è¿é€šï¼ˆå¦‚æœä¸è¿é€šç›´æ¥passï¼‰
+///é”™è¯¯ä¿¡æ¯ï¼šè¯·ç¡®ä¿æ‰€æœ‰æ¨¡å—éƒ½å·²è¿æ¥ï¼Œå¹¶ä¸”å…±äº«åŒä¸€ä¸ªå¼€å§‹æ¨¡å—
+///2ã€DFSï¼Œå¦‚æœå‘ç°æœ‰çš„åˆ†æ”¯æ²¡æœ‰è¦†ç›–åˆ°ï¼Œåˆ™é”™è¯¯
+///é”™è¯¯ä¿¡æ¯ï¼šè¯·åœ¨é€‰å®šå†…å®¹ä¸­åŒ…å«æ‰€æœ‰å¹¶è¡Œæ¨¡å—ã€‚
 
 ///
-/// \return -1 ´ú±í°üº¬¿ªÊ¼Ä£¿é
-///         -2 ±íÊ¾²»ÊÇÒ»¿ÃÊ÷
-///         -3 ±íÊ¾ÑéÖ¤µ¥·ÖÖ§³ö´í
-///          0 ±íÊ¾¿ÉÒÔÕı³£´´½¨
-///         -4 ±íÊ¾Ä³½Úµã²¢·ÇËùÓĞº¢×Ó¶¼±»Ñ¡ÖĞ
-///         -5 ±íÊ¾ÓĞ¶à¸öÁ¬Í¨Óò
+/// \return -1 ä»£è¡¨åŒ…å«å¼€å§‹æ¨¡å—
+///         -2 è¡¨ç¤ºä¸æ˜¯ä¸€æ£µæ ‘
+///         -3 è¡¨ç¤ºéªŒè¯å•åˆ†æ”¯å‡ºé”™
+///          0 è¡¨ç¤ºå¯ä»¥æ­£å¸¸åˆ›å»º
+///         -4 è¡¨ç¤ºæŸèŠ‚ç‚¹å¹¶éæ‰€æœ‰å­©å­éƒ½è¢«é€‰ä¸­
+///         -5 è¡¨ç¤ºæœ‰å¤šä¸ªè¿é€šåŸŸ
 ///
 int logic_Program::canMyBlocks(std::vector<int > ids) {
 
-	assert( mvmu_ModuleMap.count(ids[0])>0 ); //²»º¬´ËÄ£¿é
+	assert( mvmu_ModuleMap.count(ids[0])>0 ); //ä¸å«æ­¤æ¨¡å—
 
 	int vsize = ids.size();
 	logic_Tree * tree = mvmu_ModuleId_TreeMap[ids[0]];
 	std::map <int , int > idsMap;
 
-	//Ìî³äflagMap
+	//å¡«å……flagMap
 	for (int i=0;i<vsize;i++) {
 
-		assert( mvmu_ModuleMap.count(ids[i])>0 ); //²»º¬´ËÄ£¿é
+		assert( mvmu_ModuleMap.count(ids[i])>0 ); //ä¸å«æ­¤æ¨¡å—
 
 		if ( mvmu_ModuleMap[ids[0]]->getModuleType() )
 			return -1;
@@ -3298,10 +3307,10 @@ int logic_Program::canMyBlocks(std::vector<int > ids) {
 		if ( mvmu_ModuleId_TreeMap[ids[0]]->mvi_TreeID != tree->mvi_TreeID )
 			return -2;
 
-		idsMap[ids[i]] = 1; //²åÈë¸ÃÖµ
+		idsMap[ids[i]] = 1; //æ’å…¥è¯¥å€¼
 	}
 
-	//ÏÈÓÃBFSÉ¨³öµÚÒ»¸ö½Úµã£¬´Ë½ÚµãÒ»¶¨ÊÇ²ãÊı×îµÍµÄ½Úµã£¨Ö®Ò»£©
+	//å…ˆç”¨BFSæ‰«å‡ºç¬¬ä¸€ä¸ªèŠ‚ç‚¹ï¼Œæ­¤èŠ‚ç‚¹ä¸€å®šæ˜¯å±‚æ•°æœ€ä½çš„èŠ‚ç‚¹ï¼ˆä¹‹ä¸€ï¼‰
 	std::queue<logic_TreeNode *> q;
 	q.push(tree->getRoot());
 	logic_TreeNode * n = NULL;
@@ -3310,9 +3319,9 @@ int logic_Program::canMyBlocks(std::vector<int > ids) {
 	if( NULL == n )
 		assert(false);
 
-	//´¦Àíµ¥·ÖÖ§Çé¿ö
+	//å¤„ç†å•åˆ†æ”¯æƒ…å†µ
 	///
-	/// \return 0 ±íÊ¾´¦ÀíÍê±Ï£¬>0 ±íÊ¾²»Ö¹Ò»¸ö·ÖÖ§£¬<0 ³ö´í
+	/// \return 0 è¡¨ç¤ºå¤„ç†å®Œæ¯•ï¼Œ>0 è¡¨ç¤ºä¸æ­¢ä¸€ä¸ªåˆ†æ”¯ï¼Œ<0 å‡ºé”™
 	///
 	int res = MyBlockS1_SingleBranchProc(n,idsMap);
 	if( res < 0 )
@@ -3320,26 +3329,26 @@ int logic_Program::canMyBlocks(std::vector<int > ids) {
 	else if( 0 == res )
 		return 0;
 
-	//¶Ôtree½øĞĞDFS
+	//å¯¹treeè¿›è¡ŒDFS
 	res = 0;
 	MyBlockS1_DFSJudge(n,res,idsMap);
 	if( res < 0 )
 		return -4;
 
-	//´ËÊ±Á¬Í¨Óò¶¼ÒÑ±éÀúÍê
+	//æ­¤æ—¶è¿é€šåŸŸéƒ½å·²éå†å®Œ
 	if( idsMap.empty() == false )
 		return -5;
 
-	return 0; //¿ÉÒÔ´´½¨
+	return 0; //å¯ä»¥åˆ›å»º
 }
 
 ///
-/// \brief Éî¶ÈÓÅÏÈËÑË÷ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ½¨Á¢ÎÒµÄÄ£¿é£¬·ÖÖ§´ÎÊı±ØÈ»´óÓÚ1
-/// \para res ±íÊ¾½á¹û ¸ºÊı±íÊ¾²»¿É½¨Á¢£¬idsMap ±êÊ¶ÊÇ·ñÓĞid£¨½«findÊ±¼äËõ¼õµ½O(1)£©
+/// \brief æ·±åº¦ä¼˜å…ˆæœç´¢åˆ¤æ–­æ˜¯å¦å¯ä»¥å»ºç«‹æˆ‘çš„æ¨¡å—ï¼Œåˆ†æ”¯æ¬¡æ•°å¿…ç„¶å¤§äº1
+/// \para res è¡¨ç¤ºç»“æœ è´Ÿæ•°è¡¨ç¤ºä¸å¯å»ºç«‹ï¼ŒidsMap æ ‡è¯†æ˜¯å¦æœ‰idï¼ˆå°†findæ—¶é—´ç¼©å‡åˆ°O(1)ï¼‰
 ///
 void logic_Program::MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map <int , int > &idsMap ) {
 
-	//ÅĞ¶Ï±ê×¼£ºµ±startºó,branchCnt>1Ê±£¬±£Ö¤µ±Ç°½ÚµãÒÔÏÂËùÓĞ½Úµã¶¼ÔÚÆäÖĞ
+	//åˆ¤æ–­æ ‡å‡†ï¼šå½“startå,branchCnt>1æ—¶ï¼Œä¿è¯å½“å‰èŠ‚ç‚¹ä»¥ä¸‹æ‰€æœ‰èŠ‚ç‚¹éƒ½åœ¨å…¶ä¸­
 
 	if( res < 0 )
 		return;
@@ -3349,8 +3358,8 @@ void logic_Program::MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map 
 		idsMap.erase(curId);
 	}
 
-	//ËÑÑ°×Ô¼ºµÄËùÓĞº¢×ÓÊÇ·ñ¶¼ÔÚIDSMapÖĞ
-	//ÒÑ½øĞĞ¼ôÖ¦
+	//æœå¯»è‡ªå·±çš„æ‰€æœ‰å­©å­æ˜¯å¦éƒ½åœ¨IDSMapä¸­
+	//å·²è¿›è¡Œå‰ªæ
 	for (unsigned i = 0; i < some->mvvu_Children.size(); i++) {
 
 		if( idsMap.count(some->mvvu_Children[i]->getID()) == 0 )
@@ -3359,7 +3368,7 @@ void logic_Program::MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map 
 			MyBlockS1_DFSJudge(some->mvvu_Children[i],res,idsMap);
 	}
 
-	//¿´×Ô¼ºµÄĞÖµÜÊÇ·ñ´æÔÚ£¬Èç¹û´æÔÚ¿ÉÒÔ¼ÌĞø
+	//çœ‹è‡ªå·±çš„å…„å¼Ÿæ˜¯å¦å­˜åœ¨ï¼Œå¦‚æœå­˜åœ¨å¯ä»¥ç»§ç»­
 	logic_TreeNode *pa = some->mvu_Parent;
 	for (int i=0;i<pa->mvvu_Children.size();i++) {
 		if( idsMap.count(pa->mvvu_Children[i]->getID()) == 0 )
@@ -3368,10 +3377,10 @@ void logic_Program::MyBlockS1_DFSJudge( logic_TreeNode *some, int res, std::map 
 
 }
 
-//ÓÃbfsÕÒ³öÅĞ¶ÏÆğÊ¼½Úµã
+//ç”¨bfsæ‰¾å‡ºåˆ¤æ–­èµ·å§‹èŠ‚ç‚¹
 void logic_Program::MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,std::map <int , int > idsMap, logic_TreeNode * &findNode) {
 
-	if( findNode != NULL ) //ÕÒµ½ÁË
+	if( findNode != NULL ) //æ‰¾åˆ°äº†
 		return;
 
 	if ( q.empty() == true )
@@ -3384,7 +3393,7 @@ void logic_Program::MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,s
 		return;
 	}
 
-	//·ñÔò¼ÓÈë×ÓÅ®
+	//å¦åˆ™åŠ å…¥å­å¥³
 	for(int i=0;i<node->mvvu_Children.size();++i)
 		q.push(node->mvvu_Children[i]);
 
@@ -3392,24 +3401,24 @@ void logic_Program::MyBlockS1_bfsFindStartNode(std::queue<logic_TreeNode *> &q,s
 }
 
 ///
-/// \brief ´¦Àíµ¥·ÖÖ§Çé¿ö
-/// \return 0 ±íÊ¾´¦ÀíÍê±Ï£¬>0 ±íÊ¾²»Ö¹Ò»¸ö·ÖÖ§£¬<0 ³ö´í
+/// \brief å¤„ç†å•åˆ†æ”¯æƒ…å†µ
+/// \return 0 è¡¨ç¤ºå¤„ç†å®Œæ¯•ï¼Œ>0 è¡¨ç¤ºä¸æ­¢ä¸€ä¸ªåˆ†æ”¯ï¼Œ<0 å‡ºé”™
 ///
 int logic_Program::MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map <int , int > idsMap) {
 
-	//Ö±½Ó×÷Îªµ¥·ÖÖ§Çé¿ö´¦Àí
+	//ç›´æ¥ä½œä¸ºå•åˆ†æ”¯æƒ…å†µå¤„ç†
 	while ( idsMap.empty() == false ) {
 
 		if( idsMap.count(curNode->getID()) > 0 ) {
 			idsMap.erase(curNode->getID());
 		} else {
-			//²»¿Õµ«ÊÇIDSMap²¢Ã»ÓĞÕâ¸ö½Úµã£¬Ö¤Ã÷²»ÊÇµ¥·ÖÖ§£¬ÇÒÕâ¸ö·ÖÖ§Ã»°üº¬ÍêÕû£¬³ö´í
+			//ä¸ç©ºä½†æ˜¯IDSMapå¹¶æ²¡æœ‰è¿™ä¸ªèŠ‚ç‚¹ï¼Œè¯æ˜ä¸æ˜¯å•åˆ†æ”¯ï¼Œä¸”è¿™ä¸ªåˆ†æ”¯æ²¡åŒ…å«å®Œæ•´ï¼Œå‡ºé”™
 			return -1;
 		}
 
 		if ( curNode->mvvu_Children.size() == 0 && idsMap.empty() == false ) {
-			//ÒÑµ½Ò¶×Ó½Úµã£¬µ«ÊÇ´Ë´¦idsMap²¢Ã»ÓĞ¿Õ
-			return 1; //²»ÊÇÒ»¸ö·ÖÖ§
+			//å·²åˆ°å¶å­èŠ‚ç‚¹ï¼Œä½†æ˜¯æ­¤å¤„idsMapå¹¶æ²¡æœ‰ç©º
+			return 1; //ä¸æ˜¯ä¸€ä¸ªåˆ†æ”¯
 		}
 
 		curNode = curNode->mvvu_Children[0];
@@ -3419,21 +3428,21 @@ int logic_Program::MyBlockS1_SingleBranchProc(logic_TreeNode * curNode, std::map
 	return 0;
 }
 
-//µÃµ½´´½¨ÎÒµÄÄ£¿éÍâ½Ó²ÎÊıÁĞ±í
+//å¾—åˆ°åˆ›å»ºæˆ‘çš„æ¨¡å—å¤–æ¥å‚æ•°åˆ—è¡¨
 std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > ids) {
 
-	//´Ë´¦Ò»¶¨ÊÇ¿ÉÒÔ¹¹½¨ÎÒµÄÄ£¿é
+	//æ­¤å¤„ä¸€å®šæ˜¯å¯ä»¥æ„å»ºæˆ‘çš„æ¨¡å—
 	std::vector<logic_BasicPara > resV;
 
-	//¹¹½¨Module map£¬½«ËùÓĞ³öÏÖµÄids·ÅÈë£¨°üÀ¨forÖĞµÄËùÓĞ£©
+	//æ„å»ºModule mapï¼Œå°†æ‰€æœ‰å‡ºç°çš„idsæ”¾å…¥ï¼ˆåŒ…æ‹¬forä¸­çš„æ‰€æœ‰ï¼‰
 	std::map <int , logic_BasicModule* > idsMap;
-	std::queue <int > que; //¶ÓÁĞ±£´æforºÍif id
+	std::queue <int > que; //é˜Ÿåˆ—ä¿å­˜forå’Œif id
 
-	for (int i=0;i<ids.size();++i) { //»ù±¾idÈë¶Ó
+	for (int i=0;i<ids.size();++i) { //åŸºæœ¬idå…¥é˜Ÿ
 		que.push(ids[i]);
 	}
 
-	//±éÀú¶ÓÁĞ£¬ĞÎ³É×Ümap
+	//éå†é˜Ÿåˆ—ï¼Œå½¢æˆæ€»map
 	while ( !que.empty() ) {
 		int frontId = que.front();
 		que.pop();
@@ -3443,7 +3452,7 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 		idsMap[frontId] = module;
 
 		if ( module->getModuleType() == 2003 ) { //for
-			//½«forÖĞËùÓĞÄ£¿éid£¨ËùÓĞÊ÷ÖĞid£©ÍÆÈë¶ÓÁĞ
+			//å°†forä¸­æ‰€æœ‰æ¨¡å—idï¼ˆæ‰€æœ‰æ ‘ä¸­idï¼‰æ¨å…¥é˜Ÿåˆ—
 			vector<int > v = ((logic_ForModule *)module)->getAllModuleId();
 			for (int i=0;i<v.size();++i) {
 				que.push(v[i]);
@@ -3451,7 +3460,7 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 		}
 
 		else if ( module->getModuleType() == 2004 ) { //if
-			//½«ifÖĞËùÓĞÄ£¿éid£¨ËùÓĞÊ÷ÖĞid£©ÍÆÈë¶ÓÁĞ
+			//å°†ifä¸­æ‰€æœ‰æ¨¡å—idï¼ˆæ‰€æœ‰æ ‘ä¸­idï¼‰æ¨å…¥é˜Ÿåˆ—
 			vector<int > v = ((logic_IfModule *)module)->getAllModuleId();
 			for (int i=0;i<v.size();++i) {
 				que.push(v[i]);
@@ -3459,7 +3468,7 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 		}
 	}
 
-	//±éÀúmap£¬ÅĞ¶ÏÓĞÃ»ÓĞÍâ½Ó²ÎÊı
+	//éå†mapï¼Œåˆ¤æ–­æœ‰æ²¡æœ‰å¤–æ¥å‚æ•°
 	for (map<int , logic_BasicModule* >::iterator it=idsMap.begin();it!=idsMap.end();++it) {
 
 		int module_id = it->first;
@@ -3467,45 +3476,45 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 		int paraSize = module->getParaSize();
 
 		//from -- to
-		whPort from_to; //´ËÄ£¿é´Ë²ÎÊıÊÇ·¢³ö¶Ë£¨²»´æÔÚ0¶Ë¿ÚÇé¿ö£©
+		whPort from_to; //æ­¤æ¨¡å—æ­¤å‚æ•°æ˜¯å‘å‡ºç«¯ï¼ˆä¸å­˜åœ¨0ç«¯å£æƒ…å†µï¼‰
 		from_to.moduleId = module_id;
 		for (int i=1;i<=paraSize;++i) {
 			from_to.paraId = i;
 
-			if(!mvvu_Conn_From_ToMap.count(from_to)) //Ã»ÓĞÁ¬Ïß
+			if(!mvvu_Conn_From_ToMap.count(from_to)) //æ²¡æœ‰è¿çº¿
 				continue;
-			else { //ÓĞÁ¬Ïß
+			else { //æœ‰è¿çº¿
 
 				int otherModuleId = mvvu_Conn_From_ToMap[from_to].moduleId;
-				//ÁíÒ»¶ËÒ²ÊÇÑ¡ÖĞµÄÄ£¿é£¬continue
+				//å¦ä¸€ç«¯ä¹Ÿæ˜¯é€‰ä¸­çš„æ¨¡å—ï¼Œcontinue
 				if(idsMap.count(otherModuleId))
 					continue;
 
-				//´ËparaÓĞĞ§£¬¼ÇÂ¼para
+				//æ­¤paraæœ‰æ•ˆï¼Œè®°å½•para
 				resV.push_back(*(module->getPara(i)));
 			}
 		}
 
 		//to -- from
-		whPort to_from; //´ËÄ£¿é´Ë²ÎÊıÊÇÊÕÈë¶Ë£¨´æÔÚ0¶Ë¿ÚÇé¿ö£¬¼´WS¶Ë¿ÚÊäÈë£©
+		whPort to_from; //æ­¤æ¨¡å—æ­¤å‚æ•°æ˜¯æ”¶å…¥ç«¯ï¼ˆå­˜åœ¨0ç«¯å£æƒ…å†µï¼Œå³WSç«¯å£è¾“å…¥ï¼‰
 		to_from.moduleId = module_id;
 		for (int i=0;i<=paraSize;++i) {
 			to_from.paraId = i;
 
-			if(!mvvu_Conn_To_FromMap.count(to_from)) //Ã»ÓĞÁ¬Ïß
+			if(!mvvu_Conn_To_FromMap.count(to_from)) //æ²¡æœ‰è¿çº¿
 				continue;
-			else { //ÓĞÁ¬Ïß
+			else { //æœ‰è¿çº¿
 
 				int otherModuleId = mvvu_Conn_To_FromMap[to_from].moduleId;
-				//ÁíÒ»¶ËÒ²ÊÇÑ¡ÖĞµÄÄ£¿é£¬continue
+				//å¦ä¸€ç«¯ä¹Ÿæ˜¯é€‰ä¸­çš„æ¨¡å—ï¼Œcontinue
 				if(idsMap.count(otherModuleId))
 					continue;
 
-				//´ËparaÓĞĞ§£¬¼ÇÂ¼para
+				//æ­¤paraæœ‰æ•ˆï¼Œè®°å½•para
 				if( 0 == i) {
-					//¶Ë¿ÚÁ¬½Ó
+					//ç«¯å£è¿æ¥
 					logic_BasicModule *otherModule = mvmu_ModuleMap[otherModuleId];
-					//ÉúÔìÒ»¸öpara
+					//ç”Ÿé€ ä¸€ä¸ªpara
 					int otherModuleParaId = mvvu_Conn_To_FromMap[to_from].paraId;
 					logic_BasicPara para = *(otherModule->getPara(otherModuleParaId));
 					para.mve_IOType = PARA_IN;
@@ -3531,12 +3540,12 @@ void logic_Program::updateTreeMap()
 		auto newTree = index.second;
 		auto mapKey = index.first;
 
-		if (mapKey >= 10000)//¶ÔÓÚÌØÊâÄ£¿éµÄ¼¤»îÊ÷£¬²»ÄÜ¶¯
+		if (mapKey >= 10000)//å¯¹äºç‰¹æ®Šæ¨¡å—çš„æ¿€æ´»æ ‘ï¼Œä¸èƒ½åŠ¨
 		{
 			new_mvmu_TreeMap[mapKey] = newTree;
 		}
 
-		//ÆÕÍ¨Ä£¿é
+		//æ™®é€šæ¨¡å—
 		mapKey = newTree->getRoot()->getID();
 		new_mvmu_TreeMap[mapKey] = newTree;
 	}

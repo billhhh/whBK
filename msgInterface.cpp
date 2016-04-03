@@ -318,9 +318,9 @@ int msgInterface::setIfBranchContent(int if_id,int ui_branch_id,std::string con_
 }
 
 //增删 if 分支
-int msgInterface::addIfBranch(int if_id) {
+int msgInterface::addBranch(int module_id) {
 
-	return ctrl.ctrlAddIfBranch(if_id);
+	return ctrl.ctrlAddBranch(module_id);
 }
 
 //难点，需要删除分支中所有树
@@ -442,7 +442,7 @@ std::vector<logic_BasicPara > msgInterface::getMyBlocksPara(std::vector<int > id
 //session2：点击完成后，前后端第二次会话
 //前端传给后台：参数vector、我的模块name、我的模块描述
 //后台返回前端：我的模块id（底部id）
-int msgInterface::buildMyBlocks(std::string mbname,std::string mbdes,std::vector<logic_BasicPara > plist) {
+int msgInterface::buildMyBlocks(std::string mbname, std::string mbdes, std::vector<logic_BasicPara > plist) {
 
 	return 0;
 }

@@ -184,8 +184,11 @@ public:
 	int setIfBranchContent(int if_id,int ui_branch_id,int con_int);
 	int setIfBranchContent(int if_id,int ui_branch_id,std::string con_str); //重载 string
 
-	//增删 if 分支
-	int addIfBranch(int if_id);
+	//增删 for&if 分支
+	//for分支无法删除
+	//add返回值是生成的新ui_branch_id
+	//del返回值是如果发生错误的报错提示
+	int addBranch(int module_id);
 	int delIfBranch(int if_id,int ui_branch_id); //难点，需要删除分支中所有树
 
 	///方案1 暂时选定
@@ -238,8 +241,7 @@ public:
 	//session2：点击完成后，前后端第二次会话
 	//前端传给后台：参数vector、我的模块name、我的模块描述
 	//后台返回前端：我的模块id（底部id）
-	int buildMyBlocks(std::string mbname,std::string mbdes,std::vector<logic_BasicPara > plist);
-
+	int buildMyBlocks(std::string mbname, std::string mbdes, std::vector<logic_BasicPara > plist);
 protected:
 
 private:
