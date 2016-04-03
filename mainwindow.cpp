@@ -48,8 +48,9 @@ void MainWindow::whWork() {
 	msginterface.insertModule(0,false,1002);
 	msginterface.insertModule(2,false,1002);
 	msginterface.moveModule(2,1,ADD_LEAF);
+	msginterface.insertModule(0,false,1002);
 
-	msginterface.moveModule(2,0,FRONT_MULTI);
+	msginterface.moveModule(2,4,FRONT_MULTI);
 
 }
 

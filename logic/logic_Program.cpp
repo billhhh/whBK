@@ -513,68 +513,111 @@ int logic_Program::frontInsSingMove(int cur_m_id,int post_m_id) {
 
 	//注：不用新建module，只用处理树节点即可
 
-	///// step1、插入新树节点
-	logic_Tree *insTree = mvmu_ModuleId_TreeMap[post_m_id]; //待插入树
-	logic_Tree *oldTree = mvmu_ModuleId_TreeMap[cur_m_id];  //待删除树
+	///Step1.断开cur节点，cur那颗树重新连接
+	auto &curTree = mvmu_ModuleId_TreeMap[cur_m_id];
+	auto curNode = curTree->node_search(cur_m_id);  //current node
+	auto curParentNodeId = curNode->getParentID();  //current parent node id
+	auto curParentNode = curTree->search(curParentNodeId);//current parent node
+	auto curChildren = curNode->mvvu_Children;//current node's child
 
-	int oldRootId = insTree->mvi_TreeID;
-	if( post_m_id == oldRootId ) {
-
-		//待插入节点要插在原树root之前
-		if ( insTree->mvi_TreeID != oldTree->mvi_TreeID ) { //从其他树节点正常交换
-
-			if( insTree->exchangeRoot(cur_m_id) == false )
-				return -5;
-
-			//只有 post_m_id 是根的情况，才更新tree map
-			mvmu_TreeMap.erase(post_m_id);
-			mvmu_TreeMap[cur_m_id] = insTree;
-		} else {
-
-			//树内交换，不用删除旧树节点，提前终止
-			if( insTree->innerTreeExchangeRoot(cur_m_id) >= 0 ) {
-
-				//只有 post_m_id 是根的情况，才更新tree map
-				mvmu_TreeMap.erase(post_m_id);
-				mvmu_TreeMap[cur_m_id] = insTree;
-
-				return 0;
-			} else {
-				return -4; //树内交换失败
+	///有父亲，有孩子,但是孩子只能有一个（由前端判断）
+	if (curParentNode&&curChildren.size() > 0)
+	{
+		assert(curChildren.size() == 1);
+		//current节点父亲更新孩子关系
+		std::vector<logic_TreeNode *> &parentChilden = curParentNode->_node->mvvu_Children;
+		for (auto index = parentChilden.begin(); index != parentChilden.end();++index)
+		{
+			if (*index == curNode)
+			{
+				parentChilden.erase(index);
+				break;
 			}
 		}
+		//current节点孩子更新父亲关系
+		auto childNode = *(curChildren.begin());
+		parentChilden.push_back(childNode);
+		childNode->mvu_Parent = curParentNode->_node;
 
-	}else {
-
-		if ( insTree->mvi_TreeID == oldTree->mvi_TreeID ) { //本树操作
-
-			if( insTree->innerTreeFrontInsSingMove(cur_m_id,post_m_id) >=0 ) {
-
-				//树内正常操作，提前终止
-				return 0;
-			}else {
-				return -6;
+		//current node 清楚子节点，清楚父亲关系
+		std::vector<logic_TreeNode *> &curChildren = curNode->mvvu_Children;
+		curChildren.clear();
+	}
+	///有父亲，没孩子
+	if (curParentNode&&curChildren.size() == 0)
+	{
+		//current父亲节点更新子节点关系
+		std::vector<logic_TreeNode *> &parentChilden = curParentNode->_node->mvvu_Children;
+		for (auto index = parentChilden.begin(); index != parentChilden.end(); ++index)
+		{
+			if (*index == curNode)
+			{
+				parentChilden.erase(index);
+				break;
 			}
-
 		}
-		//正常插入地方
-		insTree->insert_node(insTree->getPreId(post_m_id),post_m_id,cur_m_id);
+		//current节点断开父亲节点关系
+		curNode->mvu_Parent = nullptr;
+	}
+	///没父亲，有孩子,但是孩子只能有一个（由前端判断）,该节点是treeRoot
+	if (!curParentNode&&curChildren.size() > 0)
+	{
+		assert(curChildren.size() == 1);
+		//current节点孩子跟current节点断开父子关系
+		std::vector<logic_TreeNode *> &curChildren = curNode->mvvu_Children;
+		logic_TreeNode* childNode = *curChildren.begin();
+		curTree->setRoot(childNode);
+		childNode->mvu_Parent = nullptr;
+		curChildren.clear();
 	}
 
-	mvmu_ModuleId_TreeMap[cur_m_id] = insTree;
-
-	///// step2、删除旧树节点（注：此处不可能有多个孩子）
-	if( cur_m_id != oldTree->mvi_TreeID ) {
-
-		//并非树根
-		oldTree->del_node(cur_m_id);
-	}else if(cur_m_id == oldTree->mvi_TreeID 
-		|| oldTree->getRoot()->mvvu_Children.size()==0 ) {
-
-			//树中唯一模块，删除树
-			SAFE_DELETE(oldTree);
-			mvmu_TreeMap.erase(cur_m_id);
+	///没父亲，没孩子,该节点是treeRoot,标记要插入新树时，讲原树根节点变为新树根节点 
+	bool flag = false;
+	if (!curParentNode&&curChildren.size() == 0)
+	{
+		flag = true;
 	}
+
+	///Step2.插入节点
+	auto insTree = mvmu_ModuleId_TreeMap[post_m_id];
+	auto postNode = insTree->node_search(post_m_id);
+	auto postParentNode = postNode->mvu_Parent;
+	//post节点有父亲
+	if (postParentNode != nullptr)
+	{
+		///更新父亲节点的子节点关系，cur节点的父亲、子节点关系，post节点的父亲节点关系
+		auto &postParentChildren = postParentNode->mvvu_Children;
+		for (auto index = postParentChildren.begin(); index != postParentChildren.end(); ++index)
+		{
+			if (*index == postNode)
+			{
+				postParentChildren.erase(index);
+				break;
+			}
+		}
+		postParentChildren.push_back(curNode);
+		curNode->mvu_Parent = postParentNode;
+		curNode->mvvu_Children.push_back(postNode);
+		postNode->mvu_Parent = curNode;
+
+
+		if (flag)
+		{
+			auto postTree = mvmu_ModuleId_TreeMap[postNode->getID()];
+			curTree->setRoot(postTree->getRoot());
+		}
+	}
+	//post节点无父亲
+	else
+	{
+		curNode->mvvu_Children.push_back(postNode);
+		postNode->mvu_Parent = curNode;
+		auto postTree = mvmu_ModuleId_TreeMap[postNode->getID()];
+		postTree->setRoot(curNode);
+	}
+
+	///Step3.更新树和id对应树的两个map的表
+	updateTreeMap();
 
 	return 0; //正常返回
 
@@ -3476,4 +3519,40 @@ std::vector<logic_BasicPara > logic_Program::getMyBlocksPara(std::vector<int > i
 	}
 
 	return resV;
+}
+
+void logic_Program::updateTreeMap()
+{
+	//update mvmu_treeMap
+	std::map <_IdDataType, logic_Tree *> new_mvmu_TreeMap;
+	std::map <int, logic_Tree * > new_mvmu_ModuleId_TreeMap;
+	for (auto index : mvmu_TreeMap)
+	{
+		auto newTree = index.second;
+		auto mapKey = index.first;
+
+		if (mapKey >= 10000)//对于特殊模块的激活树，不能动
+		{
+			new_mvmu_TreeMap[mapKey] = newTree;
+		}
+
+		//普通模块
+		mapKey = newTree->getRoot()->getID();
+		new_mvmu_TreeMap[mapKey] = newTree;
+	}
+
+	//update id_tree_map
+	for (auto index : new_mvmu_TreeMap)
+	{
+		auto tree = index.second;
+		vector<int> treeNodes;
+		tree->getAllNodes(treeNodes,tree->getRoot());
+		for (auto id : treeNodes)
+		{
+			new_mvmu_ModuleId_TreeMap[id] = tree;
+		}
+	}
+
+	mvmu_TreeMap = new_mvmu_TreeMap;
+	mvmu_ModuleId_TreeMap = new_mvmu_ModuleId_TreeMap;
 }

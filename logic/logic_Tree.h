@@ -66,6 +66,7 @@ public:
 	tree_node* node_search(int id); //返回node指针
 	void recurs_print(tree_node* some,int floor=0) const; //DFS打印测试
 	bool kill_subtree(tree_node *some); //将非根节点的某个节点极其子树销毁
+	void getAllNodes(std::vector<int>&, tree_node* );
 
 	int getPreId(int id); //获得一个节点的前驱节点id
 

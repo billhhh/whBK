@@ -686,3 +686,14 @@ int logic_Tree::innerTreeFrontInsSingMove(int cur_id,int post_id) {
 
 	return 0;
 }
+
+void logic_Tree::getAllNodes(std::vector<int>& allNodes,tree_node* node)
+{
+	allNodes.push_back(node->getID());
+	auto childNodes = node->mvvu_Children;
+
+	for (auto childNode : childNodes)
+	{
+		getAllNodes(allNodes, childNode);
+	}
+}
