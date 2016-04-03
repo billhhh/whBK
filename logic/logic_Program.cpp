@@ -438,7 +438,9 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 
 		logic_TreeNode *tmpPassNode = new logic_TreeNode(tmpCurNode); //深拷贝构造到堆
 		insTree = new logic_Tree(tmpPassNode); //新建一棵树，此node也必须新建，否则被下面的delnode了
-
+		oldTree->setFirstChildAsRoot();
+		mvmu_TreeMap[oldTree->mvi_TreeID] = oldTree;
+		
 		mvmu_TreeMap[insTree->mvi_TreeID] = insTree;
 
 	}else {
@@ -456,7 +458,7 @@ int logic_Program::backInsSingMove(int cur_m_id,int pre_m_id) {
 			else {
 				//成功树内move
 				mvmu_TreeMap.erase(cur_m_id);
-				mvmu_TreeMap[pre_m_id]=insTree;
+				mvmu_TreeMap[insTree->getRoot()->getID()]=insTree;
 				return 0;
 			}
 
